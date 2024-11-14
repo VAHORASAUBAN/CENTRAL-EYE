@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.integration.app-mergeDebugResources-25:/values-sk/values-sk.xml",
+            "outputFile": "com.example.integration.app-mergeDebugResources-26:/values-sk/values-sk.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\dbd69d7dffcad6be4eedecaae399de3b\\transformed\\zxing-android-embedded-4.3.0\\res\\values-sk\\values-sk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,114,161,315",
+                        "endColumns": "58,46,153,120",
+                        "endOffsets": "109,156,310,431"
+                    },
+                    "to": {
+                        "startLines": "91,92,93,94",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "7583,7642,7689,7843",
+                        "endColumns": "58,46,153,120",
+                        "endOffsets": "7637,7684,7838,7959"
+                    }
+                },
                 {
                     "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\489c79c1a748e69870e8464712a66f82\\transformed\\appcompat-1.5.1\\res\\values-sk\\values-sk.xml",
                     "from": {

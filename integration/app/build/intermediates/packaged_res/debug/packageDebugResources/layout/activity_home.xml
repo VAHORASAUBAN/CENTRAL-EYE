@@ -8,9 +8,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to the Home Page!"
-        android:textSize="18sp"
         android:layout_gravity="center"
-        android:padding="16dp" />
+        android:text="Welcome to the Home Page!"
+        android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/scan_barcode_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan Barcode"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
