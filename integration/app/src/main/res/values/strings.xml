@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Integration</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_success">Login successful!</string>
+    <string name="login_fail">Invalid credentials!</string>
+</resources>
