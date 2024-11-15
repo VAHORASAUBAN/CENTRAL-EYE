@@ -6,7 +6,6 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 id login_button
 id password
-id scan_barcode_button
 id username
 layout activity_home
 layout activity_main
@@ -22,3 +21,4 @@ style Base.Theme.Integration
 style Theme.Integration
 xml backup_rules
 xml data_extraction_rules
+xml network_security_config
