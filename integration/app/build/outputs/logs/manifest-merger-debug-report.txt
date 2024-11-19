@@ -145,14 +145,14 @@ ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:16:19-58
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:18:13-21:29
-action#android.intent.action.MAIN
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:17-69
-	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:17-77
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:17-77
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:27-74
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:27-74
+action#android.intent.action.MAIN
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:17-69
+	android:name
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:25-66
 activity#com.example.integration.activities.HomeActivity
 ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:25:9-26:39
 	android:exported

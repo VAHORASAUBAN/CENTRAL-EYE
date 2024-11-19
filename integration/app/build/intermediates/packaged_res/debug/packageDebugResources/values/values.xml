@@ -5,14 +5,14 @@
     <color name="seconadary">#f1f1f1</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">Integration</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_button">Login</string>
     <string name="login_fail">Invalid credentials!</string>
     <string name="login_success">Login successful!</string>
     <string name="password_hint">Password</string>
     <string name="username_hint">Username</string>
     <style name="Base.Theme.Integration" parent="Theme.Material3.DayNight.NoActionBar">
-        
-        
+
     </style>
     <style name="Theme.Integration" parent="Base.Theme.Integration"/>
 </resources>

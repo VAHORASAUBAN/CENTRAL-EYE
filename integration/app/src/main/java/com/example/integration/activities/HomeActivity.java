@@ -15,7 +15,7 @@ public class HomeActivity extends AppCompatActivity  {
 
     Profile_fragment profileFragment = new Profile_fragment();
 
-    Product_fragment product_fragment = new Product_fragment();
+    Add_Product_Scanner addProduct_scanner = new Add_Product_Scanner();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity  {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
                     return true;
                 } else if (item.getItemId() == nav_products) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, product_fragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, addProduct_scanner).commit();
                     return true;
                 } else if (item.getItemId() == nav_profile) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profileFragment).commit();

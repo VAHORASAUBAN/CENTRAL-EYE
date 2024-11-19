@@ -3183,6 +3183,8 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id barcodeTextView
+id barcode_scanner
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3469,10 +3471,12 @@ id productImage1
 id productImage2
 id productImage3
 id productImage4
+id productNameEditText
 id productNameTextView1
 id productNameTextView2
 id productNameTextView3
 id productNameTextView4
+id productPriceEditText
 id productidTextView1
 id productidTextView2
 id productidTextView3
@@ -3488,6 +3492,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id saveButton
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3793,6 +3798,7 @@ layout fragment_product_detail
 layout fragment_product_fragment
 layout fragment_product_list
 layout fragment_profile_fragment
+layout fragment_scanner__form__details
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3926,6 +3932,7 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
