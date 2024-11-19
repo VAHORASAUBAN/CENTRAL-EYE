@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/product2Container"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:layout_marginTop="8dp">
+
+    <!-- Circular Image -->
+    <ImageView
+        android:id="@+id/productImage3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/baseline_person_24"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/circular_background"
+        android:clipToOutline="true" />
+
+    <!-- Text Container -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/productNameTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name 3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/productBarcodeTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barcode/ID 3"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>
