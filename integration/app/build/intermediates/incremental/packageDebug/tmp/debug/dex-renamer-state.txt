@@ -1,24 +1,10 @@
-<<<<<<< HEAD
-#Wed Nov 20 10:08:10 IST 2024
+#Wed Nov 20 11:49:47 IST 2024
 base.0=C\:\\Users\\Inspiron 15\\AndroidStudioProjects\\SIH\\SIH_Hardware_Inventory_Management_System\\integration\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\Inspiron 15\\AndroidStudioProjects\\SIH\\SIH_Hardware_Inventory_Management_System\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\Inspiron 15\\AndroidStudioProjects\\SIH\\SIH_Hardware_Inventory_Management_System\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
 base.3=C\:\\Users\\Inspiron 15\\AndroidStudioProjects\\SIH\\SIH_Hardware_Inventory_Management_System\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
 base.4=C\:\\Users\\Inspiron 15\\AndroidStudioProjects\\SIH\\SIH_Hardware_Inventory_Management_System\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
 base.5=C\:\\Users\\Inspiron 15\\AndroidStudioProjects\\SIH\\SIH_Hardware_Inventory_Management_System\\integration\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-=======
-<<<<<<< HEAD
-#Wed Nov 20 11:09:39 IST 2024
-=======
-#Tue Nov 19 14:29:18 IST 2024
->>>>>>> de29adbbd28a46a203ae631af643d41715325e3d
-base.0=C\:\\Users\\SAUBAN VAHORA\\OneDrive\\Desktop\\SIH\\integration\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\SAUBAN VAHORA\\OneDrive\\Desktop\\SIH\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\SAUBAN VAHORA\\OneDrive\\Desktop\\SIH\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.3=C\:\\Users\\SAUBAN VAHORA\\OneDrive\\Desktop\\SIH\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.4=C\:\\Users\\SAUBAN VAHORA\\OneDrive\\Desktop\\SIH\\integration\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
-base.5=C\:\\Users\\SAUBAN VAHORA\\OneDrive\\Desktop\\SIH\\integration\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
->>>>>>> c0997be9ef5ba62dafdb4eb591d631f61c4e03d3
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=14/classes.dex
