@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/baseline_local_police_24"
+    android:background="@drawable/baseline_add_circle_outline_24"
     app:constraint_referenced_tags="#profile"
     tools:context=".activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
+        android:background="@drawable/baseline_home_24"
         android:alpha="0.7">
 
     </RelativeLayout>
