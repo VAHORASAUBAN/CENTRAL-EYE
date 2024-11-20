@@ -4,8 +4,8 @@ ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-28:12
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-28:12
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-28:12
-MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:17:1-56:12
+MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
 MERGED from [com.google.mlkit:barcode-scanning:17.0.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f89b052c1d1a108e0cf0bc4fef59cd48\transformed\barcode-scanning-17.0.3\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.camera:camera-video:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\b6aa895a573c527cadd79b20d17d8059\transformed\camera-video-1.4.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.camera:camera-view:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\07fa76b24b53863b72f2a32f4c5a6ef7\transformed\camera-view-1.4.0\AndroidManifest.xml:2:1-7:12
@@ -85,10 +85,10 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Us
 application
 ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:8:5-27:19
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:8:5-27:19
-MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
-MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
+MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
+MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-core:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\7267dc8015eaa3bd9092baaa8a0a4593\transformed\camera-core-1.4.0\AndroidManifest.xml:23:5-34:19
@@ -134,7 +134,7 @@ MERGED from [com.google.android.odml:image:1.0.0-beta1] C:\Users\SAUBAN VAHORA\.
 	android:allowBackup
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:10:9-35
 	android:theme
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:13:9-47
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:13:9-49
 	android:networkSecurityConfig
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:9:9-69
 activity#com.example.integration.activities.MainActivity
@@ -163,10 +163,10 @@ uses-sdk
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml
-MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:20:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.mlkit:barcode-scanning:17.0.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f89b052c1d1a108e0cf0bc4fef59cd48\transformed\barcode-scanning-17.0.3\AndroidManifest.xml:5:5-44
 MERGED from [com.google.mlkit:barcode-scanning:17.0.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f89b052c1d1a108e0cf0bc4fef59cd48\transformed\barcode-scanning-17.0.3\AndroidManifest.xml:5:5-44
 MERGED from [androidx.camera:camera-video:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\b6aa895a573c527cadd79b20d17d8059\transformed\camera-video-1.4.0\AndroidManifest.xml:5:5-44

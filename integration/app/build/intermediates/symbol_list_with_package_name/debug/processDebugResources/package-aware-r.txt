@@ -3202,6 +3202,7 @@ id buttonPanel
 id cache_measures
 id callMeasure
 id cancel_button
+id car_view
 id cardView
 id carryVelocity
 id center
@@ -3355,7 +3356,6 @@ id linear
 id listMode
 id list_item
 id login_button
-id login_container
 id m3_side_sheet
 id marquee
 id masked
@@ -3497,7 +3497,6 @@ id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
 id scale
-id scanQrBtn
 id scannedValueTv
 id screen
 id scroll

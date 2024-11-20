@@ -40,6 +40,7 @@ id barcodeTextView
 id barcode_scanner
 id bottomContainer
 id bottom_navigation
+id car_view
 id cardView
 id cpu_total_section
 id fragment_container
@@ -50,7 +51,6 @@ id itemLayout1
 id itemLayout2
 id itemLayout3
 id login_button
-id login_container
 id nav_home
 id nav_products
 id nav_profile
@@ -76,7 +76,6 @@ id productidTextView1
 id productidTextView2
 id productidTextView3
 id saveButton
-id scanQrBtn
 id scannedValueTv
 id searchEditText
 id squareBox1
