@@ -4,10 +4,12 @@ color black
 color primary
 color seconadary
 color white
+drawable background
 drawable baseline_add_circle_outline_24
 drawable baseline_arrow_circle_right_24
 drawable baseline_home_24
 drawable baseline_info_outline_24
+drawable baseline_local_police_24
 drawable baseline_person_24
 drawable baseline_search_24
 drawable baseline_sync_problem_24
@@ -21,6 +23,7 @@ drawable maintenance
 drawable product_inuse
 drawable rounded_border
 drawable rounded_border_rect
+drawable rounded_edittext
 id addCpuTextView
 id addCpuTextView2
 id addCpuTextView3
@@ -66,15 +69,14 @@ id productImage1
 id productImage2
 id productImage3
 id productImage4
-id productNameEditText
 id productNameTextView1
 id productNameTextView2
 id productNameTextView3
 id productNameTextView4
-id productPriceEditText
 id productidTextView1
 id productidTextView2
 id productidTextView3
+id purchaseDateEditText
 id saveButton
 id scannedValueTv
 id searchEditText
