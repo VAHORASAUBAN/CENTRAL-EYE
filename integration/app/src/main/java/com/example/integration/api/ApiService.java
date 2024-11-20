@@ -8,4 +8,8 @@ public interface ApiService {
     // Define the login endpoint
     @POST("api/login/")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
+
+    // Define the product save endpoint
+    @POST("api/add_product/")
+    Call<Void> saveProductDetails(@Body ProductDetails productDetails);
 }
