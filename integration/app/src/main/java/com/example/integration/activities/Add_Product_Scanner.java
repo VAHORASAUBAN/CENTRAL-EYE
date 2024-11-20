@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +20,6 @@ public class Add_Product_Scanner extends Fragment {
 
     private DecoratedBarcodeView barcodeScannerView;
     private TextView scannedValueTv;
-    private Button startScanningButton;
 
     public Add_Product_Scanner() {
         // Required empty public constructor
@@ -50,7 +48,6 @@ public class Add_Product_Scanner extends Fragment {
         // Initialize UI components
         barcodeScannerView = view.findViewById(R.id.barcode_scanner);
         scannedValueTv = view.findViewById(R.id.scannedValueTv);
-        startScanningButton = view.findViewById(R.id.scanQrBtn);
 
         // Set up the barcode scanner callback
         barcodeScannerView.decodeContinuous(new BarcodeCallback() {
@@ -67,25 +64,24 @@ public class Add_Product_Scanner extends Fragment {
             }
         });
 
-        // Handle scan button click
-        startScanningButton.setOnClickListener(v -> startScanning());
+        // Start scanning automatically
+        startScanning();
     }
 
     private void startScanning() {
         // Start the scanner
         barcodeScannerView.resume();
-        Toast.makeText(getContext(), "Scanning started...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Scanner is ready.", Toast.LENGTH_SHORT).show();
     }
 
     private void handleScannedValue(String scannedValue) {
         // Navigate to the form fragment with the scanned value
-        Scanner_Form_Details formDetailsFragment = Scanner_Form_Details.newInstance(scannedValue, null);
+        Scanner_Form_Details formDetailsFragment = Scanner_Form_Details.newInstance(scannedValue);
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, formDetailsFragment) // Replace with your container ID
                 .addToBackStack(null)
                 .commit();
     }
-
 
     @Override
     public void onResume() {

@@ -76,7 +76,6 @@ id productidTextView1
 id productidTextView2
 id productidTextView3
 id saveButton
-id scanQrBtn
 id scannedValueTv
 id searchEditText
 id squareBox1
