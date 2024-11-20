@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "com.example.integration.app-debug-38:/drawable_baseline_add_circle_outline_24.xml.flat",
         "source": "com.example.integration.app-main-40:/drawable/baseline_add_circle_outline_24.xml"
     },
@@ -10,6 +11,18 @@
     {
         "merged": "com.example.integration.app-debug-38:/layout_activity_main.xml.flat",
         "source": "com.example.integration.app-main-40:/layout/activity_main.xml"
+=======
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_rounded_border.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\rounded_border.xml"
+>>>>>>> de29adbbd28a46a203ae631af643d41715325e3d
     },
     {
         "merged": "com.example.integration.app-debug-38:/drawable_baseline_info_outline_24.xml.flat",
@@ -44,8 +57,17 @@
         "source": "com.example.integration.app-main-40:/drawable/item_product24.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "com.example.integration.app-debug-38:/mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "com.example.integration.app-main-40:/mipmap-xxhdpi/ic_launcher.webp"
+=======
+        "merged": "com.example.integration.app-debug-38:/layout_fragment_product_fragment.xml.flat",
+        "source": "com.example.integration.app-main-40:/layout/fragment_product_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_product_inuse.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\product_inuse.xml"
+>>>>>>> de29adbbd28a46a203ae631af643d41715325e3d
     },
     {
         "merged": "com.example.integration.app-debug-38:/layout_fragment_product_detail.xml.flat",
@@ -136,12 +158,17 @@
         "source": "com.example.integration.app-main-40:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
+<<<<<<< HEAD
         "merged": "com.example.integration.app-debug-38:/layout_fragment_profile_fragment.xml.flat",
         "source": "com.example.integration.app-main-40:/layout/fragment_profile_fragment.xml"
     },
     {
         "merged": "com.example.integration.app-debug-38:/drawable_baseline_search_24.xml.flat",
         "source": "com.example.integration.app-main-40:/drawable/baseline_search_24.xml"
+=======
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\mipmap-hdpi\\ic_launcher.webp"
+>>>>>>> de29adbbd28a46a203ae631af643d41715325e3d
     },
     {
         "merged": "com.example.integration.app-debug-38:/mipmap-hdpi_ic_launcher_round.webp.flat",
@@ -156,11 +183,44 @@
         "source": "com.example.integration.app-main-40:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "com.example.integration.app-debug-38:/drawable_rounded_border.xml.flat",
         "source": "com.example.integration.app-main-40:/drawable/rounded_border.xml"
     },
     {
         "merged": "com.example.integration.app-debug-38:/layout_activity_home.xml.flat",
         "source": "com.example.integration.app-main-40:/layout/activity_home.xml"
+=======
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.integration.app-debug-38:/layout_fragment_scanner__form__details.xml.flat",
+        "source": "com.example.integration.app-main-40:/layout/fragment_scanner__form__details.xml"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_maintenance.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\maintenance.xml"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_baseline_search_24.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\baseline_search_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_circular_background.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\circular_background.xml"
+>>>>>>> de29adbbd28a46a203ae631af643d41715325e3d
     }
 ]
