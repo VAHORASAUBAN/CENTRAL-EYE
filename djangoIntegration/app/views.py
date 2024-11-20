@@ -32,7 +32,7 @@ def login_view(request):
             user = User.objects.get(username=username)
             
             # Debugging step: print the stored password
-            print(f"Stored password: {user.password}")
+            # print(f"Stored password: {user.password}")
             
             if user.password == password:
                 

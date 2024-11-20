@@ -2942,10 +2942,12 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable background
 drawable baseline_add_circle_outline_24
 drawable baseline_arrow_circle_right_24
 drawable baseline_home_24
 drawable baseline_info_outline_24
+drawable baseline_local_police_24
 drawable baseline_person_24
 drawable baseline_search_24
 drawable baseline_sync_problem_24
@@ -3076,6 +3078,7 @@ drawable notify_panel_notification_icon_bg
 drawable product_inuse
 drawable rounded_border
 drawable rounded_border_rect
+drawable rounded_edittext
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3202,6 +3205,7 @@ id buttonPanel
 id cache_measures
 id callMeasure
 id cancel_button
+id car_view
 id cardView
 id carryVelocity
 id center
@@ -3355,7 +3359,6 @@ id linear
 id listMode
 id list_item
 id login_button
-id login_container
 id m3_side_sheet
 id marquee
 id masked
@@ -3471,17 +3474,16 @@ id productImage1
 id productImage2
 id productImage3
 id productImage4
-id productNameEditText
 id productNameTextView1
 id productNameTextView2
 id productNameTextView3
 id productNameTextView4
-id productPriceEditText
 id productidTextView1
 id productidTextView2
 id productidTextView3
 id progress_circular
 id progress_horizontal
+id purchaseDateEditText
 id radio
 id ratio
 id rectangles
