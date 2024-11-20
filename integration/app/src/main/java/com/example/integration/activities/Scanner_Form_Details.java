@@ -1,9 +1,11 @@
 package com.example.integration.activities;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,8 @@ import com.example.integration.api.ApiService;
 import com.example.integration.network.RetrofitClient;
 import com.example.integration.api.ProductDetails;
 
+import java.util.Calendar;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +29,7 @@ public class Scanner_Form_Details extends Fragment {
 
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
+    private EditText purchaseDateEditText;
     private String scannedBarcode;
     private TextView barcodeTextView;
     private EditText productNameEditText;
@@ -61,16 +66,37 @@ public class Scanner_Form_Details extends Fragment {
 
         // Initialize views
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
-        productNameEditText = view.findViewById(R.id.productNameEditText);
-        productPriceEditText = view.findViewById(R.id.productPriceEditText);
+//        productNameEditText = view.findViewById(R.id.productNameEditText);
+//        productPriceEditText = view.findViewById(R.id.productPriceEditText);
+        purchaseDateEditText = view.findViewById(R.id.purchaseDateEditText);
 
         // Set the scanned barcode
         if (scannedBarcode != null) {
             barcodeTextView.setText("Barcode: " + scannedBarcode);
         }
 
+        // Handle date picker for purchaseDateEditText
+        purchaseDateEditText.setOnClickListener(v -> showDatePickerDialog());
+
         // Handle save button click
         view.findViewById(R.id.saveButton).setOnClickListener(v -> saveProductDetails());
+    }
+
+    private void showDatePickerDialog() {
+        // Get current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Show date picker dialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                (DatePicker view, int selectedYear, int selectedMonth, int selectedDay) -> {
+                    // Format the date and set it in the EditText
+                    String selectedDate = selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay;
+                    purchaseDateEditText.setText(selectedDate);
+                }, year, month, day);
+        datePickerDialog.show();
     }
 
     private void saveProductDetails() {
