@@ -55,6 +55,35 @@
                         "endColumns": "74,110,88,100,106,106,98,106,102,87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,116,123,129,121,137,133,115,119",
                         "endOffsets": "859,970,1059,1160,1267,1374,1473,1580,1683,1771,1895,1997,2099,2215,2317,2431,2559,2675,2797,2933,3053,3187,3307,3419,3545,3751,3875,4005,4127,4265,4399,4515,4635"
                     }
+<<<<<<< HEAD
+=======
+                },
+                {
+                    "source": "C:\\Users\\SAUBAN VAHORA\\OneDrive\\Desktop\\SIH\\integration\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+<<<<<<< HEAD
+                        "startOffsets": "102",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "323"
+=======
+                        "startOffsets": "100",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "197"
+>>>>>>> de29adbbd28a46a203ae631af643d41715325e3d
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "152"
+                    }
+>>>>>>> c0997be9ef5ba62dafdb4eb591d631f61c4e03d3
                 }
             ]
         }
