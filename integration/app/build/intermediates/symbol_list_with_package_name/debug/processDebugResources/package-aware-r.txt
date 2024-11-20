@@ -3497,7 +3497,6 @@ id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
 id scale
-id scanQrBtn
 id scannedValueTv
 id screen
 id scroll
