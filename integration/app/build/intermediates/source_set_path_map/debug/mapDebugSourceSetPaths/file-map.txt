@@ -1,41 +1,41 @@
-com.example.integration.app-lifecycle-viewmodel-2.5.1-0 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\0179cbf94ab94e035871a8ecd70c7a77\transformed\lifecycle-viewmodel-2.5.1\res
-com.example.integration.app-camera-view-1.4.0-1 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\07fa76b24b53863b72f2a32f4c5a6ef7\transformed\camera-view-1.4.0\res
-com.example.integration.app-appcompat-1.5.1-2 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\0955c9bba547041cc7b85db6b427acba\transformed\appcompat-1.5.1\res
-com.example.integration.app-constraintlayout-2.1.4-3 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\0bd62d42d4c106d94b4fcd5dd232c05e\transformed\constraintlayout-2.1.4\res
-com.example.integration.app-core-1.8.0-4 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\12e25027a279c9a517b748b6a88a3616\transformed\core-1.8.0\res
-com.example.integration.app-zxing-android-embedded-4.3.0-5 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\res
-com.example.integration.app-tracing-ktx-1.2.0-6 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d9b07d5591c012586b856016a441bca\transformed\tracing-ktx-1.2.0\res
-com.example.integration.app-cardview-1.0.0-7 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\2c32a6544854d84b549b07a327d2e297\transformed\cardview-1.0.0\res
-com.example.integration.app-camera-lifecycle-1.4.0-8 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\30cd632cbadb679f317be2a5dbd1b310\transformed\camera-lifecycle-1.4.0\res
-com.example.integration.app-lifecycle-runtime-2.5.1-9 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\34b19cb3a135472749a6f898d19525f5\transformed\lifecycle-runtime-2.5.1\res
-com.example.integration.app-lifecycle-livedata-core-2.5.1-10 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\3755b881408d12d9c672719cb94a7c05\transformed\lifecycle-livedata-core-2.5.1\res
-com.example.integration.app-fragment-1.3.6-11 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\3a3843acf320146692bcdc7149789549\transformed\fragment-1.3.6\res
-com.example.integration.app-viewpager2-1.0.0-12 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\3bd90b18fa84ab346c044cecfdbebf5a\transformed\viewpager2-1.0.0\res
-com.example.integration.app-annotation-experimental-1.4.1-13 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\3e3d1e2691ce525aa87ca0e4f125ad33\transformed\annotation-experimental-1.4.1\res
-com.example.integration.app-core-ktx-1.8.0-14 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\5a427c139df89427f6ba1e39d7f89abd\transformed\core-ktx-1.8.0\res
-com.example.integration.app-startup-runtime-1.1.1-15 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\5f9fadb22878115a2253ebd0f1363163\transformed\startup-runtime-1.1.1\res
-com.example.integration.app-emoji2-1.2.0-16 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\res
-com.example.integration.app-savedstate-1.2.0-17 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6507a19a5e7cdb63d45f87ef480e4cf3\transformed\savedstate-1.2.0\res
-com.example.integration.app-drawerlayout-1.1.1-18 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6a9d444c4a15c700630db4938583e045\transformed\drawerlayout-1.1.1\res
-com.example.integration.app-camera-camera2-1.4.0-19 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\res
-com.example.integration.app-camera-core-1.4.0-20 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\7267dc8015eaa3bd9092baaa8a0a4593\transformed\camera-core-1.4.0\res
-com.example.integration.app-material-1.9.0-21 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\res
-com.example.integration.app-tracing-1.2.0-22 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\7981866480119a48e19e594c5810ff81\transformed\tracing-1.2.0\res
-com.example.integration.app-recyclerview-1.1.0-23 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\7bb72e95e0db1ed91ef4b32390313907\transformed\recyclerview-1.1.0\res
-com.example.integration.app-activity-1.6.1-24 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\7e8fc3785f443639b9501999db08bb42\transformed\activity-1.6.1\res
-com.example.integration.app-play-services-basement-18.1.0-25 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\res
-com.example.integration.app-coordinatorlayout-1.1.0-26 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9a1a394820c337180c88425da95ba76d\transformed\coordinatorlayout-1.1.0\res
-com.example.integration.app-emoji2-views-helper-1.2.0-27 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\a406b52c110e0796d6acc35cbfec4baf\transformed\emoji2-views-helper-1.2.0\res
-com.example.integration.app-camera-video-1.4.0-28 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\b6aa895a573c527cadd79b20d17d8059\transformed\camera-video-1.4.0\res
-com.example.integration.app-appcompat-resources-1.5.1-29 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\c07a3039cfbda76c5f42880a37730ed3\transformed\appcompat-resources-1.5.1\res
-com.example.integration.app-play-services-base-18.1.0-30 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\res
-com.example.integration.app-lifecycle-viewmodel-savedstate-2.5.1-31 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\d10aa73b4524371d98854c505defe8f5\transformed\lifecycle-viewmodel-savedstate-2.5.1\res
-com.example.integration.app-transition-1.2.0-32 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\d6e885f2238d4fed7b54adaec14ddecb\transformed\transition-1.2.0\res
-com.example.integration.app-lifecycle-process-2.4.1-33 C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\res
-com.example.integration.app-pngs-34 C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\build\generated\res\pngs\debug
-com.example.integration.app-resValues-35 C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\build\generated\res\resValues\debug
-com.example.integration.app-packageDebugResources-36 C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.example.integration.app-packageDebugResources-37 C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.example.integration.app-debug-38 C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\build\intermediates\merged_res\debug\mergeDebugResources
-com.example.integration.app-debug-39 C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\debug\res
-com.example.integration.app-main-40 C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\res
+com.example.integration.app-lifecycle-viewmodel-2.5.1-0 C:\Users\Dell\.gradle\caches\8.9\transforms\0179cbf94ab94e035871a8ecd70c7a77\transformed\lifecycle-viewmodel-2.5.1\res
+com.example.integration.app-camera-view-1.4.0-1 C:\Users\Dell\.gradle\caches\8.9\transforms\07fa76b24b53863b72f2a32f4c5a6ef7\transformed\camera-view-1.4.0\res
+com.example.integration.app-appcompat-1.5.1-2 C:\Users\Dell\.gradle\caches\8.9\transforms\0955c9bba547041cc7b85db6b427acba\transformed\appcompat-1.5.1\res
+com.example.integration.app-constraintlayout-2.1.4-3 C:\Users\Dell\.gradle\caches\8.9\transforms\0bd62d42d4c106d94b4fcd5dd232c05e\transformed\constraintlayout-2.1.4\res
+com.example.integration.app-core-1.8.0-4 C:\Users\Dell\.gradle\caches\8.9\transforms\12e25027a279c9a517b748b6a88a3616\transformed\core-1.8.0\res
+com.example.integration.app-zxing-android-embedded-4.3.0-5 C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\res
+com.example.integration.app-tracing-ktx-1.2.0-6 C:\Users\Dell\.gradle\caches\8.9\transforms\1d9b07d5591c012586b856016a441bca\transformed\tracing-ktx-1.2.0\res
+com.example.integration.app-cardview-1.0.0-7 C:\Users\Dell\.gradle\caches\8.9\transforms\2c32a6544854d84b549b07a327d2e297\transformed\cardview-1.0.0\res
+com.example.integration.app-camera-lifecycle-1.4.0-8 C:\Users\Dell\.gradle\caches\8.9\transforms\30cd632cbadb679f317be2a5dbd1b310\transformed\camera-lifecycle-1.4.0\res
+com.example.integration.app-lifecycle-runtime-2.5.1-9 C:\Users\Dell\.gradle\caches\8.9\transforms\34b19cb3a135472749a6f898d19525f5\transformed\lifecycle-runtime-2.5.1\res
+com.example.integration.app-lifecycle-livedata-core-2.5.1-10 C:\Users\Dell\.gradle\caches\8.9\transforms\3755b881408d12d9c672719cb94a7c05\transformed\lifecycle-livedata-core-2.5.1\res
+com.example.integration.app-fragment-1.3.6-11 C:\Users\Dell\.gradle\caches\8.9\transforms\3a3843acf320146692bcdc7149789549\transformed\fragment-1.3.6\res
+com.example.integration.app-viewpager2-1.0.0-12 C:\Users\Dell\.gradle\caches\8.9\transforms\3bd90b18fa84ab346c044cecfdbebf5a\transformed\viewpager2-1.0.0\res
+com.example.integration.app-annotation-experimental-1.4.1-13 C:\Users\Dell\.gradle\caches\8.9\transforms\3e3d1e2691ce525aa87ca0e4f125ad33\transformed\annotation-experimental-1.4.1\res
+com.example.integration.app-core-ktx-1.8.0-14 C:\Users\Dell\.gradle\caches\8.9\transforms\5a427c139df89427f6ba1e39d7f89abd\transformed\core-ktx-1.8.0\res
+com.example.integration.app-startup-runtime-1.1.1-15 C:\Users\Dell\.gradle\caches\8.9\transforms\5f9fadb22878115a2253ebd0f1363163\transformed\startup-runtime-1.1.1\res
+com.example.integration.app-emoji2-1.2.0-16 C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\res
+com.example.integration.app-savedstate-1.2.0-17 C:\Users\Dell\.gradle\caches\8.9\transforms\6507a19a5e7cdb63d45f87ef480e4cf3\transformed\savedstate-1.2.0\res
+com.example.integration.app-drawerlayout-1.1.1-18 C:\Users\Dell\.gradle\caches\8.9\transforms\6a9d444c4a15c700630db4938583e045\transformed\drawerlayout-1.1.1\res
+com.example.integration.app-camera-camera2-1.4.0-19 C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\res
+com.example.integration.app-camera-core-1.4.0-20 C:\Users\Dell\.gradle\caches\8.9\transforms\7267dc8015eaa3bd9092baaa8a0a4593\transformed\camera-core-1.4.0\res
+com.example.integration.app-material-1.9.0-21 C:\Users\Dell\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\res
+com.example.integration.app-tracing-1.2.0-22 C:\Users\Dell\.gradle\caches\8.9\transforms\7981866480119a48e19e594c5810ff81\transformed\tracing-1.2.0\res
+com.example.integration.app-recyclerview-1.1.0-23 C:\Users\Dell\.gradle\caches\8.9\transforms\7bb72e95e0db1ed91ef4b32390313907\transformed\recyclerview-1.1.0\res
+com.example.integration.app-activity-1.6.1-24 C:\Users\Dell\.gradle\caches\8.9\transforms\7e8fc3785f443639b9501999db08bb42\transformed\activity-1.6.1\res
+com.example.integration.app-play-services-basement-18.1.0-25 C:\Users\Dell\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\res
+com.example.integration.app-coordinatorlayout-1.1.0-26 C:\Users\Dell\.gradle\caches\8.9\transforms\9a1a394820c337180c88425da95ba76d\transformed\coordinatorlayout-1.1.0\res
+com.example.integration.app-emoji2-views-helper-1.2.0-27 C:\Users\Dell\.gradle\caches\8.9\transforms\a406b52c110e0796d6acc35cbfec4baf\transformed\emoji2-views-helper-1.2.0\res
+com.example.integration.app-camera-video-1.4.0-28 C:\Users\Dell\.gradle\caches\8.9\transforms\b6aa895a573c527cadd79b20d17d8059\transformed\camera-video-1.4.0\res
+com.example.integration.app-appcompat-resources-1.5.1-29 C:\Users\Dell\.gradle\caches\8.9\transforms\c07a3039cfbda76c5f42880a37730ed3\transformed\appcompat-resources-1.5.1\res
+com.example.integration.app-play-services-base-18.1.0-30 C:\Users\Dell\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\res
+com.example.integration.app-lifecycle-viewmodel-savedstate-2.5.1-31 C:\Users\Dell\.gradle\caches\8.9\transforms\d10aa73b4524371d98854c505defe8f5\transformed\lifecycle-viewmodel-savedstate-2.5.1\res
+com.example.integration.app-transition-1.2.0-32 C:\Users\Dell\.gradle\caches\8.9\transforms\d6e885f2238d4fed7b54adaec14ddecb\transformed\transition-1.2.0\res
+com.example.integration.app-lifecycle-process-2.4.1-33 C:\Users\Dell\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\res
+com.example.integration.app-pngs-34 D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\build\generated\res\pngs\debug
+com.example.integration.app-resValues-35 D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\build\generated\res\resValues\debug
+com.example.integration.app-packageDebugResources-36 D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.integration.app-packageDebugResources-37 D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.integration.app-debug-38 D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.example.integration.app-debug-39 D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\debug\res
+com.example.integration.app-main-40 D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\res

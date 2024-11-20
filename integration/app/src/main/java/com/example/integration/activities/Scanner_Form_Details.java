@@ -59,7 +59,6 @@ public class Scanner_Form_Details extends Fragment {
         // Initialize views
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
         productNameEditText = view.findViewById(R.id.productNameEditText);
-        productPriceEditText = view.findViewById(R.id.productPriceEditText);
         saveButton = view.findViewById(R.id.saveButton);
 
         // Set the scanned barcode

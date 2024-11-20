@@ -4,7 +4,24 @@
             "outputFile": "com.example.integration.app-mergeDebugResources-36:/values-ru/values-ru.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\0955c9bba547041cc7b85db6b427acba\\transformed\\appcompat-1.5.1\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\8.9\\transforms\\c5294d1dd1bc13be534c7531c42ec7ae\\transformed\\play-services-base-18.1.0\\res\\values-ru\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,296,458,580,686,824,949,1060,1160,1337,1440,1599,1721,1884,2038,2103,2159",
+                        "endColumns": "102,161,121,105,137,124,110,99,176,102,158,121,162,153,64,55,81",
+                        "endOffsets": "295,457,579,685,823,948,1059,1159,1336,1439,1598,1720,1883,2037,2102,2158,2240"
+                    },
+                    "to": {
+                        "startLines": "43,44,45,46,47,48,49,50,52,53,54,55,56,57,58,59,60",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3903,4010,4176,4302,4412,4554,4683,4798,5059,5240,5347,5510,5636,5803,5961,6030,6090",
+                        "endColumns": "106,165,125,109,141,128,114,103,180,106,162,125,166,157,68,59,85",
+                        "endOffsets": "4005,4171,4297,4407,4549,4678,4793,4897,5235,5342,5505,5631,5798,5956,6025,6085,6171"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\8.9\\transforms\\0955c9bba547041cc7b85db6b427acba\\transformed\\appcompat-1.5.1\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,24 +38,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\909608274662da6b53897ea5ff5763fd\\transformed\\play-services-basement-18.1.0\\res\\values-ru\\values.xml",
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\8.9\\transforms\\12e25027a279c9a517b748b6a88a3616\\transformed\\core-1.8.0\\res\\values-ru\\values-ru.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "152",
-                        "endOffsets": "347"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "51",
+                        "startLines": "116",
                         "startColumns": "4",
-                        "startOffsets": "4902",
-                        "endColumns": "156",
-                        "endOffsets": "5054"
+                        "startOffsets": "10502",
+                        "endColumns": "100",
+                        "endOffsets": "10598"
                     }
                 },
                 {
-                    "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\74d7ffa5b3ced407cd5dddbcd6f4b3bc\\transformed\\material-1.9.0\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\8.9\\transforms\\19a482e29a5b65e62872a64a99606963\\transformed\\zxing-android-embedded-4.3.0\\res\\values-ru\\values-ru.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,117,164,306",
+                        "endColumns": "61,46,141,125",
+                        "endOffsets": "112,159,301,427"
+                    },
+                    "to": {
+                        "startLines": "117,118,119,120",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "10603,10665,10712,10854",
+                        "endColumns": "61,46,141,125",
+                        "endOffsets": "10660,10707,10849,10975"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\8.9\\transforms\\74d7ffa5b3ced407cd5dddbcd6f4b3bc\\transformed\\material-1.9.0\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -57,54 +91,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\c5294d1dd1bc13be534c7531c42ec7ae\\transformed\\play-services-base-18.1.0\\res\\values-ru\\values.xml",
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\8.9\\transforms\\909608274662da6b53897ea5ff5763fd\\transformed\\play-services-basement-18.1.0\\res\\values-ru\\values.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,296,458,580,686,824,949,1060,1160,1337,1440,1599,1721,1884,2038,2103,2159",
-                        "endColumns": "102,161,121,105,137,124,110,99,176,102,158,121,162,153,64,55,81",
-                        "endOffsets": "295,457,579,685,823,948,1059,1159,1336,1439,1598,1720,1883,2037,2102,2158,2240"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "152",
+                        "endOffsets": "347"
                     },
                     "to": {
-                        "startLines": "43,44,45,46,47,48,49,50,52,53,54,55,56,57,58,59,60",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3903,4010,4176,4302,4412,4554,4683,4798,5059,5240,5347,5510,5636,5803,5961,6030,6090",
-                        "endColumns": "106,165,125,109,141,128,114,103,180,106,162,125,166,157,68,59,85",
-                        "endOffsets": "4005,4171,4297,4407,4549,4678,4793,4897,5235,5342,5505,5631,5798,5956,6025,6085,6171"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\19a482e29a5b65e62872a64a99606963\\transformed\\zxing-android-embedded-4.3.0\\res\\values-ru\\values-ru.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,117,164,306",
-                        "endColumns": "61,46,141,125",
-                        "endOffsets": "112,159,301,427"
-                    },
-                    "to": {
-                        "startLines": "117,118,119,120",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "10603,10665,10712,10854",
-                        "endColumns": "61,46,141,125",
-                        "endOffsets": "10660,10707,10849,10975"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\caches\\8.9\\transforms\\12e25027a279c9a517b748b6a88a3616\\transformed\\core-1.8.0\\res\\values-ru\\values-ru.xml",
-                    "from": {
-                        "startLines": "2",
+                        "startLines": "51",
                         "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "116",
-                        "startColumns": "4",
-                        "startOffsets": "10502",
-                        "endColumns": "100",
-                        "endOffsets": "10598"
+                        "startOffsets": "4902",
+                        "endColumns": "156",
+                        "endOffsets": "5054"
                     }
                 }
             ]
