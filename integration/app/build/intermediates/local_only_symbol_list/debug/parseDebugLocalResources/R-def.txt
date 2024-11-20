@@ -7,10 +7,12 @@ color white
 drawable background
 drawable baseline_add_circle_outline_24
 drawable baseline_arrow_circle_right_24
+drawable baseline_help_24
 drawable baseline_home_24
 drawable baseline_info_outline_24
 drawable baseline_local_police_24
 drawable baseline_person_24
+drawable baseline_qr_code_scanner_24
 drawable baseline_search_24
 drawable baseline_sync_problem_24
 drawable baseline_transform_24
@@ -89,6 +91,7 @@ id toolbar
 id username
 layout activity_home
 layout activity_main
+layout activity_user_home
 layout fragment_home_fragment
 layout fragment_product_description
 layout fragment_product_detail
