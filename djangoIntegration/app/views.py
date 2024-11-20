@@ -2,11 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import *
-from .serializers import LoginSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import LoginSerializer
+from .serializers import ProductSerializer, LoginSerializer
 
 @api_view(['POST'])
 def login_view(request):
@@ -36,6 +35,7 @@ def login_view(request):
             print(f"Stored password: {user.password}")
             
             if user.password == password:
+                
                 return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid password'}, status=status.HTTP_400_BAD_REQUEST)
@@ -45,3 +45,16 @@ def login_view(request):
     # If the serializer is not valid, return the errors
     print(f"Serializer errors: {serializer.errors}")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def add_product(request):
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid():
+        barcode = serializer.validated_data['barcode']
+        pname = serializer.validated_data['product_name']
+        pprice = serializer.validated_data['product_price']
+        
+        Product.objects.create(barcode=barcode, product_name=pname, product_price=pprice)
+        
+        return Response({"message": "Product added successfully!"}, status=201)
+    return Response(serializer.errors, status=400)
