@@ -1,10 +1,5 @@
 from django.db import models
 
-STATUS_CHOICES = [
-    ('Active', 'Active'),
-    ('Inactive', 'Inactive'),
-]
-
 class stationDetails(models.Model):
     station_id = models.IntegerField(primary_key=True)
     station_name = models.CharField(max_length=255)
@@ -30,7 +25,8 @@ class User(models.Model):
     contact_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(unique=True, null=True, blank=True)
     station = models.OneToOneField(stationDetails, related_name='stationDetails', null=True, blank=True, on_delete=models.CASCADE,) # type: ignore
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Active')
+    last_login = models.DateTimeField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.username
@@ -51,7 +47,19 @@ class Asset(models.Model):
     purchase_date = models.DateField()
     asset_value = models.CharField(max_length=255)
     condition = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{self.barcode} - {self.asset_name}"
+    
+class Allocation(models.Model):
+    allocation_id = models.IntegerField(primary_key=True)
+    asset_barcode = models.CharField(max_length=255)
+    user = models.CharField(max_length=255)
+    assign_date = models.DateField(auto_now_add=True)
+    return_date = models.DateField(null=True, blank=True)
+    assign_location = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return f"Asset : {self.asset_barcode} - Allocated to: {self.user}"
     

@@ -1,6 +1,7 @@
 package com.example.integration.activities;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.integration.R;
 import com.example.integration.api.ApiService;
 import com.example.integration.network.RetrofitClient;
-import com.example.integration.api.ProductDetails;
+import com.example.integration.api.AssignProduct;
 
 import java.util.Calendar;
 
@@ -27,19 +28,18 @@ import retrofit2.Response;
 
 public class User_Scanner_Form_DetailsFragment extends Fragment {
 
-
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
-
     private EditText returnDateEditText;
     private String scannedBarcode;
     private TextView barcodeTextView;
+    private SharedPreferences sharedPreferences;
 
     public User_Scanner_Form_DetailsFragment() {
         // Required empty public constructor
     }
 
-    public static Scanner_Form_DetailsFragment newInstance(String scannedBarcode) {
-        Scanner_Form_DetailsFragment fragment = new Scanner_Form_DetailsFragment();
+    public static User_Scanner_Form_DetailsFragment newInstance(String scannedBarcode) {
+        User_Scanner_Form_DetailsFragment fragment = new User_Scanner_Form_DetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SCANNED_BARCODE, scannedBarcode);
         fragment.setArguments(args);
@@ -52,6 +52,8 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         if (getArguments() != null) {
             scannedBarcode = getArguments().getString(ARG_SCANNED_BARCODE);
         }
+        // Initialize SharedPreferences
+        sharedPreferences = getActivity().getSharedPreferences("UserSession", getActivity().MODE_PRIVATE);
     }
 
     @Override
@@ -76,7 +78,7 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         returnDateEditText.setOnClickListener(v -> showDatePickerDialog());
 
         // Handle save button click
-        view.findViewById(R.id.saveButton).setOnClickListener(v -> saveProductDetails());
+        view.findViewById(R.id.saveButton).setOnClickListener(v -> saveAssignProduct());
     }
 
     private void showDatePickerDialog() {
@@ -96,24 +98,26 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         datePickerDialog.show();
     }
 
-    private void saveProductDetails() {
+    private void saveAssignProduct() {
         // Collect all field values
-
         String returnDate = returnDateEditText.getText().toString().trim();
 
-
         // Validate inputs
-        if ( returnDate.isEmpty()) {
+        if (returnDate.isEmpty()) {
             Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Create ProductDetails object
-        ProductDetails productDetails = new ProductDetails(scannedBarcode, returnDate);
+        // Retrieve session details from SharedPreferences
+        String sessionId = sharedPreferences.getString("session_id", "");
+        String username = sharedPreferences.getString("username", "");
+
+        // Create AssignProduct object
+        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username);
 
         // Initialize Retrofit and make the API call
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-        apiService.saveProductDetails(productDetails).enqueue(new Callback<Void>() {
+        apiService.saveAssignProduct(assignProduct).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
@@ -130,5 +134,4 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
             }
         });
     }
-
 }

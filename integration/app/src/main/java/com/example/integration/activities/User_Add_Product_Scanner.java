@@ -76,7 +76,7 @@ public class User_Add_Product_Scanner extends Fragment {
 
     private void handleScannedValue(String scannedValue) {
         // Navigate to the form fragment with the scanned value
-        Scanner_Form_DetailsFragment formDetailsFragment = User_Scanner_Form_DetailsFragment.newInstance(scannedValue);
+        Scanner_Form_DetailsFragment formDetailsFragment = fragment_user__scanner__form__details.newInstance(scannedValue);
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, formDetailsFragment) // Replace with your container ID
                 .addToBackStack(null)

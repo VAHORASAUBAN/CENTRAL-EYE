@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    private FloatingActionButton fab;
+//    private FloatingActionButton fab;
 
     private final Fragment homeFragment = new Home_fragment();
     private final Fragment profileFragment = new Profile_fragment();
@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        fab = findViewById(R.id.fab);
+//        fab = findViewById(R.id.fab);
 
         // Default fragment (Home)
         replaceFragment(homeFragment);
@@ -39,10 +39,10 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
 
         // Handle FloatingActionButton click
-        fab.setOnClickListener(v -> {
-            // Navigate to a specific action or fragment
-            replaceFragment(addProductScanner);
-        });
+//        fab.setOnClickListener(v -> {
+//            // Navigate to a specific action or fragment
+//            replaceFragment(addProductScanner);
+//        });
     }
 
     private boolean onNavigationItemSelected(@NonNull MenuItem item) {

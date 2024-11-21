@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+import android.widget.Button;
 
 import com.example.integration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,13 +23,27 @@ public class UserHomeActivity extends AppCompatActivity {
     User_Home_fragment user_homeFragment = new User_Home_fragment();
     User_Profile_fragment user_profileFragment = new User_Profile_fragment();
     User_Add_Product_Scanner user_addProductScanner = new User_Add_Product_Scanner();
+    private SharedPreferences sharedPreferences;
+    private TextView welcomeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_user_home);
 
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+
+        // Fetch the username from session
+        String username = sharedPreferences.getString("username", "User");
+
+        // Bind views
+        welcomeTextView = findViewById(R.id.welcomeTextView);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        Button logoutButton = findViewById(R.id.logoutButton);
+
+        // Set welcome message
+        welcomeTextView.setText("Welcome, " + username + "!");
 
         // Default fragment (Home)
         replaceFragmentWithAnimation(user_homeFragment, R.anim.fade_in, R.anim.fade_out);
@@ -50,6 +68,19 @@ public class UserHomeActivity extends AppCompatActivity {
                 }
                 return false;
             }
+        });
+
+        // Logout functionality
+        logoutButton.setOnClickListener(v -> {
+            // Clear the session
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+
+            // Redirect to login screen
+            Intent intent = new Intent(UserHomeActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 
@@ -88,5 +119,4 @@ public class UserHomeActivity extends AppCompatActivity {
                     .start();
         }
     }
-
 }

@@ -52,14 +52,12 @@ id asset_value_input
 id assigned_ids_label
 id barcodeTextView
 id barcode_scanner
-id bottomAppBar
 id bottomContainer
 id bottom_navigation
 id car_view
 id cardView
 id condition_input
 id cpu_total_section
-id fab
 id fragment_container
 id gridLayout
 id icon1
@@ -68,6 +66,7 @@ id itemLayout1
 id itemLayout2
 id itemLayout3
 id login_button
+id logoutButton
 id model_name_input
 id nav_home
 id nav_products
@@ -92,6 +91,7 @@ id productNameTextView4
 id productTableLayout
 id productidTextView1
 id purchaseDateEditText
+id returnDate
 id saveButton
 id scannedValueTv
 id searchEditText
@@ -104,6 +104,7 @@ id titleTextView
 id toolbar
 id username
 id viewButton
+id welcomeTextView
 layout activity_home
 layout activity_main
 layout activity_splash
@@ -119,6 +120,7 @@ layout fragment_scanner__form__details
 layout fragment_user__add__product__scanner
 layout fragment_user__home_fragment
 layout fragment_user__profile_fragment
+layout fragment_user__scanner__form__details
 menu bottom_nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -132,7 +134,6 @@ string username_hint
 style Base.Theme.Integration
 style BottomNavTextActive
 style BottomNavTextInactive
-style Theme.BottomNavigation
 style Theme.Integration
 xml backup_rules
 xml data_extraction_rules
