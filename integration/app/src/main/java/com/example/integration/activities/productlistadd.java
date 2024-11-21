@@ -44,7 +44,7 @@ public class productlistadd extends Fragment {
         View view = inflater.inflate(R.layout.fragment_productlistadd, container, false);
 
         // Initialize RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Create sample product data
