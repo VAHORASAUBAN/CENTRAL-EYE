@@ -3,8 +3,8 @@ package com.example.integration.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,14 +23,24 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+
         EditText usernameEditText = findViewById(R.id.username);
         EditText passwordEditText = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.login_button);
+
+        // Check if user is already logged in
+        if (sharedPreferences.contains("username")) {
+            navigateToHomeScreen(sharedPreferences.getString("role", ""), sharedPreferences.getString("username", ""));
+            finish();
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,15 +65,16 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 LoginResponse loginResponse = response.body();
                                 String role = loginResponse.getRole();  // Get the role from the response
+                                String username = loginResponse.getUsername();
 
-                                // Redirect based on the role
-                                Intent intent;
-                                if (role.equals("Admin")) {
-                                    intent = new Intent(MainActivity.this, HomeActivity.class);
-                                } else {
-                                    intent = new Intent(MainActivity.this, UserHomeActivity.class);
-                                }
-                                startActivity(intent);
+                                // Save user session
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("username", username);
+                                editor.putString("role", role);
+                                editor.apply();
+
+                                // Navigate to home screen
+                                navigateToHomeScreen(role, username);
                                 finish();
                             } else {
                                 // Handle invalid login response
@@ -81,5 +92,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-}
 
+    private void navigateToHomeScreen(String role, String username) {
+        Intent intent;
+        if (role.equals("Admin")) {
+            intent = new Intent(MainActivity.this, HomeActivity.class);
+        } else {
+            intent = new Intent(MainActivity.this, UserHomeActivity.class);
+            intent.putExtra("username", username);  // Pass the username to UserHomeActivity
+        }
+        startActivity(intent);
+    }
+}

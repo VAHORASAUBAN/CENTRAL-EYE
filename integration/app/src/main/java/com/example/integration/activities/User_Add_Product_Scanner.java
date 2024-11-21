@@ -25,20 +25,15 @@ public class User_Add_Product_Scanner extends Fragment {
         // Required empty public constructor
     }
 
-    public static Add_Product_Scanner newInstance(String param1, String param2) {
-        Add_Product_Scanner fragment = new Add_Product_Scanner();
-        Bundle args = new Bundle();
-        args.putString("param1", param1);
-        args.putString("param2", param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static User_Add_Product_Scanner newInstance() {
+        return new User_Add_Product_Scanner();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_user__add__product__scanner, container, false);
     }
 
     @Override
@@ -69,14 +64,13 @@ public class User_Add_Product_Scanner extends Fragment {
     }
 
     private void startScanning() {
-        // Start the scanner
-        barcodeScannerView.resume();
+        barcodeScannerView.resume(); // Start the scanner
         Toast.makeText(getContext(), "Scanner is ready.", Toast.LENGTH_SHORT).show();
     }
 
     private void handleScannedValue(String scannedValue) {
         // Navigate to the form fragment with the scanned value
-        Scanner_Form_DetailsFragment formDetailsFragment = User_Scanner_Form_DetailsFragment.newInstance(scannedValue);
+        User_Scanner_Form_DetailsFragment formDetailsFragment = User_Scanner_Form_DetailsFragment.newInstance(scannedValue);
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, formDetailsFragment) // Replace with your container ID
                 .addToBackStack(null)
