@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/black"
+        android:background="@color/primary"
         android:elevation="4dp"
         app:title="Inventory Management"
         app:titleTextColor="@android:color/white" />
@@ -33,7 +33,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/titleTextView">
+        android:layout_below="@id/titleTextView"
+        android:fillViewport="true">
 
         <!-- Card layout for asset form -->
         <androidx.cardview.widget.CardView
