@@ -9,238 +9,238 @@
 9        android:targetSdkVersion="34" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:5:5-67
-11-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:5:22-64
+11-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:5:5-67
+11-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:5:22-64
 12    <uses-permission android:name="android.permission.CAMERA" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
-12-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:5-65
-12-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:22-62
+12-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:5-65
+12-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:22-62
 13    <uses-feature
-13-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:25:5-27:36
+13-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:25:5-27:36
 14        android:name="android.hardware.camera"
-14-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:26:9-47
+14-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:26:9-47
 15        android:required="false" />
-15-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:27:9-33
+15-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:27:9-33
 16    <uses-feature
-16-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
+16-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
 17        android:name="android.hardware.camera.front"
-17-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
+17-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
 18        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
-18-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
+18-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
 19    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
 20    <uses-feature
-20-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:33:5-35:36
+20-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:33:5-35:36
 21        android:name="android.hardware.camera.autofocus"
-21-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:34:9-57
+21-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:34:9-57
 22        android:required="false" />
-22-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:35:9-33
+22-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:35:9-33
 23    <uses-feature
-23-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
+23-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
 24        android:name="android.hardware.camera.flash"
-24-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
+24-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
 25        android:required="false" />
-25-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
+25-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
 26    <uses-feature
-26-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
+26-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
 27        android:name="android.hardware.screen.landscape"
-27-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
+27-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
 28        android:required="false" />
-28-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
+28-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
 29    <uses-feature
-29-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
+29-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
 30        android:name="android.hardware.wifi"
-30-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
+30-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
 31        android:required="false" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
-31-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
+31-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
 32    <!-- <uses-sdk android:minSdkVersion="14"/> -->
 33    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
-33-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:25:5-79
-33-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:25:22-76
+33-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:25:5-79
+33-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:25:22-76
 34    <application
-34-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:8:5-30:19
+34-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:8:5-30:19
 35        android:allowBackup="true"
-35-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:10:9-35
+35-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:10:9-35
 36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-36-->[androidx.core:core:1.8.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\12e25027a279c9a517b748b6a88a3616\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+36-->[androidx.core:core:1.8.0] C:\Users\Dell\.gradle\caches\8.9\transforms\12e25027a279c9a517b748b6a88a3616\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
 37        android:debuggable="true"
 38        android:extractNativeLibs="false"
 39        android:icon="@mipmap/ic_launcher"
-39-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:11:9-43
+39-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:11:9-43
 40        android:label="@string/app_name"
-40-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:12:9-41
+40-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:12:9-41
 41        android:networkSecurityConfig="@xml/network_security_config"
-41-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:9:9-69
+41-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:9:9-69
 42        android:testOnly="true"
 43        android:theme="@style/Theme.Integration" >
-43-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:13:9-49
+43-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:13:9-49
 44
 45        <!-- Main Activity -->
 46        <activity
-46-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:16:9-22:20
+46-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:16:9-22:20
 47            android:name="com.example.integration.activities.MainActivity"
-47-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:16:19-58
+47-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:16:19-58
 48            android:exported="true" >
-48-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:17:13-36
+48-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:17:13-36
 49            <intent-filter>
-49-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:18:13-21:29
+49-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:18:13-21:29
 50                <category android:name="android.intent.category.LAUNCHER" />
-50-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:17-77
-50-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:27-74
+50-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:19:17-77
+50-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:19:27-74
 51
 52                <action android:name="android.intent.action.MAIN" />
-52-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:17-69
-52-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:25-66
+52-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:20:17-69
+52-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:20:25-66
 53            </intent-filter>
 54        </activity>
 55
 56        <!-- Home Activity -->
 57        <activity
-57-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:25:9-26:39
+57-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:25:9-26:39
 58            android:name="com.example.integration.activities.HomeActivity"
-58-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:25:19-58
+58-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:25:19-58
 59            android:exported="true" />
-59-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:26:13-36
+59-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:26:13-36
 60        <activity
-60-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:28:9-29:39
+60-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:28:9-29:39
 61            android:name="com.example.integration.activities.UserHomeActivity"
-61-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:28:19-62
+61-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:28:19-62
 62            android:exported="true" />
-62-->C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:29:13-36
+62-->D:\Desktop\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:29:13-36
 63        <activity
-63-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+63-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
 64            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-64-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+64-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
 65            android:clearTaskOnLaunch="true"
-65-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+65-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
 66            android:screenOrientation="sensorLandscape"
-66-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+66-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
 67            android:stateNotNeeded="true"
-67-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+67-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
 68            android:theme="@style/zxing_CaptureTheme"
-68-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+68-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
 69            android:windowSoftInputMode="stateAlwaysHidden" />
-69-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+69-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
 70
 71        <service
-71-->[androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:24:9-33:19
+71-->[androidx.camera:camera-camera2:1.4.0] C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:24:9-33:19
 72            android:name="androidx.camera.core.impl.MetadataHolderService"
-72-->[androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:25:13-75
+72-->[androidx.camera:camera-camera2:1.4.0] C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:25:13-75
 73            android:enabled="false"
-73-->[androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:26:13-36
+73-->[androidx.camera:camera-camera2:1.4.0] C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:26:13-36
 74            android:exported="false" >
-74-->[androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:27:13-37
+74-->[androidx.camera:camera-camera2:1.4.0] C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:27:13-37
 75            <meta-data
-75-->[androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:30:13-32:89
+75-->[androidx.camera:camera-camera2:1.4.0] C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:30:13-32:89
 76                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
-76-->[androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:31:17-103
+76-->[androidx.camera:camera-camera2:1.4.0] C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:31:17-103
 77                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
-77-->[androidx.camera:camera-camera2:1.4.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:32:17-86
+77-->[androidx.camera:camera-camera2:1.4.0] C:\Users\Dell\.gradle\caches\8.9\transforms\6eb2fa8cd82aab6c0d9493078db491a3\transformed\camera-camera2-1.4.0\AndroidManifest.xml:32:17-86
 78        </service>
 79        <service
-79-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:9:9-15:19
+79-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:9:9-15:19
 80            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
-80-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:10:13-91
+80-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:10:13-91
 81            android:directBootAware="true"
-81-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:17:13-43
+81-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:17:13-43
 82            android:exported="false" >
-82-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:11:13-37
+82-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:11:13-37
 83            <meta-data
-83-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:12:13-14:85
+83-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:12:13-14:85
 84                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
-84-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:13:17-120
+84-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:13:17-120
 85                android:value="com.google.firebase.components.ComponentRegistrar" />
-85-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:14:17-82
+85-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\1b1ca5e00b3b5d335379e9112733c982\transformed\play-services-mlkit-barcode-scanning-18.1.0\AndroidManifest.xml:14:17-82
 86            <meta-data
-86-->[com.google.mlkit:vision-common:17.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\3d1ca537f0da002ddcbef97b1b174682\transformed\vision-common-17.3.0\AndroidManifest.xml:12:13-14:85
+86-->[com.google.mlkit:vision-common:17.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\3d1ca537f0da002ddcbef97b1b174682\transformed\vision-common-17.3.0\AndroidManifest.xml:12:13-14:85
 87                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
-87-->[com.google.mlkit:vision-common:17.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\3d1ca537f0da002ddcbef97b1b174682\transformed\vision-common-17.3.0\AndroidManifest.xml:13:17-124
+87-->[com.google.mlkit:vision-common:17.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\3d1ca537f0da002ddcbef97b1b174682\transformed\vision-common-17.3.0\AndroidManifest.xml:13:17-124
 88                android:value="com.google.firebase.components.ComponentRegistrar" />
-88-->[com.google.mlkit:vision-common:17.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\3d1ca537f0da002ddcbef97b1b174682\transformed\vision-common-17.3.0\AndroidManifest.xml:14:17-82
+88-->[com.google.mlkit:vision-common:17.3.0] C:\Users\Dell\.gradle\caches\8.9\transforms\3d1ca537f0da002ddcbef97b1b174682\transformed\vision-common-17.3.0\AndroidManifest.xml:14:17-82
 89            <meta-data
-89-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:20:13-22:85
+89-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:20:13-22:85
 90                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
-90-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:21:17-120
+90-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:21:17-120
 91                android:value="com.google.firebase.components.ComponentRegistrar" />
-91-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:22:17-82
+91-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:22:17-82
 92        </service>
 93
 94        <provider
-94-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:9:9-13:38
+94-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:9:9-13:38
 95            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
-95-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:10:13-78
+95-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:10:13-78
 96            android:authorities="com.example.integration.mlkitinitprovider"
-96-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:11:13-69
+96-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:11:13-69
 97            android:exported="false"
-97-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:12:13-37
+97-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:12:13-37
 98            android:initOrder="99" />
-98-->[com.google.mlkit:common:18.6.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:13:13-35
+98-->[com.google.mlkit:common:18.6.0] C:\Users\Dell\.gradle\caches\8.9\transforms\9d37b1f07c7350b53babc191560adcde\transformed\common-18.6.0\AndroidManifest.xml:13:13-35
 99
 100        <activity
-100-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+100-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
 101            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-101-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+101-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
 102            android:exported="false"
-102-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+102-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
 103            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-103-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+103-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\c5294d1dd1bc13be534c7531c42ec7ae\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
 104
 105        <meta-data
-105-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+105-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
 106            android:name="com.google.android.gms.version"
-106-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+106-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
 107            android:value="@integer/google_play_services_version" />
-107-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+107-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Dell\.gradle\caches\8.9\transforms\909608274662da6b53897ea5ff5763fd\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
 108
 109        <provider
-109-->[androidx.emoji2:emoji2:1.2.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+109-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 110            android:name="androidx.startup.InitializationProvider"
-110-->[androidx.emoji2:emoji2:1.2.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+110-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
 111            android:authorities="com.example.integration.androidx-startup"
-111-->[androidx.emoji2:emoji2:1.2.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+111-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
 112            android:exported="false" >
-112-->[androidx.emoji2:emoji2:1.2.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+112-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
 113            <meta-data
-113-->[androidx.emoji2:emoji2:1.2.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+113-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
 114                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-114-->[androidx.emoji2:emoji2:1.2.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+114-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
 115                android:value="androidx.startup" />
-115-->[androidx.emoji2:emoji2:1.2.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+115-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\8.9\transforms\60d524f02ec00cfa44755e690e0b7730\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
 116            <meta-data
-116-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+116-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Dell\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
 117                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-117-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+117-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Dell\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
 118                android:value="androidx.startup" />
-118-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+118-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Dell\.gradle\caches\8.9\transforms\f85c5f043a3a2113fcde9c91052c6751\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
 119        </provider>
 120
 121        <service
-121-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:29:9-35:19
+121-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:29:9-35:19
 122            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-122-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:30:13-103
+122-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:30:13-103
 123            android:exported="false" >
-123-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:31:13-37
+123-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:31:13-37
 124            <meta-data
-124-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:32:13-34:39
+124-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:32:13-34:39
 125                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-125-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:33:17-94
+125-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:33:17-94
 126                android:value="cct" />
-126-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:34:17-36
+126-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Dell\.gradle\caches\8.9\transforms\cc30ba4d6457bcb52a332f31e2d13507\transformed\transport-backend-cct-2.3.3\AndroidManifest.xml:34:17-36
 127        </service>
 128        <service
-128-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:26:9-30:19
+128-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Dell\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:26:9-30:19
 129            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-129-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:27:13-117
+129-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Dell\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:27:13-117
 130            android:exported="false"
-130-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:28:13-37
+130-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Dell\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:28:13-37
 131            android:permission="android.permission.BIND_JOB_SERVICE" >
-131-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:29:13-69
+131-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Dell\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:29:13-69
 132        </service>
 133
 134        <receiver
-134-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:32:9-34:40
+134-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Dell\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:32:9-34:40
 135            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-135-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:33:13-132
+135-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Dell\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:33:13-132
 136            android:exported="false" />
-136-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:34:13-37
+136-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Dell\.gradle\caches\8.9\transforms\1d60f7807cb5e67a2651d827e93f863b\transformed\transport-runtime-2.2.6\AndroidManifest.xml:34:13-37
 137    </application>
 138
 139</manifest>
