@@ -73,12 +73,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    private void navigateToHome(String token) {
-//        // Save or use the token for authenticated API calls
-//        Retrofit retrofitWithToken = RetrofitClient.getRetrofitInstance(token);
-//        // Proceed to the HomeActivity
-//        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
 }
