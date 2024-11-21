@@ -8,6 +8,9 @@ class LoginSerializer(serializers.Serializer):
 
 class ProductSerializer(serializers.Serializer):
     barcode = serializers.CharField(max_length=255)
-    product_name = serializers.CharField(max_length=255)
-    product_price = serializers.DecimalField(max_digits=10, decimal_places=2)
+    asset_type = serializers.CharField(max_length=255)
+    asset_name = serializers.CharField(max_length=255)
+    purchase_date = serializers.DateField()
+    asset_value = serializers.CharField(max_length=255)
+    condition = serializers.CharField(max_length=255)
 
