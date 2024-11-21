@@ -7,9 +7,9 @@ public class AssignProduct {
     private String username;     // New field for username
 
     // Constructor (updated to use only three parameters)
-    public AssignProduct(String barcode, String returnDate, String username) {
+    public AssignProduct(String barcode, String returnDateEditText, String username) {
         this.barcode = barcode;
-        this.return_date = returnDate;
+        this.return_date = returnDateEditText;
         this.username = username;
     }
 

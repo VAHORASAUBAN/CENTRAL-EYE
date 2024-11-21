@@ -91,7 +91,7 @@ id productNameTextView4
 id productTableLayout
 id productidTextView1
 id purchaseDateEditText
-id returnDate
+id returnDateEditText
 id saveButton
 id scannedValueTv
 id searchEditText

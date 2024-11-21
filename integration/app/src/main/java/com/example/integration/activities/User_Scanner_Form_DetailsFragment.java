@@ -17,8 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.integration.R;
 import com.example.integration.api.ApiService;
-import com.example.integration.network.RetrofitClient;
 import com.example.integration.api.AssignProduct;
+import com.example.integration.network.RetrofitClient;
+import com.example.integration.api.ProductDetails;
 
 import java.util.Calendar;
 
@@ -28,18 +29,21 @@ import retrofit2.Response;
 
 public class User_Scanner_Form_DetailsFragment extends Fragment {
 
+
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
+
+    private SharedPreferences sharedPreferences;
     private EditText returnDateEditText;
     private String scannedBarcode;
     private TextView barcodeTextView;
-    private SharedPreferences sharedPreferences;
+
 
     public User_Scanner_Form_DetailsFragment() {
         // Required empty public constructor
     }
 
-    public static User_Scanner_Form_DetailsFragment newInstance(String scannedBarcode) {
-        User_Scanner_Form_DetailsFragment fragment = new User_Scanner_Form_DetailsFragment();
+    public static Scanner_Form_DetailsFragment newInstance(String scannedBarcode) {
+        Scanner_Form_DetailsFragment fragment = new Scanner_Form_DetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SCANNED_BARCODE, scannedBarcode);
         fragment.setArguments(args);
@@ -52,13 +56,11 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         if (getArguments() != null) {
             scannedBarcode = getArguments().getString(ARG_SCANNED_BARCODE);
         }
-        // Initialize SharedPreferences
-        sharedPreferences = getActivity().getSharedPreferences("UserSession", getActivity().MODE_PRIVATE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_scanner__form__details, container, false);
+        return inflater.inflate(R.layout.fragment_user__scanner__form__details, container, false);
     }
 
     @Override
@@ -66,19 +68,21 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize views
+
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
-        returnDateEditText = view.findViewById(R.id.returnDate);
+        returnDateEditText = view.findViewById(R.id.returnDateEditText);
+
 
         // Set the scanned barcode
         if (scannedBarcode != null) {
-            barcodeTextView.setText(scannedBarcode);
+            barcodeTextView.setText("Barcode: " + scannedBarcode);
         }
 
         // Handle date picker for purchaseDateEditText
         returnDateEditText.setOnClickListener(v -> showDatePickerDialog());
 
         // Handle save button click
-        view.findViewById(R.id.saveButton).setOnClickListener(v -> saveAssignProduct());
+        view.findViewById(R.id.saveButton).setOnClickListener(v -> saveProductDetails());
     }
 
     private void showDatePickerDialog() {
@@ -98,22 +102,19 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         datePickerDialog.show();
     }
 
-    private void saveAssignProduct() {
+    private void saveProductDetails() {
         // Collect all field values
-        String returnDate = returnDateEditText.getText().toString().trim();
+        String returnDate = returnDateEditText.getText().toString().trim(); // Get the text as String
+        String username = sharedPreferences.getString("username", ""); // Fetch username from SharedPreferences
 
         // Validate inputs
-        if (returnDate.isEmpty()) {
+        if (returnDate.isEmpty() || username.isEmpty()) {
             Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Retrieve session details from SharedPreferences
-        String sessionId = sharedPreferences.getString("session_id", "");
-        String username = sharedPreferences.getString("username", "");
-
         // Create AssignProduct object
-        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username);
+        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username); // Pass the extracted string
 
         // Initialize Retrofit and make the API call
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
@@ -134,4 +135,5 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
             }
         });
     }
+
 }
