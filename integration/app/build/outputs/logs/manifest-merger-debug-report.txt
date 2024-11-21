@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-31:12
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:2:1-37:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:17:1-56:12
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
 MERGED from [com.google.mlkit:barcode-scanning:17.0.3] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\f89b052c1d1a108e0cf0bc4fef59cd48\transformed\barcode-scanning-17.0.3\AndroidManifest.xml:2:1-7:12
@@ -83,8 +83,8 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Us
 	android:name
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:8:5-30:19
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:8:5-30:19
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:8:5-36:19
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:8:5-36:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
@@ -137,34 +137,42 @@ MERGED from [com.google.android.odml:image:1.0.0-beta1] C:\Users\SAUBAN VAHORA\.
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:13:9-49
 	android:networkSecurityConfig
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:9:9-69
-activity#com.example.integration.activities.MainActivity
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:16:9-22:20
+activity#com.example.integration.activities.SplashActivity
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:16:9-23:20
 	android:exported
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:17:13-36
+	android:theme
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:18:13-63
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:16:19-58
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:16:19-60
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:18:13-21:29
-category#android.intent.category.LAUNCHER
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:17-77
-	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:27-74
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:19:13-22:29
 action#android.intent.action.MAIN
 ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:17-69
 	android:name
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:20:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:21:17-77
+	android:name
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:21:27-74
+activity#com.example.integration.activities.MainActivity
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:26:9-28:20
+	android:exported
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:27:13-36
+	android:name
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:26:19-58
 activity#com.example.integration.activities.HomeActivity
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:25:9-26:39
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:31:9-32:39
 	android:exported
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:26:13-36
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:32:13-36
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:25:19-58
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:31:19-58
 activity#com.example.integration.activities.UserHomeActivity
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:28:9-29:39
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:34:9-35:39
 	android:exported
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:29:13-36
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:35:13-36
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:28:19-62
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml:34:19-62
 uses-sdk
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\integration\app\src\main\AndroidManifest.xml

@@ -93,6 +93,7 @@ id purchaseDateEditText
 id saveButton
 id scannedValueTv
 id searchEditText
+id splash_image
 id squareBox1
 id squareBox2
 id text1
@@ -103,6 +104,7 @@ id username
 id viewButton
 layout activity_home
 layout activity_main
+layout activity_splash
 layout activity_user_home
 layout fragment_home_fragment
 layout fragment_product_description

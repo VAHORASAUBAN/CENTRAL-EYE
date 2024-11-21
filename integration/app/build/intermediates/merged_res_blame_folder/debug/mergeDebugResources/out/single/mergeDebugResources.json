@@ -36,6 +36,10 @@
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\layout_activity_splash.xml.flat",
+        "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\layout\\activity_splash.xml"
+    },
+    {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\xml_backup_rules.xml.flat",
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\xml\\backup_rules.xml"
     },
@@ -124,20 +128,12 @@
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.integration.app-debug-38:/layout_fragment_productlistadd.xml.flat",
-        "source": "com.example.integration.app-main-40:/layout/fragment_productlistadd.xml"
-    },
-    {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_nav_item_selector.xml.flat",
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\nav_item_selector.xml"
     },
     {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\anim_bounce.xml.flat",
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\anim\\bounce.xml"
-    },
-    {
-        "merged": "com.example.integration.app-debug-38:/xml_network_security_config.xml.flat",
-        "source": "com.example.integration.app-main-40:/xml/network_security_config.xml"
     },
     {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_mp_police.png.flat",
@@ -226,6 +222,10 @@
     {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_baseline_person_24.xml.flat",
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\baseline_person_24.xml"
+    },
+    {
+        "merged": "com.example.integration.app-debug-38:/layout_fragment_scanner__form__details.xml.flat",
+        "source": "com.example.integration.app-main-40:/layout/fragment_scanner__form__details.xml"
     },
     {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\mipmap-mdpi_ic_launcher.webp.flat",
