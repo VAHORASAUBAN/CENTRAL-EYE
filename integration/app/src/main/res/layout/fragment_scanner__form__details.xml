@@ -61,8 +61,7 @@
                         android:id="@+id/asset_type_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="Asset Type Input Field"
-                         />
+                        android:contentDescription="Asset Type Input Field" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Model Name -->
@@ -128,8 +127,7 @@
                         android:id="@+id/asset_value_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="Asset Value Input Field"
-                         />
+                        android:contentDescription="Asset Value Input Field" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Condition -->
