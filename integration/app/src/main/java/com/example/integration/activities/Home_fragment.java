@@ -2,6 +2,8 @@ package com.example.integration.activities;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -61,21 +63,57 @@ public class Home_fragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout. fragment_home_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
 
         LinearLayout squareBox1 = view.findViewById(R.id.squareBox1);
+
+        // Apply entrance animation to products
+
+        // Add click listener with animation to squareBox1
         squareBox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openProductListFragment();
+                v.animate()
+                        .scaleX(0.9f)
+                        .scaleY(0.9f)
+                        .setDuration(100)
+                        .withEndAction(() -> {
+                            v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+                            openProductListFragment();
+                        })
+                        .start();
             }
         });
+
         return view;
     }
+
+    private void animateEntrance(View view, long delay) {
+        view.setAlpha(0f);
+        view.setTranslationY(50f); // Slide up effect
+        view.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setDuration(500)
+                .setStartDelay(delay)
+                .start();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        View toolbar = view.findViewById(R.id.toolbar);
+        View searchBox = view.findViewById(R.id.searchEditText);
+
+        toolbar.setTranslationY(-100f); // Start off-screen
+        searchBox.setTranslationY(-100f);
+
+        toolbar.animate().translationY(0f).setDuration(300).start();
+        searchBox.animate().translationY(0f).setDuration(400).setStartDelay(100).start();
+    }
+
     private void openProductListFragment() {
         ProductListFragment productListFragment = new ProductListFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
