@@ -27,13 +27,16 @@ import retrofit2.Response;
 
 public class Scanner_Form_DetailsFragment extends Fragment {
 
+
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
+    private EditText assetTypeEditText;
     private EditText purchaseDateEditText;
     private String scannedBarcode;
     private TextView barcodeTextView;
-    private EditText productNameEditText;
-    private EditText productPriceEditText;
+    private EditText assetNameEditText;
+    private EditText assetValueEditText;
+    private EditText conditionEditText;
 
     public Scanner_Form_DetailsFragment() {
         // Required empty public constructor
@@ -65,10 +68,12 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize views
+        assetTypeEditText = view.findViewById(R.id.asset_type_input);
+        assetNameEditText = view.findViewById(R.id.model_name_input);
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
-//        productNameEditText = view.findViewById(R.id.productNameEditText);
-//        productPriceEditText = view.findViewById(R.id.productPriceEditText);
         purchaseDateEditText = view.findViewById(R.id.purchaseDateEditText);
+        assetValueEditText = view.findViewById(R.id.asset_value_input);
+        conditionEditText = view.findViewById(R.id.condition_input);
 
         // Set the scanned barcode
         if (scannedBarcode != null) {
@@ -100,27 +105,32 @@ public class Scanner_Form_DetailsFragment extends Fragment {
     }
 
     private void saveProductDetails() {
-        String productName = productNameEditText.getText().toString().trim();
-        String productPrice = productPriceEditText.getText().toString().trim();
+        // Collect all field values
+        String assetType = assetTypeEditText.getText().toString().trim();
+        String assetName = assetNameEditText.getText().toString().trim();
+        String purchaseDate = purchaseDateEditText.getText().toString().trim();
+        String assetValue = assetValueEditText.getText().toString().trim();
+        String condition = conditionEditText.getText().toString().trim();
 
-        if (productName.isEmpty() || productPrice.isEmpty()) {
+        // Validate inputs
+        if (assetType.isEmpty() || assetName.isEmpty() || purchaseDate.isEmpty() || assetValue.isEmpty() || condition.isEmpty()) {
             Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Create ProductDetails object
-        ProductDetails productDetails = new ProductDetails(scannedBarcode, productName, productPrice);
+        ProductDetails productDetails = new ProductDetails(scannedBarcode, assetType, assetName, purchaseDate, assetValue, condition);
 
-        // Initialize Retrofit and make the call
+        // Initialize Retrofit and make the API call
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
         apiService.saveProductDetails(productDetails).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(getContext(), "Product saved successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
                     requireActivity().getSupportFragmentManager().popBackStack();
                 } else {
-                    Toast.makeText(getContext(), "Failed to save product.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed to save asset.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -130,4 +140,5 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             }
         });
     }
+
 }
