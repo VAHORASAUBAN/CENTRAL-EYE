@@ -12,4 +12,7 @@ public interface ApiService {
     // Define the product save endpoint
     @POST("api/add_product/")
     Call<Void> saveProductDetails(@Body ProductDetails productDetails);
+
+    @POST("api/assign_product/")
+    Call<Void> saveAssignProduct(@Body AssignProduct assignProduct);
 }

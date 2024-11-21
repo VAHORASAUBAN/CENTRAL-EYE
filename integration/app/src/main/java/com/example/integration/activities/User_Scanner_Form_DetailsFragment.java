@@ -1,6 +1,7 @@
 package com.example.integration.activities;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.integration.R;
 import com.example.integration.api.ApiService;
+import com.example.integration.api.AssignProduct;
 import com.example.integration.network.RetrofitClient;
 import com.example.integration.api.ProductDetails;
 
@@ -30,9 +32,11 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
 
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
+    private SharedPreferences sharedPreferences;
     private EditText returnDateEditText;
     private String scannedBarcode;
     private TextView barcodeTextView;
+
 
     public User_Scanner_Form_DetailsFragment() {
         // Required empty public constructor
@@ -56,7 +60,7 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_scanner__form__details, container, false);
+        return inflater.inflate(R.layout.fragment_user__scanner__form__details, container, false);
     }
 
     @Override
@@ -64,12 +68,14 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize views
+
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
-        returnDateEditText = view.findViewById(R.id.returnDate);
+        returnDateEditText = view.findViewById(R.id.returnDateEditText);
+
 
         // Set the scanned barcode
         if (scannedBarcode != null) {
-            barcodeTextView.setText(scannedBarcode);
+            barcodeTextView.setText("Barcode: " + scannedBarcode);
         }
 
         // Handle date picker for purchaseDateEditText
@@ -98,22 +104,21 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
 
     private void saveProductDetails() {
         // Collect all field values
-
-        String returnDate = returnDateEditText.getText().toString().trim();
-
+        String returnDate = returnDateEditText.getText().toString().trim(); // Get the text as String
+        String username = sharedPreferences.getString("username", ""); // Fetch username from SharedPreferences
 
         // Validate inputs
-        if ( returnDate.isEmpty()) {
+        if (returnDate.isEmpty() || username.isEmpty()) {
             Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Create ProductDetails object
-        ProductDetails productDetails = new ProductDetails(scannedBarcode, returnDate);
+        // Create AssignProduct object
+        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username); // Pass the extracted string
 
         // Initialize Retrofit and make the API call
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-        apiService.saveProductDetails(productDetails).enqueue(new Callback<Void>() {
+        apiService.saveAssignProduct(assignProduct).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {

@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sessions',
     'app',
     'rest_framework',
     'corsheaders',
@@ -63,6 +63,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Optional: Secure session settings
+SESSION_COOKIE_SECURE = True  # Use only over HTTPS
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# AUTH_USER_MODEL = 'app.User'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
