@@ -1,66 +1,97 @@
 package com.example.integration.activities;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.integration.R;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeResult;
+import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link User_Add_Product_Scanner#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class User_Add_Product_Scanner extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private DecoratedBarcodeView barcodeScannerView;
+    private TextView scannedValueTv;
 
     public User_Add_Product_Scanner() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment User_Add_Product_Scanner.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static User_Add_Product_Scanner newInstance(String param1, String param2) {
-        User_Add_Product_Scanner fragment = new User_Add_Product_Scanner();
+    public static Add_Product_Scanner newInstance(String param1, String param2) {
+        Add_Product_Scanner fragment = new Add_Product_Scanner();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("param1", param1);
+        args.putString("param2", param2);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_product_fragment, container, false);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user__add__product__scanner, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Initialize UI components
+        barcodeScannerView = view.findViewById(R.id.barcode_scanner);
+        scannedValueTv = view.findViewById(R.id.scannedValueTv);
+
+        // Set up the barcode scanner callback
+        barcodeScannerView.decodeContinuous(new BarcodeCallback() {
+            @Override
+            public void barcodeResult(BarcodeResult result) {
+                if (result != null && result.getText() != null) {
+                    handleScannedValue(result.getText());
+                }
+            }
+
+            @Override
+            public void possibleResultPoints(java.util.List<com.google.zxing.ResultPoint> resultPoints) {
+                // Optional: Handle possible result points (e.g., for UI feedback)
+            }
+        });
+
+        // Start scanning automatically
+        startScanning();
+    }
+
+    private void startScanning() {
+        // Start the scanner
+        barcodeScannerView.resume();
+        Toast.makeText(getContext(), "Scanner is ready.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleScannedValue(String scannedValue) {
+        // Navigate to the form fragment with the scanned value
+        Scanner_Form_DetailsFragment formDetailsFragment = User_Scanner_Form_DetailsFragment.newInstance(scannedValue);
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, formDetailsFragment) // Replace with your container ID
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        barcodeScannerView.resume(); // Resume scanning when fragment is visible
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        barcodeScannerView.pause(); // Pause scanning when fragment is not visible
     }
 }

@@ -6,7 +6,6 @@ anim fade_out
 anim slide_in_left
 anim slide_out_right
 color black
-color lightgray
 color primary
 color secondary
 color white
@@ -30,6 +29,7 @@ drawable item_product24
 drawable logo
 drawable maintenance
 drawable mp_police
+drawable mpp
 drawable nav_item_selector
 drawable product_inuse
 drawable rounded_border
@@ -52,12 +52,14 @@ id asset_value_input
 id assigned_ids_label
 id barcodeTextView
 id barcode_scanner
+id bottomAppBar
 id bottomContainer
 id bottom_navigation
 id car_view
 id cardView
 id condition_input
 id cpu_total_section
+id fab
 id fragment_container
 id gridLayout
 id icon1
@@ -114,6 +116,9 @@ layout fragment_product_list
 layout fragment_productlistadd
 layout fragment_profile_fragment
 layout fragment_scanner__form__details
+layout fragment_user__add__product__scanner
+layout fragment_user__home_fragment
+layout fragment_user__profile_fragment
 menu bottom_nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -127,6 +132,7 @@ string username_hint
 style Base.Theme.Integration
 style BottomNavTextActive
 style BottomNavTextInactive
+style Theme.BottomNavigation
 style Theme.Integration
 xml backup_rules
 xml data_extraction_rules
