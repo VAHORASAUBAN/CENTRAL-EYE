@@ -51,10 +51,13 @@ def add_product(request):
     serializer = ProductSerializer(data=request.data)
     if serializer.is_valid():
         barcode = serializer.validated_data['barcode']
-        pname = serializer.validated_data['product_name']
-        pprice = serializer.validated_data['product_price']
+        assetType = serializer.validated_data['asset_type']
+        assetName = serializer.validated_data['asset_name']
+        purchaseDate = serializer.validated_data['purchase_date']
+        assetValue = serializer.validated_data['asset_value']
+        condition = serializer.validated_data['condition']
         
-        Product.objects.create(barcode=barcode, product_name=pname, product_price=pprice)
+        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition)
         
         return Response({"message": "Product added successfully!"}, status=201)
     return Response(serializer.errors, status=400)

@@ -3,4 +3,6 @@ from .models import *
 
 # Register your models here.
 admin.site.register(User)
-admin.site.register(Product)
+admin.site.register(Asset)
+admin.site.register(AssetCategory)
+admin.site.register(stationDetails)
