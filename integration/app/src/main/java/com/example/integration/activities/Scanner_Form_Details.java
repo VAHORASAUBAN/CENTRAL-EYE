@@ -27,6 +27,7 @@ import retrofit2.Response;
 
 public class Scanner_Form_Details extends Fragment {
 
+
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
     private EditText purchaseDateEditText;
