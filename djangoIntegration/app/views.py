@@ -35,8 +35,13 @@ def login_view(request):
             # print(f"Stored password: {user.password}")
             
             if user.password == password:
+                role = user.role.role # Assuming you have a profile model that stores the user's role
+                print(role)
+                return Response({
+                    'message': 'Login successful',
+                    'role': role  # Send the user's role in the response
+                }, status=status.HTTP_200_OK)
                 
-                return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid password'}, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:

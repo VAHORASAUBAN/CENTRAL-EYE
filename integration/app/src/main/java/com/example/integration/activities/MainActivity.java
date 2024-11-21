@@ -53,7 +53,16 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                             if (response.isSuccessful()) {
-                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                LoginResponse loginResponse = response.body();
+                                String role = loginResponse.getRole();  // Get the role from the response
+
+                                // Redirect based on the role
+                                Intent intent;
+                                if (role.equals("Admin")) {
+                                    intent = new Intent(MainActivity.this, HomeActivity.class);
+                                } else {
+                                    intent = new Intent(MainActivity.this, UserHomeActivity.class);
+                                }
                                 startActivity(intent);
                                 finish();
                             } else {
@@ -72,5 +81,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }
+
