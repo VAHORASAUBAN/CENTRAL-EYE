@@ -19,3 +19,8 @@ class AssignSerializer(serializers.Serializer):
     barcode = serializers.CharField(max_length=255)
     return_date = serializers.DateField()
     username = serializers.CharField(max_length=100)
+    
+class AssetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Asset
+        fields = '__all__'  # Or specify which fields you want to include

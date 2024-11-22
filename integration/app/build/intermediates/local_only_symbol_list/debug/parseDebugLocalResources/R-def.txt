@@ -49,6 +49,9 @@ id arrowIcon1
 id arrowIcon2
 id arrowIcon3
 id arrowIcon4
+id assetBarcode
+id assetName
+id assetType
 id asset_type_input
 id asset_value_input
 id assigned_ids_label
@@ -127,6 +130,7 @@ layout fragment_user__add__product__scanner
 layout fragment_user__home_fragment
 layout fragment_user__profile_fragment
 layout fragment_user__scanner__form__details
+layout item_product
 layout product_item
 menu bottom_nav_menu
 menu menu_home

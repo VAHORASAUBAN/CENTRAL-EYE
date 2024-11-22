@@ -39,7 +39,6 @@
         android:layout_margin="16dp"
         android:text="Products"
         android:drawableLeft="@drawable/baseline_transform_24"
-
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -63,6 +62,7 @@
             android:orientation="horizontal"
             android:padding="12dp">
 
+            <!-- Product Image -->
             <ImageView
                 android:id="@+id/productImage1"
                 android:layout_width="50dp"
@@ -74,6 +74,7 @@
                 android:background="@drawable/circular_background"
                 android:clipToOutline="true" />
 
+            <!-- Product Details -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -81,6 +82,7 @@
                 android:orientation="vertical"
                 android:gravity="center_vertical">
 
+                <!-- Product Name and Type -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -103,6 +105,7 @@
                         android:layout_marginStart="8dp" />
                 </LinearLayout>
 
+                <!-- Product Barcode -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,6 +128,7 @@
                         android:layout_marginStart="8dp" />
                 </LinearLayout>
 
+                <!-- Product ID -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -148,6 +152,7 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- View Button -->
             <Button
                 android:id="@+id/viewButton"
                 android:layout_width="wrap_content"
@@ -156,11 +161,9 @@
                 android:backgroundTint="#4CAF50"
                 android:text="View"
                 android:textColor="#FFFFFF"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:onClick="onViewButtonClick" /> <!-- This calls the method in Java -->
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-
 
 </RelativeLayout>

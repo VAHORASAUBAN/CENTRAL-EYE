@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer
 from django.utils import timezone
 
 @api_view(['POST'])
@@ -87,31 +87,50 @@ def assign_product(request):
     # Deserialize the incoming data
     serializer = AssignSerializer(data=request.data)
     if serializer.is_valid():
-        # Extract the necessary fields
         barcode = serializer.validated_data['barcode']
-        returnDate = serializer.validated_data['return_date']
-        user = serializer.validated_data['username']
+        return_date = serializer.validated_data['return_date']
+        username = serializer.validated_data['username']
         
         try:
-            # Fetch the asset from the database
+            # Fetch the asset using the barcode
             asset = Asset.objects.get(barcode=barcode)
             
-            if asset.assign_to is None:    
-                # Create a new Allocation object and save it to the database
+            # Fetch the user from the database
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                return Response({"message": "User not found!"}, status=404)
+
+            # Check if the asset is already assigned
+            if asset.assign_to is None:
+                # Create the allocation object
                 allocation = Allocation.objects.create(
                     asset_barcode=barcode,
                     user=user,
-                    return_date=returnDate,
-                    assign_location="NULL"
+                    return_date=return_date,
+                    assign_location="NULL"  # Adjust this as per your logic
                 )
                 
+                # Update the `assign_to` field of the asset
                 asset.assign_to = user
                 asset.save()
                 
                 return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
             else:
                 return Response({"message": "Product is already assigned!"}, status=400)
-        except ObjectDoesNotExist:
+        
+        except Asset.DoesNotExist:
             return Response({"message": "Product not found with barcode!"}, status=404)
     else:
         return Response(serializer.errors, status=400)
+    
+@api_view(['GET'])
+def AssetList(request):
+    # Fetch all assets from the database
+    assets = Asset.objects.all()
+
+    # Serialize the assets
+    serializer = AssetSerializer(assets, many=True)
+
+    # Return the serialized data as a response
+    return Response(serializer.data, status=200)
