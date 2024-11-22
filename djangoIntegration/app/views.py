@@ -74,36 +74,44 @@ def add_product(request):
         purchaseDate = serializer.validated_data['purchase_date']
         assetValue = serializer.validated_data['asset_value']
         condition = serializer.validated_data['condition']
+        # location = serializer.validated_data['location']
         
-        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition)
+        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location="NULL")
         
         return Response({"message": "Product added successfully!"}, status=201)
+
+from django.core.exceptions import ObjectDoesNotExist
 
 @api_view(['POST'])
 def assign_product(request):
     # Deserialize the incoming data
     serializer = AssignSerializer(data=request.data)
-    
     if serializer.is_valid():
         # Extract the necessary fields
         barcode = serializer.validated_data['barcode']
         returnDate = serializer.validated_data['return_date']
-        user = request.user.username  # You can get the username from the request (assuming authentication)
-        # assign_location = serializer.validated_data.get('assign_location', 'Default Location')  # You can modify this default value
+        user = serializer.validated_data['username']
         
-        # Print values for debugging purposes (optional)
-        print(f"Barcode: {barcode}, Return Date: {returnDate}, User: {user}")
-        
-        # Create a new Allocation object and save it to the database
-        allocation = Allocation.objects.create(
-            asset_barcode=barcode,
-            user=user,
-            return_date=returnDate,
-            assign_location="NULL"
-        )
-        
-        # Return success response
-        return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
-    
-    # Return validation errors if serializer is invalid
-    return Response(serializer.errors, status=400)
+        try:
+            # Fetch the asset from the database
+            asset = Asset.objects.get(barcode=barcode)
+            
+            if asset.assign_to is None:    
+                # Create a new Allocation object and save it to the database
+                allocation = Allocation.objects.create(
+                    asset_barcode=barcode,
+                    user=user,
+                    return_date=returnDate,
+                    assign_location="NULL"
+                )
+                
+                asset.assign_to = user
+                asset.save()
+                
+                return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
+            else:
+                return Response({"message": "Product is already assigned!"}, status=400)
+        except ObjectDoesNotExist:
+            return Response({"message": "Product not found with barcode!"}, status=404)
+    else:
+        return Response(serializer.errors, status=400)

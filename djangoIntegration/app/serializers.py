@@ -13,7 +13,9 @@ class ProductSerializer(serializers.Serializer):
     purchase_date = serializers.DateField()
     asset_value = serializers.CharField(max_length=255)
     condition = serializers.CharField(max_length=255)
+    # location = serializers.CharField(max_length=255)
 
 class AssignSerializer(serializers.Serializer):
     barcode = serializers.CharField(max_length=255)
     return_date = serializers.DateField()
+    username = serializers.CharField(max_length=100)

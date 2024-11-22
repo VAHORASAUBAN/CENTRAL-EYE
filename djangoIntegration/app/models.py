@@ -48,12 +48,13 @@ class Asset(models.Model):
     asset_value = models.CharField(max_length=255)
     condition = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
+    assign_to = models.CharField(null=True, blank=True, max_length=255)
 
     def __str__(self):
         return f"{self.barcode} - {self.asset_name}"
     
 class Allocation(models.Model):
-    allocation_id = models.IntegerField(primary_key=True)
+    allocation_id = models.IntegerField(primary_key=True, unique=True)
     asset_barcode = models.CharField(max_length=255)
     user = models.CharField(max_length=255)
     assign_date = models.DateField(auto_now_add=True)

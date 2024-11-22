@@ -36,7 +36,8 @@ dependencies {
 
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     implementation 'com.google.zxing:core:3.5.2'
-
+    implementation 'org.json:json:20230618'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.google.mlkit:barcode-scanning:17.0.3'
     implementation 'androidx.camera:camera-core:1.1.0'

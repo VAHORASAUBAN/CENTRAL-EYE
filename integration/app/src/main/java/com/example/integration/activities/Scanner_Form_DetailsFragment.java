@@ -1,6 +1,8 @@
 package com.example.integration.activities;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.integration.R;
 import com.example.integration.api.ApiService;
@@ -77,7 +82,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
 
         // Set the scanned barcode
         if (scannedBarcode != null) {
-            barcodeTextView.setText("Barcode: " + scannedBarcode);
+            barcodeTextView.setText(scannedBarcode);
         }
 
         // Handle date picker for purchaseDateEditText
@@ -112,6 +117,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         String assetValue = assetValueEditText.getText().toString().trim();
         String condition = conditionEditText.getText().toString().trim();
 
+
         // Validate inputs
         if (assetType.isEmpty() || assetName.isEmpty() || purchaseDate.isEmpty() || assetValue.isEmpty() || condition.isEmpty()) {
             Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
@@ -128,7 +134,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
-                    requireActivity().getSupportFragmentManager().popBackStack();
+                    navigateToProductList();
                 } else {
                     Toast.makeText(getContext(), "Failed to save asset.", Toast.LENGTH_SHORT).show();
                 }
@@ -139,6 +145,15 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void navigateToProductList() {
+        Fragment productlistaddFragment = new productlistadd();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, productlistaddFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

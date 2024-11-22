@@ -5,9 +5,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://192.168.84.222:8000/"; //sauban Replace with your backend URL
+//    private static final String BASE_URL = "http://192.168.84.222:8000/"; //sauban Replace with your backend URL
 
-//    private static final String BASE_URL = "http://192.168.116.22:8000/"; // ayan Replace with your backend URL
+    private static final String BASE_URL = "http://192.168.116.22:8000/"; // ayan Replace with your backend URL
     private static Retrofit retrofit = null;
 
     // Singleton instance of Retrofit
