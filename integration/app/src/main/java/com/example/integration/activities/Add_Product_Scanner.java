@@ -1,5 +1,7 @@
 package com.example.integration.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.integration.R;
@@ -17,6 +21,8 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 public class Add_Product_Scanner extends Fragment {
+
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 1001;
 
     private DecoratedBarcodeView barcodeScannerView;
     private TextView scannedValueTv;
@@ -49,6 +55,20 @@ public class Add_Product_Scanner extends Fragment {
         barcodeScannerView = view.findViewById(R.id.barcode_scanner);
         scannedValueTv = view.findViewById(R.id.scannedValueTv);
 
+        // Check camera permission
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Permission is granted, start scanning
+            startScanning();
+        } else {
+            // Request camera permission
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    private void startScanning() {
         // Set up the barcode scanner callback
         barcodeScannerView.decodeContinuous(new BarcodeCallback() {
             @Override
@@ -64,11 +84,6 @@ public class Add_Product_Scanner extends Fragment {
             }
         });
 
-        // Start scanning automatically
-        startScanning();
-    }
-
-    private void startScanning() {
         // Start the scanner
         barcodeScannerView.resume();
         Toast.makeText(getContext(), "Scanner is ready.", Toast.LENGTH_SHORT).show();
@@ -86,12 +101,29 @@ public class Add_Product_Scanner extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        barcodeScannerView.resume(); // Resume scanning when fragment is visible
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            barcodeScannerView.resume(); // Resume scanning when fragment is visible
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         barcodeScannerView.pause(); // Pause scanning when fragment is not visible
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, start scanning
+                startScanning();
+            } else {
+                // Permission denied
+                Toast.makeText(getContext(), "Camera permission is required to use the scanner.", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

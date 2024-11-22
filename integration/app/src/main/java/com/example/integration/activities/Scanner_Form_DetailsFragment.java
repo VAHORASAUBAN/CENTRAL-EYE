@@ -1,6 +1,8 @@
 package com.example.integration.activities;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +14,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.integration.R;
 import com.example.integration.api.ApiService;
 import com.example.integration.network.RetrofitClient;
 import com.example.integration.api.ProductDetails;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.Calendar;
 
@@ -27,6 +34,7 @@ import retrofit2.Response;
 
 public class Scanner_Form_DetailsFragment extends Fragment {
 
+    private FusedLocationProviderClient fusedLocationClient;
 
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
@@ -68,6 +76,8 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize views
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+
         assetTypeEditText = view.findViewById(R.id.asset_type_input);
         assetNameEditText = view.findViewById(R.id.model_name_input);
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
@@ -77,7 +87,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
 
         // Set the scanned barcode
         if (scannedBarcode != null) {
-            barcodeTextView.setText("Barcode: " + scannedBarcode);
+            barcodeTextView.setText( scannedBarcode);
         }
 
         // Handle date picker for purchaseDateEditText
@@ -128,7 +138,9 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
-                    requireActivity().getSupportFragmentManager().popBackStack();
+                    getCurrentLocation();
+                    navigateToProductList();
+
                 } else {
                     Toast.makeText(getContext(), "Failed to save asset.", Toast.LENGTH_SHORT).show();
                 }
@@ -139,6 +151,47 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void navigateToProductList() {
+        Fragment productlistaddFragment = new productlistadd();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, productlistaddFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void getCurrentLocation() {
+        // Check permissions
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Request permission
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+        } else {
+            // Permission granted, get location
+            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    Toast.makeText(getContext(), "Location: " + latitude + ", " + longitude, Toast.LENGTH_LONG).show();
+                    navigateToProductList();
+                } else {
+                    Toast.makeText(getContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLocation();
+            } else {
+                Toast.makeText(getContext(), "Location permission denied.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }
