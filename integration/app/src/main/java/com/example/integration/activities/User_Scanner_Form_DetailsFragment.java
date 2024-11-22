@@ -1,8 +1,10 @@
 package com.example.integration.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,6 @@ import com.example.integration.R;
 import com.example.integration.api.ApiService;
 import com.example.integration.api.AssignProduct;
 import com.example.integration.network.RetrofitClient;
-import com.example.integration.api.ProductDetails;
 
 import java.util.Calendar;
 
@@ -29,7 +30,6 @@ import retrofit2.Response;
 
 public class User_Scanner_Form_DetailsFragment extends Fragment {
 
-
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
     private SharedPreferences sharedPreferences;
@@ -37,13 +37,12 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
     private String scannedBarcode;
     private TextView barcodeTextView;
 
-
     public User_Scanner_Form_DetailsFragment() {
         // Required empty public constructor
     }
 
-    public static Scanner_Form_DetailsFragment newInstance(String scannedBarcode) {
-        Scanner_Form_DetailsFragment fragment = new Scanner_Form_DetailsFragment();
+    public static User_Scanner_Form_DetailsFragment newInstance(String scannedBarcode) {
+        User_Scanner_Form_DetailsFragment fragment = new User_Scanner_Form_DetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SCANNED_BARCODE, scannedBarcode);
         fragment.setArguments(args);
@@ -56,6 +55,7 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         if (getArguments() != null) {
             scannedBarcode = getArguments().getString(ARG_SCANNED_BARCODE);
         }
+        sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
     }
 
     @Override
@@ -68,72 +68,67 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize views
-
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
         returnDateEditText = view.findViewById(R.id.returnDateEditText);
 
-
-        // Set the scanned barcode
+        // Display scanned barcode
         if (scannedBarcode != null) {
             barcodeTextView.setText("Barcode: " + scannedBarcode);
         }
 
-        // Handle date picker for purchaseDateEditText
+        // Set up date picker for return date
         returnDateEditText.setOnClickListener(v -> showDatePickerDialog());
 
-        // Handle save button click
-        view.findViewById(R.id.saveButton).setOnClickListener(v -> saveProductDetails());
+        // Set up save button click listener
+        view.findViewById(R.id.saveButton).setOnClickListener(v -> saveAssignProduct());
     }
 
     private void showDatePickerDialog() {
-        // Get current date
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        // Show date picker dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
                 (DatePicker view, int selectedYear, int selectedMonth, int selectedDay) -> {
-                    // Format the date and set it in the EditText
                     String selectedDate = selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay;
                     returnDateEditText.setText(selectedDate);
                 }, year, month, day);
         datePickerDialog.show();
     }
 
-    private void saveProductDetails() {
-        // Collect all field values
-        String returnDate = returnDateEditText.getText().toString().trim(); // Get the text as String
-        String username = sharedPreferences.getString("username", ""); // Fetch username from SharedPreferences
+    private void saveAssignProduct() {
+        String returnDate = returnDateEditText.getText().toString().trim();
+        String username = sharedPreferences.getString("username", "");
 
         // Validate inputs
-        if (returnDate.isEmpty() || username.isEmpty()) {
-            Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+        if (returnDate.isEmpty()) {
+            Toast.makeText(getContext(), "Please select a return date.", Toast.LENGTH_SHORT).show();
             return;
         }
+        
 
-        // Create AssignProduct object
-        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username); // Pass the extracted string
-
-        // Initialize Retrofit and make the API call
+        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username);
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // Make API call
         apiService.saveAssignProduct(assignProduct).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Product assigned successfully!", Toast.LENGTH_SHORT).show();
                     requireActivity().getSupportFragmentManager().popBackStack();
                 } else {
-                    Toast.makeText(getContext(), "Failed to save asset.", Toast.LENGTH_SHORT).show();
+                    Log.e("API Error", "Response error: " + response.errorBody());
+                    Toast.makeText(getContext(), "Failed to assign product.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("API Failure", "Error: " + t.getMessage());
+                Toast.makeText(getContext(), "Failed to assign product. Try again.", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

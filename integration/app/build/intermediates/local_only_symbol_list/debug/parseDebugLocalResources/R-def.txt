@@ -15,6 +15,7 @@ drawable baseline_help_24
 drawable baseline_home_24
 drawable baseline_info_outline_24
 drawable baseline_local_police_24
+drawable baseline_logout_24
 drawable baseline_person_24
 drawable baseline_qr_code_scanner_24
 drawable baseline_search_24
@@ -36,6 +37,7 @@ drawable rounded_border
 drawable rounded_border_rect
 drawable rounded_edittext
 drawable rounded_navigation_background
+id action_logout
 id addCpuTextView
 id addCpuTextView1
 id addCpuTextView2
@@ -73,17 +75,21 @@ id nav_products
 id nav_profile
 id password
 id product1CardView
+id productBarcode
 id productBarcodeTextView1
 id productBarcodeTextView2
 id productBarcodeTextView3
 id productContainer
+id productId
 id productIdTextView1
 id productIdTextView2
 id productIdTextView3
+id productImage
 id productImage1
 id productImage2
 id productImage3
 id productImage4
+id productName
 id productNameTextView1
 id productNameTextView2
 id productNameTextView3
@@ -121,7 +127,9 @@ layout fragment_user__add__product__scanner
 layout fragment_user__home_fragment
 layout fragment_user__profile_fragment
 layout fragment_user__scanner__form__details
+layout product_item
 menu bottom_nav_menu
+menu menu_home
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
