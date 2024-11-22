@@ -196,10 +196,6 @@
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\layout\\fragment_home_fragment.xml"
     },
     {
-        "merged": "com.example.integration.app-debug-38:/layout_fragment_home_fragment.xml.flat",
-        "source": "com.example.integration.app-main-40:/layout/fragment_home_fragment.xml"
-    },
-    {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_baseline_arrow_circle_right_24.xml.flat",
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\baseline_arrow_circle_right_24.xml"
     },
@@ -222,6 +218,10 @@
     {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_baseline_home_24.xml.flat",
         "source": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-main-40:\\drawable\\baseline_home_24.xml"
+    },
+    {
+        "merged": "com.example.integration.app-debug-38:/color_bottom_nav_icon_color.xml.flat",
+        "source": "com.example.integration.app-main-40:/color/bottom_nav_icon_color.xml"
     },
     {
         "merged": "C:\\Users\\SAUBAN VAHORA\\.gradle\\daemon\\8.9\\com.example.integration.app-debug-38:\\drawable_item_product24.xml.flat",
