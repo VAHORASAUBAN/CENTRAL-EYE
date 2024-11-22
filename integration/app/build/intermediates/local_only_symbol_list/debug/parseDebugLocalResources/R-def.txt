@@ -6,7 +6,6 @@ anim fade_out
 anim slide_in_left
 anim slide_out_right
 color black
-color lightgray
 color primary
 color secondary
 color white
@@ -16,6 +15,7 @@ drawable baseline_help_24
 drawable baseline_home_24
 drawable baseline_info_outline_24
 drawable baseline_local_police_24
+drawable baseline_logout_24
 drawable baseline_person_24
 drawable baseline_qr_code_scanner_24
 drawable baseline_search_24
@@ -30,12 +30,14 @@ drawable item_product24
 drawable logo
 drawable maintenance
 drawable mp_police
+drawable mpp
 drawable nav_item_selector
 drawable product_inuse
 drawable rounded_border
 drawable rounded_border_rect
 drawable rounded_edittext
 drawable rounded_navigation_background
+id action_logout
 id addCpuTextView
 id addCpuTextView2
 id addCpuTextView3
@@ -63,11 +65,16 @@ id itemLayout1
 id itemLayout2
 id itemLayout3
 id login_button
+id logoutButton
 id model_name_input
 id nav_home
 id nav_products
 id nav_profile
 id password
+<<<<<<< HEAD
+=======
+id product1CardView
+>>>>>>> 76cd60559e5013f6f9646983e06ee625b43f2259
 id productBarcode
 id productBarcodeTextView1
 id productBarcodeTextView2
@@ -90,9 +97,11 @@ id productNameTextView4
 id productTableLayout
 id productsRecyclerView
 id purchaseDateEditText
+id returnDateEditText
 id saveButton
 id scannedValueTv
 id searchEditText
+id splash_image
 id squareBox1
 id squareBox2
 id text1
@@ -101,8 +110,10 @@ id titleTextView
 id toolbar
 id username
 id viewButton
+id welcomeTextView
 layout activity_home
 layout activity_main
+layout activity_splash
 layout activity_user_home
 layout fragment_home_fragment
 layout fragment_product_description
@@ -112,8 +123,16 @@ layout fragment_product_list
 layout fragment_productlistadd
 layout fragment_profile_fragment
 layout fragment_scanner__form__details
+<<<<<<< HEAD
+=======
+layout fragment_user__add__product__scanner
+layout fragment_user__home_fragment
+layout fragment_user__profile_fragment
+layout fragment_user__scanner__form__details
+>>>>>>> 76cd60559e5013f6f9646983e06ee625b43f2259
 layout product_item
 menu bottom_nav_menu
+menu menu_home
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

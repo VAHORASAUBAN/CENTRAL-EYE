@@ -22,23 +22,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:layout_margin="16dp"
-        android:text="Add Assets"
+        android:text="Add Stock"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#212121"
         android:drawableLeft="@drawable/baseline_add_circle_outline_24"
         android:drawablePadding="12dp" />
 
-<<<<<<< HEAD
-
-=======
     <!-- Main content layout with ScrollView -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/titleTextView"
         android:fillViewport="true">
->>>>>>> 76cd60559e5013f6f9646983e06ee625b43f2259
 
         <!-- Card layout for asset form -->
         <androidx.cardview.widget.CardView
@@ -47,48 +43,13 @@
             android:layout_marginBottom="20dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
-            android:layout_below="@id/titleTextView"
             app:cardBackgroundColor="#F9F9F9">
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="24dp">
-
-                <!-- Asset Type -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Asset Type">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/asset_type_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="Asset Type Input Field" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Model Name -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Model Name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/model_name_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="Model Name Input Field"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Serial Number -->
                 <com.google.android.material.textfield.TextInputLayout
@@ -104,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:editable="false"
                         android:contentDescription="Serial Number Input Field"
-                    />
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Purchase Date -->
@@ -113,50 +74,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Purchase Date">
+                    android:hint="Return Date">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/purchaseDateEditText"
+                        android:id="@+id/returnDateEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
                         android:clickable="true"
-                        android:contentDescription="Purchase Date Input Field"
-                         />
+                        android:contentDescription="Return Date Input Field"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Asset Value -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Asset Value">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/asset_value_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="Asset Value Input Field" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Condition -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Condition">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/condition_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="Condition Input Field"
-                         />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Add Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/saveButton"
                     android:layout_width="match_parent"
@@ -172,7 +101,6 @@
                     app:elevation="4dp" />
 
             </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
         </androidx.cardview.widget.CardView>
+    </ScrollView>
 </RelativeLayout>

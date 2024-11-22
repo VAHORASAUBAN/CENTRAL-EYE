@@ -2,6 +2,7 @@ package com.example.integration.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -13,12 +14,15 @@ import android.view.animation.AnimationUtils;
 
 import com.example.integration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
-    Home_fragment homeFragment = new Home_fragment();
-    Profile_fragment profileFragment = new Profile_fragment();
-    Add_Product_Scanner addProductScanner = new Add_Product_Scanner();
+    private BottomNavigationView bottomNavigationView;
+//    private FloatingActionButton fab;
+
+    private final Fragment homeFragment = new Home_fragment();
+    private final Fragment profileFragment = new Profile_fragment();
+    private final Fragment addProductScanner = new Add_Product_Scanner();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,40 +30,42 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+//        fab = findViewById(R.id.fab);
 
         // Default fragment (Home)
-        replaceFragmentWithAnimation(homeFragment, R.anim.fade_in, R.anim.fade_out);
+        replaceFragment(homeFragment);
 
-        // Set listener for BottomNavigationView
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                View selectedView = bottomNavigationView.findViewById(item.getItemId()); // Get the selected item view
-                playUpsideAnimation(selectedView); // Add animation effect
+        // Handle BottomNavigationView item selection
+        bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
 
-                int id = item.getItemId();
-                if (id == R.id.nav_home) {
-                    replaceFragmentWithAnimation(homeFragment, R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                } else if (id == R.id.nav_products) {
-                    replaceFragmentWithAnimation(addProductScanner, R.anim.fade_in, R.anim.fade_out);
-                    return true;
-                } else if (id == R.id.nav_profile) {
-                    replaceFragmentWithAnimation(profileFragment, R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                }
-                return false;
-            }
-        });
+        // Handle FloatingActionButton click
+//        fab.setOnClickListener(v -> {
+//            // Navigate to a specific action or fragment
+//            replaceFragment(addProductScanner);
+//        });
+    }
+
+    private boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        View selectedView = bottomNavigationView.findViewById(item.getItemId()); // Get the selected item view
+        playUpsideAnimation(selectedView); // Add animation effect
+
+        int id = item.getItemId();
+        if (id == R.id.nav_home) {
+            replaceFragment(homeFragment);
+        } else if (id == R.id.nav_products) {
+            replaceFragment(addProductScanner);
+        } else if (id == R.id.nav_profile) {
+            replaceFragment(profileFragment);
+        }
+        return true;
     }
 
     /**
-     * Function to replace fragments with animations.
+     * Function to replace fragments without animation.
      */
-    private void replaceFragmentWithAnimation(androidx.fragment.app.Fragment fragment, int enterAnim, int exitAnim) {
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(enterAnim, exitAnim);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
@@ -88,5 +94,4 @@ public class HomeActivity extends AppCompatActivity {
                     .start();
         }
     }
-
 }
