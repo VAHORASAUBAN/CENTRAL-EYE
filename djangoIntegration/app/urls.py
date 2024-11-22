@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/login/', views.login_view, name='login'),
     path('api/add_product/', views.add_product, name='addProduct'),  # Update this line
     path('api/assign_product/', views.assign_product, name='assignProduct'),  # Update this line
+    path('api/assets/', views.AssetList, name='asset-list'),
 ]

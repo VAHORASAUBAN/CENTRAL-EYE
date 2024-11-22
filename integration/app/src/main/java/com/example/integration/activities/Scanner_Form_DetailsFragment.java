@@ -74,7 +74,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getCurrentLocation();
         // Initialize views
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
@@ -138,7 +138,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
-                    getCurrentLocation();
+
                     navigateToProductList();
 
                 } else {

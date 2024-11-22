@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer
 from django.utils import timezone
 
 @api_view(['POST'])
@@ -74,36 +74,63 @@ def add_product(request):
         purchaseDate = serializer.validated_data['purchase_date']
         assetValue = serializer.validated_data['asset_value']
         condition = serializer.validated_data['condition']
+        # location = serializer.validated_data['location']
         
-        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition)
+        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location="NULL")
         
         return Response({"message": "Product added successfully!"}, status=201)
+
+from django.core.exceptions import ObjectDoesNotExist
 
 @api_view(['POST'])
 def assign_product(request):
     # Deserialize the incoming data
     serializer = AssignSerializer(data=request.data)
-    
     if serializer.is_valid():
-        # Extract the necessary fields
         barcode = serializer.validated_data['barcode']
-        returnDate = serializer.validated_data['return_date']
-        user = request.user.username  # You can get the username from the request (assuming authentication)
-        # assign_location = serializer.validated_data.get('assign_location', 'Default Location')  # You can modify this default value
+        return_date = serializer.validated_data['return_date']
+        username = serializer.validated_data['username']
         
-        # Print values for debugging purposes (optional)
-        print(f"Barcode: {barcode}, Return Date: {returnDate}, User: {user}")
+        try:
+            # Fetch the asset using the barcode
+            asset = Asset.objects.get(barcode=barcode)
+            
+            # Fetch the user from the database
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                return Response({"message": "User not found!"}, status=404)
+
+            # Check if the asset is already assigned
+            if asset.assign_to is None:
+                # Create the allocation object
+                allocation = Allocation.objects.create(
+                    asset_barcode=barcode,
+                    user=user,
+                    return_date=return_date,
+                    assign_location="NULL"  # Adjust this as per your logic
+                )
+                
+                # Update the `assign_to` field of the asset
+                asset.assign_to = user
+                asset.save()
+                
+                return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
+            else:
+                return Response({"message": "Product is already assigned!"}, status=400)
         
-        # Create a new Allocation object and save it to the database
-        allocation = Allocation.objects.create(
-            asset_barcode=barcode,
-            user=user,
-            return_date=returnDate,
-            assign_location="NULL"
-        )
-        
-        # Return success response
-        return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
+        except Asset.DoesNotExist:
+            return Response({"message": "Product not found with barcode!"}, status=404)
+    else:
+        return Response(serializer.errors, status=400)
     
-    # Return validation errors if serializer is invalid
-    return Response(serializer.errors, status=400)
+@api_view(['GET'])
+def AssetList(request):
+    # Fetch all assets from the database
+    assets = Asset.objects.all()
+
+    # Serialize the assets
+    serializer = AssetSerializer(assets, many=True)
+
+    # Return the serialized data as a response
+    return Response(serializer.data, status=200)
