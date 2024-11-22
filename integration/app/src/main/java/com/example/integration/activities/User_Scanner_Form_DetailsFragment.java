@@ -1,5 +1,7 @@
 package com.example.integration.activities;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,6 +23,8 @@ import com.example.integration.R;
 import com.example.integration.api.ApiService;
 import com.example.integration.api.AssignProduct;
 import com.example.integration.network.RetrofitClient;
+
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -55,7 +59,7 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         if (getArguments() != null) {
             scannedBarcode = getArguments().getString(ARG_SCANNED_BARCODE);
         }
-        sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        sharedPreferences = requireContext().getSharedPreferences("user_prefs", MODE_PRIVATE);
     }
 
     @Override
@@ -67,13 +71,14 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         // Initialize views
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
         returnDateEditText = view.findViewById(R.id.returnDateEditText);
 
         // Display scanned barcode
         if (scannedBarcode != null) {
-            barcodeTextView.setText("Barcode: " + scannedBarcode);
+            barcodeTextView.setText(scannedBarcode);
         }
 
         // Set up date picker for return date
@@ -99,14 +104,18 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
 
     private void saveAssignProduct() {
         String returnDate = returnDateEditText.getText().toString().trim();
-        String username = sharedPreferences.getString("username", "");
+
+        // Use requireContext() or requireActivity() to get SharedPreferences in a Fragment
+        sharedPreferences = requireContext().getSharedPreferences("UserSession", MODE_PRIVATE);
+
+        // Fetch the username from SharedPreferences
+        String username = sharedPreferences.getString("username", "User");
 
         // Validate inputs
         if (returnDate.isEmpty()) {
             Toast.makeText(getContext(), "Please select a return date.", Toast.LENGTH_SHORT).show();
             return;
         }
-        
 
         AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username);
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
@@ -119,8 +128,19 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
                     Toast.makeText(getContext(), "Product assigned successfully!", Toast.LENGTH_SHORT).show();
                     requireActivity().getSupportFragmentManager().popBackStack();
                 } else {
-                    Log.e("API Error", "Response error: " + response.errorBody());
-                    Toast.makeText(getContext(), "Failed to assign product.", Toast.LENGTH_SHORT).show();
+                    try {
+                        // Parse the error message from the response body
+                        String errorMessage = response.errorBody() != null
+                                ? new JSONObject(response.errorBody().string()).optString("message", "Something went wrong!")
+                                : "Unknown error occurred!";
+
+                        // Show the error message in a Toast
+                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        // Fallback error message if parsing fails
+                        Toast.makeText(getContext(), "Failed to process error message!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

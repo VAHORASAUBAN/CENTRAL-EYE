@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
     'corsheaders',
+    'django_extensions',
 ]
 
 REST_FRAMEWORK = {
@@ -69,7 +70,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Optional: Secure session settings
-SESSION_COOKIE_SECURE = True  # Use only over HTTPS
+SESSION_COOKIE_SECURE = False  # Use only over HTTPS
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # AUTH_USER_MODEL = 'app.User'
