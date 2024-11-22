@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity"
     android:background="@color/white">
-
     <!-- Fragment Container -->
     <FrameLayout
         android:id="@+id/fragment_container"
