@@ -65,8 +65,5 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             viewButton = itemView.findViewById(R.id.viewButton);
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 76cd60559e5013f6f9646983e06ee625b43f2259
+
