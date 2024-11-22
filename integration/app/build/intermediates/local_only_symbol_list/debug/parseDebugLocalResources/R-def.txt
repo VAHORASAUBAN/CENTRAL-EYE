@@ -6,6 +6,7 @@ anim fade_out
 anim slide_in_left
 anim slide_out_right
 color black
+color bottom_nav_icon_color
 color primary
 color secondary
 color white
