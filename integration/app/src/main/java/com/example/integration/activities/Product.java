@@ -22,8 +22,5 @@ public class Product {
     public String getId() {
         return id;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 76cd60559e5013f6f9646983e06ee625b43f2259
+
