@@ -66,4 +66,7 @@
             android:textColor="#FFFFFF"
             android:padding="8dp" />
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
+
+

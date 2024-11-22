@@ -6,6 +6,7 @@ anim fade_out
 anim slide_in_left
 anim slide_out_right
 color black
+color bottom_nav_icon_color
 color primary
 color secondary
 color white
@@ -39,19 +40,13 @@ drawable rounded_edittext
 drawable rounded_navigation_background
 id action_logout
 id addCpuTextView
-id addCpuTextView1
 id addCpuTextView2
 id addCpuTextView3
 id addCpuTextView4
-id addbarcodeTextView1
-id addidTextView1
 id arrowIcon1
 id arrowIcon2
 id arrowIcon3
 id arrowIcon4
-id assetBarcode
-id assetName
-id assetType
 id asset_type_input
 id asset_value_input
 id assigned_ids_label
@@ -77,7 +72,10 @@ id nav_home
 id nav_products
 id nav_profile
 id password
+<<<<<<< HEAD
+=======
 id product1CardView
+>>>>>>> 76cd60559e5013f6f9646983e06ee625b43f2259
 id productBarcode
 id productBarcodeTextView1
 id productBarcodeTextView2
@@ -98,7 +96,7 @@ id productNameTextView2
 id productNameTextView3
 id productNameTextView4
 id productTableLayout
-id productidTextView1
+id productsRecyclerView
 id purchaseDateEditText
 id returnDateEditText
 id saveButton
@@ -126,11 +124,13 @@ layout fragment_product_list
 layout fragment_productlistadd
 layout fragment_profile_fragment
 layout fragment_scanner__form__details
+<<<<<<< HEAD
+=======
 layout fragment_user__add__product__scanner
 layout fragment_user__home_fragment
 layout fragment_user__profile_fragment
 layout fragment_user__scanner__form__details
-layout item_product
+>>>>>>> 76cd60559e5013f6f9646983e06ee625b43f2259
 layout product_item
 menu bottom_nav_menu
 menu menu_home

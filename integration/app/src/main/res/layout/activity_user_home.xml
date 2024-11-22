@@ -51,7 +51,7 @@
         android:background="@drawable/rounded_navigation_background"
         android:elevation="8dp"
         app:itemIconSize="30dp"
-        app:itemIconTint="@color/secondary"
+        app:itemIconTint="@color/bottom_nav_icon_color"
         app:itemTextAppearanceActive="@style/BottomNavTextActive"
         app:itemTextAppearanceInactive="@style/BottomNavTextInactive"
         app:itemTextColor="@color/secondary"
