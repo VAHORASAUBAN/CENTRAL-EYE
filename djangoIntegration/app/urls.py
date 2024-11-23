@@ -72,4 +72,8 @@ urlpatterns = [
     path('forgetpassword',views.forgetpassword, name='forgetpassword'),
     path('signup',views.signup, name='signup'),
     
- ]
+ 
+    path('api/assign_product/', views.assign_product, name='assignProduct'),  # Update this line
+    # path('api/assets/', views.AssetList, name='asset-list'),
+    path('api/assets/', views.AssetListView, name='asset-list'),
+]

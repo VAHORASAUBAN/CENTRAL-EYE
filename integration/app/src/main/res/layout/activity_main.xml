@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/baseline_home_24"
+    android:background="@color/white"
     app:constraint_referenced_tags="#profile"
     tools:context=".activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/circular_background"
-        android:alpha="0.7">
+        android:layout_height="400dp"
+        android:background="@drawable/mp_police">
 
     </RelativeLayout>
 
@@ -22,28 +21,43 @@
         android:layout_alignParentBottom="true"
         app:cardCornerRadius="28dp"
         android:layout_marginBottom="-20dp"
+        app:cardElevation="15dp"
+        android:background="@color/white"
         android:id="@+id/car_view">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="28dp">
+            android:padding="28dp"
+            android:background="@color/white">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Welcome"
+                android:textSize="35sp"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:textColor="@color/primary"/>
 
-
-
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="29dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Enter your login details"
+                android:textSize="10sp"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:textColor="@color/primary"/>
 
             <!-- Username Field -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                app:hintTextColor="@color/primary"
+                app:boxStrokeColor="@color/primary">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
@@ -52,20 +66,22 @@
                     android:drawableEnd="@drawable/baseline_person_24"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Password Field -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:passwordToggleEnabled="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                app:hintTextColor="@color/primary"
+                app:boxStrokeColor="@color/primary">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:drawableTint="@color/black"/>
+                    android:drawableTint="@color/black"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -83,7 +99,7 @@
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/primary"
                 android:text="Login" />
 
 
