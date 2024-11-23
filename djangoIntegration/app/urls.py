@@ -20,4 +20,39 @@ from . import views
 urlpatterns = [
     path('api/login/', views.login_view, name='login'),
     path('api/add_product/', views.add_product, name='addProduct'),  # Update this line
-]
+    path('', views.index, name='index'),
+
+    path('productlist', views.productlist, name='productlist'),
+    path('addproduct', views.addproduct, name='addproduct'),
+    path('editproduct', views.editproduct, name='editproduct'),
+
+    path('categorylist', views.categorylist, name='categorylist'),
+    path('addcategory', views.addcategory, name='addcategory'),
+    path('editcategory', views.addcategory, name='editcategory'),
+
+    path('importproduct', views.importproduct, name='importproduct'),
+    path('barcode', views.barcode, name='barcode'),
+
+    path('issuedproducts', views.issuedproducts, name='issuedproducts'),
+    path('editissuedproducts', views.editissuedproducts, name='editissuedproducts'),
+    path('addissuedproducts', views.addissuedproducts, name='addissuedproducts'),
+
+    path('maintenanceproducts', views.maintenanceproducts, name='maintenanceproducts'),
+    path('editmaintenanceproducts', views.editmaintenanceproducts, name='editmaintenanceproducts'),
+    path('addmaintenanceproducts', views.addmaintenanceproducts, name='addmaintenanceproducts'),
+
+    path('expiredproducts', views.expiredproducts, name='expiredproducts'),
+    path('editexpiredproducts', views.editexpiredproducts, name='editexpiredproducts'),
+    path('addexpiredproducts', views.addexpiredproducts, name='addexpiredproducts'),
+
+    path('returnproducts', views.returnproducts, name='returnproducts'),
+    path('editreturnproducts', views.editreturnproducts, name='editreturnproducts'),
+    path('addreturnproducts', views.addreturnproducts, name='addreturnproducts'),
+
+
+    path('newuser', views.newuser, name='newuser'),
+    path('userlists', views.userlists, name='userlists'),
+    path('edituser', views.edituser, name='edituser'),
+
+
+ ]
