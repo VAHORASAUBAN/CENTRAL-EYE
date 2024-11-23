@@ -55,4 +55,21 @@ urlpatterns = [
     path('edituser', views.edituser, name='edituser'),
 
 
+    path('expenselist',views.expenseList, name='expenseList'),
+    path('createexpense',views.createExpense, name='createExpense'),
+    path('editexpense',views.editExpense, name='editExpense'),
+    path('expensecategory',views.expenseCategory, name='expenseCategory'),
+    path('quotationlist',views.quotationList, name='quotationList'),
+    path('addquotation',views.addquotation, name='addquotation'),
+    path('newcountry',views.newCountry, name='newCountry'),
+    path('countrieslist',views.countriesList, name='countriesList'),
+    path('editcountry',views.editCountry, name='editCountry'),
+    path('editquotation',views.editQuotation, name='editQuotation'),
+    path('editexpense',views.editExpense, name='editExpense'),
+    path('profile',views.profile, name='profile'),
+    path('generalsettings',views.generalSettings, name='generalSettings'),
+    path('signin',views.signin, name='signin'),
+    path('forgetpassword',views.forgetpassword, name='forgetpassword'),
+    path('signup',views.signup, name='signup'),
+    
  ]

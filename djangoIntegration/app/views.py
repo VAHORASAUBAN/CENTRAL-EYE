@@ -62,67 +62,52 @@ def add_product(request):
     return Response(serializer.errors, status=400)
 
 
-
 def index(request):
     return render(request,'index.html')
 
-def productlist(request):
-    return render(request,'productlist.html')
-def editproduct(request):
-    return render(request,'editproduct.html')
-def addproduct(request):
-    return render(request,'addproduct.html')
 
-def categorylist(request):
-    return render(request,'categorylist.html')
-def addcategory(request):
-    return render(request,'addcategory.html')
-def editcategory(request):
-    return render(request,'editcategory.html')
+def expenseList(request):
+    return render(request,'expenselist.html')
 
-def importproduct(request):
-    return render(request,'importproduct.html')
-def barcode(request):
-    return render(request,'barcode.html')
+def createExpense(request):
+    return render(request,'createexpense.html')
 
-def issuedproducts(request):
-    return render(request,'issuedproducts.html')
-def editissuedproducts(request):
-    return render(request,'editissuedproducts.html')
-def addissuedproducts(request):
-    return render(request,'addissuedproducts.html')
+def editExpense(request):
+    return render(request,'editexpense.html')
 
+def expenseCategory(request):
+    return render(request,'expenseCategory.html')
 
-def maintenanceproducts(request):
-    return render(request,'maintenanceproducts.html')
-def editmaintenanceproducts(request):
-    return render(request,'editmaintenanceproducts.html')
-def addmaintenanceproducts(request):
-    return render(request,'addmaintenanceproducts.html')
+def quotationList(request):
+    return render(request,'quotationList.html')
 
+def addquotation(request):
+    return render(request,'addquotation.html')
 
-def expiredproducts(request):
-    return render(request,'expiredproducts.html')
-def editexpiredproducts(request):
-    return render(request,'editexpiredproducts.html')
-def addexpiredproducts(request):
-    return render(request,'addexpiredproducts.html')
+def countriesList(request):
+    return render(request,'countriesList.html')
 
-def returnproducts(request):
-    return render(request,'returnproducts.html')
+def newCountry(request):
+    return render(request,'newCountry.html')
 
-def editreturnproducts(request):
-    return render(request,'editreturnproducts.html')
-def addreturnproducts(request):
-    return render(request,'addreturnproducts.html')
+def editCountry(request):
+    return render(request,'editCountry.html')
 
-def aa(request):
-    return render(request,'aa.html')
+def editQuotation(request):
+    return render(request,'editquotation.html')
+def editExpense(request):
+    return render(request,'editExpense.html')
 
+def profile(request):
+    return render(request,'profile.html')
 
-def newuser(request):
-    return render(request,'newuser.html')
-def userlists(request):
-    return render(request,'userlists.html')
-def edituser(request):
-    return render(request,'edituser.html')
+def generalSettings(request):
+    return render(request,'editexpense.html')
+def signin(request):
+    return render(request,'signin.html')
+
+def signup(request):
+    return render(request,'signup.html')
+
+def forgetpassword(request):
+    return render(request,'forgetpassword.html')
