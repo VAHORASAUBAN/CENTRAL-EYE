@@ -69,6 +69,7 @@ def login_view(request):
 @api_view(['POST'])
 def add_product(request):
     serializer = ProductSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid():
         barcode = serializer.validated_data['barcode']
         assetType = serializer.validated_data['asset_type']
@@ -76,9 +77,9 @@ def add_product(request):
         purchaseDate = serializer.validated_data['purchase_date']
         assetValue = serializer.validated_data['asset_value']
         condition = serializer.validated_data['condition']
-        # location = serializer.validated_data['location']
+        location = serializer.validated_data['Location']
         
-        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location="NULL")
+        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location=location)
         
         return Response({"message": "Product added successfully!"}, status=201)
     return Response(serializer.errors, status=400)
