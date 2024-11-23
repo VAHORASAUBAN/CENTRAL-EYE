@@ -148,14 +148,14 @@ def quotationList(request):
 def addquotation(request):
     return render(request,'addquotation.html')
 
-def countriesList(request):
-    return render(request,'countriesList.html')
+def stationlist(request):
+    return render(request,'stationlist.html')
 
-def newCountry(request):
-    return render(request,'newCountry.html')
+def newstation(request):
+    return render(request,'newstation.html')
 
-def editCountry(request):
-    return render(request,'editCountry.html')
+def editstation(request):
+    return render(request,'editstation.html')
 
 def editQuotation(request):
     return render(request,'editquotation.html')
