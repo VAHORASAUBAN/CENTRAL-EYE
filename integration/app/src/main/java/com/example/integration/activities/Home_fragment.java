@@ -1,5 +1,7 @@
 package com.example.integration.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,102 +10,84 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.integration.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Home_fragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class Home_fragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private TextView headText;
+    private ImageButton logoutButton;
+    private SharedPreferences sharedPreferences;
 
     public Home_fragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Home_fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Home_fragment newInstance(String param1, String param2) {
-        Home_fragment fragment = new Home_fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
 
-        LinearLayout squareBox1 = view.findViewById(R.id.squareBox1);
+        // Initialize views
+        headText = view.findViewById(R.id.headtext);
+        logoutButton = view.findViewById(R.id.logoutButtonUser);
+        if (logoutButton == null) {
+            Log.e("Logout", "Logout button is null!");
+        } else {
+            Log.d("Logout", "Logout button initialized successfully.");
+        }
+        // Fetch session details
+        sharedPreferences = requireActivity().getSharedPreferences("UserSession", getContext().MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "User");
 
-        // Apply entrance animation to products
+        // Set username to headtext
+        headText.setText(username + "!");
 
-        // Add click listener with animation to squareBox1
-        squareBox1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.animate()
-                        .scaleX(0.9f)
-                        .scaleY(0.9f)
-                        .setDuration(100)
-                        .withEndAction(() -> {
-                            v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
-                            openProductListFragment();
-                        })
-                        .start();
-            }
+        // Set up logout functionality
+        logoutButton.setOnClickListener(v -> {
+            Log.d("Logout", "Logout button clicked");
+
+            // Clear session and redirect
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            Log.d("Logout", "Session cleared");
+
+            Intent intent = new Intent(requireActivity(), MainActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
         });
+
+        setupUIInteractions(view);
 
         return view;
     }
 
-    private void animateEntrance(View view, long delay) {
-        view.setAlpha(0f);
-        view.setTranslationY(50f); // Slide up effect
-        view.animate()
-                .alpha(1f)
-                .translationY(0f)
-                .setDuration(500)
-                .setStartDelay(delay)
-                .start();
-    }
+    private void setupUIInteractions(View view) {
+        LinearLayout squareBox1 = view.findViewById(R.id.squareBox1);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-}
+        // Add click listener with animation to squareBox1
+        squareBox1.setOnClickListener(v -> {
+            v.animate()
+                    .scaleX(0.9f)
+                    .scaleY(0.9f)
+                    .setDuration(100)
+                    .withEndAction(() -> {
+                        v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+                        openProductListFragment();
+                    })
+                    .start();
+        });
+    }
 
     private void openProductListFragment() {
         ProductListFragment productListFragment = new ProductListFragment();

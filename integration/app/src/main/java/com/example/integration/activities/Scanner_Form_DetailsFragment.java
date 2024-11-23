@@ -45,6 +45,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
     private EditText assetNameEditText;
     private EditText assetValueEditText;
     private EditText conditionEditText;
+    private String mergedLocation;
 
     public Scanner_Form_DetailsFragment() {
         // Required empty public constructor
@@ -130,7 +131,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         }
 
         // Create ProductDetails object
-        ProductDetails productDetails = new ProductDetails(scannedBarcode, assetType, assetName, purchaseDate, assetValue, condition);
+        ProductDetails productDetails = new ProductDetails(scannedBarcode, assetType, assetName, purchaseDate, assetValue, condition, mergedLocation);
 
         // Initialize Retrofit and make the API call
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
@@ -173,7 +174,9 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 if (location != null) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    Toast.makeText(getContext(), "Location: " + latitude + ", " + longitude, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(), "Location: " + latitude + ", " + longitude, Toast.LENGTH_LONG).show();
+                    String mergedLocation = latitude + ", " + longitude;
+                    this.mergedLocation = mergedLocation;
                 } else {
                     Toast.makeText(getContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show();
                 }
