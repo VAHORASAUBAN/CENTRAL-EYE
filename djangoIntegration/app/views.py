@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,6 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ProductSerializer, LoginSerializer
+
 
 @api_view(['POST'])
 def login_view(request):
@@ -58,3 +60,54 @@ def add_product(request):
         
         return Response({"message": "Product added successfully!"}, status=201)
     return Response(serializer.errors, status=400)
+
+
+def index(request):
+    return render(request,'index.html')
+
+
+def expenseList(request):
+    return render(request,'expenselist.html')
+
+def createExpense(request):
+    return render(request,'createexpense.html')
+
+def editExpense(request):
+    return render(request,'editexpense.html')
+
+def expenseCategory(request):
+    return render(request,'expenseCategory.html')
+
+def quotationList(request):
+    return render(request,'quotationList.html')
+
+def addquotation(request):
+    return render(request,'addquotation.html')
+
+def countriesList(request):
+    return render(request,'countriesList.html')
+
+def newCountry(request):
+    return render(request,'newCountry.html')
+
+def editCountry(request):
+    return render(request,'editCountry.html')
+
+def editQuotation(request):
+    return render(request,'editquotation.html')
+def editExpense(request):
+    return render(request,'editExpense.html')
+
+def profile(request):
+    return render(request,'profile.html')
+
+def generalSettings(request):
+    return render(request,'editexpense.html')
+def signin(request):
+    return render(request,'signin.html')
+
+def signup(request):
+    return render(request,'signup.html')
+
+def forgetpassword(request):
+    return render(request,'forgetpassword.html')
