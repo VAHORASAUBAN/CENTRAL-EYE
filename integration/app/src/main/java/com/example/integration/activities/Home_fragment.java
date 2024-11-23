@@ -1,92 +1,104 @@
 package com.example.integration.activities;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.integration.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Home_fragment extends Fragment {
 
-    private TextView headText;
-    private ImageButton logoutButton;
-    private SharedPreferences sharedPreferences;
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    private String mParam1;
+    private String mParam2;
 
     public Home_fragment() {
         // Required empty public constructor
+    }
+
+    public static Home_fragment newInstance(String param1, String param2) {
+        Home_fragment fragment = new Home_fragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
 
-        // Initialize views
-        headText = view.findViewById(R.id.headtext);
-        logoutButton = view.findViewById(R.id.logoutButtonUser);
-        if (logoutButton == null) {
-            Log.e("Logout", "Logout button is null!");
-        } else {
-            Log.d("Logout", "Logout button initialized successfully.");
-        }
-        // Fetch session details
-        sharedPreferences = requireActivity().getSharedPreferences("UserSession", getContext().MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "User");
+        LinearLayout squareBox1 = view.findViewById(R.id.squareBox1);
+        LinearLayout squareBox2 = view.findViewById(R.id.squareBox2); // Find squareBox2
 
-        // Set username to headtext
-        headText.setText(username + "!");
+        // Apply entrance animation to squareBox1 and squareBox2
+        animateEntrance(squareBox1, 100);
+        animateEntrance(squareBox2, 200); // Apply animation with delay to squareBox2
 
-        // Set up logout functionality
-        logoutButton.setOnClickListener(v -> {
-            Log.d("Logout", "Logout button clicked");
-
-            // Clear session and redirect
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
-            Log.d("Logout", "Session cleared");
-
-            Intent intent = new Intent(requireActivity(), MainActivity.class);
-            startActivity(intent);
-            requireActivity().finish();
+        // Add click listener with animation to squareBox1
+        squareBox1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.animate()
+                        .scaleX(0.9f)
+                        .scaleY(0.9f)
+                        .setDuration(100)
+                        .withEndAction(() -> {
+                            v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+                            openProductListFragment();
+                        })
+                        .start();
+            }
         });
 
-        setupUIInteractions(view);
+        // Add click listener with animation to squareBox2
+        squareBox2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.animate()
+                        .scaleX(0.9f)
+                        .scaleY(0.9f)
+                        .setDuration(100)
+                        .withEndAction(() -> {
+                            v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+                            openUserListAdd();
+                        })
+                        .start();
+            }
+        });
 
         return view;
     }
 
-    private void setupUIInteractions(View view) {
-        LinearLayout squareBox1 = view.findViewById(R.id.squareBox1);
-
-        // Add click listener with animation to squareBox1
-        squareBox1.setOnClickListener(v -> {
-            v.animate()
-                    .scaleX(0.9f)
-                    .scaleY(0.9f)
-                    .setDuration(100)
-                    .withEndAction(() -> {
-                        v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
-                        openProductListFragment();
-                    })
-                    .start();
-        });
+    private void animateEntrance(View view, long delay) {
+        view.setAlpha(0f);
+        view.setTranslationY(50f); // Slide up effect
+        view.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setDuration(500)
+                .setStartDelay(delay)
+                .start();
     }
 
     private void openProductListFragment() {
@@ -94,6 +106,15 @@ public class Home_fragment extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, productListFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void openUserListAdd() {
+        UserListAdd userListFragment = new UserListAdd();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, userListFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
