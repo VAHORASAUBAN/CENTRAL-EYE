@@ -1,6 +1,6 @@
 package com.example.integration.api;
 
-import com.example.integration.models.Product;
+import com.example.integration.activities.Product;
 
 import java.util.List;
 

@@ -104,14 +104,6 @@ public class Home_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View toolbar = view.findViewById(R.id.toolbar);
-        View searchBox = view.findViewById(R.id.searchEditText);
-
-        toolbar.setTranslationY(-100f); // Start off-screen
-        searchBox.setTranslationY(-100f);
-
-        toolbar.animate().translationY(0f).setDuration(300).start();
-        searchBox.animate().translationY(0f).setDuration(400).setStartDelay(100).start();
     }
 
     private void openProductListFragment() {

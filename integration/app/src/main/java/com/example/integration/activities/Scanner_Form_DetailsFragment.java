@@ -77,6 +77,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
 
         // Initialize views
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        getCurrentLocation();
 
         assetTypeEditText = view.findViewById(R.id.asset_type_input);
         assetNameEditText = view.findViewById(R.id.model_name_input);
@@ -138,7 +139,6 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
-                    getCurrentLocation();
                     navigateToProductList();
 
                 } else {

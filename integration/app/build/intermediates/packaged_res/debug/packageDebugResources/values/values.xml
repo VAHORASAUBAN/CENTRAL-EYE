@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#000000</color>
-    <color name="primary">#0b3d91</color>
+    <color name="primary">#061e45</color>
     <color name="secondary">#f1f1f1</color>
+    <color name="tertiary">#d3d3d3</color>
+    <color name="top">#a9a9a9</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">Integration</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

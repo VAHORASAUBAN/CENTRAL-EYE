@@ -9,244 +9,407 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
+        android:layout_height="44dp"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:title="Inventory Management"
-        app:titleTextColor="@android:color/white" />
+        app:title="Welcome,"
+        app:titleTextColor="@color/primary">
 
-    <!-- Search Box -->
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_margin="16dp"
-        android:hint="Search..."
-        android:padding="10dp"
-        android:background="@android:drawable/edit_text"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="8dp"
-        android:inputType="text" />
+            <TextView
+                android:id="@+id/headtext"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginTop="10dp"
+                android:text="User"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    <!-- Recently Added Products Title -->
-    <TextView
-        android:id="@+id/titleTextView"
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <!-- Logout Button -->
+    <ImageButton
+        android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/searchEditText"
-        android:layout_margin="16dp"
-        android:text="Recently Added Products"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <!-- TableLayout for Products -->
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Logout"
+        android:src="@drawable/baseline_logout_24" />
     <TableLayout
         android:id="@+id/productTableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
-        android:layout_margin="16dp"
+        android:layout_below="@id/bottomContainer"
+        android:layout_marginTop="5dp"
         android:stretchColumns="1"
-        android:background="@android:color/white">
+        android:background="@android:color/white"/>
 
-        <!-- Table Header -->
-        <TableRow android:background="@color/primary">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Image"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+    <!-- Fancy Tabular Structure -->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Barcode"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ID"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <!-- Product 1 -->
-        <TableRow>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/baseline_person_24"
-                android:layout_gravity="center"
-                android:background="@drawable/circular_background"
-                android:clipToOutline="true"
-                android:layout_margin="4dp" />
-
-            <TextView
-                android:id="@+id/productNameTextView1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:text="CPU" />
-
-            <TextView
-                android:id="@+id/productBarcodeTextView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="A2009" />
-
-            <TextView
-                android:id="@+id/productIdTextView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="009"
-                android:padding="8dp" />
-        </TableRow>
-
-        <!-- Product 2 -->
-        <TableRow>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/baseline_person_24"
-                android:layout_gravity="center"
-                android:background="@drawable/circular_background"
-                android:clipToOutline="true"
-                android:layout_margin="4dp" />
-
-            <TextView
-                android:id="@+id/productNameTextView2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:text="RAM" />
-
-            <TextView
-                android:id="@+id/productBarcodeTextView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="B4012"
-                android:padding="8dp" />
-
-            <TextView
-                android:id="@+id/productIdTextView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="012"
-                android:padding="8dp" />
-        </TableRow>
-
-        <!-- Product 3 -->
-        <TableRow>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/baseline_person_24"
-                android:layout_gravity="center"
-                android:background="@drawable/circular_background"
-                android:clipToOutline="true"
-                android:layout_margin="4dp" />
-
-            <TextView
-                android:id="@+id/productNameTextView3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:text="SSD" />
-
-            <TextView
-                android:id="@+id/productBarcodeTextView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="C3005"
-                android:padding="8dp" />
-
-            <TextView
-                android:id="@+id/productIdTextView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="005"
-                android:padding="8dp" />
-        </TableRow>
-    </TableLayout>
-
-    <!-- Bottom Container -->
     <RelativeLayout
         android:id="@+id/bottomContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/rounded_border_rect"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        android:layout_below="@id/toolbar"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
 
         <!-- First Box -->
         <LinearLayout
             android:id="@+id/squareBox1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/primary"
+            android:layout_width="155dp"
+            android:layout_height="135dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_border_rect"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginEnd="8dp">
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/icon1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/baseline_sync_problem_24"
-                android:contentDescription="Icon 1" />
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="59dp"
+                android:layout_height="59dp"
+                android:contentDescription="Icon 1"
+                android:src="@drawable/baseline_warehouse_24" />
+
+
             <TextView
                 android:id="@+id/text1"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Product"
+                android:gravity="left"
+                android:text="Inventory"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:gravity="center" />
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/subtext1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginLeft="10dp"
+                android:text="Products"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
         </LinearLayout>
         <!-- Second Box -->
         <LinearLayout
             android:id="@+id/squareBox2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/primary"
-            android:gravity="center"
-            android:orientation="vertical"
+            android:layout_width="155dp"
+            android:layout_height="135dp"
+            android:layout_marginEnd="8dp"
             android:layout_toEndOf="@id/squareBox1"
-            android:layout_marginStart="8dp">
+            android:background="@drawable/rounded_border_rect2"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/icon2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/baseline_info_outline_24"
-                android:contentDescription="Icon 2" />
+                android:layout_width="59dp"
+                android:layout_height="59dp"
+                android:layout_marginRight="40dp"
+                android:contentDescription="Icon 2"
+                android:src="@drawable/baseline_account_circle_24" />
+
             <TextView
                 android:id="@+id/text2"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Status"
+                android:gravity="left"
+                android:layout_marginBottom="25dp"
+                android:text="Users"
                 android:textColor="@color/white"
-                android:textSize="14sp"
-                android:gravity="center" />
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/squareBox3"
+            android:layout_width="155dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="150dp"
+            android:layout_toEndOf="@id/squareBox1"
+            android:background="@drawable/rounded_border_rect4"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="59dp"
+                android:layout_height="59dp"
+                android:layout_marginRight="40dp"
+                android:contentDescription="Icon 3"
+                android:src="@drawable/baseline_info_outline_24" />
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginBottom="25dp"
+                android:text="In-Use"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/squareBox4"
+            android:layout_width="155dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_border_rect3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/icon4"
+                android:layout_marginRight="40dp"
+                android:layout_width="59dp"
+                android:layout_height="59dp"
+                android:contentDescription="Icon 4"
+                android:src="@drawable/baseline_inventory_24" />
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Available"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/subtext2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginLeft="10dp"
+                android:text="Inventory"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/fancyTableContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bottomContainer"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:text="Latest Inventory"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Table Header -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="Name"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="Barcode"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Table Rows -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circular_background"
+                    android:clipToOutline="true"
+                    android:src="@drawable/baseline_person_24" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp"
+                    android:text="CPU"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:padding="8dp"
+                    android:text="A2009"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="55dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circular_background"
+                    android:clipToOutline="true"
+                    android:src="@drawable/baseline_person_24" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp"
+                    android:text="CPU"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:padding="8dp"
+                    android:text="A2009"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="110dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circular_background"
+                    android:clipToOutline="true"
+                    android:src="@drawable/baseline_person_24" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp"
+                    android:text="CPU"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:padding="8dp"
+                    android:text="A2009"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Additional Rows -->
+        <!-- Duplicate CardView structures for other products -->
+    </LinearLayout>
 
 </RelativeLayout>
