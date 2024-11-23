@@ -39,6 +39,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
     private EditText assetTypeEditText;
+    private String MergedLocation;
     private EditText purchaseDateEditText;
     private String scannedBarcode;
     private TextView barcodeTextView;
@@ -121,6 +122,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         String purchaseDate = purchaseDateEditText.getText().toString().trim();
         String assetValue = assetValueEditText.getText().toString().trim();
         String condition = conditionEditText.getText().toString().trim();
+//        String Location = getCurrentLocation();
 
         // Validate inputs
         if (assetType.isEmpty() || assetName.isEmpty() || purchaseDate.isEmpty() || assetValue.isEmpty() || condition.isEmpty()) {
@@ -138,7 +140,6 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
-                    getCurrentLocation();
                     navigateToProductList();
 
                 } else {
@@ -162,36 +163,37 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 .commit();
     }
 
-    private void getCurrentLocation() {
-        // Check permissions
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
-        } else {
-            // Permission granted, get location
-            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
-                if (location != null) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    Toast.makeText(getContext(), "Location: " + latitude + ", " + longitude, Toast.LENGTH_LONG).show();
-                    navigateToProductList();
-                } else {
-                    Toast.makeText(getContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 100) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getCurrentLocation();
-            } else {
-                Toast.makeText(getContext(), "Location permission denied.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    private String getCurrentLocation() {
+//        // Check permissions
+//        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            // Request permission
+//            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+//        } else {
+//            // Permission granted, get location
+//            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+//                if (location != null) {
+//                    double latitude = location.getLatitude();
+//                    double longitude = location.getLongitude();
+//                    MergedLocation = latitude + ", " + longitude;
+//                } else {
+//                    Toast.makeText(getContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        }
+//
+//        return MergedLocation;
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == 100) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                getCurrentLocation();
+//            } else {
+//                Toast.makeText(getContext(), "Location permission denied.", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
 }

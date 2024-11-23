@@ -7,6 +7,7 @@ public class ProductDetails {
     private String purchase_date;
     private String asset_value;
     private String condition;
+//    private String location;
 
     // Constructor (updated to include location)
     public ProductDetails(String barcode, String assetType, String assetName, String purchaseDate,
@@ -17,6 +18,7 @@ public class ProductDetails {
         this.purchase_date = purchaseDate;
         this.asset_value = assetValue;
         this.condition = condition;
+//        this.location = Location;
     }
 
     // Getters and Setters for all fields
@@ -68,4 +70,12 @@ public class ProductDetails {
     public void setCondition(String condition) {
         this.condition = condition;
     }
+
+//    public String getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(String condition) {
+//        this.location = location;
+//    }
 }
