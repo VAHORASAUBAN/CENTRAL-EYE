@@ -10,12 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.integration.R;
+import com.example.integration.api.ApiService;
+import com.example.integration.network.RetrofitClient;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class productlistadd extends Fragment {
 
@@ -38,35 +45,48 @@ public class productlistadd extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_productlistadd, container, false);
 
         // Initialize RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Create sample product data
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product("Product 1", "Barcode1", "001"));
-        productList.add(new Product("Product 2", "Barcode2", "002"));
-        productList.add(new Product("Product 3", "Barcode3", "003"));
+        // Initialize Retrofit and API service
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
-        // Set adapter
-        ProductAdapter adapter = new ProductAdapter(getContext(), productList, product -> {
-            // Handle item click
-            navigateToProductDescription(product);
+        // Fetch products from the backend
+        apiService.getProducts().enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> productList = response.body();
+
+                    // Set adapter
+                    ProductAdapter adapter = new ProductAdapter(getContext(), productList, product -> {
+                        // Handle item click
+                        navigateToProductDescription(product);
+                    });
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
-        recyclerView.setAdapter(adapter);
 
         return view;
     }
 
+
     private void navigateToProductDescription(Product product) {
         // Create a new instance of ProductDescriptionFragment with arguments
         ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(
-                product.getName(), product.getBarcode()
+                product.getLocation(), product.getBarcode()
         );
 
         // Start a transaction to replace the fragment
