@@ -1,6 +1,6 @@
 package com.example.integration.api;
 
-import com.example.integration.models.Product;
+import com.example.integration.activities.Product;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ public interface ApiService {
     @POST("api/assign_product/")
     Call<Void> saveAssignProduct(@Body AssignProduct assignProduct);
 
-    @GET("api/assets/")  // Endpoint to get list of products
-    Call<List<Product>> getProductList();
+    @GET("api/assets/")  // Ensure the endpoint matches your Django URL
+    Call<List<Product>> getProducts();
+
 }
