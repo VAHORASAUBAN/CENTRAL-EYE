@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,6 +10,7 @@ from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
 from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer
 from django.utils import timezone
+
 
 @api_view(['POST'])
 def login_view(request):
@@ -67,6 +69,7 @@ def login_view(request):
 @api_view(['POST'])
 def add_product(request):
     serializer = ProductSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid():
         barcode = serializer.validated_data['barcode']
         assetType = serializer.validated_data['asset_type']
@@ -74,11 +77,127 @@ def add_product(request):
         purchaseDate = serializer.validated_data['purchase_date']
         assetValue = serializer.validated_data['asset_value']
         condition = serializer.validated_data['condition']
-        # location = serializer.validated_data['location']
+        location = serializer.validated_data['Location']
         
-        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location="NULL")
+        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location=location)
         
         return Response({"message": "Product added successfully!"}, status=201)
+    return Response(serializer.errors, status=400)
+
+
+
+def index(request):
+    return render(request,'index.html')
+
+def productlist(request):
+    return render(request,'productlist.html')
+def editproduct(request):
+    return render(request,'editproduct.html')
+def addproduct(request):
+    return render(request,'addproduct.html')
+
+def categorylist(request):
+    return render(request,'categorylist.html')
+def addcategory(request):
+    return render(request,'addcategory.html')
+def editcategory(request):
+    return render(request,'editcategory.html')
+
+def importproduct(request):
+    return render(request,'importproduct.html')
+def barcode(request):
+    return render(request,'barcode.html')
+
+def issuedproducts(request):
+    return render(request,'issuedproducts.html')
+def editissuedproducts(request):
+    return render(request,'editissuedproducts.html')
+def addissuedproducts(request):
+    return render(request,'addissuedproducts.html')
+
+
+def maintenanceproducts(request):
+    return render(request,'maintenanceproducts.html')
+def editmaintenanceproducts(request):
+    return render(request,'editmaintenanceproducts.html')
+def addmaintenanceproducts(request):
+    return render(request,'addmaintenanceproducts.html')
+
+
+def expiredproducts(request):
+    return render(request,'expiredproducts.html')
+def editexpiredproducts(request):
+    return render(request,'editexpiredproducts.html')
+def addexpiredproducts(request):
+    return render(request,'addexpiredproducts.html')
+
+def returnproducts(request):
+    return render(request,'returnproducts.html')
+
+def editreturnproducts(request):
+    return render(request,'editreturnproducts.html')
+def addreturnproducts(request):
+    return render(request,'addreturnproducts.html')
+
+def aa(request):
+    return render(request,'aa.html')
+
+
+def newuser(request):
+    return render(request,'newuser.html')
+def userlists(request):
+    return render(request,'userlists.html')
+def edituser(request):
+    return render(request,'edituser.html')
+def index(request):
+    return render(request,'index.html')
+
+
+def expenseList(request):
+    return render(request,'expenselist.html')
+
+def createExpense(request):
+    return render(request,'createexpense.html')
+
+def editExpense(request):
+    return render(request,'editexpense.html')
+
+def expenseCategory(request):
+    return render(request,'expenseCategory.html')
+
+def quotationList(request):
+    return render(request,'quotationList.html')
+
+def addquotation(request):
+    return render(request,'addquotation.html')
+
+def stationlist(request):
+    return render(request,'stationlist.html')
+
+def newstation(request):
+    return render(request,'newstation.html')
+
+def editstation(request):
+    return render(request,'editstation.html')
+
+def editQuotation(request):
+    return render(request,'editquotation.html')
+def editExpense(request):
+    return render(request,'editExpense.html')
+
+def profile(request):
+    return render(request,'profile.html')
+
+def generalSettings(request):
+    return render(request,'editexpense.html')
+def signin(request):
+    return render(request,'signin.html')
+
+def signup(request):
+    return render(request,'signup.html')
+
+def forgetpassword(request):
+    return render(request,'forgetpassword.html')
 
 from django.core.exceptions import ObjectDoesNotExist
 

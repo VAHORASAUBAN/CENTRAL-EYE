@@ -6,10 +6,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.example.integration.R;
 
 public class Home_fragment extends Fragment {
@@ -80,7 +82,6 @@ public class Home_fragment extends Fragment {
                         .withEndAction(() -> {
                             v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
                             openUserListAdd();
-
                         })
                         .start();
             }
@@ -108,6 +109,7 @@ public class Home_fragment extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
     private void openUserListAdd() {
         UserListAdd userListFragment = new UserListAdd();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
