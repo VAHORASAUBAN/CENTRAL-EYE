@@ -1,5 +1,6 @@
 package com.example.integration.activities;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +11,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.integration.R;
 
@@ -18,7 +22,7 @@ public class Home_fragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private SharedPreferences sharedPreferences;
     private String mParam1;
     private String mParam2;
 
@@ -47,9 +51,18 @@ public class Home_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
+        // Fetch the username from shared preferences
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "User");
 
+        // Bind views
+        TextView welcomeTextView = view.findViewById(R.id.headtext);
+        ImageButton logoutButton = view.findViewById(R.id.logoutButtonUser);
         LinearLayout squareBox1 = view.findViewById(R.id.squareBox1);
-        LinearLayout squareBox2 = view.findViewById(R.id.squareBox2); // Find squareBox2
+        LinearLayout squareBox2 = view.findViewById(R.id.squareBox2);
+
+        // Set welcome message
+        welcomeTextView.setText(username + "!");
 
         // Apply entrance animation to squareBox1 and squareBox2
         animateEntrance(squareBox1, 100);

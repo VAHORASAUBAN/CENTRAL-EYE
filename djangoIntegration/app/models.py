@@ -20,11 +20,11 @@ class User(models.Model):
     user_id = models.IntegerField(primary_key=True, unique=True)
     username = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
-    role = models.OneToOneField(role, related_name='user_role', null=True, blank=True, on_delete=models.CASCADE)
+    role = models.ForeignKey(role, null=True, blank=True, on_delete=models.SET_NULL)
     full_name = models.CharField(max_length=255)
     contact_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(unique=True, null=True, blank=True)
-    station = models.OneToOneField(stationDetails, related_name='stationDetails', null=True, blank=True, on_delete=models.CASCADE,) # type: ignore
+    station = models.ForeignKey(stationDetails, null=True, blank=True, on_delete=models.SET_NULL)
     last_login = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 

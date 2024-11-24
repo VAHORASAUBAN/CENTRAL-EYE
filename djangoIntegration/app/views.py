@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer
 from django.utils import timezone
 
 
@@ -83,6 +83,12 @@ def add_product(request):
         
         return Response({"message": "Product added successfully!"}, status=201)
     return Response(serializer.errors, status=400)
+
+@api_view(['GET'])
+def user_list_view(request):
+    users = User.objects.all()  # Get all users
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 

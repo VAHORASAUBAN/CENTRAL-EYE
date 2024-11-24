@@ -1,6 +1,7 @@
 package com.example.integration.api;
 
 import com.example.integration.activities.Product;
+import com.example.integration.activities.User;
 
 import java.util.List;
 
@@ -23,5 +24,8 @@ public interface ApiService {
 
     @GET("api/assets/")  // Ensure the endpoint matches your Django URL
     Call<List<Product>> getProducts();
+
+    @GET("api/users/") // Replace with your endpoint
+    Call<List<User>> getUsers();
 
 }

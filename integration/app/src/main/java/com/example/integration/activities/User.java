@@ -1,31 +1,42 @@
 package com.example.integration.activities;
 
 public class User {
-    private final String name;
-    private final String title;
-    private final String location;
-    private final int imageResId;
+    private String full_name;
+    private String role;
+    private String station;
+    private String contact_number;
 
-    public User(String name, String title, String location, int imageResId) {
-        this.name = name;
-        this.title = title;
-        this.location = location;
-        this.imageResId = imageResId;
+    // Getters and Setters
+    public String getFull_name() {
+        return full_name;
     }
 
-    public String getName() {
-        return name;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
-    public String getTitle() {
-        return title;
+    public String getRole() {
+        return role;
     }
 
-    public String getLocation() {
-        return location;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public int getImageResId() {
-        return imageResId;
+    public String getStation() {
+        return station;
+    }
+
+    public void setStation(String station) {
+        this.station = station;
+    }
+
+    public String getContact_number() {
+        return contact_number;
+    }
+
+    public void setContact_number(String contact_number) {
+        this.contact_number = contact_number;
     }
 }
+
