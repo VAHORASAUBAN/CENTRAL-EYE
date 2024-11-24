@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +31,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
-        holder.userName.setText(user.getName());
-        holder.userTitle.setText(user.getTitle());
-        holder.userLocation.setText(user.getLocation());
-        holder.userImage.setImageResource(user.getImageResId());
+
+        // Log data for debugging
+        System.out.println("Binding User: " + user.getFull_name());
+        System.out.println("Role: " + user.getRole());
+        System.out.println("Station: " + user.getStation());
+
+        // Safely bind data to the views
+        holder.userName.setText(user.getFull_name() != null ? user.getFull_name() : "N/A");
+        holder.userTitle.setText(user.getRole() != null ? user.getRole() : "N/A");
+        holder.userLocation.setText(user.getStation() != null ? user.getStation() : "N/A");
+
+        // Set default image
+        holder.userImage.setImageResource(R.drawable.profile);
     }
 
     @Override

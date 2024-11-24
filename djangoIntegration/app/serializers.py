@@ -24,3 +24,11 @@ class AssetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asset
         fields = '__all__'  # or specify individual fields
+        
+class UserSerializer(serializers.ModelSerializer):
+    role = serializers.CharField(source='role.role', read_only=True)  # Assuming 'name' is the field in the Role model
+    station = serializers.CharField(source='station.station_name', read_only=True)  # Assuming 'station_name' is the field in the StationDetails model
+
+    class Meta:
+        model = User
+        fields = ['full_name', 'role', 'station', 'contact_number']
