@@ -1,9 +1,14 @@
 package com.example.integration.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +28,8 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int PERMISSION_REQUEST_CODE = 100;
+
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -36,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.login_button);
 
+        // Check if permissions are granted
+        if (!checkPermissions()) {
+            requestPermissions();
+        }
+
         // Check if user is already logged in
         if (sharedPreferences.contains("username")) {
             navigateToHomeScreen(sharedPreferences.getString("role", ""), sharedPreferences.getString("username", ""));
@@ -45,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkPermissions()) {
+                    Toast.makeText(MainActivity.this, "Permissions are required to proceed!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
@@ -92,7 +109,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private boolean checkPermissions() {
+        int cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        int locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        return cameraPermission == PackageManager.PERMISSION_GRANTED &&
+                locationPermission == PackageManager.PERMISSION_GRANTED;
+    }
 
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(
+                this,
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION},
+                PERMISSION_REQUEST_CODE
+        );
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults); // Call to superclass
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+                boolean cameraGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean locationGranted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                if (!cameraGranted || !locationGranted) {
+                    Toast.makeText(this, "Permissions are required to use the app!", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(this, "Permission request was denied.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
     private void navigateToHomeScreen(String role, String username) {
         Intent intent;
         if (role.equals("Admin")) {

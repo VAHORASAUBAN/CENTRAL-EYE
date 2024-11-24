@@ -5,11 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
+import com.example.integration.api.ApiService;
+import com.example.integration.network.RetrofitClient;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,20 +75,50 @@ public class ProductDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
 
-        // Set up click listener for the grid items
-        LinearLayout itemLayout = view.findViewById(R.id.itemLayout1); // Assuming this is the ID for your item layout
-        itemLayout.setOnClickListener(new View.OnClickListener() {
+        // Initialize RecyclerView
+        RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Initialize Retrofit and API service
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        apiService.getProducts().enqueue(new Callback<List<Product>>() {
             @Override
-            public void onClick(View v) {
-                // Navigate to ProductDescriptionFragment
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, new ProductDescriptionFragment()) // Make sure to use your actual container ID
-                        .addToBackStack(null) // Optional: add to back stack if you want to return to this fragment
-                        .commit();
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> productList = response.body();
+
+                    // Set adapter
+                    ProductAdapter adapter = new ProductAdapter(getContext(), productList, product -> {
+                        // Handle item click
+                        navigateToProductDescription(product);
+                    });
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
+    }
+
+    private void navigateToProductDescription(Product product) {
+        // Create a new instance of ProductDescriptionFragment with arguments
+        ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(
+                product.getLocation(), product.getBarcode()
+        );
+
+        // Start a transaction to replace the fragment
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment) // Ensure this ID matches your container
+                .addToBackStack(null)
+                .commit();
     }
 }
