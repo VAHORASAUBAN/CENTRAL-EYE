@@ -62,7 +62,7 @@ public class ProductListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
 
         // Example of setting up a click listener (you can adapt this logic)
-        view.findViewById(R.id.arrowIcon1).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.category_1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Navigate to the detailed view fragment
