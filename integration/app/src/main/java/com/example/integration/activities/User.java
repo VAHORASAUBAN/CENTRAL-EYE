@@ -39,4 +39,3 @@ public class User {
         this.contact_number = contact_number;
     }
 }
-

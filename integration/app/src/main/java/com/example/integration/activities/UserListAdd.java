@@ -1,4 +1,5 @@
 package com.example.integration.activities;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,12 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
-import com.example.integration.activities.User;
-import com.example.integration.activities.UserAdapter;
 import com.example.integration.api.ApiService;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class UserListAdd extends Fragment {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<User> users = response.body();
-                    adapter = new UserAdapter(users);
+                    adapter = new UserAdapter(users, UserListAdd.this::openUserDetailsFragment);
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -61,5 +62,21 @@ public class UserListAdd extends Fragment {
                 t.printStackTrace();
             }
         });
+    }
+
+    private void openUserDetailsFragment(User user) {
+        UserDetailsFragment userDetailsFragment = UserDetailsFragment.newInstance(
+                user.getFull_name(),
+                user.getContact_number(),
+                "N/A", // Gender is not available, passing "N/A" as default
+                user.getRole(),
+                user.getStation()
+        );
+
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, userDetailsFragment); // Replace with your container ID
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
