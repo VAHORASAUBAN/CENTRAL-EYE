@@ -15,10 +15,16 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private final List<User> userList;
+    public interface OnUserClickListener {
+        void onUserClick(User user);
+    }
 
-    public UserAdapter(List<User> userList) {
+    private final List<User> userList;
+    private final OnUserClickListener listener;
+
+    public UserAdapter(List<User> userList, OnUserClickListener listener) {
         this.userList = userList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -32,18 +38,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
 
-        // Log data for debugging
-        System.out.println("Binding User: " + user.getFull_name());
-        System.out.println("Role: " + user.getRole());
-        System.out.println("Station: " + user.getStation());
-
-        // Safely bind data to the views
         holder.userName.setText(user.getFull_name() != null ? user.getFull_name() : "N/A");
         holder.userTitle.setText(user.getRole() != null ? user.getRole() : "N/A");
         holder.userLocation.setText(user.getStation() != null ? user.getStation() : "N/A");
+        holder.userImage.setImageResource(R.drawable.profile); // Default profile image
 
-        // Set default image
-        holder.userImage.setImageResource(R.drawable.profile);
+        // Set up item click
+        holder.itemView.setOnClickListener(v -> listener.onUserClick(user));
     }
 
     @Override
