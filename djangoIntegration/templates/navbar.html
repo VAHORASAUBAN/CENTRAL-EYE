@@ -40,7 +40,6 @@
 </head>
 
 <body>
-    {% block nav %}
     <div id="global-loader">
         <div class="whirly-loader"> </div>
     </div>
@@ -48,7 +47,7 @@
     <div class="header">
 
         <div class="header-left active">
-            <a href="index.html" class="logo">
+            <a href="{% url 'index' %}" class="logo">
                 <img src="{% static 'assets/img/logo.png' %}" alt="">
             </a>
             <a href="index.html" class="logo-small">
@@ -93,16 +92,16 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/img/flags/us.png" alt="" height="16"> English
+                        <img src="{% static 'assets/img/flags/us.png' %}" alt="" height="16"> English
                     </a>
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/img/flags/fr.png" alt="" height="16"> French
+                        <img src="{% static 'assets/img/flags/fr.png' %}" alt="" height="16"> French
                     </a>
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/img/flags/es.png" alt="" height="16"> Spanish
+                        <img src="{% static 'assets/img/flags/es.png' %}" alt="" height="16"> Spanish
                     </a>
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/img/flags/de.png" alt="" height="16"> German
+                        <img src="{% static 'assets/img/flags/de.png' %}" alt="" height="16"> German
                     </a>
                 </div>
             </li>
@@ -367,7 +366,6 @@
     <script src="{% static 'assets/plugins/select2/js/select2.min.js' %}"></script>
     <script src="{% static 'assets/plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
     <script src="{% static 'assets/plugins/sweetalert/sweetalerts.min.js' %}"></script>
-    {% endblock nav %}
 </body>
 
 </html>

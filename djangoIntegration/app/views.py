@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import *
+from app.models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -86,7 +86,13 @@ def add_product(request):
 
 
 def index(request):
-    return render(request,'index.html')
+    print("Index view called")
+    try:
+        userCount = User.objects.count()
+        productCount = Asset.objects.count()
+    except Exception as e:
+        print(f"Error: {e}")
+    return render(request, 'index.html', {'userCount': userCount, 'productCount': productCount})
 
 def productlist(request):
     return render(request,'productlist.html')
@@ -148,9 +154,6 @@ def userlists(request):
     return render(request,'userlists.html')
 def edituser(request):
     return render(request,'edituser.html')
-def index(request):
-    return render(request,'index.html')
-
 
 def expenseList(request):
     return render(request,'expenselist.html')
