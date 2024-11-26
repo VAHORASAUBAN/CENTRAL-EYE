@@ -1,19 +1,22 @@
 package com.example.integration.activities;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.integration.R;
@@ -22,7 +25,7 @@ public class Home_fragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private SharedPreferences sharedPreferences;
+
     private String mParam1;
     private String mParam2;
 
@@ -51,24 +54,51 @@ public class Home_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
+
         // Fetch the username from shared preferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "User");
 
         // Bind views
-        TextView welcomeTextView = view.findViewById(R.id.headtext);
-        ImageButton logoutButton = view.findViewById(R.id.logoutButtonUser);
-        LinearLayout squareBox1 = view.findViewById(R.id.squareBox1);
-        LinearLayout squareBox2 = view.findViewById(R.id.squareBox2);
+//        TextView welcomeTextView = view.findViewById(R.id.headtext);
+        ImageView profileImageButton = view.findViewById(R.id.profile_image);
+        CardView squareBox1 = view.findViewById(R.id.squareBox1);
+        CardView squareBox2 = view.findViewById(R.id.squareBox2);
 
         // Set welcome message
-        welcomeTextView.setText(username + "!");
+//        welcomeTextView.setText(username + "!");
 
         // Apply entrance animation to squareBox1 and squareBox2
         animateEntrance(squareBox1, 100);
-        animateEntrance(squareBox2, 200); // Apply animation with delay to squareBox2
+        animateEntrance(squareBox2, 200);
 
-        // Add click listener with animation to squareBox1
+        // Profile dropdown menu
+        profileImageButton.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(requireContext(), profileImageButton);
+            popupMenu.getMenuInflater().inflate(R.menu.profile_menu, popupMenu.getMenu());
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int id= item.getItemId();
+                if (id == R.id.menu_profile) {
+                    Toast.makeText(requireContext(), "Profile Selected", Toast.LENGTH_SHORT).show();
+                    openProfileFragment();
+                    return true;
+                } else if (id == R.id.menu_update_password) {
+                    Toast.makeText(requireContext(), "Update Password Selected", Toast.LENGTH_SHORT).show();
+                    openUpdatePasswordFragment();
+                    return true;
+                } else if (id == R.id.menu_logout) {
+                    performLogout();
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            popupMenu.show();
+        });
+
+        // Add click listener to squareBox1
         squareBox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +114,7 @@ public class Home_fragment extends Fragment {
             }
         });
 
-        // Add click listener with animation to squareBox2
+        // Add click listener to squareBox2
         squareBox2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +142,37 @@ public class Home_fragment extends Fragment {
                 .setDuration(500)
                 .setStartDelay(delay)
                 .start();
+    }
+
+    private void performLogout() {
+        SharedPreferences.Editor editor = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE).edit();
+        editor.clear(); // Clear session
+        editor.apply();
+
+        Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+
+        // Navigate to login screen (optional)
+        // Intent intent = new Intent(requireContext(), LoginActivity.class);
+        // startActivity(intent);
+        // requireActivity().finish();
+    }
+
+    private void openProfileFragment() {
+        Profile_fragment profileFragment = new Profile_fragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, profileFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void openUpdatePasswordFragment() {
+//        UpdatePasswordFragment updatePasswordFragment = new UpdatePasswordFragment();
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.fragment_container, updatePasswordFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
     }
 
     private void openProductListFragment() {
