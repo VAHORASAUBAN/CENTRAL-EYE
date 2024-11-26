@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import com.example.integration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,12 +18,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-//    private FloatingActionButton fab;
+    private FloatingActionButton fab;
 
     private final Fragment homeFragment = new Home_fragment();
     private final Fragment profileFragment = new Profile_fragment();
     private final Fragment addProductScanner = new Add_Product_Scanner();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-//        fab = findViewById(R.id.fab);
-
+        fab = findViewById(R.id.nav_products);
 
         // Default fragment (Home)
         replaceFragment(homeFragment);
@@ -43,10 +39,10 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
 
         // Handle FloatingActionButton click
-//        fab.setOnClickListener(v -> {
-//            // Navigate to a specific action or fragment
-//            replaceFragment(addProductScanner);
-//        });
+        fab.setOnClickListener(v -> {
+            // Navigate to the Add Product Scanner fragment
+            replaceFragment(addProductScanner);
+        });
     }
 
     private boolean onNavigationItemSelected(@NonNull MenuItem item) {
