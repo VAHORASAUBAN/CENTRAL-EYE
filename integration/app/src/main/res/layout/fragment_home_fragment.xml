@@ -9,484 +9,485 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:title="Welcome,"
-        app:titleTextColor="@color/primary">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="6dp">
 
-        <TextView
-            android:id="@+id/headtext"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_marginTop="10dp"
-            android:text=""
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/primary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <!-- Heading Text on the Left -->
+            <TextView
+                android:id="@+id/toolbar_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
 
+            <!-- Profile Image on the Right -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Profile Image" />
 
+            <!-- Scanner Icon for Search -->
+            <ImageView
+                android:id="@+id/scanner_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_qr_code_scanner_24"
+                android:layout_toStartOf="@id/profile_image"
+                android:layout_marginEnd="8dp "
+                android:layout_centerVertical="true"
+                android:contentDescription="Scanner for Search" />
+
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
-
-    <!-- Logout Button -->
-    <ImageButton
-        android:id="@+id/logoutButtonUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Logout"
-        android:src="@drawable/baseline_logout_24"
-        android:visibility="visible"
-        android:clickable="true"
-        android:focusable="true"
-        />
-    <TableLayout
-        android:id="@+id/productTableLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bottomContainer"
-        android:layout_marginTop="5dp"
-        android:stretchColumns="1"
-        android:background="@android:color/white"/>
-
-
-    <!-- Fancy Tabular Structure -->
-
-    <RelativeLayout
-        android:id="@+id/bottomContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:gravity="center_horizontal"
-        android:padding="16dp">
-
-        <!-- First Box -->
-        <LinearLayout
-            android:id="@+id/squareBox1"
-            android:layout_width="155dp"
-            android:layout_height="135dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_border_rect"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <!-- Horizontal alignment for ImageView and Value1 -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/icon1"
-                    android:layout_width="59dp"
-                    android:layout_marginRight="45dp"
-                    android:layout_height="59dp"
-                    android:contentDescription="Icon 1"
-                    android:src="@drawable/baseline_warehouse_24" />
-
-                <TextView
-                    android:id="@+id/Value1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="50"
-                    android:textColor="@color/white"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/text1"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:gravity="left"
-                android:text="Inventory"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/subtext1"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:layout_marginLeft="10dp"
-                android:text="Products"
-                android:layout_marginRight="30dp"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Second Box -->
-        <LinearLayout
-            android:id="@+id/squareBox2"
-            android:layout_width="155dp"
-            android:layout_height="135dp"
-            android:layout_marginEnd="8dp"
-            android:layout_toEndOf="@id/squareBox1"
-            android:background="@drawable/rounded_border_rect2"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/icon2"
-                    android:layout_width="59dp"
-                    android:layout_marginRight="45dp"
-                    android:layout_height="59dp"
-                    android:contentDescription="Icon 2"
-                    android:src="@drawable/baseline_account_circle_24" />
-
-                <TextView
-                    android:id="@+id/Value2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="50"
-                    android:textColor="@color/white"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-
-            <TextView
-                android:id="@+id/text2"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:layout_marginBottom="25dp"
-                android:text="Users"
-                android:textColor="@color/white"
-                android:layout_marginLeft="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/squareBox3"
-            android:layout_width="155dp"
-            android:layout_height="135dp"
-            android:layout_marginTop="150dp"
-            android:layout_toEndOf="@id/squareBox1"
-            android:background="@drawable/rounded_border_rect4"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/icon3"
-                    android:layout_width="59dp"
-                    android:layout_marginRight="45dp"
-                    android:layout_height="59dp"
-                    android:contentDescription="Icon 2"
-                    android:src="@drawable/baseline_inventory_24" />
-
-                <TextView
-                    android:id="@+id/Value3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="50"
-                    android:textColor="@color/white"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/text3"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:layout_marginBottom="25dp"
-                android:text="In-Use"
-                android:textColor="@color/white"
-                android:layout_marginLeft="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/squareBox4"
-            android:layout_width="155dp"
-            android:layout_height="135dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_border_rect3"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/icon4"
-                    android:layout_width="59dp"
-                    android:layout_marginRight="45dp"
-                    android:layout_height="59dp"
-                    android:contentDescription="Icon 2"
-                    android:src="@drawable/baseline_inventory_24" />
-
-                <TextView
-                    android:id="@+id/Value4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="50"
-                    android:textColor="@color/white"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/text4"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="Available"
-                android:textColor="@color/white"
-                android:layout_marginLeft="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/subtext2"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:layout_marginLeft="10dp"
-                android:text="Inventory"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-    </RelativeLayout>
-
+    <!-- Heading Container -->
     <LinearLayout
-        android:id="@+id/fancyTableContainer"
+        android:id="@+id/heading_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bottomContainer"
+        android:layout_marginStart="8dp"
+        android:layout_below="@id/toolbar"
         android:orientation="vertical"
-        android:padding="4dp">
+        >
 
         <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:text="Latest Inventory"
-            android:textColor="@color/primary"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"/>
+            android:text="Welcome to"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-        <!-- Table Header -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/central_eye_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:text="Central-Eye"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Cards Container -->
+    <LinearLayout
+        android:id="@+id/cards_container"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_below="@id/heading_container"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Card for Total Products -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/squareBox1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="7dp"
+            android:layout_weight="1"
+            android:clickable="true"
+
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp">
 
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/primary"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:text=""
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                <!-- Icon on the left -->
+                <ImageView
+                    android:id="@+id/iv_product_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="Product Icon"
+                    android:src="@drawable/baseline_inventory_24" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:text="Name"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical"
+                    android:padding="3dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:text="Barcode"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_total_products"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Products Available"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/tv_product_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(100)"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Table Rows -->
+        <!-- Card for Total Users -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/squareBox2"
+            android:clickable="true"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="7dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <!-- Icon on the left -->
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="User Icon"
+                    android:src="@drawable/baseline_supervised_user_circle_24" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:id="@+id/tv_total_users"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Users"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_user_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(100)"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!-- Recently Added Text -->
+    <TextView
+        android:id="@+id/tv_recently_added"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cards_container"
+        android:layout_marginStart="8dp"
+        android:text="Recently Added Assets"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/product1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_recently_added"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border"
-                android:orientation="horizontal"
-                android:padding="1dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/circular_background"
-                    android:clipToOutline="true"
-                    android:src="@drawable/baseline_person_24" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp"
-                    android:text="CPU"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="3dp"
-                    android:padding="8dp"
-                    android:text="A2009"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
 
             <LinearLayout
-                android:layout_marginTop="55dp"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border"
-                android:orientation="horizontal"
-                android:padding="1dp">
+                android:layout_weight="1"
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/circular_background"
-                    android:clipToOutline="true"
-                    android:src="@drawable/baseline_person_24" />
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp"
-                    android:text="CPU"
-                    android:textSize="16sp" />
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Name"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="3dp"
-                    android:padding="8dp"
-                    android:text="A2009"
-                    android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/serial_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Serial:"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/serial_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12345678ab"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/arrow_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_keyboard_arrow_right_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/product2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product1"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
 
             <LinearLayout
-                android:layout_marginTop="110dp"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border"
-                android:orientation="horizontal"
-                android:padding="1dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/circular_background"
-                    android:clipToOutline="true"
-                    android:src="@drawable/baseline_person_24" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp"
-                    android:text="CPU"
-                    android:textSize="16sp" />
+                    android:id="@+id/product_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Name 2"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="3dp"
-                    android:padding="8dp"
-                    android:text="A2009"
-                    android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/serial_label2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Serial:"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/serial_number2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="23456789cd"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/arrow_icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_keyboard_arrow_right_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        <!-- Additional Rows -->
-        <!-- Duplicate CardView structures for other products -->
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_due_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product2"
+        android:text="Due Date Soon"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/product3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_due_date"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/product_name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Name 3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/serial_label3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Serial:"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/serial_number3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="34567890ef"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/arrow_icon3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_keyboard_arrow_right_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/product4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product3"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/product_name4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Name 4"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/serial_label4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Serial:"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/serial_number4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="45678901gh"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/arrow_icon4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_keyboard_arrow_right_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Recently Added Product 2 -->
+
 
 </RelativeLayout>
