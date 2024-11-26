@@ -14,249 +14,502 @@
         app:title="Inventory Management"
         app:titleTextColor="@android:color/white" />
 
-    <EditText
-        android:id="@+id/searchEditText"
+    <HorizontalScrollView
+        android:id="@+id/categoryScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_margin="16dp"
-        android:hint="Search..."
-        android:padding="10dp"
-        android:background="@android:drawable/edit_text"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="8dp"
-        android:inputType="text" />
+        android:scrollbars="none"
+        android:padding="5dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/searchEditText"
-        android:layout_margin="16dp"
-        android:text="Products"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:drawableLeft="@drawable/baseline_transform_24"
-        android:drawablePadding="12dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <!-- Category 1 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_1"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/wallet"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="keyboards"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Repeat for 7 more categories -->
+            <!-- Category 2 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_2"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/notification"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mouse"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Add similar blocks for category_3 to category_8 -->
+            <!-- Example for Category 3 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_3"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/settings"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CPU"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_4"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/item_product24"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Printer"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Category 1 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_7"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/baseline_mouse_24"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category 1"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Repeat for 7 more categories -->
+            <!-- Category 2 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_8"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/item_product24"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category 2"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Add similar blocks for category_3 to category_8 -->
+            <!-- Example for Category 3 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_9"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/item_product24"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category 3"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/category_10"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/circle_background"
+                        android:src="@drawable/item_product24"
+                        android:padding="15dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgrey"
+                        android:layout_marginTop="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category 4"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+        </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
     <LinearLayout
-        android:id="@+id/productContainer"
+        android:id="@+id/fancyTableContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
+        android:layout_below="@id/categoryScrollView"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:layout_marginTop="8dp">
+        android:padding="4dp">
 
-        <LinearLayout
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:text="Latest Inventory"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Table Header -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="@drawable/rounded_border_rect"
-            android:layout_marginTop="8dp">
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
 
-            <ImageView
-                android:id="@+id/productImage1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/item_product24"
-                android:scaleType="centerCrop"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/circular_background"
-                android:clipToOutline="true" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_gravity="center">
+                android:background="@color/primary"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/productNameTextView1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Name : "
-                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text=""
+                    android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/addCpuTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="CPU"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/arrowIcon1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/baseline_arrow_circle_right_24" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="@drawable/rounded_border_rect"
-            android:layout_marginTop="8dp">
-
-            <ImageView
-                android:id="@+id/productImage2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/item_product24"
-                android:scaleType="centerCrop"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/circular_background"
-                android:clipToOutline="true" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:id="@+id/productNameTextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name "
-                    android:textSize="20sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="Name"
+                    android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/addCpuTextView2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="CPU"
-                    android:textSize="20sp"
-                    android:layout_marginStart="8dp"
-                    />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/arrowIcon2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/baseline_arrow_circle_right_24" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="@drawable/rounded_border_rect"
-            android:layout_marginTop="8dp">
-
-            <ImageView
-                android:id="@+id/productImage3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/item_product24"
-                android:scaleType="centerCrop"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/circular_background"
-                android:clipToOutline="true" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:id="@+id/productNameTextView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name "
-                    android:textSize="20sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="Barcode"
+                    android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/addCpuTextView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CPU"
-                    android:textSize="20sp"
-                    android:layout_marginStart="8dp"
-                    />
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/arrowIcon3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/baseline_arrow_circle_right_24" />
-        </LinearLayout>
-
-        <LinearLayout
+        <!-- Table Rows -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="@drawable/rounded_border_rect"
-            android:layout_marginTop="8dp">
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp">
 
-            <ImageView
-                android:id="@+id/productImage4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/item_product24"
-                android:scaleType="centerCrop"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/circular_background"
-                android:clipToOutline="true" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:background="@drawable/rounded_border"
                 android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_gravity="center">
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circular_background"
+                    android:clipToOutline="true"
+                    android:src="@drawable/baseline_person_24" />
 
                 <TextView
-                    android:id="@+id/productNameTextView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name "
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/addCpuTextView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp"
                     android:text="CPU"
-                    android:textSize="20sp"
-                    android:layout_marginStart="8dp"
-                    />
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:padding="8dp"
+                    android:text="A2009"
+                    android:textSize="14sp" />
+
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/arrowIcon4"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/baseline_arrow_circle_right_24" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="55dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circular_background"
+                    android:clipToOutline="true"
+                    android:src="@drawable/baseline_person_24" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp"
+                    android:text="CPU"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:padding="8dp"
+                    android:text="A2009"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="110dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circular_background"
+                    android:clipToOutline="true"
+                    android:src="@drawable/baseline_person_24" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp"
+                    android:text="CPU"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="3dp"
+                    android:padding="8dp"
+                    android:text="A2009"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
+
 </RelativeLayout>

@@ -38,150 +38,118 @@
                 android:drawablePadding="12dp" />
 
             <!-- Total CPUs Section -->
-            <LinearLayout
+            <!-- Branch Section -->
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cpu_total_section"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/titleTextView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:padding="16dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/light_50">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/item_product24"
-                    app:tint="@color/black" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Total CPU's:"
-                    android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:padding="16dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    <!-- Branch Info -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
 
-            <!-- Assigned IDs Section -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CPU"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" (2)"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <!-- Head Info -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="8dp">
+
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Maintenanace"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Branch Image -->
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/mpp"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cpu_total_section"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:background="@color/secondary"
-                android:orientation="vertical"
-                android:paddingBottom="24dp">
+                android:id="@+id/assetheader"
+                android:orientation="horizontal"
+                android:layout_margin="16dp"
+                android:layout_below="@+id/cpu_total_section"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/assigned_ids_label"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Assigned Id's"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_weight="1"
+                    android:text="Asset (8)"
+                    android:textSize="14sp"
+                    android:textColor="#4B5563" />
 
-                <!-- Grid for Assigned IDs -->
-                <GridLayout
-                    android:id="@+id/gridLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:columnCount="2"
-                    android:rowCount="3"
-                    android:layout_marginBottom="16dp">
-
-                    <!-- Sample Grid Items -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        android:background="@color/white"
-                        android:elevation="2dp"
-                        android:layout_margin="4dp"
-                        android:layout_columnWeight="1"
-                        android:id="@+id/itemLayout1"
-                        android:onClick="onItemClick">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Id: 002"
-                            android:textStyle="bold"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Barcode: A20007"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        android:background="@color/white"
-                        android:elevation="2dp"
-                        android:layout_margin="4dp"
-                        android:layout_columnWeight="1"
-                        android:id="@+id/itemLayout2"
-                        android:onClick="onItemClick">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Id: 003"
-                            android:textStyle="bold"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Barcode: A20008"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        android:background="@color/white"
-                        android:elevation="2dp"
-                        android:layout_margin="4dp"
-                        android:layout_columnWeight="1"
-                        android:id="@+id/itemLayout3"
-                        android:onClick="onItemClick">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Id: 004"
-                            android:textStyle="bold"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Barcode: A20009"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-                </GridLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/baseline_arrow_circle_right_24"
+                    android:contentDescription="Arrow icon" />
             </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/assetheader"
+                android:layout_margin="8dp" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
