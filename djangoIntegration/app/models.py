@@ -4,7 +4,7 @@ from datetime import timedelta
 class stationDetails(models.Model):
     station_id = models.IntegerField(primary_key=True)
     station_name = models.CharField(max_length=255)
-    staion_code = models.CharField(max_length=255)
+    station_code = models.CharField(max_length=255)
 
     def __str__(self):
         return self.station_name
@@ -19,6 +19,7 @@ class role(models.Model):
 class User(models.Model):
 
     user_id = models.IntegerField(primary_key=True, unique=True)
+    user_image = models.ImageField(null=True, blank=True)
     username = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     role = models.ForeignKey(role, null=True, blank=True, on_delete=models.SET_NULL)

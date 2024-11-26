@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -93,49 +93,78 @@ def user_list_view(request):
 
 
 def index(request):
-    return render(request,'index.html')
+    userCount = User.objects.count()
+    assetCount = Asset.objects.count()
+    availableAsset = Asset.objects.filter(assign_to__isnull=True).count()
+    inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
+    return render(request,'index.html', {
+                'userCount': userCount, 
+                'assetCount': assetCount, 
+                'availableAsset': availableAsset, 
+                'inUseAsset': inUseAsset
+    })
 
 def productlist(request):
     return render(request,'productlist.html')
+
 def editproduct(request):
     return render(request,'editproduct.html')
+<<<<<<< HEAD
+
+=======
 def productdetails(request):
     return render(request,'productdetails.html')
+>>>>>>> 83598322d519a54c025de777fc9da54fcecf667f
 def addproduct(request):
     return render(request,'addproduct.html')
 
 def categorylist(request):
     return render(request,'categorylist.html')
+
 def addcategory(request):
     return render(request,'addcategory.html')
+
 def editcategory(request):
     return render(request,'editcategory.html')
 
+<<<<<<< HEAD
+def importproduct(request):
+    return render(request,'importproduct.html')
+
+def barcode(request):
+    return render(request,'barcode.html')
+=======
 # def importproduct(request):
 #     return render(request,'importproduct.html')
 # def barcode(request):
 #     return render(request,'barcode.html')
+>>>>>>> 83598322d519a54c025de777fc9da54fcecf667f
 
 def issuedproducts(request):
     return render(request,'issuedproducts.html')
+
 def editissuedproducts(request):
     return render(request,'editissuedproducts.html')
+
 def addissuedproducts(request):
     return render(request,'addissuedproducts.html')
 
-
 def maintenanceproducts(request):
     return render(request,'maintenanceproducts.html')
+
 def editmaintenanceproducts(request):
     return render(request,'editmaintenanceproducts.html')
+
 def addmaintenanceproducts(request):
     return render(request,'addmaintenanceproducts.html')
 
 
 def expiredproducts(request):
     return render(request,'expiredproducts.html')
+
 def editexpiredproducts(request):
     return render(request,'editexpiredproducts.html')
+
 def addexpiredproducts(request):
     return render(request,'addexpiredproducts.html')
 
@@ -144,22 +173,52 @@ def returnproducts(request):
 
 def editreturnproducts(request):
     return render(request,'editreturnproducts.html')
+
 def addreturnproducts(request):
     return render(request,'addreturnproducts.html')
 
 def aa(request):
     return render(request,'aa.html')
 
-
 def newuser(request):
-    return render(request,'newuser.html')
+    if request.method == 'POST':
+        # Get data from the POST request
+        username = request.POST.get('username')
+        role_name = request.POST.get('role_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        station_name = request.POST.get('station_name')
+        mobile = request.POST.get('mobile')
+        print(username)
+        print(station_name)
+        print(email)
+        # Get related Role and Station objects
+        roleGet = role.objects.get(role=role_name)
+        station = stationDetails.objects.get(station_name=station_name)
+
+        User.objects.create(
+            username=username,
+            role=roleGet,
+            email=email,
+            password=password,
+            station=station,
+            contact_number=mobile,
+            full_name="amaan shaikh"
+        )
+        
+        return redirect('newuser')
+
+    roles = role.objects.all()
+    station = stationDetails.objects.all()
+    
+    return render(request,'newuser.html', {'roles': roles, 'station': station})
+
 def userlists(request):
-    return render(request,'userlists.html')
+    users = User.objects.all()
+    return render(request,'userlists.html', {'users': users})
+
 def edituser(request):
     return render(request,'edituser.html')
-def index(request):
-    return render(request,'index.html')
-
 
 def expenseList(request):
     return render(request,'expenselist.html')
