@@ -92,6 +92,8 @@ def productlist(request):
     return render(request,'productlist.html')
 def editproduct(request):
     return render(request,'editproduct.html')
+def productdetails(request):
+    return render(request,'productdetails.html')
 def addproduct(request):
     return render(request,'addproduct.html')
 
@@ -102,10 +104,10 @@ def addcategory(request):
 def editcategory(request):
     return render(request,'editcategory.html')
 
-def importproduct(request):
-    return render(request,'importproduct.html')
-def barcode(request):
-    return render(request,'barcode.html')
+# def importproduct(request):
+#     return render(request,'importproduct.html')
+# def barcode(request):
+#     return render(request,'barcode.html')
 
 def issuedproducts(request):
     return render(request,'issuedproducts.html')

@@ -25,13 +25,15 @@ urlpatterns = [
     path('productlist', views.productlist, name='productlist'),
     path('addproduct', views.addproduct, name='addproduct'),
     path('editproduct', views.editproduct, name='editproduct'),
+    path('productdetails', views.productdetails, name='productdetails'),
+
 
     path('categorylist', views.categorylist, name='categorylist'),
     path('addcategory', views.addcategory, name='addcategory'),
     path('editcategory', views.addcategory, name='editcategory'),
 
-    path('importproduct', views.importproduct, name='importproduct'),
-    path('barcode', views.barcode, name='barcode'),
+    # path('importproduct', views.importproduct, name='importproduct'),
+    # path('barcode', views.barcode, name='barcode'),
 
     path('issuedproducts', views.issuedproducts, name='issuedproducts'),
     path('editissuedproducts', views.editissuedproducts, name='editissuedproducts'),
