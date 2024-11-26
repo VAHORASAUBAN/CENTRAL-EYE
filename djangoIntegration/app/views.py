@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer
 from django.utils import timezone
 
 
@@ -69,6 +69,7 @@ def login_view(request):
 @api_view(['POST'])
 def add_product(request):
     serializer = ProductSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid():
         barcode = serializer.validated_data['barcode']
         assetType = serializer.validated_data['asset_type']
@@ -76,12 +77,18 @@ def add_product(request):
         purchaseDate = serializer.validated_data['purchase_date']
         assetValue = serializer.validated_data['asset_value']
         condition = serializer.validated_data['condition']
-        # location = serializer.validated_data['location']
+        location = serializer.validated_data['Location']
         
-        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location="NULL")
+        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location=location)
         
         return Response({"message": "Product added successfully!"}, status=201)
     return Response(serializer.errors, status=400)
+
+@api_view(['GET'])
+def user_list_view(request):
+    users = User.objects.all()  # Get all users
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 
@@ -98,6 +105,8 @@ def productlist(request):
     return render(request,'productlist.html')
 def editproduct(request):
     return render(request,'editproduct.html')
+def productdetails(request):
+    return render(request,'productdetails.html')
 def addproduct(request):
     return render(request,'addproduct.html')
 
@@ -108,10 +117,10 @@ def addcategory(request):
 def editcategory(request):
     return render(request,'editcategory.html')
 
-def importproduct(request):
-    return render(request,'importproduct.html')
-def barcode(request):
-    return render(request,'barcode.html')
+# def importproduct(request):
+#     return render(request,'importproduct.html')
+# def barcode(request):
+#     return render(request,'barcode.html')
 
 def issuedproducts(request):
     return render(request,'issuedproducts.html')
