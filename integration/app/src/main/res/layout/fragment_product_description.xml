@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="#F5F5F5">
 
     <!-- Header Layout -->
     <LinearLayout
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Item Details"
+            android:text="Product Description"
             android:textSize="20sp"
             android:textColor="@android:color/white"
             android:textStyle="bold"
@@ -50,30 +50,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="15dp"
-            >
+            android:padding="15dp">
 
-            <!-- Profile Header -->
 
-            <!-- Profile Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp"
-                android:layout_marginTop="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/light_50"
-                    android:padding="15dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/wallet" />
+                        android:src="@drawable/baseline_account_circle_24" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -85,37 +70,26 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CPU"
+                            android:text="Asset ID: "
                             android:textSize="20sp"
                             android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:layout_marginBottom="25dp"/>
 
 
                     </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+
 
             <!-- About Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="10dp">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/light_50"
-                    android:padding="15dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Details"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:padding="4dp"
-                        android:textColor="@color/black" />
+                    android:background="@color/white"
+                    android:padding="10dp">
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -244,20 +218,20 @@
                             android:textStyle="bold" />
                     </RelativeLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
             <!-- User Information Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:strokeColor="@color/black">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/light_50"
+                    android:background="@color/white"
                     android:padding="15dp">
                     <TextView
                         android:layout_width="wrap_content"
@@ -265,34 +239,21 @@
                         android:text=" User Details"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:padding="4dp"
                         android:textColor="@color/black" />
 
                     <!-- Multiple Rows for User Info -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
-
-                        <!-- Profile Image -->
-                        <ImageView
-                            android:id="@+id/profileImage"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/profile"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_background" />
 
                         <!-- Username Label -->
                         <TextView
                             android:id="@+id/usernameLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="Officer Name"
+                            android:text="Assigned User Name"
                             android:textSize="15sp"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
@@ -302,12 +263,11 @@
                             android:id="@+id/usernameValue"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="ayan"
+                            android:text="Sauban Vahora"
                             android:gravity="end"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
                             android:textStyle="bold"
-
                             android:layout_weight="1" />
 
                     </LinearLayout>
@@ -317,29 +277,50 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="16dp">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Location Detail"
-                            android:textSize="18sp"
+                            android:text="Location:"
+                            android:textSize="15sp"
                             android:textStyle="bold"
                             android:textColor="@color/black" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="23.0293695, 72.5821708"
+                            android:gravity="end"
+                            android:text="123456.565 , 12348.121"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:layout_weight="1" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                    <!-- Add more rows similarly for gender, age, etc. -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Return Date:"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="12/22/2024"
+                            android:textSize="15sp"
+                            android:textColor="#6E6C6C"
+                            android:textStyle="bold"
+                            android:layout_weight="1" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -357,8 +338,9 @@
                     android:layout_weight="1"
                     android:text="Edit"
                     android:textColor="@android:color/white"
-                    android:backgroundTint="@android:color/holo_blue_dark"
+                    android:backgroundTint="#19B36E"
                     />
+
 
                 <Button
                     android:layout_width="0dp"
@@ -366,17 +348,7 @@
                     android:layout_weight="1"
                     android:text="Delete"
                     android:textColor="@android:color/white"
-                    android:backgroundTint="@android:color/holo_red_dark"
-                    android:layout_marginStart="12dp"
-                    />
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Share"
-                    android:textColor="@android:color/white"
-                    android:backgroundTint="@android:color/holo_green_dark"
+                    android:backgroundTint="#EF4141"
                     android:layout_marginStart="12dp"/>
             </LinearLayout>
         </LinearLayout>
