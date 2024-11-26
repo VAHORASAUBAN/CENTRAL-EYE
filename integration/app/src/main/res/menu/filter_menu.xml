@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/filter_peripheral"
+        android:title="Peripheral Devices" />
+
+    <item
+        android:id="@+id/filter_CPU"
+        android:title="CPU" />
+
+    <item
+        android:id="@+id/filter_Monitor"
+        android:title="Monitor" />
+    <item
+        android:id="@+id/filter_stationary"
+        android:title="Stationary" />
+    <item
+        android:id="@+id/filter_Pencil"
+        android:title="Eraser" />
+
+</menu>
