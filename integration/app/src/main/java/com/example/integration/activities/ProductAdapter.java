@@ -41,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = productList.get(position);
         holder.productName.setText(product.getAsset_name());
         holder.productBarcode.setText("Barcode: " + product.getBarcode());
-        holder.productId.setText("Location: " + product.getLocation());
+//        holder.productId.setText("Location: " + product.getLocation());
 
         holder.viewButton.setOnClickListener(v -> listener.onViewClick(product));
     }
@@ -54,14 +54,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productBarcode, productId;
         ImageView productImage;
-        Button viewButton;
+        ImageView viewButton;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
             productBarcode = itemView.findViewById(R.id.productBarcode);
-            productId = itemView.findViewById(R.id.productId);
-            productImage = itemView.findViewById(R.id.productImage);
+//            productId = itemView.findViewById(R.id.productId);
+//            productImage = itemView.findViewById(R.id.productImage);
             viewButton = itemView.findViewById(R.id.viewButton);
         }
     }
