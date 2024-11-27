@@ -22,8 +22,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_filter"
-        android:tint="#FFFFFF" />
+        android:src="@drawable/baseline_supervised_user_circle_24"
+        app:tint="@color/white" />
 
     <!-- Category Tabs -->
     <HorizontalScrollView
@@ -44,7 +44,6 @@
                 android:id="@+id/tab_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tab_background"
                 android:paddingHorizontal="16dp"
                 android:text="All"
                 android:textColor="#000000"
@@ -54,7 +53,6 @@
                 android:id="@+id/tab_available"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tab_background"
                 android:paddingHorizontal="16dp"
                 android:text="Available"
                 android:textColor="#000000"
@@ -64,7 +62,6 @@
                 android:id="@+id/tab_in_use"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tab_background"
                 android:paddingHorizontal="16dp"
                 android:text="In-Use"
                 android:textColor="#000000"
@@ -74,7 +71,6 @@
                 android:id="@+id/tab_maintenance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tab_background"
                 android:paddingHorizontal="16dp"
                 android:text="Maintenance"
                 android:textColor="#000000"
@@ -113,8 +109,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_monitor"
-                        android:tint="#000000" />
+                        app:tint="#000000" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -143,8 +138,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_chevron_right"
-                        android:tint="#CCCCCC" />
+                        app:tint="#CCCCCC" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
