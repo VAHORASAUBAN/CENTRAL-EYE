@@ -82,6 +82,8 @@ public class ProductListFragment extends Fragment {
         TextView availableTab = view.findViewById(R.id.available);
         TextView inUseTab = view.findViewById(R.id.in_use);
         TextView maintainenceTab = view.findViewById(R.id.maintainence);
+        TextView expiredTab = view.findViewById(R.id.expired);
+
         ImageView filterIcon = view.findViewById(R.id.filter);
         filterIcon.setOnClickListener(v -> showFilterDropdown(v));
 
@@ -102,17 +104,17 @@ public class ProductListFragment extends Fragment {
 
                     // Set click listeners for each tab
                     allTab.setOnClickListener(v -> {
-                        highlightTab(allTab, availableTab, inUseTab, maintainenceTab);
+                        highlightTab(allTab, availableTab, inUseTab, maintainenceTab,expiredTab);
                         updateProductList(recyclerView, allProducts); // Show all products
                     });
 
                     availableTab.setOnClickListener(v -> {
-                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab);
+                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab,expiredTab);
                         updateProductList(recyclerView, filterProductsByStatus(allProducts, "Available"));
                     });
 
                     inUseTab.setOnClickListener(v -> {
-                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab);
+                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab,expiredTab);
                         updateProductList(recyclerView, filterProductsByStatus(allProducts, "In-Use"));
                     });
 
@@ -120,6 +122,11 @@ public class ProductListFragment extends Fragment {
                         highlightTab(maintainenceTab, allTab, availableTab, inUseTab);
                         updateProductList(recyclerView, filterProductsByStatus(allProducts, "Maintenance"));
                     });
+                        expiredTab.setOnClickListener(v -> {
+                        highlightTab(expiredTab,maintainenceTab, allTab, availableTab, inUseTab);
+                        updateProductList(recyclerView, filterProductsByStatus(allProducts, "expired"));
+                    });
+
 
                     highlightTab(allTab, availableTab, inUseTab, maintainenceTab);
                     updateProductList(recyclerView, allProducts);
