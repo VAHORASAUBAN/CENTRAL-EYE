@@ -45,7 +45,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/baseline_qr_code_scanner_24"
                 android:layout_toStartOf="@id/profile_image"
-                android:layout_marginEnd="8dp "
+                android:layout_marginEnd="8dp"
                 android:layout_centerVertical="true"
                 android:contentDescription="Scanner for Search" />
 
@@ -67,7 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome to"
-            android:textSize="40sp"
+            android:textSize="30sp"
+            android:fontFamily="monospace"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
@@ -76,9 +77,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Central-Eye"
-            android:textSize="40sp"
+            android:textSize="32dp"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColorHint="@color/primary"
+            android:fontFamily="monospace"
+            android:shadowColor="@color/primary"
+            android:shadowDx="0"
+            android:shadowDy="1"
+            android:shadowRadius="2" />
     </LinearLayout>
 
     <!-- Cards Container -->
@@ -91,47 +98,49 @@
         android:gravity="center">
 
         <!-- Card for Total Products -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/squareBox1"
-            android:layout_width="0dp"
+            android:clickable="true"
+            android:layout_width="10dp"
             android:layout_height="match_parent"
             android:layout_margin="7dp"
             android:layout_weight="1"
-            android:clickable="true"
-
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="4dp"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:background="@color/white">
 
                 <!-- Icon on the left -->
                 <ImageView
                     android:id="@+id/iv_product_icon"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
                     android:contentDescription="Product Icon"
                     android:src="@drawable/baseline_inventory_24" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_marginTop="2dp"
                     android:orientation="vertical"
-                    android:padding="3dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/tv_total_products"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Products Available"
+                        android:text="Total Products"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -143,10 +152,10 @@
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Card for Total Users -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/squareBox2"
             android:clickable="true"
             android:layout_width="0dp"
@@ -154,21 +163,23 @@
             android:layout_margin="7dp"
             android:layout_weight="1"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="4dp"
+            app:strokeColor="@android:color/black"
+            app:strokeWidth="2dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="15dp">
 
                 <!-- Icon on the left -->
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:contentDescription="User Icon"
                     android:src="@drawable/baseline_supervised_user_circle_24" />
 
@@ -185,19 +196,22 @@
                         android:layout_height="wrap_content"
                         android:text="Total Users"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
-
                     <TextView
-                        android:id="@+id/tv_user_count"
+                        android:id="@+id/tv_users_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(100)"
+                        android:text="(50)"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:gravity="center"
+                        android:textSize="15sp" />
+
+
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
@@ -228,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp"
+            android:padding="15dp"
             android:gravity="center_vertical">
 
             <LinearLayout
@@ -292,7 +306,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp"
+            android:padding="15dp"
             android:gravity="center_vertical">
 
             <LinearLayout
@@ -366,7 +380,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp"
+            android:padding="15dp"
             android:gravity="center_vertical">
 
             <LinearLayout
@@ -428,7 +442,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp"
+            android:padding="15dp"
             android:gravity="center_vertical">
 
             <LinearLayout
@@ -473,21 +487,5 @@
                 android:src="@drawable/baseline_keyboard_arrow_right_24" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Recently Added Product 2 -->
-
 
 </RelativeLayout>
