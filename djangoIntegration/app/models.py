@@ -19,7 +19,7 @@ class role(models.Model):
 class User(models.Model):
 
     user_id = models.IntegerField(primary_key=True, unique=True)
-    user_image = models.ImageField(null=True, blank=True)
+    # user_image = models.ImageField(null=True, blank=True)
     username = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     role = models.ForeignKey(role, null=True, blank=True, on_delete=models.SET_NULL)

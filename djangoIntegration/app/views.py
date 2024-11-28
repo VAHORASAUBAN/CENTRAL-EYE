@@ -90,7 +90,11 @@ def user_list_view(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-
+@api_view(['GET'])
+def AssetListView(request):
+    assets = Asset.objects.all()
+    serializer = AssetSerializer(assets, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 def index(request):
     userCount = User.objects.count()
@@ -109,12 +113,9 @@ def productlist(request):
 
 def editproduct(request):
     return render(request,'editproduct.html')
-<<<<<<< HEAD
 
-=======
 def productdetails(request):
     return render(request,'productdetails.html')
->>>>>>> 83598322d519a54c025de777fc9da54fcecf667f
 def addproduct(request):
     return render(request,'addproduct.html')
 
@@ -127,18 +128,15 @@ def addcategory(request):
 def editcategory(request):
     return render(request,'editcategory.html')
 
-<<<<<<< HEAD
 def importproduct(request):
     return render(request,'importproduct.html')
 
 def barcode(request):
     return render(request,'barcode.html')
-=======
+
 # def importproduct(request):
 #     return render(request,'importproduct.html')
-# def barcode(request):
 #     return render(request,'barcode.html')
->>>>>>> 83598322d519a54c025de777fc9da54fcecf667f
 
 def issuedproducts(request):
     return render(request,'issuedproducts.html')
@@ -249,6 +247,7 @@ def editstation(request):
 
 def editQuotation(request):
     return render(request,'editquotation.html')
+
 def editExpense(request):
     return render(request,'editExpense.html')
 
@@ -257,6 +256,7 @@ def profile(request):
 
 def generalSettings(request):
     return render(request,'editexpense.html')
+
 def signin(request):
     return render(request,'signin.html')
 
@@ -302,8 +302,4 @@ def assign_product(request):
     else:
         return Response(serializer.errors, status=400)
 
-@api_view(['GET'])
-def AssetListView(request):
-    assets = Asset.objects.all()
-    serializer = AssetSerializer(assets, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+
