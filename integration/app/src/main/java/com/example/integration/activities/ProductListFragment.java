@@ -18,7 +18,10 @@ import com.example.integration.R;
 import com.example.integration.api.ApiService;
 import com.example.integration.network.RetrofitClient;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
@@ -85,12 +88,39 @@ public class ProductListFragment extends Fragment {
         TextView expiredTab = view.findViewById(R.id.expired);
 
         ImageView filterIcon = view.findViewById(R.id.filter);
-        filterIcon.setOnClickListener(v -> showFilterDropdown(v));
+        List<String> categories = Arrays.asList("Peripheral", "Category 2", "Category 3");  // Example categories
+        Map<String, List<String>> subcategories = new HashMap<>();
+        subcategories.put("Peripheral", Arrays.asList("Mouse", "Keyboard"));
+        subcategories.put("Category 2", Arrays.asList("Subcategory 2.1", "Subcategory 2.2"));
+        subcategories.put("Category 3", Arrays.asList("Subcategory 3.1", "Subcategory 3.2"));
+
+
 
 
 
 
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // Filter icon click listener
+        filterIcon.setOnClickListener(v -> {
+            PopupMenu categoryMenu = new PopupMenu(getContext(), v);
+            for (String category : categories) {
+                categoryMenu.getMenu().add(category);
+            }
+
+            categoryMenu.setOnMenuItemClickListener(item -> {
+                String selectedCategory = item.getTitle().toString();
+
+                // Show subcategories for the selected category
+                showSubcategoryMenu(selectedCategory, subcategories.get(selectedCategory));
+                return true;
+            });
+
+            categoryMenu.show();
+        });
+
+
+
 
         // Fetch all products from the API on fragment load
         apiService.getProducts().enqueue(new Callback<List<Product>>() {
@@ -144,6 +174,44 @@ public class ProductListFragment extends Fragment {
         return view;
     }
 
+    private void showSubcategoryMenu(String category, List<String> subcategoryList) {
+        PopupMenu subcategoryMenu = new PopupMenu(getContext(), getView().findViewById(R.id.filter));
+        for (String subcategory : subcategoryList) {
+            subcategoryMenu.getMenu().add(subcategory);
+        }
+
+        subcategoryMenu.setOnMenuItemClickListener(item -> {
+            String selectedSubcategory = item.getTitle().toString();
+
+            // Update product list based on selected category and subcategory
+//            updateProductListByCategoryAndSubcategory(category, selectedSubcategory);
+
+            return true;
+        });
+
+        subcategoryMenu.show();
+    }
+
+//    private void updateProductListByCategoryAndSubcategory(String category, String subcategory) {
+//        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+//        apiService.getProductsByCategoryAndSubcategory(category, subcategory).enqueue(new Callback<List<Product>>() {
+//            @Override
+//            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    List<Product> filteredProducts = response.body();
+//                    updateProductList(recyclerView, filteredProducts); // Update the RecyclerView with filtered products
+//                } else {
+//                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Product>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+
     private void navigateToProductDescription(Product product) {
         // Create a new instance of ProductDescriptionFragment with arguments
         ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(
@@ -175,52 +243,6 @@ public class ProductListFragment extends Fragment {
     }
 
 
-    private void showFilterDropdown(View view) {
-        PopupMenu popupMenu = new PopupMenu(getContext(), view);
-        // Inflate the menu layout
-        popupMenu.getMenuInflater().inflate(R.menu.filter_menu, popupMenu.getMenu());
-
-        // Set menu item click listeners
-        popupMenu.setOnMenuItemClickListener(item -> {
-            int id=item.getItemId();
-            if (id == R.id.filter_peripheral) {
-                // Handle "Peripheral" filter
-                Toast.makeText(getContext(), "Filter: Peripheral", Toast.LENGTH_SHORT).show();
-                // Update product list based on filter...
-                return true;
-
-            } else if (id == R.id.filter_CPU) {
-                // Handle "CPU" filter
-                Toast.makeText(getContext(), "Filter: CPU", Toast.LENGTH_SHORT).show();
-                // Update product list based on filter...
-                return true;
-
-            } else if (id == R.id.filter_Monitor) {
-                // Handle "Monitor" filter
-                Toast.makeText(getContext(), "Filter: Monitor", Toast.LENGTH_SHORT).show();
-                // Update product list based on filter...
-                return true;
-
-            } else if (id == R.id.filter_stationary) {
-                // Handle "Stationary" filter
-                Toast.makeText(getContext(), "Filter: Stationary", Toast.LENGTH_SHORT).show();
-                // Update product list based on filter...
-                return true;
-
-            } else if (id == R.id.filter_Pencil) {
-                // Handle "Pencil" filter
-                Toast.makeText(getContext(), "Filter: Pencil", Toast.LENGTH_SHORT).show();
-                // Update product list based on filter...
-                return true;
-
-            } else {
-                return false;
-            }
-        });
-
-        // Show the menu
-        popupMenu.show();
-    }
     private void highlightTab(TextView selectedTab, TextView... otherTabs) {
         // Highlight the selected tab
         selectedTab.setBackgroundResource(R.drawable.tab_background_selected); // Use rounded corner drawable
