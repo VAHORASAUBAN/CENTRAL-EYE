@@ -5,8 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,10 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import com.example.integration.R;
 
@@ -124,7 +120,7 @@ public class User_Home_fragment extends Fragment {
                         .setDuration(100)
                         .withEndAction(() -> {
                             v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
-//                            openUserListAdd();
+                            openrequestform();
                         })
                         .start();
             }
@@ -155,6 +151,15 @@ public class User_Home_fragment extends Fragment {
         // Intent intent = new Intent(requireContext(), LoginActivity.class);
         // startActivity(intent);
         // requireActivity().finish();
+    }
+
+    private void openrequestform() {
+        userproductrequest userproductrequest = new userproductrequest();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, userproductrequest);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void openuserprofileFragment() {
