@@ -147,9 +147,14 @@ def categorylist(request):
 
 def addcategory(request):
     return render(request,'addcategory.html')
-
+def subcategorylist(request):
+    return render(request,'subcategorylist.html')
+def addsubcategory(request):
+    return render(request,'subaddcategory.html')
 def editcategory(request):
     return render(request,'editcategory.html')
+def editsubcategory(request):
+    return render(request,'editsubcategory.html')
 
 def importproduct(request):
     return render(request,'importproduct.html')

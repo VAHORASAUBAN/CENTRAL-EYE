@@ -37,7 +37,10 @@ urlpatterns = [
 
     path('categorylist', views.categorylist, name='categorylist'),
     path('addcategory', views.addcategory, name='addcategory'),
-    path('editcategory', views.addcategory, name='editcategory'),
+    path('subcategorylist', views.subcategorylist, name='subcategorylist'),
+    path('addsubcategory', views.addsubcategory, name='addsubcategory'),
+    path('editcategory', views.editcategory, name='editcategory'),
+    path('editsubcategory', views.editsubcategory, name='editsubcategory'),
 
     # path('importproduct', views.importproduct, name='importproduct'),
     # path('barcode', views.barcode, name='barcode'),
