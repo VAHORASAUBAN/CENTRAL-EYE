@@ -92,9 +92,18 @@ def user_list_view(request):
 
 @api_view(['GET'])
 def AssetListView(request):
-    assets = Asset.objects.all()
+    filter_type = request.query_params.get('filter')
+
+    if filter_type == 'available':
+        assets = Asset.objects.filter(assign_to__isnull=True)
+    elif filter_type == 'in-use':
+        assets = Asset.objects.filter(assign_to__isnull=False)
+    else:
+        assets = Asset.objects.all()
+
     serializer = AssetSerializer(assets, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 def index(request):
     userCount = User.objects.count()
@@ -107,6 +116,20 @@ def index(request):
                 'availableAsset': availableAsset, 
                 'inUseAsset': inUseAsset
     })
+    
+@api_view(['GET'])
+def get_totals(request):
+    try:
+        total_products = Asset.objects.count()
+        total_users = User.objects.count()
+        
+        data = {
+            "total_products": total_products,
+            "total_users": total_users,
+        }
+        return Response(data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def productlist(request):
     return render(request,'productlist.html')

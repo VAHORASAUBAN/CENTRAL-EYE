@@ -22,7 +22,7 @@ public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     User_Home_fragment user_homeFragment = new User_Home_fragment();
     User_Profile_fragment user_profileFragment = new User_Profile_fragment();
-    User_Add_Product_Scanner user_addProductScanner = new User_Add_Product_Scanner();
+    User_Add_Product_Scanner user_addProductScanner = User_Add_Product_Scanner.newInstance();
     private SharedPreferences sharedPreferences;
     private TextView welcomeTextView;
 
@@ -38,12 +38,10 @@ public class UserHomeActivity extends AppCompatActivity {
         String username = sharedPreferences.getString("username", "User");
 
         // Bind views
-        welcomeTextView = findViewById(R.id.welcomeTextView);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        Button logoutButton = findViewById(R.id.logoutButton);
+//        Button logoutButton = findViewById(R.id.logoutButton);
 
         // Set welcome message
-        welcomeTextView.setText("Welcome, " + username + "!");
 
         // Default fragment (Home)
         replaceFragmentWithAnimation(user_homeFragment, R.anim.fade_in, R.anim.fade_out);
@@ -71,17 +69,17 @@ public class UserHomeActivity extends AppCompatActivity {
         });
 
         // Logout functionality
-        logoutButton.setOnClickListener(v -> {
-            // Clear the session
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
-
-            // Redirect to login screen
-            Intent intent = new Intent(UserHomeActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
+//        logoutButton.setOnClickListener(v -> {
+//            // Clear the session
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.clear();
+//            editor.apply();
+//
+//            // Redirect to login screen
+//            Intent intent = new Intent(UserHomeActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        });
     }
 
     /**

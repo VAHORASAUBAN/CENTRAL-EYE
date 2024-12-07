@@ -23,7 +23,12 @@ urlpatterns = [
     path('api/login/', views.login_view, name='login'),
     path('api/add_product/', views.add_product, name='addProduct'),  # Update this line
     path('api/users/', views.user_list_view, name='userlist'),
-     
+    path('api/totals/', views.get_totals, name='get_totals'),
+    path('api/assign_product/', views.assign_product, name='assignProduct'),  # Update this line
+    # path('api/assets/', views.AssetList, name='asset-list'),
+    path('api/asset/', views.AssetListView, name='asset-list'),
+    
+    
     path('productlist', views.productlist, name='productlist'),
     path('addproduct', views.addproduct, name='addproduct'),
     path('editproduct', views.editproduct, name='editproduct'),
@@ -75,9 +80,4 @@ urlpatterns = [
     path('signin',views.signin, name='signin'),
     path('forgetpassword',views.forgetpassword, name='forgetpassword'),
     path('signup',views.signup, name='signup'),
-    
- 
-    path('api/assign_product/', views.assign_product, name='assignProduct'),  # Update this line
-    # path('api/assets/', views.AssetList, name='asset-list'),
-    path('api/assets/', views.AssetListView, name='asset-list'),
 ]

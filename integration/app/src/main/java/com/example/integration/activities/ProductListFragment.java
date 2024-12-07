@@ -4,10 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
+import com.example.integration.api.ApiService;
+import com.example.integration.network.RetrofitClient;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,31 +74,203 @@ public class ProductListFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
 
-        // Example of setting up a click listener (you can adapt this logic)
-        view.findViewById(R.id.category_1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the detailed view fragment
-                Bundle bundle = new Bundle();
-                bundle.putString("productType", "CPU");
-                ProductDetailFragment detailFragment = ProductDetailFragment.newInstance("CPU", "OtherParam");
-                detailFragment.setArguments(bundle);
+        RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                // Assuming you're using a FragmentManager to perform the transaction
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, detailFragment) // 'fragment_container' is the container where fragments are shown
-                        .addToBackStack(null) // Adds to the back stack for user navigation
-                        .commit();
+        TextView allTab = view.findViewById(R.id.all);
+        TextView availableTab = view.findViewById(R.id.available);
+        TextView inUseTab = view.findViewById(R.id.in_use);
+        TextView maintainenceTab = view.findViewById(R.id.maintainence);
+        TextView expiredTab = view.findViewById(R.id.expired);
+
+        ImageView filterIcon = view.findViewById(R.id.filter);
+        List<String> categories = Arrays.asList("Peripheral", "Category 2", "Category 3");  // Example categories
+        Map<String, List<String>> subcategories = new HashMap<>();
+        subcategories.put("Peripheral", Arrays.asList("Mouse", "Keyboard"));
+        subcategories.put("Category 2", Arrays.asList("Subcategory 2.1", "Subcategory 2.2"));
+        subcategories.put("Category 3", Arrays.asList("Subcategory 3.1", "Subcategory 3.2"));
+
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // Filter icon click listener
+        filterIcon.setOnClickListener(v -> {
+            PopupMenu categoryMenu = new PopupMenu(getContext(), v);
+            for (String category : categories) {
+                categoryMenu.getMenu().add(category);
+            }
+
+            categoryMenu.setOnMenuItemClickListener(item -> {
+                String selectedCategory = item.getTitle().toString();
+
+                // Show subcategories for the selected category
+                showSubcategoryMenu(selectedCategory, subcategories.get(selectedCategory));
+                return true;
+            });
+
+            categoryMenu.show();
+        });
+
+        // Fetch all products from the API on fragment load
+        apiService.getProducts().enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> allProducts = response.body();
+
+                    // Initialize with all products
+                    updateProductList(recyclerView, allProducts);
+
+                    // Set click listeners for each tab
+                    allTab.setOnClickListener(v -> {
+                        highlightTab(allTab, availableTab, inUseTab, maintainenceTab,expiredTab);
+                        updateProductList(recyclerView, allProducts); // Show all products
+                    });
+
+                    availableTab.setOnClickListener(v -> {
+                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab, expiredTab);
+                        fetchFilteredProducts(recyclerView, "available");  // Fetch available products
+                    });
+
+                    inUseTab.setOnClickListener(v -> {
+                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab, expiredTab);
+                        fetchFilteredProducts(recyclerView, "in-use");  // Fetch available products
+                    });
+
+                    maintainenceTab.setOnClickListener(v -> {
+                        highlightTab(maintainenceTab, allTab, availableTab, inUseTab);
+                        updateProductList(recyclerView, filterProductsByStatus(allProducts, "Maintenance"));
+                    });
+                        expiredTab.setOnClickListener(v -> {
+                        highlightTab(expiredTab,maintainenceTab, allTab, availableTab, inUseTab);
+                        updateProductList(recyclerView, filterProductsByStatus(allProducts, "expired"));
+                    });
+
+
+                    highlightTab(allTab, availableTab, inUseTab, maintainenceTab);
+                    updateProductList(recyclerView, allProducts);
+                } else {
+                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
+    }
+
+    private void fetchFilteredProducts(RecyclerView recyclerView, String filterType) {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // Fetch products with the filter query
+        apiService.getProductsWithFilter(filterType).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> filteredProducts = response.body();
+                    updateProductList(recyclerView, filteredProducts); // Update the RecyclerView with filtered products
+                } else {
+                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showSubcategoryMenu(String category, List<String> subcategoryList) {
+        PopupMenu subcategoryMenu = new PopupMenu(getContext(), getView().findViewById(R.id.filter));
+        for (String subcategory : subcategoryList) {
+            subcategoryMenu.getMenu().add(subcategory);
+        }
+
+        subcategoryMenu.setOnMenuItemClickListener(item -> {
+            String selectedSubcategory = item.getTitle().toString();
+
+            // Update product list based on selected category and subcategory
+//            updateProductListByCategoryAndSubcategory(category, selectedSubcategory);
+
+            return true;
+        });
+
+        subcategoryMenu.show();
+    }
+
+//    private void updateProductListByCategoryAndSubcategory(String category, String subcategory) {
+//        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+//        apiService.getProductsByCategoryAndSubcategory(category, subcategory).enqueue(new Callback<List<Product>>() {
+//            @Override
+//            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    List<Product> filteredProducts = response.body();
+//                    updateProductList(recyclerView, filteredProducts); // Update the RecyclerView with filtered products
+//                } else {
+//                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Product>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+
+    private void navigateToProductDescription(Product product) {
+        ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(
+                product.getAsset_name(),
+                product.getBarcode(),
+                product.getPurchase_date(),
+                product.getAsset_category(),
+                product.getAsset_value(),
+                product.getCondition(),
+                product.getLocation()
+        );
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void updateProductList(RecyclerView recyclerView, List<Product> productList) {
+        ProductAdapter adapter = new ProductAdapter(getContext(), productList, product -> {
+            // Handle item click
+            navigateToProductDescription(product);
+        });
+        recyclerView.setAdapter(adapter);
+    }
+    /**
+     * Filters the product list based on the status.
+     */
+    private List<Product> filterProductsByStatus(List<Product> products, String status) {
+        return products.stream()
+//                .filter(product -> status.equalsIgnoreCase(product.getStatus()))
+                .collect(Collectors.toList());
+    }
+
+
+    private void highlightTab(TextView selectedTab, TextView... otherTabs) {
+        // Highlight the selected tab
+        selectedTab.setBackgroundResource(R.drawable.tab_background_selected); // Use rounded corner drawable
+        selectedTab.setTextColor(getResources().getColor(R.color.white));
+
+        // Reset other tabs
+        for (TextView tab : otherTabs) {
+            tab.setBackgroundResource(R.drawable.tab_background_unselected); // Use white background
+            tab.setTextColor(getResources().getColor(R.color.black));
+        }
     }
 
 }
