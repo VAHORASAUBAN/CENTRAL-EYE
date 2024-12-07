@@ -23,7 +23,12 @@ urlpatterns = [
     path('api/login/', views.login_view, name='login'),
     path('api/add_product/', views.add_product, name='addProduct'),  # Update this line
     path('api/users/', views.user_list_view, name='userlist'),
-     
+    path('api/totals/', views.get_totals, name='get_totals'),
+    path('api/assign_product/', views.assign_product, name='assignProduct'),  # Update this line
+    # path('api/assets/', views.AssetList, name='asset-list'),
+    path('api/asset/', views.AssetListView, name='asset-list'),
+    
+    
     path('productlist', views.productlist, name='productlist'),
     path('addproduct', views.addproduct, name='addproduct'),
     path('editproduct', views.editproduct, name='editproduct'),
@@ -32,7 +37,10 @@ urlpatterns = [
 
     path('categorylist', views.categorylist, name='categorylist'),
     path('addcategory', views.addcategory, name='addcategory'),
-    path('editcategory', views.addcategory, name='editcategory'),
+    path('subcategorylist', views.subcategorylist, name='subcategorylist'),
+    path('addsubcategory', views.addsubcategory, name='addsubcategory'),
+    path('editcategory', views.editcategory, name='editcategory'),
+    path('editsubcategory', views.editsubcategory, name='editsubcategory'),
 
     # path('importproduct', views.importproduct, name='importproduct'),
     # path('barcode', views.barcode, name='barcode'),

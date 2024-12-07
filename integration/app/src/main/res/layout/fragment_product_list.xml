@@ -2,514 +2,153 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/light_50"
     android:layout_height="match_parent">
 
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/black"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:title="Inventory Management"
-        app:titleTextColor="@android:color/white" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="6dp">
 
-    <HorizontalScrollView
-        android:id="@+id/categoryScrollView"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Heading Text on the Left -->
+            <TextView
+                android:id="@+id/toolbar_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asset"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+            <!-- Profile Image on the Right -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Profile Image" />
+
+            <!-- Scanner Icon for Search -->
+            <ImageView
+                android:id="@+id/scanner_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_qr_code_scanner_24"
+                android:layout_toStartOf="@id/profile_image"
+                android:layout_marginEnd="6dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="Scanner for Search" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:scrollbars="none"
-        android:padding="5dp">
-        <LinearLayout
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/filter"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@drawable/baseline_filter_list_24"/>
+
+        <HorizontalScrollView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <!-- Category 1 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_1"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/wallet"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="keyboards"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Repeat for 7 more categories -->
-            <!-- Category 2 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_2"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/notification"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mouse"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Add similar blocks for category_3 to category_8 -->
-            <!-- Example for Category 3 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_3"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/settings"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CPU"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_4"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/item_product24"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Printer"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <!-- Category 1 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_7"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/baseline_mouse_24"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Category 1"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Repeat for 7 more categories -->
-            <!-- Category 2 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_8"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/item_product24"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Category 2"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Add similar blocks for category_3 to category_8 -->
-            <!-- Example for Category 3 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_9"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/item_product24"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Category 3"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/category_10"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:layout_margin="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle_background"
-                        android:src="@drawable/item_product24"
-                        android:padding="15dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightgrey"
-                        android:layout_marginTop="5dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Category 4"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-
-
-        </LinearLayout>
-        </LinearLayout>
-    </HorizontalScrollView>
-    <LinearLayout
-        android:id="@+id/fancyTableContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/categoryScrollView"
-        android:orientation="vertical"
-        android:padding="4dp">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_width="match_parent"
-            android:text="Latest Inventory"
-            android:textColor="@color/primary"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"/>
-
-        <!-- Table Header -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
-
+            android:layout_weight="1"
+            android:scrollbars="none">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/primary"
                 android:orientation="horizontal">
 
+                <!-- New Request Tab -->
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/all"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:text=""
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                    android:text=" All "
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:textSize="16sp"
+                    android:layout_marginStart="4dp"
+                    android:padding="4dp"/>
 
+                <!-- Products Information Tab -->
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/available"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:text="Name"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-
+                    android:text="Available"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:layout_marginStart="4dp"
+                    android:padding="4dp"/>
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/in_use"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:text="Barcode"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-
+                    android:text="In-Use"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp"/>
+                <TextView
+                    android:id="@+id/maintainence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Maintainence"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp"/>
+                <TextView
+                    android:id="@+id/expired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Expired"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp"/>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Table Rows -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border"
-                android:orientation="horizontal"
-                android:padding="1dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/circular_background"
-                    android:clipToOutline="true"
-                    android:src="@drawable/baseline_person_24" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp"
-                    android:text="CPU"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="3dp"
-                    android:padding="8dp"
-                    android:text="A2009"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="55dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border"
-                android:orientation="horizontal"
-                android:padding="1dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/circular_background"
-                    android:clipToOutline="true"
-                    android:src="@drawable/baseline_person_24" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp"
-                    android:text="CPU"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="3dp"
-                    android:padding="8dp"
-                    android:text="A2009"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="110dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border"
-                android:orientation="horizontal"
-                android:padding="1dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/circular_background"
-                    android:clipToOutline="true"
-                    android:src="@drawable/baseline_person_24" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_horizontal"
-                    android:padding="8dp"
-                    android:text="CPU"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="3dp"
-                    android:padding="8dp"
-                    android:text="A2009"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </HorizontalScrollView>
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs"
+        android:layout_margin="8dp" />
+
 
 </RelativeLayout>

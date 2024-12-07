@@ -42,7 +42,7 @@ public class UserListAdd extends Fragment {
 
     private void fetchUsers() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.192.22:8000/") // Replace with your backend URL
+                .baseUrl("http://192.168.219.22:8000/") // Replace with your backend URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -33,7 +33,7 @@ public class User_Add_Product_Scanner extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user__add__product__scanner, container, false);
+        return inflater.inflate(R.layout.fragment_user__add__product__scanner, container, false); // Fixed the layout name to match a valid file
     }
 
     @Override
@@ -43,6 +43,11 @@ public class User_Add_Product_Scanner extends Fragment {
         // Initialize UI components
         barcodeScannerView = view.findViewById(R.id.barcode_scanner);
         scannedValueTv = view.findViewById(R.id.scannedValueTv);
+
+        // Ensure the UI components are correctly bound
+        if (barcodeScannerView == null || scannedValueTv == null) {
+            throw new IllegalStateException("Missing required views in layout: barcodeScannerView or scannedValueTv");
+        }
 
         // Set up the barcode scanner callback
         barcodeScannerView.decodeContinuous(new BarcodeCallback() {
@@ -64,28 +69,40 @@ public class User_Add_Product_Scanner extends Fragment {
     }
 
     private void startScanning() {
-        barcodeScannerView.resume(); // Start the scanner
-        Toast.makeText(getContext(), "Scanner is ready.", Toast.LENGTH_SHORT).show();
+        if (barcodeScannerView != null) {
+            barcodeScannerView.resume(); // Start the scanner
+            Toast.makeText(getContext(), "Scanner is ready.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Scanner view is not initialized.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void handleScannedValue(String scannedValue) {
-        // Navigate to the form fragment with the scanned value
-        User_Scanner_Form_DetailsFragment formDetailsFragment = User_Scanner_Form_DetailsFragment.newInstance(scannedValue);
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, formDetailsFragment) // Replace with your container ID
-                .addToBackStack(null)
-                .commit();
+        if (scannedValue != null && !scannedValue.isEmpty()) {
+            // Navigate to the form fragment with the scanned value
+            User_Scanner_Form_DetailsFragment formDetailsFragment = User_Scanner_Form_DetailsFragment.newInstance(scannedValue);
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, formDetailsFragment) // Replace with your container ID
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            Toast.makeText(getContext(), "Scanned value is empty.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        barcodeScannerView.resume(); // Resume scanning when fragment is visible
+        if (barcodeScannerView != null) {
+            barcodeScannerView.resume(); // Resume scanning when fragment is visible
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        barcodeScannerView.pause(); // Pause scanning when fragment is not visible
+        if (barcodeScannerView != null) {
+            barcodeScannerView.pause(); // Pause scanning when fragment is not visible
+        }
     }
 }
