@@ -95,55 +95,52 @@
 </div>
 </div> -->
 
-<div class="table-responsive">
-<table class="table datanew">
-<thead>
-<tr>
-<th>
-<label class="checkboxs">
-<input type="checkbox" id="select-all">
-<span class="checkmarks"></span>
-</label>
-</th>
-<th>Product Name</th>
-<th>Barcode</th>
+    <div class="table-responsive">
+    <table class="table datanew">
+    <thead>
+    <tr>
+    <th>
+    <label class="checkboxs">
+    <input type="checkbox" id="select-all">
+    <span class="checkmarks"></span>
+    </label>
+    </th>
+    <th>Product Name</th>
+    <th>Barcode</th>
+    <th>User</th>
+    <th>IssueDate</th>
+    <th>ReturnDate</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>
+    <label class="checkboxs">
+    <input type="checkbox">
+    <span class="checkmarks"></span>
+    </label>
+    </td>
+    <td class="productimgname">
+    <a href="javascript:void(0);" class="product-img">
+    <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
+    </a>
+    <a href="">Macbook pro</a>
+    </td>
+    <td>A20009</td>
+    <td><a href="">User1</a></td>
+    <td>19 Nov 2024</td>
+    <td>29 Nov 2024</td>
 
-<th>IssueDate</th>
-<th>ReturnDate</th>
-<th>User</th>
-
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<label class="checkboxs">
-<input type="checkbox">
-<span class="checkmarks"></span>
-</label>
-</td>
-<td class="productimgname">
-<a href="javascript:void(0);" class="product-img">
-<img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
-</a>
-<a href="javascript:void(0);">Macbook pro</a>
-</td>
-<td>A20009</td>
-
-<td>19 Nov 2024</td>
-<td>29 Nov 2024</td>
-<td><span class="badges bg-lightgreen">Karanj</span></td>
-
-<td>
-<a class="me-3" href="{% url 'editissuedproducts' %}">
-<img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
-</a>
-<a class="me-3 confirm-text" href="javascript:void(0);">
-<img src="{% static 'assets/img/icons/delete.svg' %}" alt="img">
-</a>
-</td>
-</tr>
+    <td>
+    <a class="me-3" href="{% url 'editissuedproducts' %}">
+    <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
+    </a>
+    <a class="me-3 confirm-text" href="javascript:void(0);">
+    <img src="{% static 'assets/img/icons/delete.svg' %}" alt="img">
+    </a>
+    </td>
+    </tr>
 
 
 

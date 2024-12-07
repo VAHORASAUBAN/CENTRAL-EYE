@@ -62,7 +62,7 @@ class Asset(models.Model):
     def __str__(self):
         return f"{self.barcode} - {self.asset_name}"
     
-class Allocation(models.Model):
+class Allocation(models.Model):          #issuedproducts
     allocation_id = models.IntegerField(primary_key=True, unique=True)
     asset_barcode = models.CharField(max_length=255)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
@@ -90,7 +90,7 @@ class Maintenance(models.Model):
     asset = models.ForeignKey("Asset", null=True, blank=True, on_delete=models.SET_NULL)
     last_maintenance_date = models.DateField()  # Tracks the last maintenance date
     next_maintenance_date = models.DateField()  # Tracks the next maintenance date
-
+    cost = models.CharField(max_length=100)
     def save(self, *args, **kwargs):
         if not self.next_maintenance_date and self.last_maintenance_date:
             # Calculate the next maintenance date based on last maintenance date
