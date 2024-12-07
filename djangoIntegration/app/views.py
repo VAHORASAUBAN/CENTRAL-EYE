@@ -265,13 +265,39 @@ def addquotation(request):
     return render(request,'addquotation.html')
 
 def stationlist(request):
-    return render(request,'stationlist.html')
+    station_id = stationDetails.objects.all()
+    con = {"station_id":station_id}
+    return render(request,'stationlist.html',con)
 
 def newstation(request):
+    if request.POST:
+        station_name = request.POST['station_name']
+        staion_code = request.POST['staion_code']
+
+        stationDetails.objects.create(station_name=station_name,staion_code=staion_code)
+        return redirect('stationlist')
     return render(request,'newstation.html')
 
-def editstation(request):
-    return render(request,'editstation.html')
+def editstation(request,id):
+    station_id = stationDetails.objects.get(station_id=id)
+    if request.POST:
+        station_name = request.POST['station_name']
+        staion_code = request.POST['staion_code']
+        station_id.station_name = station_name
+        station_id.staion_code = staion_code
+        station_id.save()
+
+        return redirect('stationlist')
+    return render(request,'editstation.html',{'i': station_id})
+
+def deletestation(request,id):
+    station_id = stationDetails.objects.get(station_id=id)
+    station_id.delete()
+
+    return redirect('stationlist')
+
+
+
 
 def editQuotation(request):
     return render(request,'editquotation.html')
