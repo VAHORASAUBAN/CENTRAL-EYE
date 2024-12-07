@@ -2,6 +2,7 @@ package com.example.integration.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,6 +18,7 @@ import android.widget.Button;
 
 import com.example.integration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -24,6 +26,8 @@ public class UserHomeActivity extends AppCompatActivity {
     User_Profile_fragment user_profileFragment = new User_Profile_fragment();
     User_Add_Product_Scanner user_addProductScanner = User_Add_Product_Scanner.newInstance();
     private SharedPreferences sharedPreferences;
+    private FloatingActionButton fab;
+
     private TextView welcomeTextView;
 
     @Override
@@ -39,6 +43,8 @@ public class UserHomeActivity extends AppCompatActivity {
 
         // Bind views
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        fab = findViewById(R.id.nav_products);
+
 //        Button logoutButton = findViewById(R.id.logoutButton);
 
         // Set welcome message
@@ -80,6 +86,18 @@ public class UserHomeActivity extends AppCompatActivity {
 //            startActivity(intent);
 //            finish();
 //        });
+        // Handle FloatingActionButton click
+        fab.setOnClickListener(v -> {
+            // Navigate to the Add Product Scanner fragment
+            replaceFragment(user_addProductScanner);
+        });
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 
     /**
