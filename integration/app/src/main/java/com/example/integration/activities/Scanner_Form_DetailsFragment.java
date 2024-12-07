@@ -174,15 +174,18 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 if (location != null) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-//                    Toast.makeText(getContext(), "Location: " + latitude + ", " + longitude, Toast.LENGTH_LONG).show();
-                    String mergedLocation = latitude + ", " + longitude;
-                    this.mergedLocation = mergedLocation;
+                    // Combine latitude and longitude into a single variable
+                    mergedLocation = latitude + "," + longitude;
+                    Toast.makeText(getContext(), "Location captured: " + mergedLocation, Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show();
                 }
+            }).addOnFailureListener(e -> {
+                Toast.makeText(getContext(), "Error fetching location: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             });
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

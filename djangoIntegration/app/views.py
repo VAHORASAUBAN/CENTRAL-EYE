@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -90,21 +90,53 @@ def user_list_view(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def AssetListView(request):
+    filter_type = request.query_params.get('filter')
+
+    if filter_type == 'available':
+        assets = Asset.objects.filter(assign_to__isnull=True)
+    elif filter_type == 'in-use':
+        assets = Asset.objects.filter(assign_to__isnull=False)
+    else:
+        assets = Asset.objects.all()
+
+    serializer = AssetSerializer(assets, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 def index(request):
-    print("Index view called")
+    userCount = User.objects.count()
+    assetCount = Asset.objects.count()
+    availableAsset = Asset.objects.filter(assign_to__isnull=True).count()
+    inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
+    return render(request,'index.html', {
+                'userCount': userCount, 
+                'assetCount': assetCount, 
+                'availableAsset': availableAsset, 
+                'inUseAsset': inUseAsset
+    })
+    
+@api_view(['GET'])
+def get_totals(request):
     try:
-        userCount = User.objects.count()
-        productCount = Asset.objects.count()
+        total_products = Asset.objects.count()
+        total_users = User.objects.count()
+        
+        data = {
+            "total_products": total_products,
+            "total_users": total_users,
+        }
+        return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
-        print(f"Error: {e}")
-    return render(request, 'index.html', {'userCount': userCount, 'productCount': productCount})
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def productlist(request):
     return render(request,'productlist.html')
+
 def editproduct(request):
     return render(request,'editproduct.html')
+
 def productdetails(request):
     return render(request,'productdetails.html')
 def addproduct(request):
@@ -112,36 +144,48 @@ def addproduct(request):
 
 def categorylist(request):
     return render(request,'categorylist.html')
+
 def addcategory(request):
     return render(request,'addcategory.html')
+
 def editcategory(request):
     return render(request,'editcategory.html')
 
+def importproduct(request):
+    return render(request,'importproduct.html')
+
+def barcode(request):
+    return render(request,'barcode.html')
+
 # def importproduct(request):
 #     return render(request,'importproduct.html')
-# def barcode(request):
 #     return render(request,'barcode.html')
 
 def issuedproducts(request):
     return render(request,'issuedproducts.html')
+
 def editissuedproducts(request):
     return render(request,'editissuedproducts.html')
+
 def addissuedproducts(request):
     return render(request,'addissuedproducts.html')
 
-
 def maintenanceproducts(request):
     return render(request,'maintenanceproducts.html')
+
 def editmaintenanceproducts(request):
     return render(request,'editmaintenanceproducts.html')
+
 def addmaintenanceproducts(request):
     return render(request,'addmaintenanceproducts.html')
 
 
 def expiredproducts(request):
     return render(request,'expiredproducts.html')
+
 def editexpiredproducts(request):
     return render(request,'editexpiredproducts.html')
+
 def addexpiredproducts(request):
     return render(request,'addexpiredproducts.html')
 
@@ -150,17 +194,50 @@ def returnproducts(request):
 
 def editreturnproducts(request):
     return render(request,'editreturnproducts.html')
+
 def addreturnproducts(request):
     return render(request,'addreturnproducts.html')
 
 def aa(request):
     return render(request,'aa.html')
 
-
 def newuser(request):
-    return render(request,'newuser.html')
+    if request.method == 'POST':
+        # Get data from the POST request
+        username = request.POST.get('username')
+        role_name = request.POST.get('role_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        station_name = request.POST.get('station_name')
+        mobile = request.POST.get('mobile')
+        print(username)
+        print(station_name)
+        print(email)
+        # Get related Role and Station objects
+        roleGet = role.objects.get(role=role_name)
+        station = stationDetails.objects.get(station_name=station_name)
+
+        User.objects.create(
+            username=username,
+            role=roleGet,
+            email=email,
+            password=password,
+            station=station,
+            contact_number=mobile,
+            full_name="amaan shaikh"
+        )
+        
+        return redirect('newuser')
+
+    roles = role.objects.all()
+    station = stationDetails.objects.all()
+    
+    return render(request,'newuser.html', {'roles': roles, 'station': station})
+
 def userlists(request):
-    return render(request,'userlists.html')
+    users = User.objects.all()
+    return render(request,'userlists.html', {'users': users})
+
 def edituser(request):
     return render(request,'edituser.html')
 
@@ -193,6 +270,7 @@ def editstation(request):
 
 def editQuotation(request):
     return render(request,'editquotation.html')
+
 def editExpense(request):
     return render(request,'editExpense.html')
 
@@ -201,6 +279,7 @@ def profile(request):
 
 def generalSettings(request):
     return render(request,'editexpense.html')
+
 def signin(request):
     return render(request,'signin.html')
 
@@ -246,8 +325,4 @@ def assign_product(request):
     else:
         return Response(serializer.errors, status=400)
 
-@api_view(['GET'])
-def AssetListView(request):
-    assets = Asset.objects.all()
-    serializer = AssetSerializer(assets, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+

@@ -84,15 +84,19 @@ public class productlistadd extends Fragment {
 
 
     private void navigateToProductDescription(Product product) {
-        // Create a new instance of ProductDescriptionFragment with arguments
         ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(
-                product.getLocation(), product.getBarcode()
+                product.getAsset_name(),
+                product.getBarcode(),
+                product.getPurchase_date(),
+                product.getAsset_category(),
+                product.getAsset_value(),
+                product.getCondition(),
+                product.getLocation()
         );
 
-        // Start a transaction to replace the fragment
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment) // Ensure this ID matches your container
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
