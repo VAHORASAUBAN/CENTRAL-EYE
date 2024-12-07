@@ -1,91 +1,81 @@
 package com.example.integration.activities;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import com.example.integration.R;
+import com.example.integration.api.ApiService;
+import com.example.integration.api.TotalsResponse;
+import com.example.integration.network.RetrofitClient;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Home_fragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private static final int REQUEST_CHECK_SETTINGS = 1001;
+    private TextView totalProductsTextView;
+    private TextView totalUsersTextView;
 
     public Home_fragment() {
         // Required empty public constructor
     }
 
-    public static Home_fragment newInstance(String param1, String param2) {
-        Home_fragment fragment = new Home_fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
 
-        // Fetch the username from shared preferences
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "User");
+        // Initialize UI elements
+        totalProductsTextView = view.findViewById(R.id.total_products);
+        totalUsersTextView = view.findViewById(R.id.total_users);
+
+        // Fetch totals from the backend
+        fetchTotals();
 
         // Bind views
-//        TextView welcomeTextView = view.findViewById(R.id.headtext);
         ImageView profileImageButton = view.findViewById(R.id.profile_image);
         CardView squareBox1 = view.findViewById(R.id.squareBox1);
         CardView squareBox2 = view.findViewById(R.id.squareBox2);
 
-        // Set welcome message
-//        welcomeTextView.setText(username + "!");
-
-        // Apply entrance animation to squareBox1 and squareBox2
-        animateEntrance(squareBox1, 100);
-        animateEntrance(squareBox2, 200);
-
         // Profile dropdown menu
         profileImageButton.setOnClickListener(v -> {
+            // PopupMenu logic here...
             PopupMenu popupMenu = new PopupMenu(requireContext(), profileImageButton);
             popupMenu.getMenuInflater().inflate(R.menu.profile_menu, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                int id= item.getItemId();
+                int id = item.getItemId();
                 if (id == R.id.menu_profile) {
-                    Toast.makeText(requireContext(), "Profile Selected", Toast.LENGTH_SHORT).show();
-                    openProfileFragment();
-                    return true;
-                } else if (id == R.id.menu_update_password) {
-                    Toast.makeText(requireContext(), "Update Password Selected", Toast.LENGTH_SHORT).show();
-                    openUpdatePasswordFragment();
+                    openuserprofileFragment();
                     return true;
                 } else if (id == R.id.menu_logout) {
                     performLogout();
@@ -98,86 +88,58 @@ public class Home_fragment extends Fragment {
             popupMenu.show();
         });
 
-        // Add click listener to squareBox1
-        squareBox1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.animate()
-                        .scaleX(0.9f)
-                        .scaleY(0.9f)
-                        .setDuration(100)
-                        .withEndAction(() -> {
-                            v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
-                            openProductListFragment();
-                        })
-                        .start();
-            }
-        });
+        // Add click listeners to the card views
+        squareBox1.setOnClickListener(v -> openProductListFragment());
+        squareBox2.setOnClickListener(v -> openUserListAdd());
 
-        // Add click listener to squareBox2
-        squareBox2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.animate()
-                        .scaleX(0.9f)
-                        .scaleY(0.9f)
-                        .setDuration(100)
-                        .withEndAction(() -> {
-                            v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
-                            openUserListAdd();
-                        })
-                        .start();
-            }
-        });
+        // Check location settings
+        checkLocationSettings();
 
         return view;
     }
 
-    private void animateEntrance(View view, long delay) {
-        view.setAlpha(0f);
-        view.setTranslationY(50f); // Slide up effect
-        view.animate()
-                .alpha(1f)
-                .translationY(0f)
-                .setDuration(500)
-                .setStartDelay(delay)
-                .start();
+    private void fetchTotals() {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        Call<TotalsResponse> call = apiService.getTotals();
+
+        call.enqueue(new Callback<TotalsResponse>() {
+            @Override
+            public void onResponse(Call<TotalsResponse> call, Response<TotalsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    TotalsResponse totals = response.body();
+                    totalProductsTextView.setText(String.valueOf(totals.getTotalProducts()));
+                    totalUsersTextView.setText(String.valueOf(totals.getTotalUsers()));
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TotalsResponse> call, Throwable t) {
+                Toast.makeText(requireContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void performLogout() {
-        SharedPreferences.Editor editor = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE).edit();
-        editor.clear(); // Clear session
-        editor.apply();
-
         Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
-
-        // Navigate to login screen (optional)
-        // Intent intent = new Intent(requireContext(), LoginActivity.class);
-        // startActivity(intent);
-        // requireActivity().finish();
+        Intent intent = new Intent(requireContext(), MainActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
     }
 
-    private void openProfileFragment() {
-        Profile_fragment profileFragment = new Profile_fragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+    private void openuserprofileFragment() {
+        User_Profile_fragment userprofileFragment = new User_Profile_fragment();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, profileFragment);
+        fragmentTransaction.replace(R.id.fragment_container, userprofileFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
-    private void openUpdatePasswordFragment() {
-//        UpdatePasswordFragment updatePasswordFragment = new UpdatePasswordFragment();
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_container, updatePasswordFragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
-    }
-
     private void openProductListFragment() {
         ProductListFragment productListFragment = new ProductListFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, productListFragment);
         fragmentTransaction.addToBackStack(null);
@@ -186,10 +148,42 @@ public class Home_fragment extends Fragment {
 
     private void openUserListAdd() {
         UserListAdd userListFragment = new UserListAdd();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, userListFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    private void checkLocationSettings() {
+        LocationRequest locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10000)
+                .setFastestInterval(5000);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest)
+                .setAlwaysShow(true);
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(requireContext());
+        Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
+
+        task.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+                try {
+                    task.getResult(ApiException.class);
+                    Toast.makeText(requireContext(), "Location is enabled", Toast.LENGTH_SHORT).show();
+                } catch (ResolvableApiException e) {
+                    try {
+                        e.startResolutionForResult(requireActivity(), REQUEST_CHECK_SETTINGS);
+                    } catch (IntentSender.SendIntentException sendEx) {
+                        Toast.makeText(requireContext(), "Failed to prompt location settings.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(requireContext(), "Error checking location: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

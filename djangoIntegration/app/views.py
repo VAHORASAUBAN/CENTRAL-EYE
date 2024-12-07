@@ -90,6 +90,19 @@ def user_list_view(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def AssetListView(request):
+    filter_type = request.query_params.get('filter')
+
+    if filter_type == 'available':
+        assets = Asset.objects.filter(assign_to__isnull=True)
+    elif filter_type == 'in-use':
+        assets = Asset.objects.filter(assign_to__isnull=False)
+    else:
+        assets = Asset.objects.all()
+
+    serializer = AssetSerializer(assets, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 def index(request):
@@ -103,18 +116,29 @@ def index(request):
                 'availableAsset': availableAsset, 
                 'inUseAsset': inUseAsset
     })
+    
+@api_view(['GET'])
+def get_totals(request):
+    try:
+        total_products = Asset.objects.count()
+        total_users = User.objects.count()
+        
+        data = {
+            "total_products": total_products,
+            "total_users": total_users,
+        }
+        return Response(data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def productlist(request):
     return render(request,'productlist.html')
 
 def editproduct(request):
     return render(request,'editproduct.html')
-<<<<<<< HEAD
 
-=======
 def productdetails(request):
     return render(request,'productdetails.html')
->>>>>>> 83598322d519a54c025de777fc9da54fcecf667f
 def addproduct(request):
     return render(request,'addproduct.html')
 
@@ -127,18 +151,15 @@ def addcategory(request):
 def editcategory(request):
     return render(request,'editcategory.html')
 
-<<<<<<< HEAD
 def importproduct(request):
     return render(request,'importproduct.html')
 
 def barcode(request):
     return render(request,'barcode.html')
-=======
+
 # def importproduct(request):
 #     return render(request,'importproduct.html')
-# def barcode(request):
 #     return render(request,'barcode.html')
->>>>>>> 83598322d519a54c025de777fc9da54fcecf667f
 
 def issuedproducts(request):
     return render(request,'issuedproducts.html')
@@ -249,6 +270,7 @@ def editstation(request):
 
 def editQuotation(request):
     return render(request,'editquotation.html')
+
 def editExpense(request):
     return render(request,'editExpense.html')
 
@@ -257,6 +279,7 @@ def profile(request):
 
 def generalSettings(request):
     return render(request,'editexpense.html')
+
 def signin(request):
     return render(request,'signin.html')
 
@@ -302,8 +325,4 @@ def assign_product(request):
     else:
         return Response(serializer.errors, status=400)
 
-@api_view(['GET'])
-def AssetListView(request):
-    assets = Asset.objects.all()
-    serializer = AssetSerializer(assets, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+

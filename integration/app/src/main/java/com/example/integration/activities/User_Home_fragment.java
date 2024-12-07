@@ -188,6 +188,4 @@ public class User_Home_fragment extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
-   
 }

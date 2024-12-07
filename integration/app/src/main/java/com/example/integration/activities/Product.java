@@ -3,7 +3,7 @@ package com.example.integration.activities;
 public class Product {
     private String asset_name;
     private String barcode;
-    private String asset_type;
+    private String asset_category;
     private String purchase_date;
     private String asset_value;
     private String condition;
@@ -18,8 +18,8 @@ public class Product {
         return barcode;
     }
 
-    public String getAsset_type() {
-        return asset_type;
+    public String getAsset_category() {
+        return asset_category;
     }
 
     public String getPurchase_date() {

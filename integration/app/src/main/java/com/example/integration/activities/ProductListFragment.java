@@ -94,11 +94,6 @@ public class ProductListFragment extends Fragment {
         subcategories.put("Category 2", Arrays.asList("Subcategory 2.1", "Subcategory 2.2"));
         subcategories.put("Category 3", Arrays.asList("Subcategory 3.1", "Subcategory 3.2"));
 
-
-
-
-
-
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
         // Filter icon click listener
@@ -119,9 +114,6 @@ public class ProductListFragment extends Fragment {
             categoryMenu.show();
         });
 
-
-
-
         // Fetch all products from the API on fragment load
         apiService.getProducts().enqueue(new Callback<List<Product>>() {
             @Override
@@ -139,13 +131,13 @@ public class ProductListFragment extends Fragment {
                     });
 
                     availableTab.setOnClickListener(v -> {
-                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab,expiredTab);
-                        updateProductList(recyclerView, filterProductsByStatus(allProducts, "Available"));
+                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab, expiredTab);
+                        fetchFilteredProducts(recyclerView, "available");  // Fetch available products
                     });
 
                     inUseTab.setOnClickListener(v -> {
-                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab,expiredTab);
-                        updateProductList(recyclerView, filterProductsByStatus(allProducts, "In-Use"));
+                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab, expiredTab);
+                        fetchFilteredProducts(recyclerView, "in-use");  // Fetch available products
                     });
 
                     maintainenceTab.setOnClickListener(v -> {
@@ -172,6 +164,28 @@ public class ProductListFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void fetchFilteredProducts(RecyclerView recyclerView, String filterType) {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // Fetch products with the filter query
+        apiService.getProductsWithFilter(filterType).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> filteredProducts = response.body();
+                    updateProductList(recyclerView, filteredProducts); // Update the RecyclerView with filtered products
+                } else {
+                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showSubcategoryMenu(String category, List<String> subcategoryList) {
@@ -213,15 +227,19 @@ public class ProductListFragment extends Fragment {
 //    }
 
     private void navigateToProductDescription(Product product) {
-        // Create a new instance of ProductDescriptionFragment with arguments
         ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(
-                product.getLocation(), product.getBarcode()
+                product.getAsset_name(),
+                product.getBarcode(),
+                product.getPurchase_date(),
+                product.getAsset_category(),
+                product.getAsset_value(),
+                product.getCondition(),
+                product.getLocation()
         );
 
-        // Start a transaction to replace the fragment
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment) // Ensure this ID matches your container
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
