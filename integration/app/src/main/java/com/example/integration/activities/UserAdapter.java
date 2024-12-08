@@ -38,7 +38,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
 
-        holder.userName.setText(user.getFull_name() != null ? user.getFull_name() : "N/A");
+        holder.userName.setText(user.getFirst_name() != null ? user.getFirst_name() : "N/A");
         holder.userTitle.setText(user.getRole() != null ? user.getRole() : "N/A");
         holder.userLocation.setText(user.getStation() != null ? user.getStation() : "N/A");
         holder.userImage.setImageResource(R.drawable.profile); // Default profile image

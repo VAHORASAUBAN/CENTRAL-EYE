@@ -2,6 +2,7 @@ package com.example.integration.api;
 
 import com.example.integration.activities.Product;
 import com.example.integration.activities.User;
+import com.example.integration.activities.Category;
 
 import java.util.List;
 
@@ -15,6 +16,12 @@ public interface ApiService {
     // Define the login endpoint
     @POST("api/login/")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
+
+    @GET("api/categories/")
+    Call<List<Category>> getCategories();
+
+    @GET("api/conditions/")
+    Call<List<String>> getConditionChoices();
 
     @GET("api/totals/") // This should match your backend URL endpoint
     Call<TotalsResponse> getTotals();

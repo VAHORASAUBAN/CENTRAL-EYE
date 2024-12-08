@@ -21,6 +21,8 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('api/login/', views.login_view, name='login'),
+    path('api/categories/', views.get_categories, name='get-categorys'),
+     path('api/conditions/', views.get_condition_choices, name='get_condition_choices'),
     path('api/add_product/', views.add_product, name='addProduct'),  # Update this line
     path('api/users/', views.user_list_view, name='userlist'),
     path('api/totals/', views.get_totals, name='get_totals'),

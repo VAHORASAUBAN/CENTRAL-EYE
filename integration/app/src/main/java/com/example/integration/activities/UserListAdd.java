@@ -66,7 +66,7 @@ public class UserListAdd extends Fragment {
 
     private void openUserDetailsFragment(User user) {
         UserDetailsFragment userDetailsFragment = UserDetailsFragment.newInstance(
-                user.getFull_name(),
+                user.getFirst_name() + ' ' + user.getLast_name(),
                 user.getContact_number(),
                 "N/A", // Gender is not available, passing "N/A" as default
                 user.getRole(),
