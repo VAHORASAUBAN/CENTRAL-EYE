@@ -319,9 +319,9 @@ def stationlist(request):
 def newstation(request):
     if request.POST:
         station_name = request.POST['station_name']
-        staion_code = request.POST['staion_code']
-
-        stationDetails.objects.create(station_name=station_name,staion_code=staion_code)
+        station_code = request.POST['station_code']
+        station_address = request.POST['station_address']
+        stationDetails.objects.create(station_name=station_name,station_code=station_code,station_address=station_address)
         return redirect('stationlist')
     return render(request,'newstation.html')
 
@@ -329,9 +329,13 @@ def editstation(request,id):
     station_id = stationDetails.objects.get(station_id=id)
     if request.POST:
         station_name = request.POST['station_name']
-        staion_code = request.POST['staion_code']
+        station_code = request.POST['station_code']
+        station_address = request.POST['station_address']
+
         station_id.station_name = station_name
-        station_id.staion_code = staion_code
+        station_id.station_code = station_code
+        station_id.station_address = station_address
+
         station_id.save()
 
         return redirect('stationlist')
