@@ -37,7 +37,10 @@ urlpatterns = [
 
     path('categorylist', views.categorylist, name='categorylist'),
     path('addcategory', views.addcategory, name='addcategory'),
-    path('editcategory', views.addcategory, name='editcategory'),
+    path('subcategorylist', views.subcategorylist, name='subcategorylist'),
+    path('addsubcategory', views.addsubcategory, name='addsubcategory'),
+    path('editcategory', views.editcategory, name='editcategory'),
+    path('editsubcategory', views.editsubcategory, name='editsubcategory'),
 
     # path('importproduct', views.importproduct, name='importproduct'),
     # path('barcode', views.barcode, name='barcode'),
@@ -72,7 +75,9 @@ urlpatterns = [
     path('addquotation',views.addquotation, name='addquotation'),
     path('newstation',views.newstation, name='newstation'),
     path('stationlist',views.stationlist, name='stationlist'),
-    path('editstation',views.editstation, name='editstation'),
+    path('editstation/<int:id>',views.editstation, name='editstation'),
+    path('deletestation/<int:id>',views.deletestation, name='deletestation'),
+
     path('editquotation',views.editQuotation, name='editQuotation'),
     path('editexpense',views.editExpense, name='editExpense'),
     path('profile',views.profile, name='profile'),
@@ -80,4 +85,8 @@ urlpatterns = [
     path('signin',views.signin, name='signin'),
     path('forgetpassword',views.forgetpassword, name='forgetpassword'),
     path('signup',views.signup, name='signup'),
+ 
+    path('api/assign_product/', views.assign_product, name='assignProduct'),  # Update this line
+    # path('api/assets/', views.AssetList, name='asset-list'),
+    path('api/assets/', views.AssetListView, name='asset-list'),
 ]
