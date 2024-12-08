@@ -3,24 +3,37 @@ package com.example.integration.activities;
 import java.util.List;
 
 public class Category {
-    private String name;
-    private List<String> subcategories;
+    private int category_id;
+    private String category_name;
+    private List<Subcategory> subcategories;
 
-    // Getters and Setters
-    public String getName() {
-        return name;
+    // Getter for category_id
+    public int getCategoryId() {
+        return category_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    // Setter for category_id
+    public void setCategoryId(int category_id) {
+        this.category_id = category_id;
     }
 
-    public List<String> getSubcategories() {
+    // Getter for category_name
+    public String getCategoryName() {
+        return category_name;
+    }
+
+    // Setter for category_name
+    public void setCategoryName(String category_name) {
+        this.category_name = category_name;
+    }
+
+    // Getter for subcategories
+    public List<Subcategory> getSubcategories() {
         return subcategories;
     }
 
-    public void setSubcategories(List<String> subcategories) {
+    // Setter for subcategories
+    public void setSubcategories(List<Subcategory> subcategories) {
         this.subcategories = subcategories;
     }
 }
-

@@ -46,7 +46,7 @@ def login_view(request):
                 # request.session['user_id'] = user.user_id
                 request.session['username'] = user.username
                 request.session['role'] = user.role.role  # Example custom field
-                request.session['full_name'] = user.full_name
+                request.session['full_name'] = user.first_name
 
                 # Log the user in
                 django_login(request, user)
@@ -66,22 +66,69 @@ def login_view(request):
     print(f"Serializer errors: {serializer.errors}")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def get_categories(request):
+    categories = AssetCategory.objects.all()
+    data = []
+    for category in categories:
+        subcategories = AssetSubCategory.objects.filter(category=category)
+        data.append({
+            "category_id": category.category_id,
+            "category_name": category.category_name,
+            "subcategories": [
+                {
+                    "sub_category_id": sub.sub_category_id,
+                    "sub_category_name": sub.sub_category_name
+                }
+                for sub in subcategories
+            ]
+        })
+    return Response(data, status=200)
+
+@api_view(['GET'])
+def get_condition_choices(request):
+    conditions = [condition[0] for condition in CONDITION_CHOICES]
+    return Response(conditions)
+
 @api_view(['POST'])
 def add_product(request):
     serializer = ProductSerializer(data=request.data)
     print(request.data)
-    if serializer.is_valid():
-        barcode = serializer.validated_data['barcode']
-        assetType = serializer.validated_data['asset_type']
+    
+    if not serializer.is_valid():
+        print("Validation Errors:", serializer.errors)
+        return Response(serializer.errors, status=400)
+    
+    else: 
+        # Extract validated data from the request
         assetName = serializer.validated_data['asset_name']
-        purchaseDate = serializer.validated_data['purchase_date']
         assetValue = serializer.validated_data['asset_value']
+        barcode = serializer.validated_data['barcode']
+        category = serializer.validated_data['category']
         condition = serializer.validated_data['condition']
-        location = serializer.validated_data['Location']
+        location = serializer.validated_data['location']
+        purchaseDate = serializer.validated_data['purchase_date']
+        subcategory = serializer.validated_data['subcategory']  # Assuming this is passed as subcategory_id
         
-        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location=location)
+        # Get the AssetSubCategory instance based on the provided subcategory_id
+        try:
+            subcategory = AssetSubCategory.objects.get(sub_category_name=subcategory)
+        except AssetSubCategory.DoesNotExist:
+            return Response({"error": "Subcategory not found"}, status=404)
+        
+        # Create a new Asset instance with the related subcategory
+        Asset.objects.create(
+            asset_name=assetName, 
+            barcode=barcode, 
+            asset_category=subcategory,  # This is the ForeignKey relation
+            purchase_date=purchaseDate, 
+            asset_value=assetValue, 
+            condition=condition, 
+            location=location
+        )
         
         return Response({"message": "Product added successfully!"}, status=201)
+    
     return Response(serializer.errors, status=400)
 
 @api_view(['GET'])

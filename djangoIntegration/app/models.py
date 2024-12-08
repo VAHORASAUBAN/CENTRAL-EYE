@@ -90,33 +90,23 @@ class Asset(models.Model):
     asset_status = models.CharField(max_length=20, choices=ASSET_STATUS_CHOICES, default='available')
 
     def save(self, *args, **kwargs):
-        # Check if the Asset is being created (not updated)
-        is_new = self._state.adding
-
-        # Get the previous status (if updating)
+    # Determine if the instance is being updated
         try:
-            existing_asset = Asset.objects.get(pk=self.pk)
+            existing_asset = Asset.objects.get(pk=self.pk)  # Fetch the previous state
             previous_status = existing_asset.asset_status
         except Asset.DoesNotExist:
             previous_status = None
 
         super().save(*args, **kwargs)  # Save the Asset instance first
 
-        # Ensure only one Maintenance record is created for new assets
-        if is_new and not Maintenance.objects.filter(asset=self).exists():
-            Maintenance.objects.create(
-                asset=self,
-                last_maintenance_date=self.purchase_date,  # Optionally use purchase_date as the initial date
-            )
-
-        # Handle logic for adding to ExpiredProduct table
+        # Handle ExpiredProduct logic
         if self.asset_status == 'expired' and previous_status != 'expired':
+            # Add to ExpiredProduct table if it is not already there
             ExpiredProduct.objects.get_or_create(asset=self)
-
-        # Handle logic for removing from ExpiredProduct table
-        elif self.asset_status != 'expired' and previous_status == 'expired':
+        elif previous_status == 'expired' and self.asset_status != 'expired':
+            # Remove from ExpiredProduct table if status changes from expired
             ExpiredProduct.objects.filter(asset=self).delete()
-
+            
     def __str__(self):
         return f"{self.barcode} - {self.asset_name} - {self.asset_status}"
 
@@ -154,17 +144,17 @@ class Maintenance(models.Model):
     maintenance_cost = models.CharField(max_length=255)
     return_date = models.DateField(null=True, blank=True)  # Add this field to capture return date
             
-    def save(self, *args, **kwargs):
-        # Calculate the next maintenance date if not set
-        if not self.next_maintenance_date and self.last_maintenance_date:
-            self.next_maintenance_date = self.last_maintenance_date + timedelta(days=180)
+    # def save(self, *args, **kwargs):
+    #     # Calculate the next maintenance date if not set
+    #     if not self.next_maintenance_date and self.last_maintenance_date:
+    #         self.next_maintenance_date = self.last_maintenance_date + timedelta(days=180)
 
-        # Update return date and asset status when coming back from maintenance
-        if self.return_date and self.asset:
-            self.asset.asset_status = 'available'  # Update asset status to "available"
-            self.asset.save()  # Save the asset changes
+    #     # Update return date and asset status when coming back from maintenance
+    #     if self.return_date and self.asset:
+    #         self.asset.asset_status = 'available'  # Update asset status to "available"
+    #         self.asset.save()  # Save the asset changes
 
-        super().save(*args, **kwargs)
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Maintenance for Asset: {self.asset} - Next Maintenance: {self.next_maintenance_date}"

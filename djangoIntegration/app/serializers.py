@@ -8,12 +8,13 @@ class LoginSerializer(serializers.Serializer):
 
 class ProductSerializer(serializers.Serializer):
     barcode = serializers.CharField(max_length=255)
-    asset_type = serializers.CharField(max_length=255)
     asset_name = serializers.CharField(max_length=255)
+    category = serializers.CharField(max_length=255)
+    subcategory = serializers.CharField(max_length=255)
     purchase_date = serializers.DateField()
     asset_value = serializers.CharField(max_length=255)
     condition = serializers.CharField(max_length=255)
-    # location = serializers.CharField(max_length=255)
+    location = serializers.CharField(max_length=255)
 
 class AssignSerializer(serializers.Serializer):
     barcode = serializers.CharField(max_length=255)
@@ -31,4 +32,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['full_name', 'role', 'station', 'contact_number']
+        fields = ['first_name', 'last_name', 'role', 'station', 'contact_number']

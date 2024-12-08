@@ -1,6 +1,7 @@
 package com.example.integration.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -148,9 +149,9 @@ public class User_Home_fragment extends Fragment {
         Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
 
         // Navigate to login screen (optional)
-        // Intent intent = new Intent(requireContext(), LoginActivity.class);
-        // startActivity(intent);
-        // requireActivity().finish();
+         Intent intent = new Intent(requireContext(), MainActivity.class);
+         startActivity(intent);
+         requireActivity().finish();
     }
 
     private void openrequestform() {
