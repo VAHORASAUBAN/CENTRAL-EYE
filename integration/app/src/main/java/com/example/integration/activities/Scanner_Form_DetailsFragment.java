@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,7 +28,11 @@ import com.example.integration.api.ProductDetails;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +52,8 @@ public class Scanner_Form_DetailsFragment extends Fragment {
     private EditText assetValueEditText;
     private EditText conditionEditText;
     private String mergedLocation;
+    private AutoCompleteTextView categoryDropdown;
+    private  AutoCompleteTextView subcategoryDropdown;
 
     public Scanner_Form_DetailsFragment() {
         // Required empty public constructor
@@ -86,17 +94,82 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         purchaseDateEditText = view.findViewById(R.id.purchaseDateEditText);
         assetValueEditText = view.findViewById(R.id.asset_value_input);
         conditionEditText = view.findViewById(R.id.condition_input);
+        categoryDropdown = view.findViewById(R.id.category);
+        subcategoryDropdown= view.findViewById(R.id.subcategory);
 
         // Set the scanned barcode
         if (scannedBarcode != null) {
             barcodeTextView.setText( scannedBarcode);
         }
 
+
+
+
+        // Fetch and set up categories and subcategories
+        fetchCategories(categoryDropdown, subcategoryDropdown);
+
+
+
+
         // Handle date picker for purchaseDateEditText
         purchaseDateEditText.setOnClickListener(v -> showDatePickerDialog());
 
         // Handle save button click
         view.findViewById(R.id.saveButton).setOnClickListener(v -> saveProductDetails());
+    }
+
+    private void fetchCategories(AutoCompleteTextView categoryDropdown, AutoCompleteTextView subcategoryDropdown) {
+
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        apiService.getCategories().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Category> categories = response.body();
+                    List<String> categoryNames = new ArrayList<>();
+                    Map<String, List<String>> subcategoryMap = new HashMap<>();
+
+                    for (Category category : categories) {
+                        categoryNames.add(category.getName());
+                        subcategoryMap.put(category.getName(), category.getSubcategories());
+                    }
+
+                    // Set up the category dropdown
+                    ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getContext(),
+                            android.R.layout.simple_dropdown_item_1line, categoryNames);
+                    categoryDropdown.setAdapter(categoryAdapter);
+
+                    // Handle category selection
+                    categoryDropdown.setOnItemClickListener((parent, view, position, id) -> {
+                        String selectedCategory = categoryNames.get(position);
+                        List<String> subcategories = subcategoryMap.get(selectedCategory);
+
+                        // Set up the subcategory dropdown
+                        if (subcategories != null) {
+                            ArrayAdapter<String> subcategoryAdapter = new ArrayAdapter<>(getContext(),
+                                    android.R.layout.simple_dropdown_item_1line, subcategories);
+                            subcategoryDropdown.setAdapter(subcategoryAdapter);
+                        } else {
+                            subcategoryDropdown.setAdapter(null); // Clear subcategory dropdown
+                        }
+                    });
+                } else {
+                    Toast.makeText(getContext(), "Failed to fetch categories", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error fetching categories: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
+
     }
 
     private void showDatePickerDialog() {
@@ -115,6 +188,13 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 }, year, month, day);
         datePickerDialog.show();
     }
+
+
+
+
+
+
+
 
     private void saveProductDetails() {
         // Collect all field values
@@ -185,6 +265,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             });
         }
     }
+
 
 
     @Override
