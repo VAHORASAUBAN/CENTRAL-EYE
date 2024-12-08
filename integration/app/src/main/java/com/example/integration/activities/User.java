@@ -1,18 +1,28 @@
 package com.example.integration.activities;
 
 public class User {
-    private String full_name;
+    private String first_name;
+    private String last_name;
     private String role;
     private String station;
     private String contact_number;
 
     // Getters and Setters
-    public String getFull_name() {
-        return full_name;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getRole() {

@@ -67,6 +67,8 @@
                                     </th>
                                     <th>Station Name</th>
                                     <th>Code</th>
+                                    <th>Address</th>
+
                                     <th>Action</th>
                                 </tr>
 
@@ -81,7 +83,9 @@
                                         </label>
                                     </td>
                                     <td>{{i.station_name}}</td>
-                                    <td>{{i.staion_code}} </td>
+                                    <td>{{i.station_code}} </td>
+                                    <td>{{i.station_address}} </td>
+
                                   
                                     <td>
                                         <a class="me-3" href="{% url 'editstation' i.station_id %}">

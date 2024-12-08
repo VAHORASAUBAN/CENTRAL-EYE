@@ -44,13 +44,12 @@ public class Scanner_Form_DetailsFragment extends Fragment {
 
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
-    private EditText assetTypeEditText;
     private EditText purchaseDateEditText;
     private String scannedBarcode;
     private TextView barcodeTextView;
     private EditText assetNameEditText;
     private EditText assetValueEditText;
-    private EditText conditionEditText;
+    private AutoCompleteTextView conditionDropdown;
     private String mergedLocation;
     private AutoCompleteTextView categoryDropdown;
     private  AutoCompleteTextView subcategoryDropdown;
@@ -88,12 +87,11 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
         getCurrentLocation();
 
-        assetTypeEditText = view.findViewById(R.id.asset_type_input);
         assetNameEditText = view.findViewById(R.id.model_name_input);
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
         purchaseDateEditText = view.findViewById(R.id.purchaseDateEditText);
         assetValueEditText = view.findViewById(R.id.asset_value_input);
-        conditionEditText = view.findViewById(R.id.condition_input);
+        conditionDropdown = view.findViewById(R.id.conditionValue);
         categoryDropdown = view.findViewById(R.id.category);
         subcategoryDropdown= view.findViewById(R.id.subcategory);
 
@@ -102,14 +100,11 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             barcodeTextView.setText( scannedBarcode);
         }
 
-
-
-
         // Fetch and set up categories and subcategories
         fetchCategories(categoryDropdown, subcategoryDropdown);
 
-
-
+        // Fetch conditions
+        fetchConditions(conditionDropdown);
 
         // Handle date picker for purchaseDateEditText
         purchaseDateEditText.setOnClickListener(v -> showDatePickerDialog());
@@ -119,7 +114,6 @@ public class Scanner_Form_DetailsFragment extends Fragment {
     }
 
     private void fetchCategories(AutoCompleteTextView categoryDropdown, AutoCompleteTextView subcategoryDropdown) {
-
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
         apiService.getCategories().enqueue(new Callback<List<Category>>() {
             @Override
@@ -127,30 +121,32 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Category> categories = response.body();
                     List<String> categoryNames = new ArrayList<>();
-                    Map<String, List<String>> subcategoryMap = new HashMap<>();
+                    Map<String, List<Subcategory>> subcategoryMap = new HashMap<>();
 
                     for (Category category : categories) {
-                        categoryNames.add(category.getName());
-                        subcategoryMap.put(category.getName(), category.getSubcategories());
+                        categoryNames.add(category.getCategoryName());
+                        subcategoryMap.put(category.getCategoryName(), category.getSubcategories());
                     }
 
-                    // Set up the category dropdown
                     ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getContext(),
                             android.R.layout.simple_dropdown_item_1line, categoryNames);
                     categoryDropdown.setAdapter(categoryAdapter);
 
-                    // Handle category selection
                     categoryDropdown.setOnItemClickListener((parent, view, position, id) -> {
                         String selectedCategory = categoryNames.get(position);
-                        List<String> subcategories = subcategoryMap.get(selectedCategory);
+                        List<Subcategory> subcategories = subcategoryMap.get(selectedCategory);
 
-                        // Set up the subcategory dropdown
                         if (subcategories != null) {
+                            List<String> subcategoryNames = new ArrayList<>();
+                            for (Subcategory sub : subcategories) {
+                                subcategoryNames.add(sub.getSubCategoryName());
+                            }
+
                             ArrayAdapter<String> subcategoryAdapter = new ArrayAdapter<>(getContext(),
-                                    android.R.layout.simple_dropdown_item_1line, subcategories);
+                                    android.R.layout.simple_dropdown_item_1line, subcategoryNames);
                             subcategoryDropdown.setAdapter(subcategoryAdapter);
                         } else {
-                            subcategoryDropdown.setAdapter(null); // Clear subcategory dropdown
+                            subcategoryDropdown.setAdapter(null);
                         }
                     });
                 } else {
@@ -163,13 +159,28 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 Toast.makeText(getContext(), "Error fetching categories: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    private void fetchConditions(AutoCompleteTextView conditionDropdown) {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        apiService.getConditionChoices().enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<String> conditionList = response.body();
+                    ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(getContext(),
+                            android.R.layout.simple_dropdown_item_1line, conditionList);
+                    conditionDropdown.setAdapter(conditionAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Failed to fetch conditions", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-
-
-
-
-
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error fetching conditions: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showDatePickerDialog() {
@@ -189,29 +200,23 @@ public class Scanner_Form_DetailsFragment extends Fragment {
         datePickerDialog.show();
     }
 
-
-
-
-
-
-
-
     private void saveProductDetails() {
         // Collect all field values
-        String assetType = assetTypeEditText.getText().toString().trim();
         String assetName = assetNameEditText.getText().toString().trim();
         String purchaseDate = purchaseDateEditText.getText().toString().trim();
         String assetValue = assetValueEditText.getText().toString().trim();
-        String condition = conditionEditText.getText().toString().trim();
+        String condition = conditionDropdown.getText().toString().trim();
+        String selectedCategory = categoryDropdown.getText().toString().trim();
+        String selectedSubcategory = subcategoryDropdown.getText().toString().trim();
 
         // Validate inputs
-        if (assetType.isEmpty() || assetName.isEmpty() || purchaseDate.isEmpty() || assetValue.isEmpty() || condition.isEmpty()) {
+        if (assetName.isEmpty() || purchaseDate.isEmpty() || assetValue.isEmpty() || condition.isEmpty() || selectedCategory.isEmpty() || selectedSubcategory.isEmpty()) {
             Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Create ProductDetails object
-        ProductDetails productDetails = new ProductDetails(scannedBarcode, assetType, assetName, purchaseDate, assetValue, condition, mergedLocation);
+        // Create ProductDetails object with category and subcategory
+        ProductDetails productDetails = new ProductDetails(scannedBarcode, assetName, purchaseDate, assetValue, condition, mergedLocation, selectedCategory, selectedSubcategory);
 
         // Initialize Retrofit and make the API call
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
@@ -221,7 +226,6 @@ public class Scanner_Form_DetailsFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Asset saved successfully!", Toast.LENGTH_SHORT).show();
                     navigateToProductList();
-
                 } else {
                     Toast.makeText(getContext(), "Failed to save asset.", Toast.LENGTH_SHORT).show();
                 }
@@ -233,6 +237,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             }
         });
     }
+
 
     private void navigateToProductList() {
         Fragment productlistaddFragment = new productlistadd();
@@ -265,8 +270,6 @@ public class Scanner_Form_DetailsFragment extends Fragment {
             });
         }
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

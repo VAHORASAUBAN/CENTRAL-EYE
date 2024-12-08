@@ -1,7 +1,9 @@
 package com.example.integration.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -122,7 +124,13 @@ public class Home_fragment extends Fragment {
     }
 
     private void performLogout() {
+        SharedPreferences.Editor editor = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE).edit();
+        editor.clear(); // Clear session
+        editor.apply();
+
         Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+
+        // Navigate to login screen (optional)
         Intent intent = new Intent(requireContext(), MainActivity.class);
         startActivity(intent);
         requireActivity().finish();
