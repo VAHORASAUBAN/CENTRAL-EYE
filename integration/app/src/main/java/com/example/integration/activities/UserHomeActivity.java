@@ -24,6 +24,7 @@ public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     User_Home_fragment user_homeFragment = new User_Home_fragment();
     User_Profile_fragment user_profileFragment = new User_Profile_fragment();
+    User_notification userNotification=new User_notification();
     User_Add_Product_Scanner user_addProductScanner = User_Add_Product_Scanner.newInstance();
     private SharedPreferences sharedPreferences;
     private FloatingActionButton fab;
@@ -66,8 +67,8 @@ public class UserHomeActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_products) {
                     replaceFragmentWithAnimation(user_addProductScanner, R.anim.fade_in, R.anim.fade_out);
                     return true;
-                } else if (id == R.id.nav_profile) {
-                    replaceFragmentWithAnimation(user_profileFragment, R.anim.slide_in_left, R.anim.slide_out_right);
+                } else if (id == R.id.nav_notify) {
+                    replaceFragmentWithAnimation(userNotification, R.anim.slide_in_left, R.anim.slide_out_right);
                     return true;
                 }
                 return false;
