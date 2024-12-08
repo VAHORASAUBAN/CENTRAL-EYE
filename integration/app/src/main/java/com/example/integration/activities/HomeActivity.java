@@ -22,6 +22,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private final Fragment homeFragment = new Home_fragment();
     private final Fragment profileFragment = new Profile_fragment();
+    private final Fragment adminNotificationFragment = new Adminnotification();
+
     private final Fragment addProductScanner = new Add_Product_Scanner();
 
     @Override
@@ -54,8 +56,8 @@ public class HomeActivity extends AppCompatActivity {
             replaceFragment(homeFragment);
         } else if (id == R.id.nav_products) {
             replaceFragment(addProductScanner);
-        } else if (id == R.id.nav_profile) {
-            replaceFragment(profileFragment);
+        } else if (id == R.id.nav_notify) {
+            replaceFragment(adminNotificationFragment);
         }
         return true;
     }

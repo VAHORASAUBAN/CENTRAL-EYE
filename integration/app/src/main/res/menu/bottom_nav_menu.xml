@@ -10,7 +10,7 @@
         android:title=""
         android:enabled="false"/>
     <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/baseline_person_24"
-        android:title="Profile" />
+        android:id="@+id/nav_notify"
+        android:icon="@drawable/baseline_notifications_24"
+        android:title="Notifications" />
 </menu>

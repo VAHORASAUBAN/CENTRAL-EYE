@@ -2,6 +2,7 @@ package com.example.integration.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,13 +18,17 @@ import android.widget.Button;
 
 import com.example.integration.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     User_Home_fragment user_homeFragment = new User_Home_fragment();
     User_Profile_fragment user_profileFragment = new User_Profile_fragment();
+    User_notification userNotification=new User_notification();
     User_Add_Product_Scanner user_addProductScanner = User_Add_Product_Scanner.newInstance();
     private SharedPreferences sharedPreferences;
+    private FloatingActionButton fab;
+
     private TextView welcomeTextView;
 
     @Override
@@ -39,6 +44,8 @@ public class UserHomeActivity extends AppCompatActivity {
 
         // Bind views
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        fab = findViewById(R.id.nav_products);
+
 //        Button logoutButton = findViewById(R.id.logoutButton);
 
         // Set welcome message
@@ -60,8 +67,8 @@ public class UserHomeActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_products) {
                     replaceFragmentWithAnimation(user_addProductScanner, R.anim.fade_in, R.anim.fade_out);
                     return true;
-                } else if (id == R.id.nav_profile) {
-                    replaceFragmentWithAnimation(user_profileFragment, R.anim.slide_in_left, R.anim.slide_out_right);
+                } else if (id == R.id.nav_notify) {
+                    replaceFragmentWithAnimation(userNotification, R.anim.slide_in_left, R.anim.slide_out_right);
                     return true;
                 }
                 return false;
@@ -80,6 +87,18 @@ public class UserHomeActivity extends AppCompatActivity {
 //            startActivity(intent);
 //            finish();
 //        });
+        // Handle FloatingActionButton click
+        fab.setOnClickListener(v -> {
+            // Navigate to the Add Product Scanner fragment
+            replaceFragment(user_addProductScanner);
+        });
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 
     /**
