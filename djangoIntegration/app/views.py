@@ -10,6 +10,9 @@ from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
 from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer
 from django.utils import timezone
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 @api_view(['POST'])
@@ -190,7 +193,21 @@ def get_totals(request):
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['GET'])
+def get_product_by_barcode(request, barcode):
+    try:
+        # Try to find the product with the given barcode
+        product = Asset.objects.get(barcode=barcode)
 
+        serializer = AssetSerializer(product, many=False)
+
+        print(serializer.data)  # Debugging log to verify data
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Asset.DoesNotExist:
+        # If no product is found with the given barcode
+        return JsonResponse({'status': 'error', 'message': 'Product not found with this barcode.'})
+    
 def productlist(request):
     return render(request,'productlist.html')
 
@@ -203,14 +220,41 @@ def addproduct(request):
     return render(request,'addproduct.html')
 
 def categorylist(request):
-    return render(request,'categorylist.html')
+    categories=AssetCategory.objects.all()
+    return render(request,'categorylist.html',{'categories':categories})
 
 def addcategory(request):
+    if request.method=="POST":
+        category=request.POST.get('category')
+        AssetCategory.objects.create(category_name=category)
+        print(category)
+        return redirect("categorylist")
+        
+        
     return render(request,'addcategory.html')
 def subcategorylist(request):
-    return render(request,'subcategorylist.html')
+    subcategories=AssetSubCategory.objects.all()
+    return render(request,'subcategorylist.html',{'subcategories':subcategories})
+
 def addsubcategory(request):
-    return render(request,'subaddcategory.html')
+    if request.method == 'POST':
+        # Get data from the POST request
+        subcategory=request.POST.get('subcategory')
+        categories = request.POST.get('category_name')
+        print(subcategory)
+        # Get related Role and Station objects
+        categoryGet = AssetCategory.objects.get(category_name=categories)
+        AssetSubCategory.objects.create(
+            category=categoryGet,
+            sub_category_name=subcategory,
+        )
+        
+        return redirect('subcategorylist')
+
+    categories = AssetCategory.objects.all()
+    
+    return render(request,'subaddcategory.html',{'categories':categories})
+
 def editcategory(request):
     return render(request,'editcategory.html')
 def editsubcategory(request):
@@ -269,12 +313,16 @@ def aa(request):
 def newuser(request):
     if request.method == 'POST':
         # Get data from the POST request
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
         username = request.POST.get('username')
         role_name = request.POST.get('role_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
         station_name = request.POST.get('station_name')
         mobile = request.POST.get('mobile')
+        is_active = request.POST.get('is_active') == 'on'  # Checkbox returns 'on' if checked
+
         print(username)
         print(station_name)
         print(email)
@@ -283,13 +331,16 @@ def newuser(request):
         station = stationDetails.objects.get(station_name=station_name)
 
         User.objects.create(
+            first_name=firstname,
+            last_name=lastname,
             username=username,
             role=roleGet,
             email=email,
             password=password,
             station=station,
             contact_number=mobile,
-            full_name="amaan shaikh"
+            is_active=is_active,
+
         )
         
         return redirect('newuser')
