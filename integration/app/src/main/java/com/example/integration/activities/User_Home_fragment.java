@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -61,7 +62,16 @@ public class User_Home_fragment extends Fragment {
         ImageView profileImageButton = view.findViewById(R.id.profile_image);
         CardView squareBox1 = view.findViewById(R.id.squareBox1);
         CardView squareBox2 = view.findViewById(R.id.squareBox2);
+        ImageButton scanner_icon = view.findViewById(R.id.scanner_icon);
 
+        scanner_icon.setOnClickListener(v -> {
+            // Navigate to ProductListAddFragment
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new SearchScanner())
+                    .addToBackStack(null) // Optional, adds transaction to back stack
+                    .commit();
+        });
         // Set welcome message
 //        welcomeTextView.setText(username + "!");
 

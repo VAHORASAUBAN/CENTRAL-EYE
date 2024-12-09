@@ -240,7 +240,7 @@ public class Scanner_Form_DetailsFragment extends Fragment {
 
 
     private void navigateToProductList() {
-        Fragment productlistaddFragment = new productlistadd();
+        Fragment productlistaddFragment = new ProductListFragment();
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, productlistaddFragment)
