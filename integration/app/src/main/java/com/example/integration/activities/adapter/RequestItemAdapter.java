@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.adapter;
 
 
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
+import com.example.integration.activities.model.RequestItemModel;
 
 import java.util.List;
 

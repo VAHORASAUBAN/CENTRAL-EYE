@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.integration.R;
+import com.example.integration.activities.Profile_fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

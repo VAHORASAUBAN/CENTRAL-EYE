@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +21,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.integration.R;
+import com.example.integration.activities.MainActivity;
+import com.example.integration.activities.ProductListFragment;
+import com.example.integration.activities.SearchScanner;
+import com.example.integration.activities.user.UserListAdd;
+import com.example.integration.activities.user.User_Profile_fragment;
 import com.example.integration.api.ApiService;
 import com.example.integration.api.TotalsResponse;
 import com.example.integration.network.RetrofitClient;

@@ -34,10 +34,10 @@
         </activity>
 
         <!-- Home Activity -->
-        <activity android:name=".activities.HomeActivity"
+        <activity android:name=".activities.admin.HomeActivity"
             android:exported="true" />
 
-        <activity android:name=".activities.UserHomeActivity"
+        <activity android:name=".activities.user.UserHomeActivity"
             android:exported="true" />
     </application>
 </manifest>

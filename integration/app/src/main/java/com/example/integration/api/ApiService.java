@@ -1,8 +1,8 @@
 package com.example.integration.api;
 
-import com.example.integration.activities.Product;
-import com.example.integration.activities.User;
-import com.example.integration.activities.Category;
+import com.example.integration.activities.model.Product;
+import com.example.integration.activities.model.User;
+import com.example.integration.activities.model.Category;
 
 import java.util.List;
 

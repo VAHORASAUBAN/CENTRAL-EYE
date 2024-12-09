@@ -1,6 +1,5 @@
-package com.example.integration.activities;
+package com.example.integration.activities.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
+import com.example.integration.activities.model.RequestModel;
+import com.example.integration.activities.admin.Request_details;
 
 import java.util.List;
 

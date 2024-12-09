@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.user;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,9 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 
 import com.example.integration.R;
+import com.example.integration.activities.MainActivity;
+import com.example.integration.activities.ProductListFragment;
+import com.example.integration.activities.SearchScanner;
 
 public class User_Home_fragment extends Fragment {
 

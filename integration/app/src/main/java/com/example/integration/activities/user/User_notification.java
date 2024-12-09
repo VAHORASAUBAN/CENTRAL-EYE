@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.user;
 
 import android.os.Bundle;
 
@@ -12,17 +12,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.integration.R;
+import com.example.integration.activities.adapter.ProductNotificationAdapter;
+import com.example.integration.activities.adapter.RequestListAdapter;
+import com.example.integration.activities.model.Notification;
+import com.example.integration.activities.model.RequestModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Adminnotification#newInstance} factory method to
+ * Use the {@link User_notification#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Adminnotification extends Fragment {
-
+public class User_notification extends Fragment {
 
     private RecyclerView requestRecyclerView;
     private RequestListAdapter requestAdapter;
@@ -31,6 +34,8 @@ public class Adminnotification extends Fragment {
     private TextView productInfoTab;
     private List<RequestModel> requestList;
     private List<Notification> notificationList;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,7 +45,7 @@ public class Adminnotification extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Adminnotification() {
+    public User_notification() {
         // Required empty public constructor
     }
 
@@ -50,11 +55,11 @@ public class Adminnotification extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Adminnotification.
+     * @return A new instance of fragment User_notification.
      */
     // TODO: Rename and change types and number of parameters
-    public static Adminnotification newInstance(String param1, String param2) {
-        Adminnotification fragment = new Adminnotification();
+    public static User_notification newInstance(String param1, String param2) {
+        User_notification fragment = new User_notification();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,9 +79,8 @@ public class Adminnotification extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_adminnotification, container, false);
-
-        // Initialize views
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_user_notification, container, false);
         requestRecyclerView = view.findViewById(R.id.requestRecyclerView);
         newRequestTab = view.findViewById(R.id.newrequest);
         productInfoTab = view.findViewById(R.id.Product_information);
@@ -126,6 +130,7 @@ public class Adminnotification extends Fragment {
         return view;
     }
 
+
     private void showNewRequestRecyclerView() {
         // Show New Request RecyclerView
         requestRecyclerView.setVisibility(View.VISIBLE);
@@ -151,6 +156,10 @@ public class Adminnotification extends Fragment {
         otherTab.setBackgroundResource(R.drawable.tab_background_unselected); // Replace with actual drawable
         otherTab.setTextColor(getResources().getColor(R.color.black)); // Adjust colors
     }
+
+
+
+
 
 
 }
