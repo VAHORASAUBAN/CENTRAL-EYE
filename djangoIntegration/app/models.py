@@ -105,6 +105,12 @@ class Asset(models.Model):
         elif previous_status == 'expired' and self.asset_status != 'expired':
             # Remove from ExpiredProduct table if status changes from expired
             ExpiredProduct.objects.filter(asset=self).delete()
+        elif self.asset_status == 'in-maintenance' and previous_status != 'in-maintenance':
+            # Remove from ExpiredProduct table if status changes from expired
+            Maintenance.objects.get_or_create(asset=self)
+        elif previous_status == 'in-maintenance' and self.asset_status != 'in-maintenance':
+            # Remove from ExpiredProduct table if status changes from expired
+            Maintenance.objects.filter(asset=self).delete()
             
     def __str__(self):
         return f"{self.barcode} - {self.asset_name} - {self.asset_status}"
