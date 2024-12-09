@@ -91,8 +91,6 @@ public class ProductListFragment extends Fragment {
         TextView barcodeTab = view.findViewById(R.id.barcode);
 
         ImageView filterIcon = view.findViewById(R.id.filter);
-        highlightTab(allTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
-
         List<String> categories = Arrays.asList("Peripheral", "Category 2", "Category 3");  // Example categories
         Map<String, List<String>> subcategories = new HashMap<>();
         subcategories.put("Peripheral", Arrays.asList("Mouse", "Keyboard"));
@@ -131,32 +129,30 @@ public class ProductListFragment extends Fragment {
 
                     // Set click listeners for each tab
                     allTab.setOnClickListener(v -> {
-                        highlightTab(allTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
+                        highlightTab(allTab, availableTab, inUseTab, maintainenceTab,expiredTab, barcodeTab);
                         updateProductList(recyclerView, allProducts); // Show all products
                     });
 
                     availableTab.setOnClickListener(v -> {
-                        highlightTab(availableTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
+                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
                         fetchFilteredProducts(recyclerView, "available");  // Fetch available products
                     });
 
                     inUseTab.setOnClickListener(v -> {
-                        highlightTab(inUseTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
-                        fetchFilteredProducts(recyclerView, "in-use");  // Fetch in-use products
+                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab, expiredTab, barcodeTab);
+                        fetchFilteredProducts(recyclerView, "in-use");  // Fetch available products
                     });
 
                     maintainenceTab.setOnClickListener(v -> {
-                        highlightTab(maintainenceTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
+                        highlightTab(maintainenceTab, allTab, availableTab, inUseTab, barcodeTab);
                         fetchFilteredProducts(recyclerView, "in-maintenance");
                     });
-
                     expiredTab.setOnClickListener(v -> {
-                        highlightTab(expiredTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
+                        highlightTab(expiredTab, maintainenceTab, allTab, availableTab, inUseTab, barcodeTab);
                         fetchFilteredProducts(recyclerView, "expired");
                     });
-
                     barcodeTab.setOnClickListener(v -> {
-                        highlightTab(barcodeTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
+                        highlightTab(barcodeTab, expiredTab,maintainenceTab, allTab, availableTab, inUseTab);
                         fetchFilteredProducts(recyclerView, "barcode-remaining");
                     });
 
@@ -238,15 +234,7 @@ public class ProductListFragment extends Fragment {
 //    }
 
     private void navigateToProductDescription(Product product) {
-        ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(
-                product.getAsset_name(),
-                product.getBarcode(),
-                product.getPurchase_date(),
-                product.getAsset_category(),
-                product.getAsset_value(),
-                product.getCondition(),
-                product.getLocation()
-        );
+        ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(product);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -272,28 +260,16 @@ public class ProductListFragment extends Fragment {
     }
 
 
-    //    private void highlightTab(TextView selectedTab, TextView... otherTabs) {
-//        // Highlight the selected tab
-//        selectedTab.setBackgroundResource(R.drawable.tab_background_selected); // Use rounded corner drawable
-//        selectedTab.setTextColor(getResources().getColor(R.color.white));
-//
-//        // Reset other tabs
-//        for (TextView tab : otherTabs) {
-//            tab.setBackgroundResource(R.drawable.tab_background_unselected); // Use white background
-//            tab.setTextColor(getResources().getColor(R.color.black));
-//        }
-//    }
-    private void highlightTab(TextView selectedTab, TextView... allTabs) {
-        for (TextView tab : allTabs) {
-            if (tab == selectedTab) {
-                tab.setBackgroundResource(R.drawable.tab_background_selected); // Selected tab style
-                tab.setTextColor(getResources().getColor(R.color.white));
-            } else {
-                tab.setBackgroundResource(R.drawable.tab_background_unselected); // Unselected tab style
-                tab.setTextColor(getResources().getColor(R.color.black));
-            }
+    private void highlightTab(TextView selectedTab, TextView... otherTabs) {
+        // Highlight the selected tab
+        selectedTab.setBackgroundResource(R.drawable.tab_background_selected); // Use rounded corner drawable
+        selectedTab.setTextColor(getResources().getColor(R.color.white));
+
+        // Reset other tabs
+        for (TextView tab : otherTabs) {
+            tab.setBackgroundResource(R.drawable.tab_background_unselected); // Use white background
+            tab.setTextColor(getResources().getColor(R.color.black));
         }
     }
-
 
 }
