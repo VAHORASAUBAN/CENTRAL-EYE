@@ -117,7 +117,7 @@ def add_product(request):
             return Response({"error": "Subcategory not found"}, status=404)
         
         # Create a new Asset instance with the related subcategory
-        Asset.objects.create(
+        asset = Asset.objects.create(
             asset_name=assetName, 
             barcode=barcode, 
             asset_category=subcategory,  # This is the ForeignKey relation
@@ -126,6 +126,13 @@ def add_product(request):
             condition=condition, 
             location=location
         )
+        
+        # Maintenance.objects.create(
+        #     asset=asset,
+        #     last_maintenance_date=asset.purchase_date,
+        #     next_maintenance_date=asset.purchase_date + timedelta(days=180),  # Example: 180 days after purchase
+        #     maintenance_cost='N/A',  # Set a default cost or pass it from the request
+        # )
         
         return Response({"message": "Product added successfully!"}, status=201)
     
@@ -142,9 +149,15 @@ def AssetListView(request):
     filter_type = request.query_params.get('filter')
 
     if filter_type == 'available':
-        assets = Asset.objects.filter(assign_to__isnull=True)
+        assets = Asset.objects.filter(asset_status='available')
     elif filter_type == 'in-use':
-        assets = Asset.objects.filter(assign_to__isnull=False)
+        assets = Asset.objects.filter(asset_status='in-use')
+    elif filter_type == 'in-maintenance':
+        assets = Asset.objects.filter(asset_status='in-maintenance')
+    elif filter_type == 'expired':
+        assets = Asset.objects.filter(asset_status='expired')
+    elif filter_type == 'barcode-remaining':
+        assets = Asset.objects.filter(barcode__isnull=True)
     else:
         assets = Asset.objects.all()
 
@@ -377,26 +390,31 @@ from django.core.exceptions import ObjectDoesNotExist
 def assign_product(request):
     # Deserialize the incoming data
     serializer = AssignSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid():
         # Extract the necessary fields
         barcode = serializer.validated_data['barcode']
         returnDate = serializer.validated_data['return_date']
         user = serializer.validated_data['username']
+        location = serializer.validated_data['location']
+        print(user)
         
         try:
             # Fetch the asset from the database
             asset = Asset.objects.get(barcode=barcode)
             
             if asset.assign_to is None:    
+                user = User.objects.get(username=user)
                 # Create a new Allocation object and save it to the database
                 allocation = Allocation.objects.create(
-                    asset_barcode=barcode,
+                    asset=asset,
                     user=user,
-                    return_date=returnDate,
-                    assign_location="NULL"
+                    expected_return_date=returnDate,
+                    assign_location=location
                 )
                 
                 asset.assign_to = user
+                asset.asset_status = 'in-use'
                 asset.save()
                 
                 return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
@@ -405,6 +423,7 @@ def assign_product(request):
         except ObjectDoesNotExist:
             return Response({"message": "Product not found with barcode!"}, status=404)
     else:
+        print("Validation Errors:", serializer.errors)
         return Response(serializer.errors, status=400)
 
 

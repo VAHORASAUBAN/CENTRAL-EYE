@@ -2,9 +2,11 @@ package com.example.integration.activities;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,12 +19,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.integration.R;
 import com.example.integration.api.ApiService;
 import com.example.integration.api.AssignProduct;
 import com.example.integration.network.RetrofitClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONObject;
 
@@ -34,6 +40,9 @@ import retrofit2.Response;
 
 public class User_Scanner_Form_DetailsFragment extends Fragment {
 
+    private FusedLocationProviderClient fusedLocationClient;
+
+    private String mergedLocation;
     private static final String ARG_SCANNED_BARCODE = "scannedBarcode";
 
     private SharedPreferences sharedPreferences;
@@ -59,7 +68,7 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
         if (getArguments() != null) {
             scannedBarcode = getArguments().getString(ARG_SCANNED_BARCODE);
         }
-        sharedPreferences = requireContext().getSharedPreferences("user_prefs", MODE_PRIVATE);
+        sharedPreferences = requireContext().getSharedPreferences("Username", MODE_PRIVATE);
     }
 
     @Override
@@ -71,6 +80,8 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        getCurrentLocation();
 
         // Initialize views
         barcodeTextView = view.findViewById(R.id.barcodeTextView);
@@ -117,7 +128,7 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
             return;
         }
 
-        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username);
+        AssignProduct assignProduct = new AssignProduct(scannedBarcode, returnDate, username, mergedLocation);
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
         // Make API call
@@ -150,5 +161,28 @@ public class User_Scanner_Form_DetailsFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to assign product. Try again.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void getCurrentLocation() {
+        // Check permissions
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Request permission
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+        } else {
+            // Permission granted, get location
+            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    // Combine latitude and longitude into a single variable
+                    mergedLocation = latitude + "," + longitude;
+                    Toast.makeText(getContext(), "Location captured: " + mergedLocation, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(e -> {
+                Toast.makeText(getContext(), "Error fetching location: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
+        }
     }
 }

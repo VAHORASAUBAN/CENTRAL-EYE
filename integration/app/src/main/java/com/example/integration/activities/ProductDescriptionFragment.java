@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -72,6 +73,16 @@ public class ProductDescriptionFragment extends Fragment {
         ((TextView) view.findViewById(R.id.assetValue)).setText(assetValue);
         ((TextView) view.findViewById(R.id.conditionValue)).setText(condition);
 //        ((TextView) view.findViewById(R.id.locationValue)).setText(location);
+
+        ImageButton backBtn = view.findViewById(R.id.backbtn);
+        backBtn.setOnClickListener(v -> {
+            // Navigate to ProductListAddFragment
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ProductListFragment())
+                    .addToBackStack(null) // Optional, adds transaction to back stack
+                    .commit();
+        });
 
         return view;
     }
