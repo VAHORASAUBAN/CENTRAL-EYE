@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -42,5 +43,8 @@ public interface ApiService {
 
     @GET("api/users/") // Replace with your endpoint
     Call<List<User>> getUsers();
+
+    @GET("api/products/{barcode}/")
+    Call<Product> getProductByBarcode(@Path("barcode") String barcode);
 
 }
