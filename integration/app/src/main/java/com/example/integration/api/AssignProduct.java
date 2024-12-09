@@ -5,12 +5,14 @@ public class AssignProduct {
     private String barcode;
     private String return_date;
     private String username;     // New field for username
+    private String location;     // New field for location
 
     // Constructor (updated to use only three parameters)
-    public AssignProduct(String barcode, String returnDateEditText, String username) {
+    public AssignProduct(String barcode, String returnDateEditText, String username, String location) {
         this.barcode = barcode;
         this.return_date = returnDateEditText;
         this.username = username;
+        this.location = location;
     }
 
     // Getters and Setters for all fields
@@ -37,4 +39,12 @@ public class AssignProduct {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
 }

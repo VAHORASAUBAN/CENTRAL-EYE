@@ -86,6 +86,7 @@ public class ProductListFragment extends Fragment {
         TextView inUseTab = view.findViewById(R.id.in_use);
         TextView maintainenceTab = view.findViewById(R.id.maintainence);
         TextView expiredTab = view.findViewById(R.id.expired);
+        TextView barcodeTab = view.findViewById(R.id.barcode);
 
         ImageView filterIcon = view.findViewById(R.id.filter);
         List<String> categories = Arrays.asList("Peripheral", "Category 2", "Category 3");  // Example categories
@@ -126,27 +127,31 @@ public class ProductListFragment extends Fragment {
 
                     // Set click listeners for each tab
                     allTab.setOnClickListener(v -> {
-                        highlightTab(allTab, availableTab, inUseTab, maintainenceTab,expiredTab);
+                        highlightTab(allTab, availableTab, inUseTab, maintainenceTab,expiredTab, barcodeTab);
                         updateProductList(recyclerView, allProducts); // Show all products
                     });
 
                     availableTab.setOnClickListener(v -> {
-                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab, expiredTab);
+                        highlightTab(availableTab, allTab, inUseTab, maintainenceTab, expiredTab, barcodeTab);
                         fetchFilteredProducts(recyclerView, "available");  // Fetch available products
                     });
 
                     inUseTab.setOnClickListener(v -> {
-                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab, expiredTab);
+                        highlightTab(inUseTab, allTab, availableTab, maintainenceTab, expiredTab, barcodeTab);
                         fetchFilteredProducts(recyclerView, "in-use");  // Fetch available products
                     });
 
                     maintainenceTab.setOnClickListener(v -> {
-                        highlightTab(maintainenceTab, allTab, availableTab, inUseTab);
-                        updateProductList(recyclerView, filterProductsByStatus(allProducts, "Maintenance"));
+                        highlightTab(maintainenceTab, allTab, availableTab, inUseTab, barcodeTab);
+                        fetchFilteredProducts(recyclerView, "in-maintenance");
                     });
-                        expiredTab.setOnClickListener(v -> {
-                        highlightTab(expiredTab,maintainenceTab, allTab, availableTab, inUseTab);
-                        updateProductList(recyclerView, filterProductsByStatus(allProducts, "expired"));
+                    expiredTab.setOnClickListener(v -> {
+                        highlightTab(expiredTab, maintainenceTab, allTab, availableTab, inUseTab, barcodeTab);
+                        fetchFilteredProducts(recyclerView, "expired");
+                    });
+                    barcodeTab.setOnClickListener(v -> {
+                        highlightTab(barcodeTab, expiredTab,maintainenceTab, allTab, availableTab, inUseTab);
+                        fetchFilteredProducts(recyclerView, "barcode-remaining");
                     });
 
 

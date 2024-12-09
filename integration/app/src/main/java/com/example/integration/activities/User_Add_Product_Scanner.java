@@ -1,5 +1,8 @@
 package com.example.integration.activities;
 
+import android.Manifest;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +12,27 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.integration.R;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 public class User_Add_Product_Scanner extends Fragment {
-
+    private static final int REQUEST_CHECK_SETTINGS = 1002;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 1001;
     private DecoratedBarcodeView barcodeScannerView;
     private TextView scannedValueTv;
 
@@ -44,9 +59,14 @@ public class User_Add_Product_Scanner extends Fragment {
         barcodeScannerView = view.findViewById(R.id.barcode_scanner);
         scannedValueTv = view.findViewById(R.id.scannedValueTv);
 
-        // Ensure the UI components are correctly bound
-        if (barcodeScannerView == null || scannedValueTv == null) {
-            throw new IllegalStateException("Missing required views in layout: barcodeScannerView or scannedValueTv");
+        // Check camera and location permissions
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            checkLocationSettings(); // Check location settings
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_REQUEST_CODE);
         }
 
         // Set up the barcode scanner callback
@@ -88,6 +108,38 @@ public class User_Add_Product_Scanner extends Fragment {
         } else {
             Toast.makeText(getContext(), "Scanned value is empty.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void checkLocationSettings() {
+        LocationRequest locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10000)
+                .setFastestInterval(5000);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest)
+                .setAlwaysShow(true);
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(requireContext());
+        Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
+
+        task.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+                try {
+                    task.getResult(ApiException.class);
+                    Toast.makeText(requireContext(), "Location is enabled", Toast.LENGTH_SHORT).show();
+                } catch (ResolvableApiException e) {
+                    try {
+                        e.startResolutionForResult(requireActivity(), REQUEST_CHECK_SETTINGS);
+                    } catch (IntentSender.SendIntentException sendEx) {
+                        Toast.makeText(requireContext(), "Failed to prompt location settings.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(requireContext(), "Error checking location: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
