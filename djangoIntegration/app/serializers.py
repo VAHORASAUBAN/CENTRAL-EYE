@@ -23,9 +23,11 @@ class AssignSerializer(serializers.Serializer):
     location = serializers.CharField(max_length=100)
     
 class AssetSerializer(serializers.ModelSerializer):
+    asset_category = serializers.CharField(source='asset_category.category.category_name', read_only=True)  
+    asset_sub_category = serializers.CharField(source='asset_category.sub_category_name', read_only=True)   
     class Meta:
         model = Asset
-        fields = '__all__'  # or specify individual fields
+        fields = ['asset_id', 'asset_name', 'barcode', 'purchase_date', 'asset_value', 'condition', 'location', 'asset_category', 'asset_sub_category']  # or specify individual fields
         
 class UserSerializer(serializers.ModelSerializer):
     role = serializers.CharField(source='role.role', read_only=True)  # Assuming 'name' is the field in the Role model

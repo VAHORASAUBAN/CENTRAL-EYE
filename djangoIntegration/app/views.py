@@ -10,6 +10,9 @@ from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
 from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer
 from django.utils import timezone
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 @api_view(['POST'])
@@ -190,7 +193,21 @@ def get_totals(request):
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['GET'])
+def get_product_by_barcode(request, barcode):
+    try:
+        # Try to find the product with the given barcode
+        product = Asset.objects.get(barcode=barcode)
 
+        serializer = AssetSerializer(product, many=False)
+
+        print(serializer.data)  # Debugging log to verify data
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Asset.DoesNotExist:
+        # If no product is found with the given barcode
+        return JsonResponse({'status': 'error', 'message': 'Product not found with this barcode.'})
+    
 def productlist(request):
     return render(request,'productlist.html')
 
