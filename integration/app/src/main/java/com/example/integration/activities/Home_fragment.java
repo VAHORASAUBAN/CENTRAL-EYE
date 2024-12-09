@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -67,6 +68,17 @@ public class Home_fragment extends Fragment {
         ImageView profileImageButton = view.findViewById(R.id.profile_image);
         CardView squareBox1 = view.findViewById(R.id.squareBox1);
         CardView squareBox2 = view.findViewById(R.id.squareBox2);
+
+        ImageButton scanner_icon = view.findViewById(R.id.scanner_icon);
+
+        scanner_icon.setOnClickListener(v -> {
+            // Navigate to ProductListAddFragment
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new SearchScanner())
+                    .addToBackStack(null) // Optional, adds transaction to back stack
+                    .commit();
+        });
 
         // Profile dropdown menu
         profileImageButton.setOnClickListener(v -> {
