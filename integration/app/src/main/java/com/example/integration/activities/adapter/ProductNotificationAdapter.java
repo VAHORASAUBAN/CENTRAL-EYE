@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,10 +6,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
+import com.example.integration.activities.model.Notification;
 
 import java.util.List;
 

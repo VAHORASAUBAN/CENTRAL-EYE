@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.model;
 
 public class Product {
     private String asset_name;

@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.user;
 
 import android.os.Bundle;
 

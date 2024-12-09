@@ -1,19 +1,18 @@
-package com.example.integration.activities;
+package com.example.integration.activities.admin;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.integration.R;
+import com.example.integration.activities.adapter.RequestItemAdapter;
+import com.example.integration.activities.model.RequestItemModel;
 
 import java.util.ArrayList;
 import java.util.List;

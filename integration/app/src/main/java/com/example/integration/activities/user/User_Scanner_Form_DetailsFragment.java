@@ -1,10 +1,9 @@
-package com.example.integration.activities;
+package com.example.integration.activities.user;
 
 import static android.content.Context.MODE_PRIVATE;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.integration.activities;
+package com.example.integration.activities.admin;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -22,6 +22,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.integration.R;
+import com.example.integration.activities.ProductListFragment;
+import com.example.integration.activities.model.Subcategory;
+import com.example.integration.activities.model.Category;
 import com.example.integration.api.ApiService;
 import com.example.integration.network.RetrofitClient;
 import com.example.integration.api.ProductDetails;
