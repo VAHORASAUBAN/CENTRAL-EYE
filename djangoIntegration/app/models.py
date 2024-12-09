@@ -72,7 +72,6 @@ class AssetSubCategory(models.Model):
     sub_category_id = models.IntegerField(primary_key=True)
     category = models.ForeignKey(AssetCategory, null=True, blank=True, on_delete=models.SET_NULL)
     sub_category_name = models.CharField(max_length=255)
-    
     def __str__(self):
         return self.sub_category_name
     
