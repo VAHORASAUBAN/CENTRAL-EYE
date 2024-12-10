@@ -1,9 +1,14 @@
 package com.example.integration.activities.user;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +17,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.integration.R;
+import com.example.integration.activities.MainActivity;
+import com.example.integration.activities.SearchScanner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,6 +92,8 @@ public class userproductrequest extends Fragment {
 
 
 
+        ImageView profileImageButton = view.findViewById(R.id.profile_image);
+        ImageButton scanner_icon = view.findViewById(R.id.scanner_icon);
 
         requestMoreCategoryButton = view.findViewById(R.id.requestMoreCategoryButton);
         requestButton = view.findViewById(R.id.requestButton);
@@ -94,8 +106,61 @@ public class userproductrequest extends Fragment {
         requestButton.setOnClickListener(v -> processAllForms());
         requestMoreCategoryButton.setOnClickListener(v -> addNewForm());
 
+        scanner_icon.setOnClickListener(v -> {
+            // Navigate to ProductListAddFragment
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new SearchScanner())
+                    .addToBackStack(null) // Optional, adds transaction to back stack
+                    .commit();
+        });
+
+        profileImageButton.setOnClickListener(v -> {
+            // PopupMenu logic here...
+            PopupMenu popupMenu = new PopupMenu(requireContext(), profileImageButton);
+            popupMenu.getMenuInflater().inflate(R.menu.profile_menu, popupMenu.getMenu());
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.menu_profile) {
+                    openuserprofileFragment();
+                    return true;
+                } else if (id == R.id.menu_logout) {
+                    performLogout();
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            popupMenu.show();
+        });
+
 
         return view;
+    }
+
+
+    private void performLogout() {
+        SharedPreferences.Editor editor = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE).edit();
+        editor.clear(); // Clear session
+        editor.apply();
+
+        Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+
+        // Navigate to login screen (optional)
+        Intent intent = new Intent(requireContext(), MainActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
+    }
+
+    private void openuserprofileFragment() {
+        User_Profile_fragment userprofileFragment = new User_Profile_fragment();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, userprofileFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void openDatePicker(EditText returnDateEditText) {
