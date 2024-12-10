@@ -261,52 +261,59 @@
                 app:cardCornerRadius="10dp"
                 app:strokeColor="@color/white">
 
+                <!-- Placeholder for unassigned message -->
+                <TextView
+                    android:id="@+id/userDetailsSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This product is not assigned to any user."
+                    android:textSize="15sp"
+                    android:textColor="#FF0000"
+                    android:visibility="gone"
+                    android:padding="10dp" />
+
+                <!-- User Information Card -->
                 <LinearLayout
+                    android:id="@+id/userInfoCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="@color/white"
-                    android:padding="15dp">
+                    android:padding="15dp"
+                    android:visibility="gone">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" User Details"
+                        android:text="User Details"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black" />
 
-                    <!-- Multiple Rows for User Info -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:orientation="horizontal">
 
-                        <!-- Username Label -->
                         <TextView
                             android:id="@+id/usernameLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Assigned User Name"
+                            android:text="Assigned User Name:"
                             android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
 
-                        <!-- Username Value -->
                         <TextView
                             android:id="@+id/usernameValue"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Sauban Vahora"
+                            android:text="John Doe"
                             android:gravity="end"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
-                            android:textStyle="bold"
                             android:layout_weight="1" />
-
                     </LinearLayout>
-
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -322,13 +329,13 @@
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/locationValue"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="123456.565 , 12348.121"
+                            android:text="N/A"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
-                            android:textStyle="bold"
                             android:layout_weight="1" />
                     </LinearLayout>
 
@@ -346,16 +353,39 @@
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/returnDateValue"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="12/22/2024"
+                            android:text="N/A"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
-                            android:textStyle="bold"
                             android:layout_weight="1" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/notifyButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginEnd="16dp"
+                            android:backgroundTint="#EF4141"
+                            android:text="Notify"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:drawableStart="@drawable/ic_baseline_notifications_24"
+                            android:drawablePadding="8dp"
+                            android:padding="12dp" />
+                    </LinearLayout>
                 </LinearLayout>
+
 
             </com.google.android.material.card.MaterialCardView>
             <LinearLayout

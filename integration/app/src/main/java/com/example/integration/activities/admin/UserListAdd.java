@@ -1,4 +1,4 @@
-package com.example.integration.activities.user;
+package com.example.integration.activities.admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.integration.R;
 import com.example.integration.activities.adapter.UserAdapter;
 import com.example.integration.activities.model.User;
+import com.example.integration.activities.user.UserDetailsFragment;
 import com.example.integration.api.ApiService;
 
 import java.util.List;
