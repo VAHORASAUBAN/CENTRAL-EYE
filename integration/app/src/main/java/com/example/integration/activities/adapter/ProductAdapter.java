@@ -8,9 +8,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
+import com.example.integration.activities.admin.Remaining_barcodescanner;
 import com.example.integration.activities.model.Product;
 
 import java.util.List;
@@ -48,10 +51,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             holder.productBarcode.setText("Barcode: Not Available");
             holder.viewButton.setImageResource(R.drawable.baseline_qr_code_scanner_24); // Replace with another icon
             holder.viewButton.setOnClickListener(v -> {
-                // Show a message or perform another operation
-                Toast.makeText(context, "No barcode available for this product", Toast.LENGTH_SHORT).show();
-                // Additional operations can go here, e.g., navigating to an error screen or prompting user input
-            });        } else {
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                Remaining_barcodescanner fragment = Remaining_barcodescanner.newInstance(product); // Use newInstance method
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment) // Ensure `fragment_container` exists in your activity's layout
+                        .addToBackStack(null)
+                        .commit();
+            });
+        } else {
             // When the barcode is available
             holder.productBarcode.setText("Barcode: " + barcode);
             holder.viewButton.setImageResource(R.drawable.baseline_keyboard_arrow_right_24); // Default icon
