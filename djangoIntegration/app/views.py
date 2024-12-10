@@ -220,41 +220,14 @@ def addproduct(request):
     return render(request,'addproduct.html')
 
 def categorylist(request):
-    categories=AssetCategory.objects.all()
-    return render(request,'categorylist.html',{'categories':categories})
+    return render(request,'categorylist.html')
 
 def addcategory(request):
-    if request.method=="POST":
-        category=request.POST.get('category')
-        AssetCategory.objects.create(category_name=category)
-        print(category)
-        return redirect("categorylist")
-        
-        
     return render(request,'addcategory.html')
 def subcategorylist(request):
-    subcategories=AssetSubCategory.objects.all()
-    return render(request,'subcategorylist.html',{'subcategories':subcategories})
-
+    return render(request,'subcategorylist.html')
 def addsubcategory(request):
-    if request.method == 'POST':
-        # Get data from the POST request
-        subcategory=request.POST.get('subcategory')
-        categories = request.POST.get('category_name')
-        print(subcategory)
-        # Get related Role and Station objects
-        categoryGet = AssetCategory.objects.get(category_name=categories)
-        AssetSubCategory.objects.create(
-            category=categoryGet,
-            sub_category_name=subcategory,
-        )
-        
-        return redirect('subcategorylist')
-
-    categories = AssetCategory.objects.all()
-    
-    return render(request,'subaddcategory.html',{'categories':categories})
-
+    return render(request,'subaddcategory.html')
 def editcategory(request):
     return render(request,'editcategory.html')
 def editsubcategory(request):
@@ -313,16 +286,12 @@ def aa(request):
 def newuser(request):
     if request.method == 'POST':
         # Get data from the POST request
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
         username = request.POST.get('username')
         role_name = request.POST.get('role_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
         station_name = request.POST.get('station_name')
         mobile = request.POST.get('mobile')
-        is_active = request.POST.get('is_active') == 'on'  # Checkbox returns 'on' if checked
-
         print(username)
         print(station_name)
         print(email)
@@ -331,16 +300,13 @@ def newuser(request):
         station = stationDetails.objects.get(station_name=station_name)
 
         User.objects.create(
-            first_name=firstname,
-            last_name=lastname,
             username=username,
             role=roleGet,
             email=email,
             password=password,
             station=station,
             contact_number=mobile,
-            is_active=is_active,
-
+            full_name="amaan shaikh"
         )
         
         return redirect('newuser')

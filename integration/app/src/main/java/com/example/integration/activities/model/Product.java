@@ -12,6 +12,7 @@ public class Product implements Parcelable {
     private String asset_value;
     private String condition;
     private String location;
+    private String assign_to;
 
     // Constructor
     public Product(String asset_name, String barcode, String asset_category, String purchase_date, String asset_value, String condition, String location) {
@@ -57,6 +58,10 @@ public class Product implements Parcelable {
         return location;
     }
 
+    public String getAssign_to() {
+        return assign_to;
+    }
+
     // Parcelable implementation
     protected Product(Parcel in) {
         asset_name = in.readString();
@@ -67,6 +72,7 @@ public class Product implements Parcelable {
         asset_category = in.readString();
         condition = in.readString();
         location = in.readString();
+        assign_to = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -96,5 +102,6 @@ public class Product implements Parcelable {
         dest.writeString(asset_sub_category);
         dest.writeString(condition);
         dest.writeString(location);
+        dest.writeString(assign_to);
     }
 }
