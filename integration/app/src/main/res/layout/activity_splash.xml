@@ -8,8 +8,8 @@
     <!-- Splash Image -->
     <ImageView
         android:id="@+id/splash_image"
-        android:layout_width="358dp"
-        android:layout_height="wrap_content"
+        android:layout_width="375dp"
+        android:layout_height="370dp"
         android:layout_centerInParent="true"
         android:contentDescription="Splash Image"
         android:src="@drawable/mp_police" />
