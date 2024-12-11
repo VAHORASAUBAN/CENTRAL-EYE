@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-43:12
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:2:1-45:12
 MERGED from [androidx.databinding:viewbinding:8.7.2] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\11a9fd55d867698efce0d0f83bee3742\transformed\viewbinding-8.7.2\AndroidManifest.xml:2:1-7:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:17:1-56:12
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
@@ -106,9 +106,17 @@ MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHOR
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:5-65
 	android:name
 		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:12:22-62
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:13:5-82
+	android:name
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:13:22-79
+uses-permission#android.permission.WAKE_LOCK
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:14:5-68
+	android:name
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:14:22-65
 application
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:14:5-42:19
-INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:14:5-42:19
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:16:5-44:19
+INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:16:5-44:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\19a482e29a5b65e62872a64a99606963\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\74d7ffa5b3ced407cd5dddbcd6f4b3bc\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
@@ -154,51 +162,51 @@ MERGED from [com.google.android.odml:image:1.0.0-beta1] C:\Users\SAUBAN VAHORA\.
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.8.0] C:\Users\SAUBAN VAHORA\.gradle\caches\8.9\transforms\12e25027a279c9a517b748b6a88a3616\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:18:9-41
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:20:9-41
 	android:icon
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:17:9-43
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:19:9-43
 	android:allowBackup
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:16:9-35
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:18:9-35
 	android:theme
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:19:9-49
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:21:9-49
 	android:networkSecurityConfig
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:15:9-69
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:17:9-69
 activity#com.example.integration.activities.SplashActivity
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:22:9-29:20
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:24:9-31:20
 	android:exported
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:23:13-36
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:25:13-36
 	android:theme
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:24:13-63
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:26:13-63
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:22:19-60
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:24:19-60
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:25:13-28:29
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:27:13-30:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:26:17-69
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:28:17-69
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:26:25-66
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:28:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:27:17-77
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:27:27-74
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:29:27-74
 activity#com.example.integration.activities.MainActivity
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:32:9-34:20
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:34:9-36:20
 	android:exported
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:33:13-36
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:35:13-36
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:32:19-58
-activity#com.example.integration.activities.HomeActivity
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:37:9-38:39
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:34:19-58
+activity#com.example.integration.activities.admin.HomeActivity
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:39:9-40:39
 	android:exported
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:38:13-36
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:40:13-36
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:37:19-58
-activity#com.example.integration.activities.UserHomeActivity
-ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:40:9-41:39
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:39:19-64
+activity#com.example.integration.activities.user.UserHomeActivity
+ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:42:9-43:39
 	android:exported
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:41:13-36
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:43:13-36
 	android:name
-		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:40:19-62
+		ADDED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml:42:19-67
 uses-sdk
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\SAUBAN VAHORA\OneDrive\Desktop\SIH\SIH_Hardware_Inventory_Management_System\integration\app\src\main\AndroidManifest.xml

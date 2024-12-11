@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#000000</color>
+    <color name="blue">#1b2850</color>
+    <color name="green">#28c76f</color>
     <color name="light_50">#F7F8F9</color>
     <color name="lightgrey">#404040</color>
+    <color name="orange">#ff9f43</color>
     <color name="primary">#0b3d91</color>
+    <color name="red">#EF4141</color>
     <color name="secondary">#f1f1f1</color>
+    <color name="sky">#00cfe8</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">Integration</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

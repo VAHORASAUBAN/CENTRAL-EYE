@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -86,7 +87,7 @@ public class ProductDescriptionFragment extends Fragment {
         }
 
         // Handle back button click
-        ImageButton backBtn = view.findViewById(R.id.backbtn);
+        ImageView backBtn = view.findViewById(R.id.backbtn);
         backBtn.setOnClickListener(v -> {
             getParentFragmentManager()
                     .beginTransaction()

@@ -19,7 +19,7 @@
             android:layout_marginBottom="16dp"
             android:src="@drawable/baseline_account_circle_24"
             android:scaleType="centerCrop"
-            android:background="@drawable/circle_background" />
+            android:background="@drawable/baseline_supervised_user_circle_24" />
 
         <!-- Full Name -->
         <TextView
