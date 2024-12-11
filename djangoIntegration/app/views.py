@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -37,7 +38,7 @@ def login_view(request):
 
         try:
             # Check if user exists
-            user = User.objects.get(username=username)
+            user = UserDetails.objects.get(username=username)
             
             # Debugging step: print the stored password
             # print(f"Stored password: {user.password}")
@@ -62,7 +63,7 @@ def login_view(request):
                 }, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid password'}, status=status.HTTP_400_BAD_REQUEST)
-        except User.DoesNotExist:
+        except UserDetails.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     
     # If the serializer is not valid, return the errors
@@ -143,7 +144,7 @@ def add_product(request):
 
 @api_view(['GET'])
 def user_list_view(request):
-    users = User.objects.all()  # Get all users
+    users = UserDetails.objects.all()  # Get all users
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -169,7 +170,7 @@ def AssetListView(request):
 
 
 def index(request):
-    userCount = User.objects.count()
+    userCount = UserDetails.objects.count()
     assetCount = Asset.objects.count()
     availableAsset = Asset.objects.filter(assign_to__isnull=True).count()
     inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
@@ -209,7 +210,7 @@ def get_requests(request):
 def get_totals(request):
     try:
         total_products = Asset.objects.count()
-        total_users = User.objects.count()
+        total_users = UserDetails.objects.count()
         
         data = {
             "total_products": total_products,
@@ -218,7 +219,7 @@ def get_totals(request):
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+
 @api_view(['GET'])
 def get_product_by_barcode(request, barcode):
     try:
@@ -232,7 +233,44 @@ def get_product_by_barcode(request, barcode):
     except Asset.DoesNotExist:
         # If no product is found with the given barcode
         return JsonResponse({'status': 'error', 'message': 'Product not found with this barcode.'})
+     
+def signin(request):
+    if "email" in request.session:
+        return redirect('index')  # Redirect to the appropriate page for logged-in users
     
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        try:
+            # Fetch user by email
+            uid = UserDetails.objects.get(email=email)
+            print(email)
+            # Check password match
+            if uid.password == password:
+                # Set session only if the password is correct
+                request.session['email'] = uid.email
+                return redirect("index")  # Redirect to the dashboard or homepage
+            else:
+                # Invalid password
+                con = {"e_msg": "Invalid password"}
+                return render(request, "signin.html", con)
+        except UserDetails.DoesNotExist:
+            # User does not exist
+            con = {'e_msg': 'User does not exist'}
+            return render(request, 'signin.html', con)
+
+    return render(request, 'signin.html')
+
+def logout(request):
+    if 'email' in request.session:
+        del request.session['email']
+        return redirect('signin')
+    else:
+        return redirect('signin')
+    
+def forgetpassword(request):
+    return render(request,'forgetpassword.html')
+
 def productlist(request):
     return render(request,'productlist.html')
 
@@ -278,20 +316,82 @@ def addissuedproducts(request):
     return render(request,'addissuedproducts.html')
 
 def maintenanceproducts(request):
-    return render(request,'maintenanceproducts.html')
+    maintenance_id = Maintenance.objects.all()
+    con = {'maintenance_id':maintenance_id}
+    return render(request,'maintenanceproducts.html',con)
 
-def editmaintenanceproducts(request):
-    return render(request,'editmaintenanceproducts.html')
+def editmaintenanceproducts(request,id):
+    maintenance_id = Maintenance.objects.get(maintenance_id=id)
+    if request.method == 'POST':
+        asset_name = request.POST['asset_name']
+        barcode = request.POST['barcode']
+        last_maintenance_date = request.POST['last_maintenance_date']
+        next_maintenance_date = request.POST['next_maintenance_date']
+        return_date = request.POST['return_date']
+        maintenance_cost = request.POST['maintenance_cost']
+        # print(last_maintenance_date)
+     
+        try:
+            asset = Asset.objects.get(barcode=barcode)
+            maintenance_id.asset = asset
+            maintenance_id.last_maintenance_date = last_maintenance_date
+            maintenance_id.next_maintenance_date = next_maintenance_date
+            maintenance_id.return_date=return_date
+            maintenance_id.maintenance_cost=maintenance_cost
+            maintenance_id.save()
+
+            return redirect('maintenanceproducts')
+        
+        except Asset.DoesNotExist:
+            return render(request, 'editmaintenanceproducts.html', {
+                'i': maintenance_id,
+                'error': "Asset with the given name and barcode does not exist."
+            })
+        
+    return render(request,'editmaintenanceproducts.html',{'i':maintenance_id})
 
 def addmaintenanceproducts(request):
+    if request.method == 'POST':
+        asset_name = request.POST['asset_name']
+        barcode = request.POST['barcode']
+        last_maintenance_date = request.POST['last_maintenance_date']
+        next_maintenance_date = request.POST['next_maintenance_date']
+        return_date = request.POST['return_date']
+        maintenance_cost = request.POST['maintenance_cost']
+        Maintenance.objects.create(asset_name=asset_name,barcode=barcode,last_maintenance_date=last_maintenance_date,
+                                   next_maintenance_date=next_maintenance_date,return_date=return_date,maintenance_cost=maintenance_cost)
+        return redirect("maintenanceproducts")
     return render(request,'addmaintenanceproducts.html')
 
 
 def expiredproducts(request):
-    return render(request,'expiredproducts.html')
+    expired_id = ExpiredProduct.objects.all()
+    con={'expired_id':expired_id}
+    return render(request,'expiredproducts.html',con)
 
-def editexpiredproducts(request):
-    return render(request,'editexpiredproducts.html')
+def editexpiredproducts(request,id):
+    expired_id=ExpiredProduct.objects.get(expired_id=id)
+    if request.method == 'POST':
+        asset_name = request.POST['asset_name']
+        barcode = request.POST['barcode']
+        expiration_date = request.POST['expiration_date']
+        reason = request.POST['reason']
+
+        try:
+            asset = Asset.objects.get(barcode=barcode)
+            expired_id.asset = asset
+            expired_id.expiration_date = expiration_date
+            expired_id.reason=reason
+            expired_id.save()
+            return redirect('expiredproducts')
+        
+        except Asset.DoesNotExist:
+            return render(request, 'editexpiredproducts.html', {
+                'i': expired_id,
+                'error': "Asset with the given name and barcode does not exist."
+            })
+
+    return render(request,'editexpiredproducts.html',{'i': expired_id})
 
 def addexpiredproducts(request):
     return render(request,'addexpiredproducts.html')
@@ -324,7 +424,7 @@ def newuser(request):
         roleGet = role.objects.get(role=role_name)
         station = stationDetails.objects.get(station_name=station_name)
 
-        User.objects.create(
+        UserDetails.objects.create(
             username=username,
             role=roleGet,
             email=email,
@@ -342,7 +442,7 @@ def newuser(request):
     return render(request,'newuser.html', {'roles': roles, 'station': station})
 
 def userlists(request):
-    users = User.objects.all()
+    users = UserDetails.objects.all()
     return render(request,'userlists.html', {'users': users})
 
 def edituser(request):
@@ -417,14 +517,12 @@ def profile(request):
 def generalSettings(request):
     return render(request,'editexpense.html')
 
-def signin(request):
-    return render(request,'signin.html')
+
 
 def signup(request):
     return render(request,'signup.html')
 
-def forgetpassword(request):
-    return render(request,'forgetpassword.html')
+
 
 from django.core.exceptions import ObjectDoesNotExist
 

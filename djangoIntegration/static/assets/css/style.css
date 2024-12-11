@@ -18,7 +18,15 @@
     color: red;
     float: left
 }
+.login-logo {
+    text-align: center; /* Center align the logo */
+}
 
+.logo-img {
+    width: 200px; /* Adjust the width as per your requirement */
+    max-width: 100%; /* Ensures the image doesn't exceed the container width */
+    height: auto; /* Maintains aspect ratio */
+}
 .pass-group .toggle-password,
 .pass-group .toggle-passworda,
 .profile-set .profile-top .profileupload a,
