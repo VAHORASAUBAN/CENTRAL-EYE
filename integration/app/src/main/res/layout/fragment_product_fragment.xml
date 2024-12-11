@@ -1,10 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:foreground="?attr/selectableItemBackground">
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Heading Text on the Left -->
+            <TextView
+                android:id="@+id/toolbar_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan Product"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+            <!-- Profile Image on the Right -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Profile Image" />
+
+            <!-- Scanner Icon for Search -->
+            <ImageButton
+                android:id="@+id/scanner_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_qr_code_scanner_24"
+                android:layout_toStartOf="@id/profile_image"
+                android:layout_marginEnd="6dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="Scanner for Search" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
 
     <!-- Barcode Scanner View -->
     <com.journeyapps.barcodescanner.DecoratedBarcodeView
@@ -12,7 +57,19 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_gravity="center"
+        android:layout_below="@id/toolbar"
         android:layout_marginBottom="16dp" />
+
+    <ImageButton
+        android:id="@+id/flashlight_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/baseline_flashlight_on_24"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/barcode_scanner"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Flashlight Toggle" />
 
     <!-- TextView to display scanned value -->
     <TextView
@@ -22,4 +79,4 @@
         android:gravity="center"
         android:padding="8dp"
         android:textSize="16sp" />
-</LinearLayout>
+</RelativeLayout>

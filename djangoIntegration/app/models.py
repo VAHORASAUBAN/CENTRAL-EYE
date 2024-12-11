@@ -36,7 +36,7 @@ class role(models.Model):
     def __str__(self):
         return self.role
 
-class User(models.Model):
+class UserDetails(models.Model):
 
     user_id = models.IntegerField(primary_key=True, unique=True)
     # user_image = models.ImageField(null=True, blank=True)
@@ -85,8 +85,9 @@ class Asset(models.Model):
     asset_value = models.CharField(max_length=255)
     condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, default='good')
     location = models.CharField(max_length=255)
-    assign_to = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    assign_to = models.ForeignKey(UserDetails, null=True, blank=True, on_delete=models.SET_NULL)
     asset_status = models.CharField(max_length=20, choices=ASSET_STATUS_CHOICES, default='available')
+    
 
     def save(self, *args, **kwargs):
         # Determine if the instance is being updated
@@ -116,7 +117,7 @@ class Asset(models.Model):
 class Allocation(models.Model):          #issuedproducts
     allocation_id = models.IntegerField(primary_key=True, unique=True)
     asset = models.ForeignKey(Asset, null=True, blank=True, on_delete=models.SET_NULL)
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(UserDetails, null=True, blank=True, on_delete=models.SET_NULL)
     assign_date = models.DateField(auto_now_add=True)
     expected_return_date = models.DateField(null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)
@@ -127,6 +128,8 @@ class Allocation(models.Model):          #issuedproducts
     
 class RequestAsset(models.Model):
     request_id = models.IntegerField(primary_key=True, unique=True)
+    user = models.ForeignKey(UserDetails, null=True, blank=True, on_delete=models.SET_NULL)
+    asset = models.ForeignKey(Asset, null=True, blank=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     asset_sub_category = models.ForeignKey(AssetSubCategory, null=True, blank=True, on_delete=models.SET_NULL)
     quantity = models.CharField(max_length=255)
