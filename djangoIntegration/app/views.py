@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -8,9 +9,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer, BarcodeUpdateSerializer, RequestAssetSerializer
 from django.utils import timezone
-
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers.json import DjangoJSONEncoder
+from geopy.geocoders import Nominatim
 
 @api_view(['POST'])
 def login_view(request):
@@ -34,7 +38,7 @@ def login_view(request):
 
         try:
             # Check if user exists
-            user = User.objects.get(username=username)
+            user = UserDetails.objects.get(username=username)
             
             # Debugging step: print the stored password
             # print(f"Stored password: {user.password}")
@@ -59,7 +63,7 @@ def login_view(request):
                 }, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid password'}, status=status.HTTP_400_BAD_REQUEST)
-        except User.DoesNotExist:
+        except UserDetails.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     
     # If the serializer is not valid, return the errors
@@ -94,11 +98,11 @@ def get_condition_choices(request):
 def add_product(request):
     serializer = ProductSerializer(data=request.data)
     print(request.data)
-    
+
     if not serializer.is_valid():
         print("Validation Errors:", serializer.errors)
         return Response(serializer.errors, status=400)
-    
+
     else: 
         # Extract validated data from the request
         assetName = serializer.validated_data['asset_name']
@@ -106,34 +110,57 @@ def add_product(request):
         barcode = serializer.validated_data['barcode']
         category = serializer.validated_data['category']
         condition = serializer.validated_data['condition']
-        location = serializer.validated_data['location']
+        location = serializer.validated_data['location']  # Format: 'longitude,latitude'
         purchaseDate = serializer.validated_data['purchase_date']
         subcategory = serializer.validated_data['subcategory']  # Assuming this is passed as subcategory_id
-        
+        print(location)
+        # Convert location coordinates into a readable name
+        try:
+            latitude, longitude = map(float, location.split(','))
+            geolocator = Nominatim(user_agent="asset_management")
+            location_name = geolocator.reverse((latitude, longitude)).raw['address']
+            print(location_name)
+            road_name = location_name.get('road')
+            city_name = location_name.get('state_district')
+            district_name = location_name.get('city_district')
+            specific_area_name = road_name + ', ' + city_name + ', ' + district_name
+            print(specific_area_name)
+        except Exception as e:
+            return Response({"error": f"Failed to resolve location name: {str(e)}"}, status=400)
+
         # Get the AssetSubCategory instance based on the provided subcategory_id
         try:
             subcategory = AssetSubCategory.objects.get(sub_category_name=subcategory)
         except AssetSubCategory.DoesNotExist:
             return Response({"error": "Subcategory not found"}, status=404)
-        
+
         # Create a new Asset instance with the related subcategory
-        Asset.objects.create(
+        asset = Asset.objects.create(
             asset_name=assetName, 
             barcode=barcode, 
             asset_category=subcategory,  # This is the ForeignKey relation
             purchase_date=purchaseDate, 
             asset_value=assetValue, 
             condition=condition, 
-            location=location
+            location=specific_area_name  # Save the specific area name
         )
-        
-        return Response({"message": "Product added successfully!"}, status=201)
-    
+
+        # Uncomment if maintenance needs to be created
+        # Maintenance.objects.create(
+        #     asset=asset,
+        #     last_maintenance_date=asset.purchase_date,
+        #     next_maintenance_date=asset.purchase_date + timedelta(days=180),  # Example: 180 days after purchase
+        #     maintenance_cost='N/A',  # Set a default cost or pass it from the request
+        # )
+
+        return Response({"message": "Product added successfully!", "location_name": specific_area_name}, status=201)
+
     return Response(serializer.errors, status=400)
+
 
 @api_view(['GET'])
 def user_list_view(request):
-    users = User.objects.all()  # Get all users
+    users = UserDetails.objects.all()  # Get all users
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -142,9 +169,15 @@ def AssetListView(request):
     filter_type = request.query_params.get('filter')
 
     if filter_type == 'available':
-        assets = Asset.objects.filter(assign_to__isnull=True)
+        assets = Asset.objects.filter(asset_status='available')
     elif filter_type == 'in-use':
-        assets = Asset.objects.filter(assign_to__isnull=False)
+        assets = Asset.objects.filter(asset_status='in-use')
+    elif filter_type == 'in-maintenance':
+        assets = Asset.objects.filter(asset_status='in-maintenance')
+    elif filter_type == 'expired':
+        assets = Asset.objects.filter(asset_status='expired')
+    elif filter_type == 'barcode-remaining':
+        assets = Asset.objects.filter(barcode__isnull=True)
     else:
         assets = Asset.objects.all()
 
@@ -153,7 +186,7 @@ def AssetListView(request):
 
 
 def index(request):
-    userCount = User.objects.count()
+    userCount = UserDetails.objects.count()
     assetCount = Asset.objects.count()
     availableAsset = Asset.objects.filter(assign_to__isnull=True).count()
     inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
@@ -164,11 +197,36 @@ def index(request):
                 'inUseAsset': inUseAsset
     })
     
+@api_view(['PUT'])
+def update_barcode(request, asset_id):
+    try:
+        asset= Asset.objects.get(asset_id=asset_id)
+    except Asset.DoesNotExist:
+        return Response({"error": "Asset not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = BarcodeUpdateSerializer(data=request.data)
+    print(request.data)
+    if serializer.is_valid():
+        asset.barcode = serializer.validated_data['barcode']
+        asset.save()
+        return Response({"message": "Barcode updated successfully"}, status=status.HTTP_200_OK)
+    print(serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_requests(request):
+    try:
+        requests = RequestAsset.objects.all()
+        serializer = RequestAssetSerializer(requests, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 @api_view(['GET'])
 def get_totals(request):
     try:
         total_products = Asset.objects.count()
-        total_users = User.objects.count()
+        total_users = UserDetails.objects.count()
         
         data = {
             "total_products": total_products,
@@ -177,6 +235,57 @@ def get_totals(request):
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def get_product_by_barcode(request, barcode):
+    try:
+        # Try to find the product with the given barcode
+        product = Asset.objects.get(barcode=barcode)
+
+        serializer = AssetSerializer(product, many=False)
+
+        print(serializer.data)  # Debugging log to verify data
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Asset.DoesNotExist:
+        # If no product is found with the given barcode
+        return JsonResponse({'status': 'error', 'message': 'Product not found with this barcode.'})
+     
+def signin(request):
+    if "email" in request.session:
+        return redirect('index')  # Redirect to the appropriate page for logged-in users
+    
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        try:
+            # Fetch user by email
+            uid = UserDetails.objects.get(email=email)
+            print(email)
+            # Check password match
+            if uid.password == password:
+                # Set session only if the password is correct
+                request.session['email'] = uid.email
+                return redirect("index")  # Redirect to the dashboard or homepage
+            else:
+                # Invalid password
+                con = {"e_msg": "Invalid password"}
+                return render(request, "signin.html", con)
+        except UserDetails.DoesNotExist:
+            # User does not exist
+            con = {'e_msg': 'User does not exist'}
+            return render(request, 'signin.html', con)
+
+    return render(request, 'signin.html')
+
+def logout(request):
+    if 'email' in request.session:
+        del request.session['email']
+        return redirect('signin')
+    else:
+        return redirect('signin')
+    
+def forgetpassword(request):
+    return render(request,'forgetpassword.html')
 
 def productlist(request):
     assets = Asset.objects.all()  # Fetch all products from the Asset model
@@ -221,41 +330,14 @@ def addproduct(request):
      return render(request,'addproduct.html',{'categories': categories})
 
 def categorylist(request):
-    categories=AssetCategory.objects.all()
-    return render(request,'categorylist.html',{'categories':categories})
+    return render(request,'categorylist.html')
 
 def addcategory(request):
-    if request.method=="POST":
-        category=request.POST.get('category')
-        AssetCategory.objects.create(category_name=category)
-        print(category)
-        return redirect("categorylist")
-        
-        
     return render(request,'addcategory.html')
 def subcategorylist(request):
-    subcategories=AssetSubCategory.objects.all()
-    return render(request,'subcategorylist.html',{'subcategories':subcategories})
-
+    return render(request,'subcategorylist.html')
 def addsubcategory(request):
-    if request.method == 'POST':
-        # Get data from the POST request
-        subcategory=request.POST.get('subcategory')
-        categories = request.POST.get('category_name')
-        print(subcategory)
-        # Get related Role and Station objects
-        categoryGet = AssetCategory.objects.get(category_name=categories)
-        AssetSubCategory.objects.create(
-            category=categoryGet,
-            sub_category_name=subcategory,
-        )
-        
-        return redirect('subcategorylist')
-
-    categories = AssetCategory.objects.all()
-    
-    return render(request,'subaddcategory.html',{'categories':categories})
-
+    return render(request,'subaddcategory.html')
 def editcategory(request):
     return render(request,'editcategory.html')
 def editsubcategory(request):
@@ -281,20 +363,82 @@ def addissuedproducts(request):
     return render(request,'addissuedproducts.html')
 
 def maintenanceproducts(request):
-    return render(request,'maintenanceproducts.html')
+    maintenance_id = Maintenance.objects.all()
+    con = {'maintenance_id':maintenance_id}
+    return render(request,'maintenanceproducts.html',con)
 
-def editmaintenanceproducts(request):
-    return render(request,'editmaintenanceproducts.html')
+def editmaintenanceproducts(request,id):
+    maintenance_id = Maintenance.objects.get(maintenance_id=id)
+    if request.method == 'POST':
+        asset_name = request.POST['asset_name']
+        barcode = request.POST['barcode']
+        last_maintenance_date = request.POST['last_maintenance_date']
+        next_maintenance_date = request.POST['next_maintenance_date']
+        return_date = request.POST['return_date']
+        maintenance_cost = request.POST['maintenance_cost']
+        # print(last_maintenance_date)
+     
+        try:
+            asset = Asset.objects.get(barcode=barcode)
+            maintenance_id.asset = asset
+            maintenance_id.last_maintenance_date = last_maintenance_date
+            maintenance_id.next_maintenance_date = next_maintenance_date
+            maintenance_id.return_date=return_date
+            maintenance_id.maintenance_cost=maintenance_cost
+            maintenance_id.save()
+
+            return redirect('maintenanceproducts')
+        
+        except Asset.DoesNotExist:
+            return render(request, 'editmaintenanceproducts.html', {
+                'i': maintenance_id,
+                'error': "Asset with the given name and barcode does not exist."
+            })
+        
+    return render(request,'editmaintenanceproducts.html',{'i':maintenance_id})
 
 def addmaintenanceproducts(request):
+    if request.method == 'POST':
+        asset_name = request.POST['asset_name']
+        barcode = request.POST['barcode']
+        last_maintenance_date = request.POST['last_maintenance_date']
+        next_maintenance_date = request.POST['next_maintenance_date']
+        return_date = request.POST['return_date']
+        maintenance_cost = request.POST['maintenance_cost']
+        Maintenance.objects.create(asset_name=asset_name,barcode=barcode,last_maintenance_date=last_maintenance_date,
+                                   next_maintenance_date=next_maintenance_date,return_date=return_date,maintenance_cost=maintenance_cost)
+        return redirect("maintenanceproducts")
     return render(request,'addmaintenanceproducts.html')
 
 
 def expiredproducts(request):
-    return render(request,'expiredproducts.html')
+    expired_id = ExpiredProduct.objects.all()
+    con={'expired_id':expired_id}
+    return render(request,'expiredproducts.html',con)
 
-def editexpiredproducts(request):
-    return render(request,'editexpiredproducts.html')
+def editexpiredproducts(request,id):
+    expired_id=ExpiredProduct.objects.get(expired_id=id)
+    if request.method == 'POST':
+        asset_name = request.POST['asset_name']
+        barcode = request.POST['barcode']
+        expiration_date = request.POST['expiration_date']
+        reason = request.POST['reason']
+
+        try:
+            asset = Asset.objects.get(barcode=barcode)
+            expired_id.asset = asset
+            expired_id.expiration_date = expiration_date
+            expired_id.reason=reason
+            expired_id.save()
+            return redirect('expiredproducts')
+        
+        except Asset.DoesNotExist:
+            return render(request, 'editexpiredproducts.html', {
+                'i': expired_id,
+                'error': "Asset with the given name and barcode does not exist."
+            })
+
+    return render(request,'editexpiredproducts.html',{'i': expired_id})
 
 def addexpiredproducts(request):
     return render(request,'addexpiredproducts.html')
@@ -314,16 +458,12 @@ def aa(request):
 def newuser(request):
     if request.method == 'POST':
         # Get data from the POST request
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
         username = request.POST.get('username')
         role_name = request.POST.get('role_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
         station_name = request.POST.get('station_name')
         mobile = request.POST.get('mobile')
-        is_active = request.POST.get('is_active') == 'on'  # Checkbox returns 'on' if checked
-
         print(username)
         print(station_name)
         print(email)
@@ -331,17 +471,14 @@ def newuser(request):
         roleGet = role.objects.get(role=role_name)
         station = stationDetails.objects.get(station_name=station_name)
 
-        User.objects.create(
-            first_name=firstname,
-            last_name=lastname,
+        UserDetails.objects.create(
             username=username,
             role=roleGet,
             email=email,
             password=password,
             station=station,
             contact_number=mobile,
-            is_active=is_active,
-
+            full_name="amaan shaikh"
         )
         
         return redirect('newuser')
@@ -352,7 +489,7 @@ def newuser(request):
     return render(request,'newuser.html', {'roles': roles, 'station': station})
 
 def userlists(request):
-    users = User.objects.all()
+    users = UserDetails.objects.all()
     return render(request,'userlists.html', {'users': users})
 
 def edituser(request):
@@ -427,14 +564,12 @@ def profile(request):
 def generalSettings(request):
     return render(request,'editexpense.html')
 
-def signin(request):
-    return render(request,'signin.html')
+
 
 def signup(request):
     return render(request,'signup.html')
 
-def forgetpassword(request):
-    return render(request,'forgetpassword.html')
+
 
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -442,26 +577,31 @@ from django.core.exceptions import ObjectDoesNotExist
 def assign_product(request):
     # Deserialize the incoming data
     serializer = AssignSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid():
         # Extract the necessary fields
         barcode = serializer.validated_data['barcode']
         returnDate = serializer.validated_data['return_date']
         user = serializer.validated_data['username']
+        location = serializer.validated_data['location']
+        print(user)
         
         try:
             # Fetch the asset from the database
             asset = Asset.objects.get(barcode=barcode)
             
             if asset.assign_to is None:    
+                user = UserDetails.objects.get(username=user)
                 # Create a new Allocation object and save it to the database
                 allocation = Allocation.objects.create(
-                    asset_barcode=barcode,
+                    asset=asset,
                     user=user,
-                    return_date=returnDate,
-                    assign_location="NULL"
+                    expected_return_date=returnDate,
+                    assign_location=location
                 )
                 
                 asset.assign_to = user
+                asset.asset_status = 'in-use'
                 asset.save()
                 
                 return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
@@ -470,6 +610,7 @@ def assign_product(request):
         except ObjectDoesNotExist:
             return Response({"message": "Product not found with barcode!"}, status=404)
     else:
+        print("Validation Errors:", serializer.errors)
         return Response(serializer.errors, status=400)
 
 

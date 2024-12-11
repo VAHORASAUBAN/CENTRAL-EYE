@@ -12,7 +12,7 @@
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="@color/white"
         android:padding="12dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
@@ -20,11 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/backbtn"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/baseline_arrow_circle_left_24"
-            app:tint="@color/white" />
+            android:src="@drawable/baseline_keyboard_arrow_left_24"
+            app:tint="@color/black" />
 
         <TextView
             android:layout_width="0dp"
@@ -32,7 +33,7 @@
             android:layout_weight="1"
             android:text="Product Description"
             android:textSize="20sp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold"
             android:gravity="center" />
     </LinearLayout>
@@ -54,179 +55,203 @@
 
 
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_account_circle_24" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/baseline_account_circle_24" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="15dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Asset ID: "
-                            android:textSize="20sp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="25dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Asset ID: "
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="25dp"/>
 
 
-                    </LinearLayout>
+            </LinearLayout>
 
 
             <!-- About Card -->
 
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="10dp">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/white"
-                    android:padding="10dp">
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/assetCategoryValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Peripherals"
+                        android:textSize="15sp"
+                        android:textColor="#6E6C6C"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Asset name:"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/assetNameValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="CPU"
-                            android:textSize="15sp"
-                            android:textColor="#6E6C6C"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sub-Category"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Barcode:"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/assetSubCategoryValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Mouse"
+                        android:textSize="15sp"
+                        android:textColor="#6E6C6C"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-                        <TextView
-                            android:id="@+id/barcodeValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="1R6J5G8N6UH6M"
-                            android:textColor="#6E6C6C"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Purchase date:"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Asset"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/purchaseDateValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="2024-11-22"
-                            android:textSize="15sp"
-                            android:textColor="#6E6C6C"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/assetNameValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="HP-5548"
+                        android:textSize="15sp"
+                        android:textColor="#6E6C6C"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Asset type:"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Barcode"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/assetTypeValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Electronics"
-                            android:textSize="15sp"
-                            android:textColor="#6E6C6C"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/barcodeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="1R6J5G8N6UH6M"
+                        android:textColor="#6E6C6C"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Asset value:"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Purchase Date"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/assetValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:text="1000"
-                            android:textColor="#6E6C6C"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/purchaseDateValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="2024-11-22"
+                        android:textSize="15sp"
+                        android:textColor="#6E6C6C"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Condition:"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/conditionValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="New"
-                            android:textSize="15sp"
-                            android:textColor="#6E6C6C"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Asset Value"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/assetValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="1000"
+                        android:textColor="#6E6C6C"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Condition"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/conditionValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="New"
+                        android:textSize="15sp"
+                        android:textColor="#6E6C6C"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
 
             <!-- User Information Card -->
             <com.google.android.material.card.MaterialCardView
@@ -234,54 +259,61 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="10dp"
-                app:strokeColor="@color/black">
+                app:strokeColor="@color/white">
 
+                <!-- Placeholder for unassigned message -->
+                <TextView
+                    android:id="@+id/userDetailsSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This product is not assigned to any user."
+                    android:textSize="15sp"
+                    android:textColor="#FF0000"
+                    android:visibility="gone"
+                    android:padding="10dp" />
+
+                <!-- User Information Card -->
                 <LinearLayout
+                    android:id="@+id/userInfoCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="@color/white"
-                    android:padding="15dp">
+                    android:padding="15dp"
+                    android:visibility="gone">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" User Details"
+                        android:text="User Details"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black" />
 
-                    <!-- Multiple Rows for User Info -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:orientation="horizontal">
 
-                        <!-- Username Label -->
                         <TextView
                             android:id="@+id/usernameLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Assigned User Name"
+                            android:text="Assigned User Name:"
                             android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
 
-                        <!-- Username Value -->
                         <TextView
                             android:id="@+id/usernameValue"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Sauban Vahora"
+                            android:text="John Doe"
                             android:gravity="end"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
-                            android:textStyle="bold"
                             android:layout_weight="1" />
-
                     </LinearLayout>
-
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -297,13 +329,13 @@
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/locationValue"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="123456.565 , 12348.121"
+                            android:text="N/A"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
-                            android:textStyle="bold"
                             android:layout_weight="1" />
                     </LinearLayout>
 
@@ -321,16 +353,39 @@
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/returnDateValue"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="12/22/2024"
+                            android:text="N/A"
                             android:textSize="15sp"
                             android:textColor="#6E6C6C"
-                            android:textStyle="bold"
                             android:layout_weight="1" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/notifyButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginEnd="16dp"
+                            android:backgroundTint="#EF4141"
+                            android:text="Notify"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:drawableStart="@drawable/ic_baseline_notifications_24"
+                            android:drawablePadding="8dp"
+                            android:padding="12dp" />
+                    </LinearLayout>
                 </LinearLayout>
+
 
             </com.google.android.material.card.MaterialCardView>
             <LinearLayout

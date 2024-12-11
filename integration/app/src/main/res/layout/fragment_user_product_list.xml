@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/light_50"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Heading Text on the Left -->
+            <TextView
+                android:id="@+id/toolbar_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asset"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+            <!-- Profile Image on the Right -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Profile Image" />
+
+            <!-- Scanner Icon for Search -->
+            <ImageView
+                android:id="@+id/scanner_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_qr_code_scanner_24"
+                android:layout_toStartOf="@id/profile_image"
+                android:layout_marginEnd="6dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="Scanner for Search" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@drawable/baseline_filter_list_24"/>
+
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <!-- Products Information Tab -->
+                <TextView
+                    android:id="@+id/in_use"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="In-Use"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp"/>
+                <TextView
+                    android:id="@+id/duesoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Due Son"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp"/>
+                <TextView
+                    android:id="@+id/returned"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Returned"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs"
+        android:layout_margin="8dp" />
+
+
+</RelativeLayout>

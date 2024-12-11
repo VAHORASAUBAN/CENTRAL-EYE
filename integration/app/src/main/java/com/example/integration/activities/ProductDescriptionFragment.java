@@ -1,47 +1,39 @@
 package com.example.integration.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.integration.R;
+import com.example.integration.activities.model.Product;
+import com.example.integration.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductDescriptionFragment extends Fragment {
 
-    private static final String ARG_NAME = "name";
-    private static final String ARG_BARCODE = "barcode";
-    private static final String ARG_PURCHASE_DATE = "purchase_date";
-    private static final String ARG_ASSET_TYPE = "asset_type";
-    private static final String ARG_ASSET_VALUE = "asset_value";
-    private static final String ARG_CONDITION = "condition";
-    private static final String ARG_LOCATION = "location";
-
-    private String assetName;
-    private String barcode;
-    private String purchaseDate;
-    private String assetType;
-    private String assetValue;
-    private String condition;
-    private String location;
+    private static final String ARG_PRODUCT = "product"; // Key for passing the Product object
+    private Product product;
 
     public ProductDescriptionFragment() {
         // Required empty public constructor
     }
 
-    public static ProductDescriptionFragment newInstance(String name, String barcode, String purchaseDate, String assetType, String assetValue, String condition, String location) {
+    // Updated newInstance method to accept a Product object
+    public static ProductDescriptionFragment newInstance(Product product) {
         ProductDescriptionFragment fragment = new ProductDescriptionFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_NAME, name);
-        args.putString(ARG_BARCODE, barcode);
-        args.putString(ARG_PURCHASE_DATE, purchaseDate);
-        args.putString(ARG_ASSET_TYPE, assetType);
-        args.putString(ARG_ASSET_VALUE, assetValue);
-        args.putString(ARG_CONDITION, condition);
-        args.putString(ARG_LOCATION, location);
+        args.putParcelable(ARG_PRODUCT, product); // Put the Product object directly
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,28 +42,58 @@ public class ProductDescriptionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            assetName = getArguments().getString(ARG_NAME);
-            barcode = getArguments().getString(ARG_BARCODE);
-            purchaseDate = getArguments().getString(ARG_PURCHASE_DATE);
-            assetType = getArguments().getString(ARG_ASSET_TYPE);
-            assetValue = getArguments().getString(ARG_ASSET_VALUE);
-            condition = getArguments().getString(ARG_CONDITION);
-            location = getArguments().getString(ARG_LOCATION);
+            product = getArguments().getParcelable(ARG_PRODUCT); // Retrieve the Product object
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_description, container, false);
+        // Bind data to TextViews using the Product object
 
-        // Bind data to TextViews
-        ((TextView) view.findViewById(R.id.assetNameValue)).setText(assetName);
-        ((TextView) view.findViewById(R.id.barcodeValue)).setText(barcode);
-        ((TextView) view.findViewById(R.id.purchaseDateValue)).setText(purchaseDate);
-        ((TextView) view.findViewById(R.id.assetTypeValue)).setText(assetType);
-        ((TextView) view.findViewById(R.id.assetValue)).setText(assetValue);
-        ((TextView) view.findViewById(R.id.conditionValue)).setText(condition);
-//        ((TextView) view.findViewById(R.id.locationValue)).setText(location);
+        Log.d("Productname", "Product Name" + product.getAsset_name());
+        ((TextView) view.findViewById(R.id.assetNameValue)).setText(product.getAsset_name());
+        ((TextView) view.findViewById(R.id.assetCategoryValue)).setText(product.getAsset_category());
+        ((TextView) view.findViewById(R.id.assetSubCategoryValue)).setText(product.getAsset_sub_category());
+        ((TextView) view.findViewById(R.id.assetNameValue)).setText(product.getAsset_name());
+        ((TextView) view.findViewById(R.id.barcodeValue)).setText(product.getBarcode());
+        ((TextView) view.findViewById(R.id.purchaseDateValue)).setText(product.getPurchase_date());
+        ((TextView) view.findViewById(R.id.assetValue)).setText(product.getAsset_value());
+        ((TextView) view.findViewById(R.id.conditionValue)).setText(product.getCondition());
+
+        // Display the location if it's available
+//        TextView locationTextView = view.findViewById(R.id.locationValue);
+//        if (product.getLocation() != null && !product.getLocation().isEmpty()) {
+//            locationTextView.setText(product.getLocation());
+//        } else {
+//            locationTextView.setText("Location not available");
+//        }
+
+        // Display user details or appropriate message
+        TextView userDetailsSection = view.findViewById(R.id.userDetailsSection);
+        LinearLayout userInfoCard = view.findViewById(R.id.userInfoCard);
+
+        if (product.getAssign_to() == null || product.getAssign_to().isEmpty()) {
+            userDetailsSection.setVisibility(View.VISIBLE);
+            userDetailsSection.setText("This product is not assigned to any user.");
+            userInfoCard.setVisibility(View.GONE); // Hide the user details card
+        } else {
+            userDetailsSection.setVisibility(View.GONE);
+            userInfoCard.setVisibility(View.VISIBLE); // Show the user details card
+            ((TextView) view.findViewById(R.id.usernameValue)).setText(product.getAssign_to());
+            ((TextView) view.findViewById(R.id.locationValue)).setText(product.getLocation());
+            ((TextView) view.findViewById(R.id.returnDateValue)).setText("Set return date logic here");
+        }
+
+        // Handle back button click
+        ImageButton backBtn = view.findViewById(R.id.backbtn);
+        backBtn.setOnClickListener(v -> {
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ProductListFragment())
+                    .addToBackStack(null) // Optional, adds transaction to back stack
+                    .commit();
+        });
 
         return view;
     }

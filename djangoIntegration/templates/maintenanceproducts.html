@@ -107,13 +107,16 @@
 </th>
 <th>Product Name</th>
 <th>Barcode</th>
-<th>Maintenance Date</th>
+<th>Last Maintenance Date</th>
+<th>Next Maintenance Date</th>
+
 <th>Handover Date</th>
 <th>Cost(Rs)</th>
 <th>Action</th>
 </tr>
 </thead>
 <tbody>
+    {% for i in maintenance_id %}
 <tr>
 <td>
 <label class="checkboxs">
@@ -125,17 +128,16 @@
 <a href="javascript:void(0);" class="product-img">
 <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
 </a>
-<a href="javascript:void(0);">Macbook pro</a>
+<a href="javascript:void(0);">{{i.asset.asset_name}}</a>
 </td>
-<td>A20009</td>
-
-<td>19 Nov 2022</td>
-<td>19 Nov 2022</td>
-
-<td>550</td>
+<td>{{i.asset.barcode}}</td>
+<td>{{i.last_maintenance_date}}</td>
+<td>{{i.next_maintenance_date}}</td>
+<td>{{i.return_date}}</td>
+<td>{{i.maintenance_cost}}</td>
 
 <td>
-<a class="me-3" href="{% url  'editmaintenanceproducts' %}">
+<a class="me-3" href="{% url  'editmaintenanceproducts' i.maintenance_id %}">
 <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
 </a>
 <a class="me-3 confirm-text" href="javascript:void(0);">
@@ -143,13 +145,7 @@
 </a>
 </td>
 </tr>
-
-
-
-
-
-
-
+{% endfor %}
 </tbody>
 </table>
 </div>

@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.integration.activities.admin.HomeActivity;
+import com.example.integration.activities.user.UserHomeActivity;
 import com.example.integration.api.ApiService;
 import com.example.integration.api.LoginRequest;
 import com.example.integration.api.LoginResponse;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this,R.color.primary));
 
         sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
 

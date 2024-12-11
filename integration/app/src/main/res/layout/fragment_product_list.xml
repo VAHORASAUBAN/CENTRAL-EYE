@@ -5,7 +5,6 @@
     android:background="@color/light_50"
     android:layout_height="match_parent">
 
-    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                 android:contentDescription="Profile Image" />
 
             <!-- Scanner Icon for Search -->
-            <ImageView
+            <ImageButton
                 android:id="@+id/scanner_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -133,6 +132,17 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Expired"
+                    android:textSize="16sp"
+                    android:background="@drawable/tab_selector"
+                    android:textColor="@color/tab_text_selector"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp"/>
+                <TextView
+                    android:id="@+id/barcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Barcode Remaining"
                     android:textSize="16sp"
                     android:background="@drawable/tab_selector"
                     android:textColor="@color/tab_text_selector"
