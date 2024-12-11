@@ -13,6 +13,7 @@ public class Product implements Parcelable {
     private String condition;
     private String location;
     private String assign_to;
+    private String asset_id;
 
     // Constructor
     public Product(String asset_name, String barcode, String asset_category, String purchase_date, String asset_value, String condition, String location) {
@@ -28,6 +29,9 @@ public class Product implements Parcelable {
     // Getters and Setters
     public String getAsset_name() {
         return asset_name;
+    }
+    public String getAsset_id() {
+        return asset_id;
     }
 
     public String getBarcode() {

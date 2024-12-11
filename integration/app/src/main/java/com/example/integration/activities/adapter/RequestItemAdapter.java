@@ -1,33 +1,36 @@
 package com.example.integration.activities.adapter;
 
-
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.integration.R;
+import com.example.integration.activities.admin.Request_details;
 import com.example.integration.activities.model.RequestItemModel;
+
+import androidx.fragment.app.FragmentActivity;
 
 import java.util.List;
 
 public class RequestItemAdapter extends RecyclerView.Adapter<RequestItemAdapter.RequestItemViewHolder> {
 
     private List<RequestItemModel> itemList;
+    private Context context;
 
-    // Constructor to initialize the data list
-    public RequestItemAdapter(List<RequestItemModel> itemList) {
+    public RequestItemAdapter(Context context, List<RequestItemModel> itemList) {
+        this.context = context;
         this.itemList = itemList;
     }
 
     @NonNull
     @Override
     public RequestItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the layout for each item in the RecyclerView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_card, parent, false);
         return new RequestItemViewHolder(view);
@@ -35,19 +38,27 @@ public class RequestItemAdapter extends RecyclerView.Adapter<RequestItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RequestItemViewHolder holder, int position) {
-        // Bind the data to the views
         RequestItemModel item = itemList.get(position);
         holder.assetName.setText(item.getAssetName());
         holder.totalAssets.setText(String.valueOf(item.getTotalAssets()));
         holder.availableAssets.setText(String.valueOf(item.getAvailableAssets()));
         holder.returnDate.setText(item.getReturnDate());
 
-        // Handle button clicks
-        holder.acceptButton.setOnClickListener(v -> {
-            // Handle accept button click (e.g., update database or notify user)
-        });
-        holder.rejectButton.setOnClickListener(v -> {
-            // Handle reject button click (e.g., update database or notify user)
+        // Handle item click to redirect to Request_details
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("requestId", item.getAssetName());
+            bundle.putInt("totalAssets", item.getTotalAssets());
+            bundle.putInt("availableAssets", item.getAvailableAssets());
+            bundle.putString("returnDate", item.getReturnDate());
+
+            Request_details detailsFragment = new Request_details();
+            detailsFragment.setArguments(bundle);
+
+            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, detailsFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
     }
 
@@ -56,10 +67,8 @@ public class RequestItemAdapter extends RecyclerView.Adapter<RequestItemAdapter.
         return itemList.size();
     }
 
-    // ViewHolder class to hold the views for each item
     public static class RequestItemViewHolder extends RecyclerView.ViewHolder {
         TextView assetName, totalAssets, availableAssets, returnDate;
-        Button acceptButton, rejectButton;
 
         public RequestItemViewHolder(View itemView) {
             super(itemView);
@@ -67,8 +76,6 @@ public class RequestItemAdapter extends RecyclerView.Adapter<RequestItemAdapter.
             totalAssets = itemView.findViewById(R.id.ToataAssetrequest);
             availableAssets = itemView.findViewById(R.id.Availableasset);
             returnDate = itemView.findViewById(R.id.returndate);
-            acceptButton = itemView.findViewById(R.id.acceptbtn);
-            rejectButton = itemView.findViewById(R.id.rejectbtn);
         }
     }
 }
