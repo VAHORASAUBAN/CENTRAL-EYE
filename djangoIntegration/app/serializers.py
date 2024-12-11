@@ -38,7 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
     station = serializers.CharField(source='station.station_name', read_only=True)  # Assuming 'station_name' is the field in the StationDetails model
 
     class Meta:
-        model = User
+        model = UserDetails
         fields = ['first_name', 'last_name', 'role', 'station', 'contact_number']
         
 class RequestAssetSerializer(serializers.ModelSerializer):

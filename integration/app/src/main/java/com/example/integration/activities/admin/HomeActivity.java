@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -31,7 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Window window = getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.primary));
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         fab = findViewById(R.id.nav_products);
 

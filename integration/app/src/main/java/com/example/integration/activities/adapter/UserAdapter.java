@@ -42,7 +42,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.userName.setText(user.getFirst_name() != null ? user.getFirst_name() : "N/A");
         holder.userTitle.setText(user.getRole() != null ? user.getRole() : "N/A");
         holder.userLocation.setText(user.getStation() != null ? user.getStation() : "N/A");
-        holder.userImage.setImageResource(R.drawable.profile); // Default profile image
+        holder.userImage.setImageResource(R.drawable.baseline_account_circle_24); // Default profile image
 
         // Set up item click
         holder.itemView.setOnClickListener(v -> listener.onUserClick(user));

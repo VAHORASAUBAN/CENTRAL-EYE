@@ -39,7 +39,7 @@
                 android:contentDescription="Profile Image" />
 
             <!-- Scanner Icon for Search -->
-            <ImageView
+            <ImageButton
                 android:id="@+id/scanner_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"

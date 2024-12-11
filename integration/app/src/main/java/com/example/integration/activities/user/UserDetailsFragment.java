@@ -72,7 +72,7 @@ public class UserDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_details, container, false);
 
         // Views from the XML layout
-        ImageView profileImage = view.findViewById(R.id.userProfileImage);
+        ImageView profileImage = view.findViewById(R.id.userImage);
         TextView nameText = view.findViewById(R.id.fullName);
         EditText mobileText = view.findViewById(R.id.mobileNumber);
         RadioGroup genderGroup = view.findViewById(R.id.genderGroup);

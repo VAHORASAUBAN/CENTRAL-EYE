@@ -8,9 +8,9 @@
     <!-- Splash Image -->
     <ImageView
         android:id="@+id/splash_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/mp_police"
+        android:layout_width="358dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:contentDescription="Splash Image"
-        android:layout_centerInParent="true"/>
+        android:src="@drawable/mp_police" />
 </RelativeLayout>
