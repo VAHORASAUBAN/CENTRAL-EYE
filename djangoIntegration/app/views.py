@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -288,14 +288,29 @@ def forgetpassword(request):
     return render(request,'forgetpassword.html')
 
 def productlist(request):
-    assets = Asset.objects.all()  # Fetch all products from the Asset model
-    return render(request, 'productlist.html', {'assets': assets})
+    filter = request.GET.get('filter')
+    print(filter)
+    if filter:  # Check if a filter is provided
+        # Filter assets where the assigned user's station matches the filter value
+        assets = Asset.objects.filter(assign_to__station__station_name=filter)
+        print(assets)
+    else:
+        # If no filter is provided, fetch all assets
+        assets = Asset.objects.all()
+    
+    return render(request, 'productlist.html', {'asset': assets})
 
 def editproduct(request):
     return render(request,'editproduct.html')
 
-def productdetails(request):
-    return render(request,'productdetails.html')
+def productdetails(request, id):
+    # Retrieve the product with the given id or return a 404 if it doesn't exist
+    asset = get_object_or_404(Asset, asset_id=id)
+
+    # Pass the asset to the template context
+    context = {'asset': asset}
+    return render(request, 'productdetails.html', context)
+
 def addproduct(request):
      if request.method == 'POST':
         # Get data from the form
@@ -319,14 +334,9 @@ def addproduct(request):
             condition=condition,
             asset_maintenance_date=maintenance_date,
         )
-        
+
         return redirect('productlist')
-    
-
-
      categories = AssetSubCategory.objects.all()
-   
-        
      return render(request,'addproduct.html',{'categories': categories})
 
 def categorylist(request):
@@ -515,6 +525,7 @@ def addquotation(request):
 
 def stationlist(request):
     station_id = stationDetails.objects.all()
+
     con = {"station_id":station_id}
     return render(request,'stationlist.html',con)
 

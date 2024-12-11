@@ -18,7 +18,7 @@
                 </div>
                 <div class="page-btn">
                     <a href="{% url 'addquotation' %}" class="btn btn-added">
-                        <img src="{% static 'assets/img/icons/plus.svg' %}" alt="img" class="me-2"> Add Quotation
+                        <img src="{% static 'assets/img/icons/plus.svg' %}" alt="img" class="me-2"> Add Tender
                     </a>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
                                         <select class="select">
-                                            <option>Choose Customer</option>
-                                            <option>Customer1</option>
+                                            <option>Choose Seller</option>
+                                            <option>Seller1</option>
                                         </select>
                                     </div>
                                 </div>
@@ -81,6 +81,7 @@
                                         <select class="select">
                                             <option>Choose Status</option>
                                             <option>Inprogress</option>
+                                            <option>Pending</option>
                                             <option>Complete</option>
                                         </select>
                                     </div>
@@ -106,10 +107,10 @@
                                         </label>
                                     </th>
                                     <th>Product Name</th>
-                                    <th>Reference</th>
-                                    <th>Custmer Name</th>
+                                    <th>Tender No.</th>
+                                    <th>Seller Name</th>
                                     <th>Status</th>
-                                    <th>Grand Total ($)</th>
+                                    <th>Grand Total (INR)</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -128,9 +129,9 @@
                                         <a href="javascript:void(0);">Macbook pro</a>
                                     </td>
                                     <td>PT001</td>
-                                    <td>walk-in-customer</td>
-                                    <td><span class="badges bg-lightgreen">Sent</span></td>
-                                    <td>550</td>
+                                    <td>walk-in-tender</td>
+                                    <td><span class="badges bg-lightgreen">Received</span></td>
+                                    <td>55000</td>
                                     <td>
                                         <a class="me-3" href="{% url 'editQuotation' %}">
                                             <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
