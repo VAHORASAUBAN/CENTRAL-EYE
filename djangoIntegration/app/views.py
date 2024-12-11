@@ -15,6 +15,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
 from geopy.geocoders import Nominatim
+from django.db.models import Count
+import json
 
 @api_view(['POST'])
 def login_view(request):
@@ -190,11 +192,28 @@ def index(request):
     assetCount = Asset.objects.count()
     availableAsset = Asset.objects.filter(assign_to__isnull=True).count()
     inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
-    return render(request,'index.html', {
+    
+    condition_queryset = Asset.objects.values('condition').annotate(total=Count('asset_id')).order_by()
+    condition_data = list(condition_queryset)
+    
+    stations_data = (
+        Asset.objects.values("assign_to__station__station_name")  # Replace "station_name" with the actual field in UserDetails
+        .annotate(total_products=Count("assign_to"))
+        .filter(assign_to__isnull=False)  # Only consider allocated assets
+    )
+    
+    station_names = [data["assign_to__station__station_name"] for data in stations_data]
+    total_products = [data["total_products"] for data in stations_data]
+     
+    return render(request,'index.html',{
                 'userCount': userCount, 
                 'assetCount': assetCount, 
                 'availableAsset': availableAsset, 
-                'inUseAsset': inUseAsset
+                'inUseAsset': inUseAsset,
+                'station_names': json.dumps(station_names),  # Serialize to JSON
+                'total_products': json.dumps(total_products),  # Serialize to JSON
+                'condition_data': json.dumps(condition_data),
+
     })
     
 @api_view(['PUT'])
@@ -295,8 +314,9 @@ def productlist(request):
         assets = Asset.objects.filter(assign_to__station__station_name=filter)
         print(assets)
     else:
+         assets = Asset.objects.all()
         # If no filter is provided, fetch all assets
-        assets = Asset.objects.all()
+     
     
     return render(request, 'productlist.html', {'asset': assets})
 
@@ -364,10 +384,11 @@ def barcode(request):
 #     return render(request,'barcode.html')
 
 def issuedproducts(request):
-    return render(request,'issuedproducts.html')
+    issuedproducts_id = Allocation.objects.all()
+    con={'issuedproducts_id': issuedproducts_id}
+    return render(request,'issuedproducts.html',con)
 
-def editissuedproducts(request):
-    return render(request,'editissuedproducts.html')
+
 
 def addissuedproducts(request):
     return render(request,'addissuedproducts.html')

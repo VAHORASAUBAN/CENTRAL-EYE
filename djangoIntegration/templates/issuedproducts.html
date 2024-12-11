@@ -114,6 +114,7 @@
     </tr>
     </thead>
     <tbody>
+        {%for i in issuedproducts_id %}
     <tr>
     <td>
     <label class="checkboxs">
@@ -125,24 +126,22 @@
     <a href="javascript:void(0);" class="product-img">
     <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
     </a>
-    <a href="">Macbook pro</a>
+    <a href="">{{i.asset.asset_name}}</a>
     </td>
-    <td>A20009</td>
-    <td><a href="">User1</a></td>
-    <td>19 Nov 2024</td>
-    <td>29 Nov 2024</td>
+    <td>{{i.asset.barcode}}</td>
+    <td><a href="">{{i.user.username}}</a></td>
+    <td>{{i.assign_date}}</td>
+    <td>{{i.return_date}}</td>
 
     <td>
-    <a class="me-3" href="{% url 'editissuedproducts' %}">
-    <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
-    </a>
+  
     <a class="me-3 confirm-text" href="javascript:void(0);">
     <img src="{% static 'assets/img/icons/delete.svg' %}" alt="img">
     </a>
     </td>
     </tr>
 
-
+{% endfor %}
 
 
 

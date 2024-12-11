@@ -55,7 +55,6 @@ urlpatterns = [
     # path('barcode', views.barcode, name='barcode'),
 
     path('issuedproducts', views.issuedproducts, name='issuedproducts'),
-    path('editissuedproducts', views.editissuedproducts, name='editissuedproducts'),
     path('addissuedproducts', views.addissuedproducts, name='addissuedproducts'),
 
     path('maintenanceproducts', views.maintenanceproducts, name='maintenanceproducts'),
