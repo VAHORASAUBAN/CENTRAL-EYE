@@ -38,24 +38,24 @@
      </div>
      </div>
      </div> -->
-     
+     <form action="{% url 'addmaintenanceproducts' %}" method="POST">
      <div class="col-lg-3 col-sm-6 col-12">
          <div class="form-group">
          <label>Product Name</label>
-         <input type="text" >
+         <input type="text" name="asset_name" >
          </div>
      </div>
          <div class="col-lg-3 col-sm-6 col-12">
              <div class="form-group">
              <label>Barcode</label>
-             <input type="text" >
+             <input type="text" name="barcode" >
              </div>
          </div>
      <div class="col-lg-3 col-sm-6 col-12">
      <div class="form-group">
-     <label>Maintenance Date</label>
+     <label>Last Maintenance Date</label>
      <div class="input-groupicon">
-     <input type="text"  class="datetimepicker">
+     <input type="text"  class="datetimepicker" name="last_maintenance_date">
      <div class="addonset">
      <img src="{% static 'assets/img/icons/calendars.svg' %}" alt="img">
      </div>
@@ -63,10 +63,21 @@
      </div>
      </div>
      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="form-group">
+        <label>New Maintenance Date</label>
+        <div class="input-groupicon">
+        <input type="text"  class="datetimepicker" name="next_maintenance_date">
+        <div class="addonset">
+        <img src="{% static 'assets/img/icons/calendars.svg' %}" alt="img">
+        </div>
+        </div>
+        </div>
+        </div>
+     <div class="col-lg-3 col-sm-6 col-12">
          <div class="form-group">
          <label>Handover Date</label>
          <div class="input-groupicon">
-         <input type="text"  class="datetimepicker">
+         <input type="text"  class="datetimepicker" name="return_date">
          <div class="addonset">
          <img src="{% static 'assets/img/icons/calendars.svg' %}" alt="img">
          </div>
@@ -76,10 +87,10 @@
      <div class="col-lg-3 col-sm-6 col-12">
          <div class="form-group">
          <label>Cost</label>
-         <input type="text" >
+         <input type="text" name="maintenance_cost" >
          </div>
      </div>
-     
+    </form>
      
      <!-- 
      <div class="row">
@@ -94,12 +105,7 @@
          <a class="btn btn-submit me-2">Add</a>
          <a href="{% url 'maintenanceproducts' %}" class="btn btn-cancel">Cancel</a>
          </div>
-     
-     
-     
-     
-     
-             </div>
+  </div>
 
 
 </div>

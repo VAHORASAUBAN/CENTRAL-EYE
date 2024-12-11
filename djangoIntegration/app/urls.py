@@ -28,7 +28,10 @@ urlpatterns = [
     # path('api/assets/', views.AssetList, name='asset-list'),
     path('api/asset/', views.AssetListView, name='asset-list'),
     
-    
+    path('signin',views.signin, name='signin'),
+    path('logout',views.logout, name='logout'),
+
+
     path('productlist', views.productlist, name='productlist'),
     path('addproduct', views.addproduct, name='addproduct'),
     path('editproduct', views.editproduct, name='editproduct'),
@@ -50,11 +53,11 @@ urlpatterns = [
     path('addissuedproducts', views.addissuedproducts, name='addissuedproducts'),
 
     path('maintenanceproducts', views.maintenanceproducts, name='maintenanceproducts'),
-    path('editmaintenanceproducts', views.editmaintenanceproducts, name='editmaintenanceproducts'),
+    path('editmaintenanceproducts/<int:id>', views.editmaintenanceproducts, name='editmaintenanceproducts'),
     path('addmaintenanceproducts', views.addmaintenanceproducts, name='addmaintenanceproducts'),
 
     path('expiredproducts', views.expiredproducts, name='expiredproducts'),
-    path('editexpiredproducts', views.editexpiredproducts, name='editexpiredproducts'),
+    path('editexpiredproducts/<int:id>', views.editexpiredproducts, name='editexpiredproducts'),
     path('addexpiredproducts', views.addexpiredproducts, name='addexpiredproducts'),
 
     path('returnproducts', views.returnproducts, name='returnproducts'),
@@ -82,7 +85,6 @@ urlpatterns = [
     path('editexpense',views.editExpense, name='editExpense'),
     path('profile',views.profile, name='profile'),
     path('generalsettings',views.generalSettings, name='generalSettings'),
-    path('signin',views.signin, name='signin'),
     path('forgetpassword',views.forgetpassword, name='forgetpassword'),
     path('signup',views.signup, name='signup'),
  
