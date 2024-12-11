@@ -87,7 +87,8 @@ class Asset(models.Model):
     location = models.CharField(max_length=255)
     assign_to = models.ForeignKey(UserDetails, null=True, blank=True, on_delete=models.SET_NULL)
     asset_status = models.CharField(max_length=20, choices=ASSET_STATUS_CHOICES, default='available')
-    
+    asset_maintenance_date = models.DateField(null=True, blank=True)
+
 
     def save(self, *args, **kwargs):
         # Determine if the instance is being updated

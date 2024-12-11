@@ -134,11 +134,12 @@
                                     <th>Status</th>
                                     <th>Value</th>
                                     <th>Condition</th>
-                                    <th>Maintenance</th>
+                                    <th>Maintenance Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for asset in assets %}
                                 <tr>
                                     <td>
                                         <label class="checkboxs">
@@ -150,8 +151,51 @@
                                         <a href="javascript:void(0);" class="product-img">
                                             <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
                                         </a>
-                                        <a href="javascript:void(0);">Macbook pro</a>
+                                        <a href="javascript:void(0);">{{ asset.asset_name }}</a>
                                     </td>
+<<<<<<< HEAD
+                                    <td> {% if asset.barcode %}
+                                        {{ asset.barcode }}
+                                        {% else %}
+                                        <span class="text-danger">ADD BARCODE!</span>
+                                        {% endif %}
+                                    </td>
+                                    <td> {% if asset.asset_category %}
+                                        {{ asset.asset_category.name }}
+                                        {% else %}
+                                        No Subcategory
+                                        {% endif %}</td>
+                                    <td> {% if asset.asset_category and asset.asset_category.category %}
+                                        {{ asset.asset_category.category.name }}
+                                        {% else %}
+                                        No Category
+                                        {% endif %}
+                                    </td>
+                                    <td>{% if asset.asset_status == 'available' %}
+                                        <span class="badges bg-lightgreen">Available</span>
+                                        {% elif asset.asset_status == 'in-use' %}
+                                        <span class="badges bg-lightyellow">In-Use</span>
+                                        {% elif asset.asset_status == 'in-maintenance' %}
+                                        <span class="badges bg-lightblue">In-Maintenance</span>
+                                        {% elif asset.asset_status == 'expired' %}
+                                        <span class="badges bg-lightred">Expired</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ asset.asset_value }}</td>
+                                    <td> {% if asset.condition == 'good' %}
+                                        <span class="badges bg-lightgreen">Good</span>
+                                        {% elif asset.condition == 'fair' %}
+                                        <span class="badges bg-lightyellow">Fair</span>
+                                        {% elif asset.condition == 'poor' %}
+                                        <span class="badges bg-lightred">Poor</span>
+                                        {% endif %}
+                                    </td>
+                                    <td> {% if asset.asset_maintenance_date %}
+                                        {{ asset.asset_maintenance_date|date:"d M Y" }}
+                                        {% else %}
+                                        N/A
+                                        {% endif %}</td>
+=======
                                     <td>A20004</td>
                                     <td>Device</td>
                                     <td>abc</td>
@@ -159,6 +203,7 @@
                                     <td>550</td>
                                     <td><span class="badges bg-lightgreen">Paid</span></td>
                                     <td>120</td>
+>>>>>>> 8e76ccd27b857be81e967e000f93fb65fa67a518
                                     <td>
                                         <a class="me-3" href="{% url 'productdetails' %}">
                                             <img src="{% static 'assets/img/icons/eye.svg' %}" alt="img">
@@ -171,10 +216,14 @@
                                         </a>
                                     </td>
                                 </tr>
+<<<<<<< HEAD
+                                {% endfor %}
+=======
                               
                                
                                
                                 
+>>>>>>> 8e76ccd27b857be81e967e000f93fb65fa67a518
                             </tbody>
                         </table>
                     </div>

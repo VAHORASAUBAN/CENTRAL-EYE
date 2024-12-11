@@ -288,7 +288,8 @@ def forgetpassword(request):
     return render(request,'forgetpassword.html')
 
 def productlist(request):
-    return render(request,'productlist.html')
+    assets = Asset.objects.all()  # Fetch all products from the Asset model
+    return render(request, 'productlist.html', {'assets': assets})
 
 def editproduct(request):
     return render(request,'editproduct.html')
@@ -296,7 +297,37 @@ def editproduct(request):
 def productdetails(request):
     return render(request,'productdetails.html')
 def addproduct(request):
-    return render(request,'addproduct.html')
+     if request.method == 'POST':
+        # Get data from the form
+        product_name = request.POST.get('productname')
+        category = request.POST.get('category_name')  # Assume you pass category ID
+        purchase_date = request.POST.get('purchasedate')
+        asset_value = request.POST.get('productvalue')
+        condition = request.POST.get('condition')
+        maintenance_date = request.POST.get('maintenance_date')
+        
+    
+        print (product_name)
+        
+        categoryGet = AssetSubCategory.objects.get(sub_category_name=category)
+        
+        Asset.objects.create(
+            asset_name=product_name,
+            asset_category=categoryGet,
+            purchase_date=purchase_date,
+            asset_value=asset_value,
+            condition=condition,
+            asset_maintenance_date=maintenance_date,
+        )
+        
+        return redirect('productlist')
+    
+
+
+     categories = AssetSubCategory.objects.all()
+   
+        
+     return render(request,'addproduct.html',{'categories': categories})
 
 def categorylist(request):
     return render(request,'categorylist.html')
