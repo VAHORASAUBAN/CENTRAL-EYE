@@ -14,10 +14,11 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:padding="10dp">
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/productimage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="79dp"
+            android:layout_height="86dp"
             android:src="@drawable/baseline_mouse_24" />
 
 
