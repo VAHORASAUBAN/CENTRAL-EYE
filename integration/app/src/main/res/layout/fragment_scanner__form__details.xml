@@ -3,37 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/light_50">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
-        android:elevation="4dp"
-        app:title="Inventory Management"
-        app:titleTextColor="@android:color/white" />
-
-    <!-- Title Text -->
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_margin="16dp"
-        android:text="Add Assets"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#212121"
-        android:drawableLeft="@drawable/baseline_add_circle_outline_24"
-        android:drawablePadding="12dp" />
+        android:background="@color/white"
+        android:padding="6dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content">
+
+            <!-- Heading Text on the Left -->
+            <TextView
+                android:id="@+id/toolbar_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Asset"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+
+
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
 
     <!-- Form Card -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
+        android:layout_below="@id/toolbar"
         android:layout_margin="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
@@ -48,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginBottom="100dp"
                 android:padding="24dp">
 
 
