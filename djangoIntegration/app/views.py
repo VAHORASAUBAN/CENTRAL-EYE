@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer, BarcodeUpdateSerializer, RequestAssetSerializer
 from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -179,6 +179,31 @@ def index(request):
                 'availableAsset': availableAsset, 
                 'inUseAsset': inUseAsset
     })
+    
+@api_view(['PUT'])
+def update_barcode(request, asset_id):
+    try:
+        asset= Asset.objects.get(asset_id=asset_id)
+    except Asset.DoesNotExist:
+        return Response({"error": "Asset not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = BarcodeUpdateSerializer(data=request.data)
+    print(request.data)
+    if serializer.is_valid():
+        asset.barcode = serializer.validated_data['barcode']
+        asset.save()
+        return Response({"message": "Barcode updated successfully"}, status=status.HTTP_200_OK)
+    print(serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_requests(request):
+    try:
+        requests = RequestAsset.objects.all()
+        serializer = RequestAssetSerializer(requests, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 @api_view(['GET'])
 def get_totals(request):

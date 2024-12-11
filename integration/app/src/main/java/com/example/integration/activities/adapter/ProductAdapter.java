@@ -48,19 +48,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         String barcode = product.getBarcode();
         if (barcode == null || barcode.isEmpty()) {
             // When the barcode is null or empty
-            holder.productBarcode.setText("Barcode: Not Available");
+            holder.productBarcode.setText("Not Available");
             holder.viewButton.setImageResource(R.drawable.baseline_qr_code_scanner_24); // Replace with another icon
             holder.viewButton.setOnClickListener(v -> {
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                Remaining_barcodescanner fragment = Remaining_barcodescanner.newInstance(product); // Use newInstance method
+                Remaining_barcodescanner fragment = Remaining_barcodescanner.newInstance(product); // Pass the Product object
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment) // Ensure `fragment_container` exists in your activity's layout
+                        .replace(R.id.fragment_container, fragment) // Ensure `fragment_container` exists
                         .addToBackStack(null)
                         .commit();
             });
         } else {
             // When the barcode is available
-            holder.productBarcode.setText("Barcode: " + barcode);
+            holder.productBarcode.setText(barcode);
             holder.viewButton.setImageResource(R.drawable.baseline_keyboard_arrow_right_24); // Default icon
             holder.viewButton.setOnClickListener(v -> listener.onViewClick(product)); // Enable click
         }

@@ -110,8 +110,8 @@ public class User_notification extends Fragment {
 
         // Sample data for Request RecyclerView
         requestList = new ArrayList<>();
-        requestList.add(new RequestModel("REQ001", "John Doe"));
-        requestList.add(new RequestModel("REQ002", "Jane Smith"));
+//        requestList.add(new RequestModel("REQ001", "John Doe"));
+//        requestList.add(new RequestModel("REQ002", "Jane Smith"));
         requestAdapter = new RequestListAdapter(getParentFragmentManager(), requestList);
         requestRecyclerView.setAdapter(requestAdapter);
 

@@ -30,6 +30,9 @@ urlpatterns = [
     path('api/products/<str:barcode>/', views.get_product_by_barcode, name='get_product_by_barcode'),# Update this line
     # path('api/assets/', views.AssetList, name='asset-list'),
     path('api/asset/', views.AssetListView, name='asset-list'),
+    path('api/update-barcode/<str:asset_id>/', views.update_barcode, name='update-barcode'),
+    path('api/requests/', views.get_requests, name='get_requests'),
+
     
     
     path('productlist', views.productlist, name='productlist'),

@@ -35,12 +35,12 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RequestModel request = requestList.get(position);
-        holder.requestId.setText(request.getRequestId());
-        holder.userName.setText(request.getUserName());
+        holder.requestId.setText(String.valueOf(request.getRequest_id())); // Convert to String
+        holder.userName.setText(request.getUser_name());
 
         holder.itemView.setOnClickListener(v -> {
             // Navigate to RequestDetailsFragment
-            Request_details detailsFragment = Request_details.newInstance(request.getRequestId());
+            Request_details detailsFragment = Request_details.newInstance(String.valueOf(request.getRequest_id())); // Pass as String
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, detailsFragment)
                     .addToBackStack(null)
