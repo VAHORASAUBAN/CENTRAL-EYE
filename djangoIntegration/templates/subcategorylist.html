@@ -16,8 +16,8 @@
                     <h6>View/Search product Category</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{% url 'addsubcategory' %}" class="btn btn-added"><img src="{% static 'assets/img/icons/plus.svg' %}"
-                            class="me-2" alt="img"> Add Sub Category</a>
+                    <a href="{% url 'addsubcategory' %}" class="btn btn-added"><img
+                            src="{% static 'assets/img/icons/plus.svg' %}" class="me-2" alt="img"> Add Sub Category</a>
                 </div>
             </div>
 
@@ -32,7 +32,8 @@
                                 </a>
                             </div>
                             <div class="search-input">
-                                <a class="btn btn-searchset"><img src="{% static 'assets/img/icons/search-white.svg' %}" alt="img"></a>
+                                <a class="btn btn-searchset"><img src="{% static 'assets/img/icons/search-white.svg' %}"
+                                        alt="img"></a>
                             </div>
                         </div>
                         <div class="wordset">
@@ -86,8 +87,8 @@
                                 <div class="col-lg-1 col-sm-6 col-12 ms-auto">
                                     <div class="form-group">
                                         <label>&nbsp;</label>
-                                        <a class="btn btn-filters ms-auto"><img src="{% static 'assets/img/icons/search-whites.svg' %}"
-                                                alt="img"></a>
+                                        <a class="btn btn-filters ms-auto"><img
+                                                src="{% static 'assets/img/icons/search-whites.svg' %}" alt="img"></a>
                                     </div>
                                 </div>
                             </div>
@@ -105,41 +106,42 @@
                                         </label>
                                     </th>
                                     <th>Image</th>
-                                    <th>Category</th>
-                                    <th>Parent category</th>
-                                    <th>Category Code</th>
-                                    <th>Description</th>
+                                    <th>SubCategoryName</th>
+                                    <th>category</th>
+                                    <th>SubCategory Id</th>
                                     <th>Created By</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for subcategory in subcategories %}
+
                                 <tr>
                                     <td>
-                                    <label class="checkboxs">
-                                    <input type="checkbox">
-                                    <span class="checkmarks"></span>
-                                    </label>
+                                        <label class="checkboxs">
+                                            <input type="checkbox">
+                                            <span class="checkmarks"></span>
+                                        </label>
                                     </td>
                                     <td>
-                                    <a class="product-img">
-                                    <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
-                                    </a>
+                                        <a class="product-img">
+                                            <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
+                                        </a>
                                     </td>
-                                    <td>Computers</td>
-                                    <td>Computers</td>
-                                    <td>CT001</td>
-                                    <td>Computers Description</td>
+                                    <td>{{subcategory.sub_category_name}}</td>
+                                    <td>{{subcategory.category.category_name}}</td>
+                                    <td>{{subcategory.sub_category_id}}</td>
                                     <td>Admin</td>
                                     <td>
-                                    <a class="me-3" href="{% url 'editsubcategory' %}">
-                                    <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
-                                    </a>
-                                    <a class="me-3 confirm-text" href="javascript:void(0);">
-                                    <img src="{% static 'assets/img/icons/delete.svg' %}" alt="img">
-                                    </a>
+                                        <a class="me-3" href="{% url 'editsubcategory' %}">
+                                            <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
+                                        </a>
+                                        <a class="me-3 confirm-text" href="javascript:void(0);">
+                                            <img src="{% static 'assets/img/icons/delete.svg' %}" alt="img">
+                                        </a>
                                     </td>
-                                    </tr>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

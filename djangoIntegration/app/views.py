@@ -9,8 +9,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer, BarcodeUpdateSerializer, RequestAssetSerializer
 from django.utils import timezone
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 @api_view(['POST'])
@@ -47,7 +50,7 @@ def login_view(request):
                 # request.session['user_id'] = user.user_id
                 request.session['username'] = user.username
                 request.session['role'] = user.role.role  # Example custom field
-                request.session['full_name'] = user.full_name
+                request.session['full_name'] = user.first_name
 
                 # Log the user in
                 django_login(request, user)
@@ -67,22 +70,76 @@ def login_view(request):
     print(f"Serializer errors: {serializer.errors}")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def get_categories(request):
+    categories = AssetCategory.objects.all()
+    data = []
+    for category in categories:
+        subcategories = AssetSubCategory.objects.filter(category=category)
+        data.append({
+            "category_id": category.category_id,
+            "category_name": category.category_name,
+            "subcategories": [
+                {
+                    "sub_category_id": sub.sub_category_id,
+                    "sub_category_name": sub.sub_category_name
+                }
+                for sub in subcategories
+            ]
+        })
+    return Response(data, status=200)
+
+@api_view(['GET'])
+def get_condition_choices(request):
+    conditions = [condition[0] for condition in CONDITION_CHOICES]
+    return Response(conditions)
+
 @api_view(['POST'])
 def add_product(request):
     serializer = ProductSerializer(data=request.data)
     print(request.data)
-    if serializer.is_valid():
-        barcode = serializer.validated_data['barcode']
-        assetType = serializer.validated_data['asset_type']
+    
+    if not serializer.is_valid():
+        print("Validation Errors:", serializer.errors)
+        return Response(serializer.errors, status=400)
+    
+    else: 
+        # Extract validated data from the request
         assetName = serializer.validated_data['asset_name']
-        purchaseDate = serializer.validated_data['purchase_date']
         assetValue = serializer.validated_data['asset_value']
+        barcode = serializer.validated_data['barcode']
+        category = serializer.validated_data['category']
         condition = serializer.validated_data['condition']
-        location = serializer.validated_data['Location']
+        location = serializer.validated_data['location']
+        purchaseDate = serializer.validated_data['purchase_date']
+        subcategory = serializer.validated_data['subcategory']  # Assuming this is passed as subcategory_id
         
-        Asset.objects.create(asset_name=assetName, barcode=barcode, asset_type=assetType, purchase_date=purchaseDate, asset_value=assetValue, condition=condition, location=location)
+        # Get the AssetSubCategory instance based on the provided subcategory_id
+        try:
+            subcategory = AssetSubCategory.objects.get(sub_category_name=subcategory)
+        except AssetSubCategory.DoesNotExist:
+            return Response({"error": "Subcategory not found"}, status=404)
+        
+        # Create a new Asset instance with the related subcategory
+        asset = Asset.objects.create(
+            asset_name=assetName, 
+            barcode=barcode, 
+            asset_category=subcategory,  # This is the ForeignKey relation
+            purchase_date=purchaseDate, 
+            asset_value=assetValue, 
+            condition=condition, 
+            location=location
+        )
+        
+        # Maintenance.objects.create(
+        #     asset=asset,
+        #     last_maintenance_date=asset.purchase_date,
+        #     next_maintenance_date=asset.purchase_date + timedelta(days=180),  # Example: 180 days after purchase
+        #     maintenance_cost='N/A',  # Set a default cost or pass it from the request
+        # )
         
         return Response({"message": "Product added successfully!"}, status=201)
+    
     return Response(serializer.errors, status=400)
 
 @api_view(['GET'])
@@ -96,9 +153,15 @@ def AssetListView(request):
     filter_type = request.query_params.get('filter')
 
     if filter_type == 'available':
-        assets = Asset.objects.filter(assign_to__isnull=True)
+        assets = Asset.objects.filter(asset_status='available')
     elif filter_type == 'in-use':
-        assets = Asset.objects.filter(assign_to__isnull=False)
+        assets = Asset.objects.filter(asset_status='in-use')
+    elif filter_type == 'in-maintenance':
+        assets = Asset.objects.filter(asset_status='in-maintenance')
+    elif filter_type == 'expired':
+        assets = Asset.objects.filter(asset_status='expired')
+    elif filter_type == 'barcode-remaining':
+        assets = Asset.objects.filter(barcode__isnull=True)
     else:
         assets = Asset.objects.all()
 
@@ -118,6 +181,31 @@ def index(request):
                 'inUseAsset': inUseAsset
     })
     
+@api_view(['PUT'])
+def update_barcode(request, asset_id):
+    try:
+        asset= Asset.objects.get(asset_id=asset_id)
+    except Asset.DoesNotExist:
+        return Response({"error": "Asset not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = BarcodeUpdateSerializer(data=request.data)
+    print(request.data)
+    if serializer.is_valid():
+        asset.barcode = serializer.validated_data['barcode']
+        asset.save()
+        return Response({"message": "Barcode updated successfully"}, status=status.HTTP_200_OK)
+    print(serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_requests(request):
+    try:
+        requests = RequestAsset.objects.all()
+        serializer = RequestAssetSerializer(requests, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 @api_view(['GET'])
 def get_totals(request):
     try:
@@ -131,7 +219,21 @@ def get_totals(request):
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+
+@api_view(['GET'])
+def get_product_by_barcode(request, barcode):
+    try:
+        # Try to find the product with the given barcode
+        product = Asset.objects.get(barcode=barcode)
+
+        serializer = AssetSerializer(product, many=False)
+
+        print(serializer.data)  # Debugging log to verify data
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Asset.DoesNotExist:
+        # If no product is found with the given barcode
+        return JsonResponse({'status': 'error', 'message': 'Product not found with this barcode.'})
+     
 def signin(request):
     if "email" in request.session:
         return redirect('index')  # Redirect to the appropriate page for logged-in users
@@ -428,26 +530,31 @@ from django.core.exceptions import ObjectDoesNotExist
 def assign_product(request):
     # Deserialize the incoming data
     serializer = AssignSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid():
         # Extract the necessary fields
         barcode = serializer.validated_data['barcode']
         returnDate = serializer.validated_data['return_date']
         user = serializer.validated_data['username']
+        location = serializer.validated_data['location']
+        print(user)
         
         try:
             # Fetch the asset from the database
             asset = Asset.objects.get(barcode=barcode)
             
             if asset.assign_to is None:    
+                user = User.objects.get(username=user)
                 # Create a new Allocation object and save it to the database
                 allocation = Allocation.objects.create(
-                    asset_barcode=barcode,
+                    asset=asset,
                     user=user,
-                    return_date=returnDate,
-                    assign_location="NULL"
+                    expected_return_date=returnDate,
+                    assign_location=location
                 )
                 
                 asset.assign_to = user
+                asset.asset_status = 'in-use'
                 asset.save()
                 
                 return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
@@ -456,6 +563,7 @@ def assign_product(request):
         except ObjectDoesNotExist:
             return Response({"message": "Product not found with barcode!"}, status=404)
     else:
+        print("Validation Errors:", serializer.errors)
         return Response(serializer.errors, status=400)
 
 

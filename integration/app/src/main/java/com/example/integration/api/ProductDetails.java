@@ -2,23 +2,25 @@ package com.example.integration.api;
 
 public class ProductDetails {
     private String barcode;
-    private String asset_type;
     private String asset_name;
     private String purchase_date;
     private String asset_value;
     private String condition;
-    private String Location;
+    private String location;
+    private String category;
+    private String subcategory;
 
-    // Constructor (updated to include location)
-    public ProductDetails(String barcode, String assetType, String assetName, String purchaseDate,
-                          String assetValue, String condition, String Location) {
+    // Constructor (updated to include location and other fields)
+    public ProductDetails(String barcode, String assetName, String purchaseDate,
+                          String assetValue, String condition, String location, String category, String subcategory) {
         this.barcode = barcode;
-        this.asset_type = assetType;
         this.asset_name = assetName;
         this.purchase_date = purchaseDate;
         this.asset_value = assetValue;
         this.condition = condition;
-        this.Location = Location;
+        this.location = location;
+        this.category = category;
+        this.subcategory = subcategory;
     }
 
     // Getters and Setters for all fields
@@ -29,14 +31,6 @@ public class ProductDetails {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
-    }
-
-    public String getAsset_type() {
-        return asset_type;
-    }
-
-    public void setAsset_type(String asset_type) {
-        this.asset_type = asset_type;
     }
 
     public String getAsset_name() {
@@ -72,10 +66,26 @@ public class ProductDetails {
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
-    public void setLocation(String Location) {
-        this.Location = Location;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
     }
 }

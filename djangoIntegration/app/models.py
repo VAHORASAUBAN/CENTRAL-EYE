@@ -72,7 +72,6 @@ class AssetSubCategory(models.Model):
     sub_category_id = models.IntegerField(primary_key=True)
     category = models.ForeignKey(AssetCategory, null=True, blank=True, on_delete=models.SET_NULL)
     sub_category_name = models.CharField(max_length=255)
-    
     def __str__(self):
         return self.sub_category_name
     
@@ -81,7 +80,7 @@ class Asset(models.Model):
     asset_id = models.IntegerField(primary_key=True, unique=True)
     asset_name = models.CharField(max_length=255)
     asset_category = models.ForeignKey(AssetSubCategory, null=True, blank=True, on_delete=models.SET_NULL)
-    barcode = models.CharField(max_length=255, unique=True)
+    barcode = models.CharField(max_length=255, unique=True, null=True, blank=True)
     purchase_date = models.DateField()
     asset_value = models.CharField(max_length=255)
     condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, default='good')
@@ -91,41 +90,29 @@ class Asset(models.Model):
     
 
     def save(self, *args, **kwargs):
-        # Check if the Asset is being created (not updated)
-        is_new = self._state.adding
-
-        # Get the previous status (if updating)
+        # Determine if the instance is being updated
         try:
-            existing_asset = Asset.objects.get(pk=self.pk)
+            existing_asset = Asset.objects.get(pk=self.pk)  # Fetch the previous state
             previous_status = existing_asset.asset_status
         except Asset.DoesNotExist:
             previous_status = None
 
         super().save(*args, **kwargs)  # Save the Asset instance first
 
-        # Ensure only one Maintenance record is created for new assets
-        if is_new and not Maintenance.objects.filter(asset=self).exists():
-            Maintenance.objects.create(
-                asset=self,
-                last_maintenance_date=self.purchase_date,  # Optionally use purchase_date as the initial date
-            )
-
-        # Handle logic for adding to ExpiredProduct table
+        # Handle ExpiredProduct logic
         if self.asset_status == 'expired' and previous_status != 'expired':
+            # Add to ExpiredProduct table if it is not already there
             ExpiredProduct.objects.get_or_create(asset=self)
-
-        # Handle logic for removing from ExpiredProduct table
-        elif self.asset_status != 'expired' and previous_status == 'expired':
+        elif previous_status == 'expired' and self.asset_status != 'expired':
+            # Remove from ExpiredProduct table if status changes from expired
             ExpiredProduct.objects.filter(asset=self).delete()
-
-           # Handle logic for adding to MaintenanaceProduct table
-        if self.asset_status == 'in-maintenance' and previous_status != 'in-maintenance':
+        elif self.asset_status == 'in-maintenance' and previous_status != 'in-maintenance':
+            # Remove from ExpiredProduct table if status changes from expired
             Maintenance.objects.get_or_create(asset=self)
-
-        # Handle logic for removing from MaintenanaceProduct table
-        elif self.asset_status != 'in-maintenance' and previous_status == 'in-maintenance':
+        elif previous_status == 'in-maintenance' and self.asset_status != 'in-maintenance':
+            # Remove from ExpiredProduct table if status changes from expired
             Maintenance.objects.filter(asset=self).delete()
-
+            
     def __str__(self):
         return f"{self.barcode} - {self.asset_name} - {self.asset_status}"
 
@@ -140,12 +127,14 @@ class Allocation(models.Model):          #issuedproducts
     assign_location = models.CharField(max_length=255)
     
     def __str__(self):
-        return f"Asset : {self.asset} - Barcode : {self.asset.barcode} - Allocated to: {self.user}"
+        return f"Asset : {self.asset} - Allocated to: {self.user}"
     
 class RequestAsset(models.Model):
     request_id = models.IntegerField(primary_key=True, unique=True)
     user = models.ForeignKey(UserDetails, null=True, blank=True, on_delete=models.SET_NULL)
     asset = models.ForeignKey(Asset, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    asset_sub_category = models.ForeignKey(AssetSubCategory, null=True, blank=True, on_delete=models.SET_NULL)
     quantity = models.CharField(max_length=255)
     return_date = models.DateField(null=True, blank=True)
     request_date = models.DateField(auto_now_add=True)
@@ -160,7 +149,7 @@ class Maintenance(models.Model):
     asset = models.ForeignKey("Asset", null=True, blank=True, on_delete=models.CASCADE)
     last_maintenance_date = models.DateField()  # Tracks the last maintenance date
     next_maintenance_date = models.DateField()  # Tracks the next maintenance date
-    maintenance_cost = models.CharField(max_length=255)
+    maintenance_cost = models.CharField(max_length=255, null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)  # Add this field to capture return date
             
     def save(self, *args, **kwargs):
@@ -183,6 +172,6 @@ class ExpiredProduct(models.Model):
     asset = models.OneToOneField("Asset", on_delete=models.CASCADE, related_name="expired_record")
     expiration_date = models.DateField(auto_now_add=True)
     reason = models.CharField(max_length=255, default="Expired status set by admin")  # Optional field
-
+    
     def __str__(self):
         return f"Expired Product: {self.asset.asset_name} (Barcode: {self.asset.barcode})"

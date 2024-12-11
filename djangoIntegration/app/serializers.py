@@ -8,22 +8,30 @@ class LoginSerializer(serializers.Serializer):
 
 class ProductSerializer(serializers.Serializer):
     barcode = serializers.CharField(max_length=255)
-    asset_type = serializers.CharField(max_length=255)
     asset_name = serializers.CharField(max_length=255)
+    category = serializers.CharField(max_length=255)
+    subcategory = serializers.CharField(max_length=255)
     purchase_date = serializers.DateField()
     asset_value = serializers.CharField(max_length=255)
     condition = serializers.CharField(max_length=255)
-    # location = serializers.CharField(max_length=255)
+    location = serializers.CharField(max_length=255)
 
 class AssignSerializer(serializers.Serializer):
     barcode = serializers.CharField(max_length=255)
     return_date = serializers.DateField()
     username = serializers.CharField(max_length=100)
+    location = serializers.CharField(max_length=100)
     
 class AssetSerializer(serializers.ModelSerializer):
+    asset_category = serializers.CharField(source='asset_category.category.category_name', read_only=True)  
+    asset_sub_category = serializers.CharField(source='asset_category.sub_category_name', read_only=True)   
+    assign_to = serializers.CharField(source='assign_to.username', read_only=True)   
     class Meta:
         model = Asset
-        fields = '__all__'  # or specify individual fields
+        fields = ['asset_id', 'asset_name', 'barcode', 'purchase_date', 'asset_value', 'condition', 'location', 'asset_category', 'asset_sub_category', 'assign_to']  # or specify individual fields
+
+class BarcodeUpdateSerializer(serializers.Serializer):
+    barcode = serializers.CharField(max_length=255)
         
 class UserSerializer(serializers.ModelSerializer):
     role = serializers.CharField(source='role.role', read_only=True)  # Assuming 'name' is the field in the Role model
@@ -31,4 +39,21 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['full_name', 'role', 'station', 'contact_number']
+        fields = ['first_name', 'last_name', 'role', 'station', 'contact_number']
+        
+class RequestAssetSerializer(serializers.ModelSerializer):
+    user_name = serializers.CharField(source='user.username', read_only=True)
+    asset_category = serializers.CharField(source='asset_sub_category.name', read_only=True)
+
+    class Meta:
+        model = RequestAsset
+        fields = [
+            'request_id', 
+            'user_name', 
+            'asset_category', 
+            'quantity', 
+            'return_date', 
+            'request_date', 
+            'request_location', 
+            'request_status'
+        ]
