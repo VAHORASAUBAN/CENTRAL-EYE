@@ -6,6 +6,10 @@
     <color name="secondary">#f1f1f1</color>
     <color name="lightgrey">#404040</color>
     <color name="light_50">#F7F8F9</color>
-
+    <color name="blue">#1b2850</color>
+    <color name="orange">#ff9f43</color>
+    <color name="sky">#00cfe8</color>
+    <color name="green">#28c76f</color>
+    <color name="red">#EF4141</color>
 
 </resources>

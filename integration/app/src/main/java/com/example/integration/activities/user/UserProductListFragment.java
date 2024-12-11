@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -94,7 +95,7 @@ public class UserProductListFragment extends Fragment {
         ImageView profileImageButton = view.findViewById(R.id.profile_image);
         ImageButton scanner_icon = view.findViewById(R.id.scanner_icon);
 
-        ImageView filterIcon = view.findViewById(R.id.filter);
+        CardView filterIcon = view.findViewById(R.id.filter);
         List<String> categories = Arrays.asList("Peripheral", "Category 2", "Category 3");  // Example categories
         Map<String, List<String>> subcategories = new HashMap<>();
         subcategories.put("Peripheral", Arrays.asList("Mouse", "Keyboard"));
