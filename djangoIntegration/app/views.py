@@ -544,7 +544,7 @@ def assign_product(request):
             asset = Asset.objects.get(barcode=barcode)
             
             if asset.assign_to is None:    
-                user = User.objects.get(username=user)
+                user = UserDetails.objects.get(username=user)
                 # Create a new Allocation object and save it to the database
                 allocation = Allocation.objects.create(
                     asset=asset,
