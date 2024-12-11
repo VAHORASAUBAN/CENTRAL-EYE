@@ -1,11 +1,17 @@
 package com.example.integration.activities;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,9 +20,12 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.integration.R;
 import com.example.integration.activities.model.Product;
+import com.example.integration.activities.user.User_Profile_fragment;
 import com.example.integration.api.ApiService;
 import com.example.integration.network.RetrofitClient;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -33,6 +42,8 @@ public class SearchScanner extends Fragment {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 1001;
 
     private boolean isProcessingBarcode = false;
+    private ImageButton flashlightButton;
+    private boolean isFlashlightOn = false;
 
     public SearchScanner() {
         // Required empty public constructor
@@ -48,8 +59,33 @@ public class SearchScanner extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize UI components
+        ImageView profileImageButton = view.findViewById(R.id.profile_image);
+
         barcodeScannerView = view.findViewById(R.id.search_scanner);
         scannedValueTv = view.findViewById(R.id.scannedValueTv);
+        flashlightButton = view.findViewById(R.id.flashlight_button);
+
+        profileImageButton.setOnClickListener(v -> {
+            // PopupMenu logic here...
+            PopupMenu popupMenu = new PopupMenu(requireContext(), profileImageButton);
+            popupMenu.getMenuInflater().inflate(R.menu.profile_menu, popupMenu.getMenu());
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.menu_profile) {
+                    openuserprofileFragment();
+                    return true;
+                } else if (id == R.id.menu_logout) {
+                    performLogout();
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            popupMenu.show();
+        });
+
 
         if (barcodeScannerView == null) {
             throw new IllegalStateException("DecoratedBarcodeView (barcodeScannerView) is null. Check the ID in the layout.");
@@ -57,7 +93,9 @@ public class SearchScanner extends Fragment {
 
         // Check camera permissions
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            startScanning(); // Start scanning if permission is granted
+            startScanning();// Start scanning if permission is granted
+            flashlightButton.setOnClickListener(v -> toggleFlashlight());
+
         } else {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
         }
@@ -141,6 +179,45 @@ public class SearchScanner extends Fragment {
         }
     }
 
+    private void performLogout() {
+        SharedPreferences.Editor editor = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE).edit();
+        editor.clear(); // Clear session
+        editor.apply();
+
+        Toast.makeText(requireContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+
+        // Navigate to login screen (optional)
+        Intent intent = new Intent(requireContext(), MainActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
+    }
+
+    private void openuserprofileFragment() {
+        User_Profile_fragment userprofileFragment = new User_Profile_fragment();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, userprofileFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    private void toggleFlashlight() {
+        if (barcodeScannerView != null) {
+            if (isFlashlightOn) {
+                barcodeScannerView.setTorchOff();
+                isFlashlightOn = false;
+                flashlightButton.setImageResource(R.drawable.baseline_flashlight_off_24); // Replace with appropriate icon
+                Toast.makeText(requireContext(), "Flashlight turned off", Toast.LENGTH_SHORT).show();
+            } else {
+                barcodeScannerView.setTorchOn();
+                isFlashlightOn = true;
+                flashlightButton.setImageResource(R.drawable.baseline_flashlight_on_24); // Replace with appropriate icon
+                Toast.makeText(requireContext(), "Flashlight turned on", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(requireContext(), "Scanner view is not initialized.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -149,6 +226,7 @@ public class SearchScanner extends Fragment {
                 if (barcodeScannerView != null) {
                     barcodeScannerView.resume();
                     startScanning();
+
                 }
             } else {
                 Toast.makeText(getContext(), "Camera permission is required to use the scanner.", Toast.LENGTH_LONG).show();
