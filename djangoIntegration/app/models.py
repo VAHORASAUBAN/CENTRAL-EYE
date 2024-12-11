@@ -111,9 +111,6 @@ class Asset(models.Model):
         elif previous_status == 'in-maintenance' and self.asset_status != 'in-maintenance':
             # Remove from ExpiredProduct table if status changes from expired
             Maintenance.objects.filter(asset=self).delete()
-            
-    def __str__(self):
-        return f"{self.barcode} - {self.asset_name} - {self.asset_status}"
 
     
 class Allocation(models.Model):          #issuedproducts
@@ -144,22 +141,10 @@ class RequestAsset(models.Model):
 class Maintenance(models.Model):
     maintenance_id = models.AutoField(primary_key=True)
     asset = models.ForeignKey("Asset", null=True, blank=True, on_delete=models.SET_NULL)
-    last_maintenance_date = models.DateField()  # Tracks the last maintenance date
-    next_maintenance_date = models.DateField()  # Tracks the next maintenance date
+    last_maintenance_date = models.DateField(null=True, blank=True)  # Tracks the last maintenance date
+    next_maintenance_date = models.DateField(null=True, blank=True)  # Tracks the next maintenance date
     maintenance_cost = models.CharField(max_length=255, null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)  # Add this field to capture return date
-            
-    def save(self, *args, **kwargs):
-        # Calculate the next maintenance date if not set
-        if not self.next_maintenance_date and self.last_maintenance_date:
-            self.next_maintenance_date = self.last_maintenance_date + timedelta(days=180)
-
-        # Update return date and asset status when coming back from maintenance
-        if self.return_date and self.asset:
-            self.asset.asset_status = 'available'  # Update asset status to "available"
-            self.asset.save()  # Save the asset changes
-
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Maintenance for Asset: {self.asset} - Next Maintenance: {self.next_maintenance_date}"

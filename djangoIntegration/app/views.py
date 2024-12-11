@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
-
+from geopy.geocoders import Nominatim
 
 @api_view(['POST'])
 def login_view(request):
@@ -97,11 +97,11 @@ def get_condition_choices(request):
 def add_product(request):
     serializer = ProductSerializer(data=request.data)
     print(request.data)
-    
+
     if not serializer.is_valid():
         print("Validation Errors:", serializer.errors)
         return Response(serializer.errors, status=400)
-    
+
     else: 
         # Extract validated data from the request
         assetName = serializer.validated_data['asset_name']
@@ -109,16 +109,30 @@ def add_product(request):
         barcode = serializer.validated_data['barcode']
         category = serializer.validated_data['category']
         condition = serializer.validated_data['condition']
-        location = serializer.validated_data['location']
+        location = serializer.validated_data['location']  # Format: 'longitude,latitude'
         purchaseDate = serializer.validated_data['purchase_date']
         subcategory = serializer.validated_data['subcategory']  # Assuming this is passed as subcategory_id
-        
+        print(location)
+        # Convert location coordinates into a readable name
+        try:
+            latitude, longitude = map(float, location.split(','))
+            geolocator = Nominatim(user_agent="asset_management")
+            location_name = geolocator.reverse((latitude, longitude)).raw['address']
+            print(location_name)
+            road_name = location_name.get('road')
+            city_name = location_name.get('state_district')
+            district_name = location_name.get('city_district')
+            specific_area_name = road_name + ', ' + city_name + ', ' + district_name
+            print(specific_area_name)
+        except Exception as e:
+            return Response({"error": f"Failed to resolve location name: {str(e)}"}, status=400)
+
         # Get the AssetSubCategory instance based on the provided subcategory_id
         try:
             subcategory = AssetSubCategory.objects.get(sub_category_name=subcategory)
         except AssetSubCategory.DoesNotExist:
             return Response({"error": "Subcategory not found"}, status=404)
-        
+
         # Create a new Asset instance with the related subcategory
         asset = Asset.objects.create(
             asset_name=assetName, 
@@ -127,19 +141,21 @@ def add_product(request):
             purchase_date=purchaseDate, 
             asset_value=assetValue, 
             condition=condition, 
-            location=location
+            location=specific_area_name  # Save the specific area name
         )
-        
+
+        # Uncomment if maintenance needs to be created
         # Maintenance.objects.create(
         #     asset=asset,
         #     last_maintenance_date=asset.purchase_date,
         #     next_maintenance_date=asset.purchase_date + timedelta(days=180),  # Example: 180 days after purchase
         #     maintenance_cost='N/A',  # Set a default cost or pass it from the request
         # )
-        
-        return Response({"message": "Product added successfully!"}, status=201)
-    
+
+        return Response({"message": "Product added successfully!", "location_name": specific_area_name}, status=201)
+
     return Response(serializer.errors, status=400)
+
 
 @api_view(['GET'])
 def user_list_view(request):
