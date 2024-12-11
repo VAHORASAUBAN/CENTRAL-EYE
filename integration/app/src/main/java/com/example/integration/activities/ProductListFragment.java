@@ -106,6 +106,13 @@ public class ProductListFragment extends Fragment {
         subcategories.put("Peripheral", Arrays.asList("Mouse", "Keyboard"));
         subcategories.put("Category 2", Arrays.asList("Subcategory 2.1", "Subcategory 2.2"));
         subcategories.put("Category 3", Arrays.asList("Subcategory 3.1", "Subcategory 3.2"));
+        if (getArguments() != null) {
+            String param1 = getArguments().getString(ARG_PARAM1);
+            if ("barcode-remaining".equals(param1)) {
+                highlightTab(barcodeTab, allTab, availableTab, inUseTab, maintainenceTab, expiredTab);
+                fetchFilteredProducts(recyclerView, "barcode-remaining"); // Fetch barcode remaining products
+            }
+        }
 
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 

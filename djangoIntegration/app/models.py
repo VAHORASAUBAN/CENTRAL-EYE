@@ -114,6 +114,8 @@ class Asset(models.Model):
             # Remove from ExpiredProduct table if status changes from expired
             Maintenance.objects.filter(asset=self).delete()
 
+    def __str__(self):
+        return self.asset_name
     
 class Allocation(models.Model):          #issuedproducts
     allocation_id = models.IntegerField(primary_key=True, unique=True)

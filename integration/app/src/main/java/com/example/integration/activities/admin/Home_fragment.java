@@ -15,6 +15,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,11 @@ import android.view.ViewGroup;
 
 import com.example.integration.R;
 import com.example.integration.activities.MainActivity;
+import com.example.integration.activities.ProductDescriptionFragment;
 import com.example.integration.activities.ProductListFragment;
 import com.example.integration.activities.SearchScanner;
+import com.example.integration.activities.adapter.ProductAdapter;
+import com.example.integration.activities.model.Product;
 import com.example.integration.activities.user.User_Profile_fragment;
 import com.example.integration.api.ApiService;
 import com.example.integration.api.TotalsResponse;
@@ -38,6 +43,8 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,6 +54,7 @@ public class Home_fragment extends Fragment {
     private static final int REQUEST_CHECK_SETTINGS = 1001;
     private TextView totalProductsTextView;
     private TextView totalUsersTextView;
+
 
     public Home_fragment() {
         // Required empty public constructor
@@ -64,16 +72,24 @@ public class Home_fragment extends Fragment {
         // Initialize UI elements
         totalProductsTextView = view.findViewById(R.id.total_products);
         totalUsersTextView = view.findViewById(R.id.total_users);
+        RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        fetchFilteredProducts(recyclerView, "barcode-remaining");
+
+
 
         // Fetch totals from the backend
         fetchTotals();
 
         // Bind views
         ImageView profileImageButton = view.findViewById(R.id.profile_image);
+        TextView viewall = view.findViewById(R.id.viewall);
+
         CardView squareBox1 = view.findViewById(R.id.squareBox1);
         CardView squareBox2 = view.findViewById(R.id.squareBox2);
 
         ImageButton scanner_icon = view.findViewById(R.id.scanner_icon);
+
 
         scanner_icon.setOnClickListener(v -> {
             // Navigate to ProductListAddFragment
@@ -105,6 +121,16 @@ public class Home_fragment extends Fragment {
 
             popupMenu.show();
         });
+        viewall.setOnClickListener(v -> {
+            ProductListFragment productListFragment = ProductListFragment.newInstance("barcode-remaining", null);
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, productListFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+        });
+
 
         // Add click listeners to the card views
         squareBox1.setOnClickListener(v -> openProductListFragment());
@@ -178,6 +204,47 @@ public class Home_fragment extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+    private void fetchFilteredProducts(RecyclerView recyclerView, String filterType) {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // Fetch products with the filter query
+        apiService.getProductsWithFilter(filterType).enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> filteredProducts = response.body();
+                    updateProductList(recyclerView, filteredProducts); // Update the RecyclerView with filtered products
+                } else {
+                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updateProductList(RecyclerView recyclerView, List<Product> productList) {
+        ProductAdapter adapter = new ProductAdapter(getContext(), productList, product -> {
+            // Handle item click
+            navigateToProductDescription(product);
+        });
+        recyclerView.setAdapter(adapter);
+    }
+    private void navigateToProductDescription(Product product) {
+        ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(product);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
 
     private void checkLocationSettings() {
         LocationRequest locationRequest = LocationRequest.create()

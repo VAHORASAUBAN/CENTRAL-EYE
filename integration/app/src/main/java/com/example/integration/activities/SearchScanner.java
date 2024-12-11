@@ -64,6 +64,8 @@ public class SearchScanner extends Fragment {
         barcodeScannerView = view.findViewById(R.id.search_scanner);
         scannedValueTv = view.findViewById(R.id.scannedValueTv);
         flashlightButton = view.findViewById(R.id.flashlight_button);
+        flashlightButton.setOnClickListener(v -> toggleFlashlight());
+
 
         profileImageButton.setOnClickListener(v -> {
             // PopupMenu logic here...
@@ -94,7 +96,6 @@ public class SearchScanner extends Fragment {
         // Check camera permissions
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             startScanning();// Start scanning if permission is granted
-            flashlightButton.setOnClickListener(v -> toggleFlashlight());
 
         } else {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);

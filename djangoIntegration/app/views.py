@@ -586,6 +586,16 @@ def assign_product(request):
         location = serializer.validated_data['location']
         print(user)
         
+        latitude, longitude = map(float, location.split(','))
+        geolocator = Nominatim(user_agent="asset_management")
+        location_name = geolocator.reverse((latitude, longitude)).raw['address']
+        print(location_name)
+        road_name = location_name.get('road')
+        city_name = location_name.get('state_district')
+        district_name = location_name.get('city_district')
+        specific_area_name = road_name + ', ' + city_name + ', ' + district_name
+        print(specific_area_name)
+        
         try:
             # Fetch the asset from the database
             asset = Asset.objects.get(barcode=barcode)
@@ -597,7 +607,7 @@ def assign_product(request):
                     asset=asset,
                     user=user,
                     expected_return_date=returnDate,
-                    assign_location=location
+                    assign_location=specific_area_name
                 )
                 
                 asset.assign_to = user
