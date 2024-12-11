@@ -10,15 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.integration.R;
 import com.example.integration.activities.model.Notification;
 import com.example.integration.activities.adapter.ProductNotificationAdapter;
 import com.example.integration.activities.adapter.RequestListAdapter;
 import com.example.integration.activities.model.RequestModel;
+import com.example.integration.api.ApiService;
+import com.example.integration.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,8 +83,7 @@ public class Adminnotification extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_adminnotification, container, false);
 
         // Initialize views
@@ -88,33 +94,11 @@ public class Adminnotification extends Fragment {
         // Set up RecyclerView with default layout manager
         requestRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Fetch requests from API
+        fetchRequestsFromAPI();
 
-
-
-        // Set up RecyclerViews
-        requestRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        productRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Sample data for Request RecyclerView
-        requestList = new ArrayList<>();
-        requestList.add(new RequestModel("REQ001", "John Doe"));
-        requestList.add(new RequestModel("REQ002", "Jane Smith"));
-        requestAdapter = new RequestListAdapter(getParentFragmentManager(), requestList);
-        requestRecyclerView.setAdapter(requestAdapter);
-
-        // Sample data for Product Notifications
-        notificationList = new ArrayList<>();
-        notificationList.add(new Notification("Reminder", "Your Asset with ID: 12321 is due on 21/7/2024"));
-        notificationList.add(new Notification("Alert", "Your Asset with ID: 45678 is overdue since 15/6/2024"));
-        productNotificationAdapter = new ProductNotificationAdapter(notificationList, new ProductNotificationAdapter.OnNotificationClickListener() {
-            @Override
-            public void onNotificationClick(Notification notification) {
-                // Handle the click event here (can be left empty if not needed)
-            }
-        });
         // Set default tab as New Request
         highlightTab(newRequestTab, productInfoTab);
-        showNewRequestRecyclerView();
 
         // Tab click listeners
         newRequestTab.setOnClickListener(v -> {
@@ -129,6 +113,32 @@ public class Adminnotification extends Fragment {
 
         return view;
     }
+
+    private void fetchRequestsFromAPI() {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        Call<List<RequestModel>> call = apiService.getRequests();
+
+        call.enqueue(new Callback<List<RequestModel>>() {
+            @Override
+            public void onResponse(Call<List<RequestModel>> call, Response<List<RequestModel>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    requestList = response.body();
+                    requestAdapter = new RequestListAdapter(getParentFragmentManager(), requestList);
+                    requestRecyclerView.setAdapter(requestAdapter);
+                } else {
+                    // Handle the error
+                    Toast.makeText(getContext(), "Failed to fetch requests.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RequestModel>> call, Throwable t) {
+                // Handle API failure
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     private void showNewRequestRecyclerView() {
         // Show New Request RecyclerView

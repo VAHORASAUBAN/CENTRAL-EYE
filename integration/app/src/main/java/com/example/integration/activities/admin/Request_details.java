@@ -77,7 +77,7 @@ public class Request_details extends Fragment {
     }
 
     private void loadRequestDetails() {
-        // For now, use sample data. Replace with an API call or database query.
+        // Sample data based on requestId
         itemList = new ArrayList<>();
         if ("REQ001".equals(requestId)) {
             itemList.add(new RequestItemModel("Laptop", 10, 5, "2024-12-31"));
@@ -87,7 +87,8 @@ public class Request_details extends Fragment {
             itemList.add(new RequestItemModel("Monitor", 8, 6, "2024-11-20"));
         }
 
-        adapter = new RequestItemAdapter(itemList);
+        // Pass context to the adapter
+        adapter = new RequestItemAdapter(getContext(), itemList);
         itemRecyclerView.setAdapter(adapter);
     }
 

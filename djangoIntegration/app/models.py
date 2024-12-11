@@ -131,7 +131,7 @@ class Allocation(models.Model):          #issuedproducts
 class RequestAsset(models.Model):
     request_id = models.IntegerField(primary_key=True, unique=True)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
-    asset = models.ForeignKey(Asset, null=True, blank=True, on_delete=models.SET_NULL)
+    asset_sub_category = models.ForeignKey(AssetSubCategory, null=True, blank=True, on_delete=models.SET_NULL)
     quantity = models.CharField(max_length=255)
     return_date = models.DateField(null=True, blank=True)
     request_date = models.DateField(auto_now_add=True)

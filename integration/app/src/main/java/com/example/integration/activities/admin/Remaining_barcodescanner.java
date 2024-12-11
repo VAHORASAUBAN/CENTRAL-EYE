@@ -24,6 +24,9 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -113,32 +116,39 @@ public class Remaining_barcodescanner extends Fragment {
 
         isProcessingBarcode = true; // Set the flag to true
 
-        // Use Retrofit to update the barcode in the database
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-//        Call<Void> call = apiService.updateProductBarcode(product.getId(), scannedValue); // Assume `product.getId()` retrieves the product ID
-//
-//        call.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                isProcessingBarcode = false; // Reset the flag
-//                if (response.isSuccessful()) {
-//                    // Update success
-//                    Toast.makeText(getContext(), "Barcode added successfully!", Toast.LENGTH_LONG).show();
-//                    redirectToProductListFragment(); // Redirect after success
-//                } else {
-//                    // Update failed
-//                    Toast.makeText(getContext(), "Failed to update barcode. Please try again.", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                isProcessingBarcode = false; // Reset the flag
-//                // Handle API failure
-//                Toast.makeText(getContext(), "An error occurred while updating the barcode.", Toast.LENGTH_LONG).show();
-//            }
-//        });
+
+        // Create a map for the request body
+        Map<String, String> barcodeData = new HashMap<>();
+        barcodeData.put("barcode", scannedValue); // Key must match the serializer's field
+
+        Call<Void> call = apiService.updateProductBarcode(product.getAsset_id(), barcodeData);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                isProcessingBarcode = false; // Reset the flag
+                if (response.isSuccessful()) {
+                    // Update success
+                    Toast.makeText(getContext(), "Barcode added successfully!", Toast.LENGTH_LONG).show();
+                    redirectToProductListFragment(); // Redirect after success
+                } else {
+                    // Update failed
+                    Toast.makeText(getContext(), "Failed to update barcode. Please try again.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                isProcessingBarcode = false; // Reset the flag
+                // Handle API failure
+                Toast.makeText(getContext(), "An error occurred while updating the barcode.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+
+
 
 
     private void redirectToProductListFragment() {
