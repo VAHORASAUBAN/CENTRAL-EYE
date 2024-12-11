@@ -149,7 +149,7 @@
                                     </td>
                                     <td class="productimgname">
                                         <a href="javascript:void(0);" class="product-img">
-                                            <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
+                                            <img src="{% static 'assets/img/product/product6.jpg' %}" alt="product">
                                         </a>
                                         <a href="javascript:void(0);">{{ asset.asset_name }}</a>
                                     </td>
@@ -173,7 +173,7 @@
                                         {% elif asset.asset_status == 'in-use' %}
                                         <span class="badges bg-lightyellow">In-Use</span>
                                         {% elif asset.asset_status == 'in-maintenance' %}
-                                        <span class="badges bg-lightblue">In-Maintenance</span>
+                                        <span  class="badges bg" style="background-color: rgb(108, 108, 193);">In-Maintenance</span>
                                         {% elif asset.asset_status == 'expired' %}
                                         <span class="badges bg-lightred">Expired</span>
                                         {% endif %}
@@ -193,10 +193,10 @@
                                         N/A
                                         {% endif %}</td>
                                     <td>
-                                        <a class="me-3" href="{% url 'productdetails' %}">
+                                        <a class="me-3" href="{% url 'productdetails' asset.asset_id  %}">
                                             <img src="{% static 'assets/img/icons/eye.svg' %}" alt="img">
                                         </a>
-                                        <a class="me-3" href="{% url 'editproduct' %}">
+                                        <a class="me-3" href="{% url 'editproduct'  %}">
                                             <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
                                         </a>
                                         <a class="me-3 confirm-text" href="javascript:void(0);">

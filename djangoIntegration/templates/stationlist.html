@@ -31,7 +31,8 @@
                                 </a>
                             </div>
                             <div class="search-input">
-                                <a class="btn btn-searchset"><img src="{% static 'assets/img/icons/search-white.svg' %}" alt="img"></a>
+                                <a class="btn btn-searchset"><img src="{% static 'assets/img/icons/search-white.svg' %}"
+                                        alt="img"></a>
                             </div>
                         </div>
                         <div class="wordset">
@@ -52,12 +53,12 @@
                         </div>
                     </div>
 
-                   
+
 
                     <div class="table-responsive">
                         <table class="table  datanew">
                             <thead>
-                                
+
                                 <tr>
                                     <th>
                                         <label class="checkboxs">
@@ -82,10 +83,14 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </td>
-                                    <td><a href="{% url 'productlist' %}?filter={{ i.station_name }}">{{i.station_name}}</a></td>                                     <td>{{i.station_code}} </td>
+                                    <td><a
+                                            href="{% url 'productlist' %}?filter={{ i.station_name }}">{{i.station_name}}</a>
+                                    </td>
+                                    <td>{{i.station_code}} </td>
+                                    <td>{{i.station_code}} </td>
                                     <td>{{i.station_address}} </td>
 
-                                  
+
                                     <td>
                                         <a class="me-3" href="{% url 'editstation' i.station_id %}">
                                             <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">

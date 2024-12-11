@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -315,13 +315,22 @@ def productlist(request):
         print(assets)
     else:
          assets = Asset.objects.all()
+        # If no filter is provided, fetch all assets
+     
+    
     return render(request, 'productlist.html', {'asset': assets})
 
 def editproduct(request):
     return render(request,'editproduct.html')
 
-def productdetails(request):
-    return render(request,'productdetails.html')
+def productdetails(request, id):
+    # Retrieve the product with the given id or return a 404 if it doesn't exist
+    asset = get_object_or_404(Asset, asset_id=id)
+
+    # Pass the asset to the template context
+    context = {'asset': asset}
+    return render(request, 'productdetails.html', context)
+
 def addproduct(request):
      if request.method == 'POST':
         # Get data from the form
@@ -345,14 +354,9 @@ def addproduct(request):
             condition=condition,
             asset_maintenance_date=maintenance_date,
         )
-        
+
         return redirect('productlist')
-    
-
-
      categories = AssetSubCategory.objects.all()
-   
-        
      return render(request,'addproduct.html',{'categories': categories})
 
 def categorylist(request):
@@ -542,6 +546,7 @@ def addquotation(request):
 
 def stationlist(request):
     station_id = stationDetails.objects.all()
+
     con = {"station_id":station_id}
     return render(request,'stationlist.html',con)
 
@@ -613,6 +618,16 @@ def assign_product(request):
         location = serializer.validated_data['location']
         print(user)
         
+        latitude, longitude = map(float, location.split(','))
+        geolocator = Nominatim(user_agent="asset_management")
+        location_name = geolocator.reverse((latitude, longitude)).raw['address']
+        print(location_name)
+        road_name = location_name.get('road')
+        city_name = location_name.get('state_district')
+        district_name = location_name.get('city_district')
+        specific_area_name = road_name + ', ' + city_name + ', ' + district_name
+        print(specific_area_name)
+        
         try:
             # Fetch the asset from the database
             asset = Asset.objects.get(barcode=barcode)
@@ -624,7 +639,7 @@ def assign_product(request):
                     asset=asset,
                     user=user,
                     expected_return_date=returnDate,
-                    assign_location=location
+                    assign_location=specific_area_name
                 )
                 
                 asset.assign_to = user

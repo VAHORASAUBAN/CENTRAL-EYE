@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,6 +62,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         } else {
             // When the barcode is available
             holder.productBarcode.setText(barcode);
+            holder.productcarView.setOnClickListener(v -> listener.onViewClick(product));
             holder.viewButton.setImageResource(R.drawable.baseline_keyboard_arrow_right_24); // Default icon
             holder.viewButton.setOnClickListener(v -> listener.onViewClick(product)); // Enable click
         }
@@ -77,12 +79,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productBarcode, productId;
         ImageView productImage;
+        CardView productcarView;
         ImageView viewButton;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
             productBarcode = itemView.findViewById(R.id.productBarcode);
+            productcarView=itemView.findViewById(R.id.productcard);
 //            productId = itemView.findViewById(R.id.productId);
 //            productImage = itemView.findViewById(R.id.productImage);
             viewButton = itemView.findViewById(R.id.viewButton);

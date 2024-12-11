@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -36,7 +37,8 @@ public class UserHomeActivity extends AppCompatActivity {
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
-
+        Window window = getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.primary));
         // Fetch the username from session
         String username = sharedPreferences.getString("username", "User");
 
