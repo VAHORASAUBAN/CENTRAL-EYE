@@ -51,8 +51,13 @@ public class ProductDescriptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_description, container, false);
         // Bind data to TextViews using the Product object
+        if (product == null) {
+            Log.e("ProductDescriptionFragment", "Product is null, unable to display details.");
+            return view; // Return early or show a default message
+        }
 
-        Log.d("Productname", "Product Name" + product.getAsset_name());
+        // Continue with binding the data to views only if product is not null
+        Log.d("Productname", "Product Name: " + product.getAsset_name());
         ((TextView) view.findViewById(R.id.assetNameValue)).setText(product.getAsset_name());
         ((TextView) view.findViewById(R.id.assetCategoryValue)).setText(product.getAsset_category());
         ((TextView) view.findViewById(R.id.assetSubCategoryValue)).setText(product.getAsset_sub_category());
@@ -100,6 +105,7 @@ public class ProductDescriptionFragment extends Fragment {
 
 
         String condition = product.getCondition();
+
         int colorResId; // To store the resolved color resource
         switch (condition) {
             case "good":
