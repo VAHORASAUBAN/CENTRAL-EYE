@@ -26,10 +26,14 @@ urlpatterns = [
     path('api/add_product/', views.add_product, name='addProduct'),  # Update this line
     path('api/users/', views.user_list_view, name='userlist'),
     path('api/totals/', views.get_totals, name='get_totals'),
+    path('api/user/totals/', views.get_user_totals, name='get_user_totals'),
     path('api/assign_product/', views.assign_product, name='assignProduct'),
+    path('api/asset/', views.AssetListView, name='asset-list'),
+    path('api/user/asset/', views.UserAssetListView, name='user-asset-list'),
+    path('api/products/by-subcategory', views.AssetListView, name='asset_list'),
+    path('api/categories/<int:id>/', views.SubcategoryListAPIView, name='subcategory_list'),
     path('api/products/<str:barcode>/', views.get_product_by_barcode, name='get_product_by_barcode'),# Update this line
     # path('api/assets/', views.AssetList, name='asset-list'),
-    path('api/asset/', views.AssetListView, name='asset-list'),
     path('api/update-barcode/<str:asset_id>/', views.update_barcode, name='update-barcode'),
     path('api/requests/', views.get_requests, name='get_requests'),
 

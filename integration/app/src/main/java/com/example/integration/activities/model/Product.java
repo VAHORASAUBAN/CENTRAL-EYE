@@ -15,6 +15,7 @@ public class Product implements Parcelable {
     private String assign_to;
     private String asset_id;
 
+    private String username;
     // Constructor
     public Product(String asset_name, String barcode, String asset_category, String purchase_date, String asset_value, String condition, String location) {
         this.asset_name = asset_name;
@@ -66,6 +67,10 @@ public class Product implements Parcelable {
         return assign_to;
     }
 
+    public String getUsername() {
+        return username;  // Getter for username
+    }
+
     // Parcelable implementation
     protected Product(Parcel in) {
         asset_name = in.readString();
@@ -77,6 +82,7 @@ public class Product implements Parcelable {
         condition = in.readString();
         location = in.readString();
         assign_to = in.readString();
+        username = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -107,5 +113,6 @@ public class Product implements Parcelable {
         dest.writeString(condition);
         dest.writeString(location);
         dest.writeString(assign_to);
+        dest.writeString(username);
     }
 }

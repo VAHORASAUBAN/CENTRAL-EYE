@@ -57,3 +57,8 @@ class RequestAssetSerializer(serializers.ModelSerializer):
             'request_location', 
             'request_status'
         ]
+        
+class SubcategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssetSubCategory
+        fields = '__all__'

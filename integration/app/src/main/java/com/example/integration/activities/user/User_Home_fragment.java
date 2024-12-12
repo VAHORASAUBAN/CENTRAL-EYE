@@ -29,6 +29,7 @@ import com.example.integration.activities.SearchScanner;
 import com.example.integration.activities.adapter.ProductAdapter;
 import com.example.integration.activities.model.Product;
 import com.example.integration.api.ApiService;
+import com.example.integration.api.TotalsResponse;
 import com.example.integration.network.RetrofitClient;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class User_Home_fragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private TextView totalProductsTextView;
     private String mParam1;
     private String mParam2;
     private RecyclerView recyclerView;
@@ -73,11 +74,13 @@ public class User_Home_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user__home_fragment, container, false);
 
+        totalProductsTextView = view.findViewById(R.id.tv_product_count);
         // Fetch the username from shared preferences
         apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "User");
+
 
         // Bind views
 //        TextView welcomeTextView = view.findViewById(R.id.headtext);
@@ -89,6 +92,8 @@ public class User_Home_fragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.productRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        fetchTotals(username);
 
         // Load products into RecyclerView
         loadAllProducts();
@@ -209,6 +214,28 @@ public class User_Home_fragment extends Fragment {
 
 
         return view;
+    }
+
+    private void fetchTotals(String username) {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+        Call<TotalsResponse> call = apiService.getUserTotals(username);
+
+        call.enqueue(new Callback<TotalsResponse>() {
+            @Override
+            public void onResponse(Call<TotalsResponse> call, Response<TotalsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    TotalsResponse totals = response.body();
+                    totalProductsTextView.setText(String.valueOf(totals.getTotalProducts()));
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TotalsResponse> call, Throwable t) {
+                Toast.makeText(requireContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void loadAllProducts() {
