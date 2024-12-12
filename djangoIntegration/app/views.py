@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -15,6 +15,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
 from geopy.geocoders import Nominatim
+from django.db.models import Count
+import json
 
 @api_view(['POST'])
 def login_view(request):
@@ -224,11 +226,28 @@ def index(request):
     assetCount = Asset.objects.count()
     availableAsset = Asset.objects.filter(assign_to__isnull=True).count()
     inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
-    return render(request,'index.html', {
+    
+    condition_queryset = Asset.objects.values('condition').annotate(total=Count('asset_id')).order_by()
+    condition_data = list(condition_queryset)
+    
+    stations_data = (
+        Asset.objects.values("assign_to__station__station_name")  # Replace "station_name" with the actual field in UserDetails
+        .annotate(total_products=Count("assign_to"))
+        .filter(assign_to__isnull=False)  # Only consider allocated assets
+    )
+    
+    station_names = [data["assign_to__station__station_name"] for data in stations_data]
+    total_products = [data["total_products"] for data in stations_data]
+     
+    return render(request,'index.html',{
                 'userCount': userCount, 
                 'assetCount': assetCount, 
                 'availableAsset': availableAsset, 
-                'inUseAsset': inUseAsset
+                'inUseAsset': inUseAsset,
+                'station_names': json.dumps(station_names),  # Serialize to JSON
+                'total_products': json.dumps(total_products),  # Serialize to JSON
+                'condition_data': json.dumps(condition_data),
+
     })
     
 @api_view(['PUT'])
@@ -336,14 +355,30 @@ def forgetpassword(request):
     return render(request,'forgetpassword.html')
 
 def productlist(request):
-    assets = Asset.objects.all()  # Fetch all products from the Asset model
-    return render(request, 'productlist.html', {'assets': assets})
+    filter = request.GET.get('filter')
+    print(filter)
+    if filter:  # Check if a filter is provided
+        # Filter assets where the assigned user's station matches the filter value
+        assets = Asset.objects.filter(assign_to__station__station_name=filter)
+        print(assets)
+    else:
+         assets = Asset.objects.all()
+        # If no filter is provided, fetch all assets
+     
+    
+    return render(request, 'productlist.html', {'asset': assets})
 
 def editproduct(request):
     return render(request,'editproduct.html')
 
-def productdetails(request):
-    return render(request,'productdetails.html')
+def productdetails(request, id):
+    # Retrieve the product with the given id or return a 404 if it doesn't exist
+    asset = get_object_or_404(Asset, asset_id=id)
+
+    # Pass the asset to the template context
+    context = {'asset': asset}
+    return render(request, 'productdetails.html', context)
+
 def addproduct(request):
      if request.method == 'POST':
         # Get data from the form
@@ -367,14 +402,9 @@ def addproduct(request):
             condition=condition,
             asset_maintenance_date=maintenance_date,
         )
-        
+
         return redirect('productlist')
-    
-
-
      categories = AssetSubCategory.objects.all()
-   
-        
      return render(request,'addproduct.html',{'categories': categories})
 
 def categorylist(request):
@@ -402,10 +432,11 @@ def barcode(request):
 #     return render(request,'barcode.html')
 
 def issuedproducts(request):
-    return render(request,'issuedproducts.html')
+    issuedproducts_id = Allocation.objects.all()
+    con={'issuedproducts_id': issuedproducts_id}
+    return render(request,'issuedproducts.html',con)
 
-def editissuedproducts(request):
-    return render(request,'editissuedproducts.html')
+
 
 def addissuedproducts(request):
     return render(request,'addissuedproducts.html')
@@ -563,6 +594,7 @@ def addquotation(request):
 
 def stationlist(request):
     station_id = stationDetails.objects.all()
+
     con = {"station_id":station_id}
     return render(request,'stationlist.html',con)
 

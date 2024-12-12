@@ -45,7 +45,7 @@ urlpatterns = [
     path('productlist', views.productlist, name='productlist'),
     path('addproduct', views.addproduct, name='addproduct'),
     path('editproduct', views.editproduct, name='editproduct'),
-    path('productdetails', views.productdetails, name='productdetails'),
+    path('productdetails/<int:id>', views.productdetails, name='productdetails'),
 
 
     path('categorylist', views.categorylist, name='categorylist'),
@@ -59,7 +59,6 @@ urlpatterns = [
     # path('barcode', views.barcode, name='barcode'),
 
     path('issuedproducts', views.issuedproducts, name='issuedproducts'),
-    path('editissuedproducts', views.editissuedproducts, name='editissuedproducts'),
     path('addissuedproducts', views.addissuedproducts, name='addissuedproducts'),
 
     path('maintenanceproducts', views.maintenanceproducts, name='maintenanceproducts'),
@@ -101,4 +100,7 @@ urlpatterns = [
     path('api/assign_product/', views.assign_product, name='assignProduct'),  # Update this line
     # path('api/assets/', views.AssetList, name='asset-list'),
     path('api/assets/', views.AssetListView, name='asset-list'),
+    # path('pie_chart_view', views.pie_chart_view, name='pie_chart_view-list'),
+    # path('generate_pie_chart', views.generate_pie_chart, name='generate_pie_chart-list'),
+
 ]

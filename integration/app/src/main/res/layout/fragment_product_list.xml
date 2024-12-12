@@ -61,17 +61,15 @@
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
         android:gravity="center">
-        <ImageView
-            android:id="@+id/filter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            android:src="@drawable/baseline_filter_list_24"/>
+
+
+
 
         <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+
             android:scrollbars="none">
 
             <LinearLayout
@@ -79,13 +77,34 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/filter"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:clickable="true"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="@color/white"
+                    app:strokeColor="@color/primary"
+                    app:strokeWidth="2dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginStart="1dp"
+                        android:drawableStart="@drawable/baseline_filter_list_24"
+                        android:textColor="@color/primary"
+                        android:text="Filter" />
+                </com.google.android.material.card.MaterialCardView>
+
                 <!-- New Request Tab -->
                 <TextView
                     android:id="@+id/all"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:gravity="center"
-                    android:text=" All "
+                    android:text=" All"
                     android:background="@drawable/tab_selector"
                     android:textColor="@color/tab_text_selector"
                     android:textSize="16sp"
@@ -96,58 +115,58 @@
                 <TextView
                     android:id="@+id/available"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Available"
                     android:textSize="16sp"
                     android:background="@drawable/tab_selector"
                     android:textColor="@color/tab_text_selector"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="8dp"
                     android:padding="4dp"/>
                 <TextView
                     android:id="@+id/in_use"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:gravity="center"
                     android:text="In-Use"
                     android:textSize="16sp"
                     android:background="@drawable/tab_selector"
                     android:textColor="@color/tab_text_selector"
                     android:padding="4dp"
-                    android:layout_marginStart="4dp"/>
+                    android:layout_marginStart="8dp"/>
                 <TextView
                     android:id="@+id/maintainence"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Maintainence"
                     android:textSize="16sp"
                     android:background="@drawable/tab_selector"
                     android:textColor="@color/tab_text_selector"
-                    android:padding="4dp"
+                    android:padding="8dp"
                     android:layout_marginStart="4dp"/>
                 <TextView
                     android:id="@+id/expired"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Expired"
                     android:textSize="16sp"
                     android:background="@drawable/tab_selector"
                     android:textColor="@color/tab_text_selector"
                     android:padding="4dp"
-                    android:layout_marginStart="4dp"/>
+                    android:layout_marginStart="8dp"/>
                 <TextView
                     android:id="@+id/barcode"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Barcode Remaining"
                     android:textSize="16sp"
                     android:background="@drawable/tab_selector"
                     android:textColor="@color/tab_text_selector"
                     android:padding="4dp"
-                    android:layout_marginStart="4dp"/>
+                    android:layout_marginStart="8dp"/>
             </LinearLayout>
         </HorizontalScrollView>
 

@@ -107,12 +107,13 @@ class Asset(models.Model):
         elif previous_status == 'expired' and self.asset_status != 'expired':
             # Remove from ExpiredProduct table if status changes from expired
             ExpiredProduct.objects.filter(asset=self).delete()
-        elif self.asset_status == 'in-maintenance' and previous_status != 'in-maintenance':
-            # Remove from ExpiredProduct table if status changes from expired
+        if self.asset_status == 'in-maintenance' and previous_status != 'in-maintenance':
+            # Add to ExpiredProduct table if it is not already there
             Maintenance.objects.get_or_create(asset=self)
         elif previous_status == 'in-maintenance' and self.asset_status != 'in-maintenance':
             # Remove from ExpiredProduct table if status changes from expired
             Maintenance.objects.filter(asset=self).delete()
+       
 
     def __str__(self):
         return self.asset_name
