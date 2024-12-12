@@ -650,11 +650,8 @@ def editExpense(request):
 def expenseCategory(request):
     return render(request,'expenseCategory.html')
 
-def quotationList(request):
-    
-    tender=Tender.objects.all()
-    
-    return render(request,'quotationList.html',{'tender':tender})
+def quotationList(request):   
+    return render(request,'quotationList.html')
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Tender  # Replace with the correct model name
