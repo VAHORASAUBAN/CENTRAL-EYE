@@ -124,19 +124,20 @@
     </td>
     <td class="productimgname">
     <a href="javascript:void(0);" class="product-img">
-    <img src="{% static 'assets/img/product/product1.jpg' %}" alt="product">
+    <img src="{{i.asset.asset_category.sub_category_image.url}}" alt="product">
     </a>
     <a href="">{{i.asset.asset_name}}</a>
     </td>
     <td>{{i.asset.barcode}}</td>
     <td><a href="">{{i.user.username}}</a></td>
     <td>{{i.assign_date}}</td>
-    <td>{{i.return_date}}</td>
+    <td>{{i.expected_return_date}}</td>
 
     <td>
   
-        <a class="me-3 confirm-text" href="{% url 'issuedproducts' %}">
-            <img src="{% static 'assets/img/icons/delete.svg'  %}" alt="img">
+        <a class="me-3" href="{% url 'addreturnproducts' i.allocation_id %}">
+            <span class="badges bg-lightgreen">Return</span>
+
             </a>
     </td>
     </tr>

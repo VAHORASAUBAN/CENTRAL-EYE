@@ -76,10 +76,9 @@ urlpatterns = [
     path('addexpiredproducts', views.addexpiredproducts, name='addexpiredproducts'),
     path('deleteexpired/<int:id>', views.deleteexpired, name='deleteexpired'),
 
-
-    path('returnproducts', views.returnproducts, name='returnproducts'),
+    path('addreturnproducts/<int:id>/', views.addreturnproducts, name='addreturnproducts'),
+    path('returnproducts/', views.returnproducts, name='returnproducts'),
     path('editreturnproducts', views.editreturnproducts, name='editreturnproducts'),
-    path('addreturnproducts', views.addreturnproducts, name='addreturnproducts'),
 
 
     path('newuser', views.newuser, name='newuser'),
