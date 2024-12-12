@@ -105,6 +105,8 @@ public class Remaining_barcodescanner extends Fragment {
         }
 
 
+        flashlightButton.setOnClickListener(v -> toggleFlashlight());
+
 
         scanner_icon.setOnClickListener(v -> {
             // Navigate to ProductListAddFragment
@@ -235,7 +237,6 @@ public class Remaining_barcodescanner extends Fragment {
                 if (barcodeScannerView != null) {
                     barcodeScannerView.resume();
                     startScanning();
-                    flashlightButton.setOnClickListener(v -> toggleFlashlight());
 
                 }
             } else {
