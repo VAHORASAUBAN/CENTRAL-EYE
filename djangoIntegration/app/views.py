@@ -293,9 +293,10 @@ def get_totals(request):
 def get_user_totals(request):
     
     username = request.query_params.get('username', None)
+    print(username)
     try:
-        total_products = Asset.objects.count(assign_to=username)
-        
+        total_products = Asset.objects.filter(assign_to=username).count()
+        print(total_products)
         data = {
             "total_products": total_products
         }
