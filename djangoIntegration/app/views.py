@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.shortcuts import render, redirect,get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer, BarcodeUpdateSerializer, RequestAssetSerializer, SubcategorySerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer, BarcodeUpdateSerializer, RequestAssetSerializer, SubcategorySerializer, AllocationSerializer
 from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -195,20 +195,31 @@ def UserAssetListView(request):
     Retrieve products based on the username.
     Query parameter: `username`
     """
-    # Get the `username` parameter from the request
     username = request.query_params.get('username', None)
     filter = request.query_params.get('filter', None)
-    
-    if username is None:
+
+    if username:
+        if filter == 'Due Soon':
+            # Fetch allocations where the `expected_return_date` is within the next 7 days
+            today = datetime.today().date()
+            next_seven_days = today + timedelta(days=7)
+            products = Allocation.objects.filter(
+                user__username=username,
+                expected_return_date__gte=today,
+                expected_return_date__lte=next_seven_days
+            )
+            serializer = AllocationSerializer(products, many=True)
+        elif filter == 'Returned':
+            products = ReturnedProducts.objects.filter(user__username=username)
+            serializer = AssetSerializer(products, many=True)
+        else:
+            products = Asset.objects.filter(assign_to__username=username)
+            serializer = AssetSerializer(products, many=True)
+    else:
         return Response(
             {"detail": "Username query parameter is required."},
             status=status.HTTP_400_BAD_REQUEST
         )
-    # if filter == 'Due Soon':
-    products = Asset.objects.filter(assign_to=username)  # Filter based on the 'assign_to' field
-
-    # Serialize the product data
-    serializer = AssetSerializer(products, many=True)
 
     # Return the serialized data as a response
     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -295,7 +306,7 @@ def get_user_totals(request):
     username = request.query_params.get('username', None)
     print(username)
     try:
-        total_products = Asset.objects.filter(assign_to=username).count()
+        total_products = Asset.objects.filter(assign_to__user__username=username).count()
         print(total_products)
         data = {
             "total_products": total_products
