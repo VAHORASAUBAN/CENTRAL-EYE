@@ -149,7 +149,7 @@
                                     </td>
                                     <td class="productimgname">
                                         <a href="javascript:void(0);" class="product-img">
-                                            <img src="{% static 'assets/img/product/product6.jpg' %}" alt="product">
+                                            <img src="{{asset.asset_category.sub_category_image.url}}" alt="product">
                                         </a>
                                         <a href="javascript:void(0);">{{ asset.asset_name }}</a>
                                     </td>
@@ -183,8 +183,8 @@
                                         <span class="badges bg-lightgreen">Good</span>
                                         {% elif asset.condition == 'average' %}
                                         <span class="badges bg-lightyellow">Average</span>
-                                        {% elif asset.condition == 'belowaverage' %}
-                                        <span class="badges bg-lightred">BelowAverage</span>
+                                        {% elif asset.condition == 'below-average' %}
+                                        <span class="badges bg-lightred">Below Average</span>
                                         {% endif %}
                                     </td>
                                     <td> {% if asset.asset_maintenance_date %}

@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect,get_object_or_404, HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -17,6 +17,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from geopy.geocoders import Nominatim
 from django.db.models import Count
 import json
+from datetime import date
 
 @api_view(['POST'])
 def login_view(request):
@@ -587,13 +588,43 @@ def deleteexpired(request,id):
 
 
 def returnproducts(request):
-    return render(request,'returnproducts.html')
+    returnProducts = ReturnedProducts.objects.all()
+    print(returnProducts)
+    con={'returnProducts': returnProducts}
+    return render(request,'returnproducts.html',con)
 
+def addreturnproducts(request, id):
+    try:
+        # Try to fetch the allocation object
+        allocation = Allocation.objects.get(allocation_id=id)
+
+        # Create the returned product record
+        ReturnedProducts.objects.create(allocation=allocation, asset=allocation.asset, user=allocation.user)
+        
+        # Update the allocation return date
+        allocation.return_date = date.today()
+        allocation.save()
+
+        # Update the asset status to 'available'
+        allocation.asset.asset_status = 'available'
+        allocation.asset.save()
+
+        # Fetch all returned products
+        returnproducts = ReturnedProducts.objects.all()
+
+        # Render the returnproducts page with the returned products
+        return redirect('returnproducts')
+    
+    except Allocation.DoesNotExist:
+        # Handle the case when the allocation with the given id does not exist
+        return HttpResponse("Allocation not found.", status=404)
+    
+    except Exception as e:
+        # Catch any other exceptions and log them
+        print(f"An error occurred: {e}")
+        return HttpResponse("An unexpected error occurred.", status=500)
 def editreturnproducts(request):
     return render(request,'editreturnproducts.html')
-
-def addreturnproducts(request):
-    return render(request,'addreturnproducts.html')
 
 def aa(request):
     return render(request,'aa.html')

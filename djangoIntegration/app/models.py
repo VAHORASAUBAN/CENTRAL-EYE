@@ -168,10 +168,12 @@ class ExpiredProduct(models.Model):
         return f"Expired Product: {self.asset.asset_name} (Barcode: {self.asset.barcode})"
 
 class ReturnedProducts(models.Model):
+    return_id = models.AutoField(primary_key=True)
+    allocation = models.ForeignKey("Allocation", null=True, blank=True, on_delete=models.SET_NULL)
     asset = models.ForeignKey("Asset", null=True, blank=True, on_delete=models.SET_NULL)
     user = models.ForeignKey("UserDetails", null=True, blank=True, on_delete=models.SET_NULL)
-    returnDate = models.DateField(null=True, blank=True)
-    
+    returnDate = models.DateField(auto_now=True)
+
     def __str__(self):
         return f"asset: {self.asset.asset_name} returned on {self.returnDate}"
     
