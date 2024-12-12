@@ -174,3 +174,13 @@ class ReturnedProducts(models.Model):
     
     def __str__(self):
         return f"asset: {self.asset.asset_name} returned on {self.returnDate}"
+    
+    
+class Tender(models.Model):
+    itemName = models.CharField(max_length=15)
+    quantity = models.IntegerField()
+    startDate = models.DateField(null=True, blank=True)
+    endDate = models.DateField(null=True, blank=True)
+    
+    def _str_(self):
+        return self.itemName
