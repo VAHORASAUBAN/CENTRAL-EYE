@@ -210,6 +210,7 @@ def UserAssetListView(request):
                 expected_return_date__lte=next_seven_days
             )
             serializer = AllocationSerializer(products, many=True)
+            print(serializer.data)
         elif filter == 'Returned':
             products = ReturnedProducts.objects.filter(user__username=username)
             serializer = AssetSerializer(products, many=True)
@@ -637,9 +638,8 @@ def newuser(request):
         password = request.POST.get('password')
         station_name = request.POST.get('station_name')
         mobile = request.POST.get('mobile')
-        print(username)
-        print(station_name)
-        print(email)
+        fname = request.POST.get('firstname')
+        lname = request.POST.get('lastname')
         # Get related Role and Station objects
         roleGet = role.objects.get(role=role_name)
         station = stationDetails.objects.get(station_name=station_name)
@@ -651,10 +651,11 @@ def newuser(request):
             password=password,
             station=station,
             contact_number=mobile,
-            full_name="amaan shaikh"
+            first_name = fname,
+            last_name = lname
         )
         
-        return redirect('newuser')
+        return redirect('userlists')
 
     roles = role.objects.all()
     station = stationDetails.objects.all()
@@ -681,10 +682,44 @@ def expenseCategory(request):
     return render(request,'expenseCategory.html')
 
 def quotationList(request):
-    return render(request,'quotationList.html')
+    
+    tender=Tender.objects.all()
+    
+    return render(request,'quotationList.html',{'tender':tender})
+from django.http import JsonResponse
+from django.shortcuts import render
+from .models import Tender  # Replace with the correct model name
 
 def addquotation(request):
-    return render(request,'addquotation.html')
+    if request.method == 'POST':
+        try:
+            item = request.POST.get('item')
+            quantity = request.POST.get('quantity')
+            startdate = request.POST.get('startdate')
+            enddate = request.POST.get('enddate')
+
+            # Check if all fields are present
+            if not all([ item, quantity, startdate, enddate]):
+                return JsonResponse({'success': False, 'message': 'All fields are required!'}, status=400)
+
+            # Validate the data (optional but recommended)
+            if not quantity.isdigit():
+                return JsonResponse({'success': False, 'message': 'Quantity must be a valid number!'}, status=400)
+
+            # Create the Tender object
+            Tender.objects.create(
+                itemName=item,
+                quantity=int(quantity),
+                startDate=startdate,
+                endDate=enddate
+            )
+
+            return JsonResponse({'success': True, 'message': 'You have successfully applied!'}, status=200)
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)}, status=500)
+
+    return render(request, 'addquotation.html')
+
 
 def stationlist(request):
     station_id = stationDetails.objects.all()
@@ -758,6 +793,7 @@ def assign_product(request):
         returnDate = serializer.validated_data['return_date']
         user = serializer.validated_data['username']
         location = serializer.validated_data['location']
+        print(location)
         print(user)
         
         latitude, longitude = map(float, location.split(','))

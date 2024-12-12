@@ -33,7 +33,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/profile"
+                android:src="@drawable/baseline_account_circle_24"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:contentDescription="Profile Image" />
@@ -49,8 +49,20 @@
                 android:layout_centerVertical="true"
                 android:contentDescription="Scanner for Search" />
 
+            <!-- Question Mark Icon -->
+            <ImageButton
+                android:id="@+id/question_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_help_24"
+                android:layout_toStartOf="@id/scanner_icon"
+                android:layout_marginEnd="8dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="Help Icon" />
+
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
+
 
     <!-- Heading Container -->
     <LinearLayout
@@ -251,6 +263,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/titleremaning"
         android:layout_margin="8dp" />
+
+    <include
+        android:id="@+id/no_product"
+
+
+        layout="@layout/no_product"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

@@ -127,7 +127,7 @@ class Allocation(models.Model):          #issuedproducts
     assign_date = models.DateField(auto_now_add=True)
     expected_return_date = models.DateField(null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)
-    assign_location = models.CharField(max_length=255)
+    assign_location = models.CharField(max_length=255, null=True, blank=True)
     
     def __str__(self):
         return f"Asset : {self.asset} - Allocated to: {self.user}"
@@ -176,3 +176,13 @@ class ReturnedProducts(models.Model):
 
     def __str__(self):
         return f"asset: {self.asset.asset_name} returned on {self.returnDate}"
+    
+    
+class Tender(models.Model):
+    itemName = models.CharField(max_length=15)
+    quantity = models.IntegerField()
+    startDate = models.DateField(null=True, blank=True)
+    endDate = models.DateField(null=True, blank=True)
+    
+    def _str_(self):
+        return self.itemName
