@@ -252,5 +252,12 @@
         android:layout_below="@id/titleremaning"
         android:layout_margin="8dp" />
 
+    <include
+        android:id="@+id/no_product"
+
+
+        layout="@layout/no_product"
+        android:visibility="gone" />
+
 
 </RelativeLayout>

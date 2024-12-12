@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -55,7 +56,6 @@ public class Home_fragment extends Fragment {
     private TextView totalProductsTextView;
     private TextView totalUsersTextView;
 
-
     public Home_fragment() {
         // Required empty public constructor
     }
@@ -75,8 +75,7 @@ public class Home_fragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fetchFilteredProducts(recyclerView, "barcode-remaining");
-
-
+        View noProductView = view.findViewById(R.id.no_product);
 
         // Fetch totals from the backend
         fetchTotals();
@@ -90,6 +89,7 @@ public class Home_fragment extends Fragment {
 
         ImageButton scanner_icon = view.findViewById(R.id.scanner_icon);
 
+        showNoProductLayout(noProductView, recyclerView);
 
         scanner_icon.setOnClickListener(v -> {
             // Navigate to ProductListAddFragment
@@ -102,7 +102,6 @@ public class Home_fragment extends Fragment {
 
         // Profile dropdown menu
         profileImageButton.setOnClickListener(v -> {
-            // PopupMenu logic here...
             PopupMenu popupMenu = new PopupMenu(requireContext(), profileImageButton);
             popupMenu.getMenuInflater().inflate(R.menu.profile_menu, popupMenu.getMenu());
 
@@ -121,6 +120,7 @@ public class Home_fragment extends Fragment {
 
             popupMenu.show();
         });
+
         viewall.setOnClickListener(v -> {
             ProductListFragment productListFragment = ProductListFragment.newInstance("barcode-remaining", null);
             FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
@@ -128,9 +128,7 @@ public class Home_fragment extends Fragment {
             fragmentTransaction.replace(R.id.fragment_container, productListFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-
         });
-
 
         // Add click listeners to the card views
         squareBox1.setOnClickListener(v -> openProductListFragment());
@@ -208,13 +206,17 @@ public class Home_fragment extends Fragment {
     private void fetchFilteredProducts(RecyclerView recyclerView, String filterType) {
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
-        // Fetch products with the filter query
         apiService.getProductsWithFilter(filterType).enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Product> filteredProducts = response.body();
-                    updateProductList(recyclerView, filteredProducts); // Update the RecyclerView with filtered products
+                    if (filteredProducts.isEmpty()) {
+                        View noProductView = getView().findViewById(R.id.no_product); // Ensure this is defined
+                        showNoProductLayout(noProductView, recyclerView);
+                    } else {
+                        updateProductList(getView(), filteredProducts);
+                    }
                 } else {
                     Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
                 }
@@ -227,13 +229,36 @@ public class Home_fragment extends Fragment {
         });
     }
 
-    private void updateProductList(RecyclerView recyclerView, List<Product> productList) {
-        ProductAdapter adapter = new ProductAdapter(getContext(), productList, product -> {
-            // Handle item click
-            navigateToProductDescription(product);
-        });
-        recyclerView.setAdapter(adapter);
+    private void showNoProductLayout(View noProductView, RecyclerView recyclerView) {
+        if (noProductView != null) {
+            noProductView.setVisibility(View.VISIBLE);
+        } else {
+            Log.e("Home_fragment", "No Product View not found!");
+        }
+
+        if (recyclerView != null) {
+            recyclerView.setVisibility(View.GONE);
+        }
     }
+
+    private void updateProductList(View rootView, List<Product> productList) {
+        RecyclerView recyclerView = rootView.findViewById(R.id.productRecyclerView);
+        View noProductView = rootView.findViewById(R.id.no_product);
+
+        if (productList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            noProductView.setVisibility(View.VISIBLE);
+        } else {
+            noProductView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+
+            ProductAdapter adapter = new ProductAdapter(getContext(), productList, product -> {
+                navigateToProductDescription(product);
+            });
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
     private void navigateToProductDescription(Product product) {
         ProductDescriptionFragment fragment = ProductDescriptionFragment.newInstance(product);
 
@@ -243,8 +268,6 @@ public class Home_fragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
-
-
 
     private void checkLocationSettings() {
         LocationRequest locationRequest = LocationRequest.create()
