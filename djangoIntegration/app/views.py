@@ -651,10 +651,44 @@ def expenseCategory(request):
     return render(request,'expenseCategory.html')
 
 def quotationList(request):
-    return render(request,'quotationList.html')
+    
+    tender=Tender.objects.all()
+    
+    return render(request,'quotationList.html',{'tender':tender})
+from django.http import JsonResponse
+from django.shortcuts import render
+from .models import Tender  # Replace with the correct model name
 
 def addquotation(request):
-    return render(request,'addquotation.html')
+    if request.method == 'POST':
+        try:
+            item = request.POST.get('item')
+            quantity = request.POST.get('quantity')
+            startdate = request.POST.get('startdate')
+            enddate = request.POST.get('enddate')
+
+            # Check if all fields are present
+            if not all([ item, quantity, startdate, enddate]):
+                return JsonResponse({'success': False, 'message': 'All fields are required!'}, status=400)
+
+            # Validate the data (optional but recommended)
+            if not quantity.isdigit():
+                return JsonResponse({'success': False, 'message': 'Quantity must be a valid number!'}, status=400)
+
+            # Create the Tender object
+            Tender.objects.create(
+                itemName=item,
+                quantity=int(quantity),
+                startDate=startdate,
+                endDate=enddate
+            )
+
+            return JsonResponse({'success': True, 'message': 'You have successfully applied!'}, status=200)
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)}, status=500)
+
+    return render(request, 'addquotation.html')
+
 
 def stationlist(request):
     station_id = stationDetails.objects.all()
