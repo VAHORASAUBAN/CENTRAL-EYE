@@ -1,0 +1,107 @@
+{% extends 'navbar.html' %}
+
+{% load static %}
+{% block title %} Index {% endblock title %}
+{% block css %}
+{% endblock css %}
+{% block body %}
+
+<div class="main-wrapper">
+    <div class="page-wrapper">
+        <div class="content">
+
+            <div class="page-header">
+                <div class="page-title">
+                    <h4>GeM Certified Tender Creation</h4>
+                    <h6>Create new Tender</h6>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="post" id="quotationForm">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <div class="form-group">
+                                    <label>Bid No</label>
+                                    <input type="text" name="bidno">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <div class="form-group">
+                                    <label>Item Name</label>
+                                    <input type="text" name="item">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="text" name="quantity">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-3" style="margin-left: 20px;">
+                                <div class="form-group">
+                                    <label>start Date</label>
+                                    <input type="date" name="startdate" id="start_date">
+                                </div>
+                            </div>
+                         
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="date" id="end_date" name="enddate" >
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <button class="btn btn-submit me-2">Submit</button>
+                                <a href="{% url 'addquotation' %}" class="btn btn-cancel">Cancel</a>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div><script>
+    document.getElementById('quotationForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(this);
+
+        fetch('', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Successfull:', Successfull);
+            alert('Submitted To Database');
+            window.location.href = 'https://bidplus.gem.gov.in/all-bids'; // Redirect to GeM portal
+
+        });
+    });
+</script>
+
+
+{% endblock %}
+

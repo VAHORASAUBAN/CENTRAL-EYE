@@ -108,7 +108,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for category in categories %}
+                                {% for categorylist in categorylist %}
                                 <tr>
                                     <td>
                                         <label class="checkboxs">
@@ -117,9 +117,9 @@
                                         </label>
                                     </td>
                                     <td class="productimgname" style="vertical-align: top ;">
-                                        <a href="javascript:void(0);">{{category.category_name}}</a>
+                                        <a href="javascript:void(0);">{{categorylist.category_name}}</a>
                                     </td>
-                                    <td>{{category.category_id}}</td>
+                                    <td>{{categorylist.category_id}}</td>
                                     <td>Admin</td>
                                     <td>
                                         <a class="me-3" href="{% url 'editcategory' %}">

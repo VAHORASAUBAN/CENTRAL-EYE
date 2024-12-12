@@ -17,6 +17,8 @@ from django.core.serializers.json import DjangoJSONEncoder
 from geopy.geocoders import Nominatim
 from django.db.models import Count
 import json
+from django.http import JsonResponse
+
 
 @api_view(['POST'])
 def login_view(request):
@@ -194,7 +196,21 @@ def index(request):
     inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
     
     condition_queryset = Asset.objects.values('condition').annotate(total=Count('asset_id')).order_by()
-    condition_data = list(condition_queryset)
+    condition_data = []
+    for condition in condition_queryset:
+        if condition['condition'] == 'good':
+            color = '#28c76f'  # Green
+        elif condition['condition'] == 'average':
+            color = '#ff9f43'  # Orange
+        elif condition['condition'] == 'below-average':
+            color = '#ef4141'  # Red
+        else:
+            color = '#d3d3d3'  # Default Grey
+        condition_data.append({
+            'condition': condition['condition'],
+            'total': condition['total'],
+            'color': color
+        })
     
     stations_data = (
         Asset.objects.values("assign_to__station__station_name")  # Replace "station_name" with the actual field in UserDetails
@@ -360,13 +376,42 @@ def addproduct(request):
      return render(request,'addproduct.html',{'categories': categories})
 
 def categorylist(request):
-    return render(request,'categorylist.html')
+    categorylist=AssetCategory.objects.all()
+    
+    
+    return render(request,'categorylist.html',{'categorylist': categorylist})
 
 def addcategory(request):
+    if request.method == 'POST':
+        category_name = request.POST.get('category')
+        
+        AssetCategory.objects.create(category_name=category_name)
+        
+        
+        return redirect('categorylist')
+        
     return render(request,'addcategory.html')
 def subcategorylist(request):
     return render(request,'subcategorylist.html')
 def addsubcategory(request):
+    if request.method == 'POST':
+        subcategory = request.POST.get('subcategory')
+        category=request.POST.get('category_name')
+        print (subcategory)
+        
+        categoryGet = AssetCategory.objects.get(category_name=category)
+        
+        AssetSubCategory.objects.create(category=categoryGet,sub_category_name=subcategory)
+        return redirect('subcategorylist')
+    
+    categories = AssetCategory.objects.all()
+    
+    return render(request,'subaddcategory.html',{'categories': categories})
+
+
+
+        
+        
     return render(request,'subaddcategory.html')
 def editcategory(request):
     return render(request,'editcategory.html')
@@ -541,8 +586,40 @@ def expenseCategory(request):
 def quotationList(request):
     return render(request,'quotationList.html')
 
+from django.http import JsonResponse
+
+from django.http import JsonResponse
+from django.shortcuts import render
+
 def addquotation(request):
-    return render(request,'addquotation.html')
+    if request.method == 'POST':
+        try:
+            bidno = request.POST.get('Bid No')
+            item = request.POST.get('Itemname')
+            quantity = request.POST.get('Quantity')
+            startdate = request.POST.get('start_date')
+            enddate = request.POST.get('end_date')
+
+            # Check if all fields are present
+            if not all([bidno, item, quantity, startdate, enddate]):
+                return JsonResponse({'success': False, 'message': 'All fields are required!'}, status=400)
+
+            # Create the Quotation object
+            Tender.objects.create(
+                bidNo=bidno,
+                itemName=item,
+                quantity=quantity,
+                startDate=startdate,
+                endDate=enddate
+            )
+
+            return JsonResponse({'success': True, 'message': 'You have successfully applied!'}, status=200)
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)}, status=500)
+
+    return render(request, 'addquatation.html')
+
+
 
 def stationlist(request):
     station_id = stationDetails.objects.all()
@@ -591,7 +668,10 @@ def editExpense(request):
     return render(request,'editExpense.html')
 
 def profile(request):
-    return render(request,'profile.html')
+   admin_user = UserDetails.objects.filter(role__role='Admin').first()
+   
+   print("Admin User:", admin_user)  # Debugging statement
+   return render(request, 'profile.html', {'admin_user': admin_user})
 
 def generalSettings(request):
     return render(request,'editexpense.html')

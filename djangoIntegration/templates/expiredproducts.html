@@ -138,7 +138,7 @@
                                     </td>
                                     <td>{{i.asset.barcode}}</td>
                                     <td>{{i.expiration_date}}</td>
-                                    <td><span class="badges bg-lightgreen">{{i.reason}}</span></td>
+                                    <td><span class="badges" style="background-color: red; color: white;">{{i.reason}}</span></td>
                                   
                                     <td>
                                         <a class="me-3" href="{% url   'editexpiredproducts' i.expired_id %}">

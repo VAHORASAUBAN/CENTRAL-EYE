@@ -67,8 +67,8 @@
                                             <div class="form-group">
                                                 <select class="select">
                                                     <option>Choose Product</option>
-                                                    <option>Macbook pro</option>
-                                                    <option>Orange</option>
+                                                    <option>DELL</option>
+                                                    <option>Lenovo</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -76,8 +76,8 @@
                                             <div class="form-group">
                                                 <select class="select">
                                                     <option>Choose Category</option>
-                                                    <option>Computers</option>
-                                                    <option>Fruits</option>
+                                                    <option>Peripheral</option>
+                                                    <option>Electronic</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -85,23 +85,16 @@
                                             <div class="form-group">
                                                 <select class="select">
                                                     <option>Choose Sub Category</option>
-                                                    <option>Computer</option>
+                                                    <option>Mouse</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <select class="select">
-                                                    <option>Brand</option>
-                                                    <option>N/D</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                       
                                         <div class="col-lg col-sm-6 col-12 ">
                                             <div class="form-group">
                                                 <select class="select">
                                                     <option>Price</option>
-                                                    <option>150.00</option>
+                                                    <option>12000.00</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -183,8 +176,8 @@
                                         <span class="badges bg-lightgreen">Good</span>
                                         {% elif asset.condition == 'average' %}
                                         <span class="badges bg-lightyellow">Average</span>
-                                        {% elif asset.condition == 'belowaverage' %}
-                                        <span class="badges bg-lightred">BelowAverage</span>
+                                        {% elif asset.condition == 'below-average' %}
+                                        <span class="badges bg-lightred">Bad</span>
                                         {% endif %}
                                     </td>
                                     <td> {% if asset.asset_maintenance_date %}

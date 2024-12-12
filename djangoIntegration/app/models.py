@@ -164,3 +164,4 @@ class ExpiredProduct(models.Model):
     
     def __str__(self):
         return f"Expired Product: {self.asset.asset_name} (Barcode: {self.asset.barcode})"
+    

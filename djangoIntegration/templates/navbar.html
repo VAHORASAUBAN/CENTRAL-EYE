@@ -34,6 +34,19 @@
     <link rel="stylesheet" href="{% static 'assets/plugins/select2/css/select2.min.css' %}">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+    <style>
+        /* Hide the default Google Translate bar */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+   
+        /* Optional: To ensure the Google Translate element still works properly */
+        body {
+            top: 0 !important;
+        }
+   </style>
 
     <title>{% block title %} {% endblock title %}</title>
     {% block css %}{% endblock css %}
@@ -48,23 +61,14 @@
 
         <div class="header-left active">
             <a href="{% url 'index' %}">
-                 <img src="{% static 'assets/img/centraleye.png' %}" alt="img">  
+                 <img src="{% static 'assets/img/centraleye.jpeg' %}" alt="img">  
             </a>
-<<<<<<< HEAD
-             <a href="{% url 'index' %}" class="logo-small">
-                <img src="{% static 'assets/img/logo-small.png' %}" alt="">
-            </a> 
-            <a id="toggle_btn" href="javascript:void(0);">
-            </a>
-        </div> 
-=======
                 <a href="{% url 'index' %}" class="logo-small">
                     <img src="{% static 'assets/img/logo-small.png' %}" alt="">
                 </a> 
             <a id="toggle_btn" href="javascript:void(0);">
             </a>
         </div>
->>>>>>> 514d1d1b50d491f06953704c409b56498dc921df
 
         <a id="mobile_btn" class="mobile_btn" href="#sidebar">
             <span class="bar-icon">
@@ -93,6 +97,8 @@
                     </form>
                 </div>
             </li>
+            <div id="google_translate_element" style="display: inline-block; margin-left: 10px; margin-top: 15px;"></div>
+
 
 
             <!-- <li class="nav-item dropdown has-arrow flag-nav">
@@ -201,7 +207,7 @@
                                 <i class="fa-solid fa-user"></i>
                                 <span class="status online"></span></span>
                             <div class="profilesets">
-                                <h6>Madhya Pradesh Police</h6>
+                                <h6>{{admin_user.first_name}} {{admin_user.last_name}}</h6>
                                 <h5>Admin</h5>
                             </div>
                         </div>
@@ -277,12 +283,13 @@
                    
                     <li class="submenu">
                         <a href="javascript:void(0);"><img src="{% static 'assets/img/icons/expense1.svg' %}"
-                                alt="img"><span> Expense & Budget</span> <span class="menu-arrow"></span></a>
+                                alt="img"><span> Tender & Expense</span> <span class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="{% url 'quotationList' %}">Quotation List</a></li>
-                            <li><a href="{% url 'addquotation' %}">Add Quotation</a></li>
-                            <li><a href="{% url 'expenseList' %}">Expense List</a></li>
+                            <li><a href="{% url 'addquotation' %}">Add Tender</a></li>
+                            <li><a href="{% url 'quotationList' %}">Tender List</a></li>
                             <li><a href="{% url 'createExpense' %}">Add Expense</a></li>
+                            <li><a href="{% url 'expenseList' %}">Expense List</a></li>
+
 
                         </ul>
                     </li>
@@ -318,6 +325,18 @@
     </div>
 
     {% block body %}{% endblock %}
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,gu', // Limit to English, Hindi, and Gujarati
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+   </script>
+   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+   
 
     <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'assets/js/feather.min.js' %}"></script>

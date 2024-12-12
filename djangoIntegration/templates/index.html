@@ -3,6 +3,8 @@
 {% block title %} Index {% endblock title %}
 {% block css %}
 
+
+
 {% endblock css %}
 {% block body %}
 <div class="main-wrapper">
@@ -58,10 +60,11 @@
                 </div>
             </div>
 
-            <div class="row" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+            <div class="row" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px;">
+                <!-- Product Conditions Chart -->
                 <div class="col-lg-6 col-sm-12 col-12"
-                    style="flex: 1; min-width: 300px; max-width: 600px; display: flex;">
-                    <div class="card" style="flex-grow: 1; padding: 16px; margin: 10px; height: auto;">
+                    style="flex: 1; min-width: 300px; max-width: 600px; display: flex; align-items: stretch;">
+                    <div class="card" style="flex-grow: 1; padding: 16px; margin: 10px; height: 100%;">
                         <div class="card-header"
                             style="background-color: #f8f9fc; padding: 15px; border-bottom: 1px solid #e3e6f0;">
                             <div class="card-title" style="font-size: 18px; font-weight: bold; color: #333;">
@@ -69,29 +72,31 @@
                             </div>
                         </div>
                         <div class="card-body"
-                            style="padding: 16px; display: flex; justify-content: center; align-items: center;">
-                            <canvas id="chartBar3" style="max-width: 100%; height: 250px;"></canvas>
+                            style="padding: 16px; display: flex; justify-content: center; align-items: center; height: 350px;">
+                            <canvas id="chartBar3" style="max-width: 100%; height: 100%;"></canvas>
                         </div>
                     </div>
                 </div>
-
+            
+                <!-- Assigned Products Chart -->
                 <div class="col-lg-6 col-sm-12 col-12"
-                    style="flex: 1; min-width: 300px; max-width: 600px; display: flex;">
-                    <div class="card" style="flex-grow: 1; padding: 16px; margin: 10px; height: auto;">
-                        <div class="card-header">
+                    style="flex: 1; min-width: 300px; max-width: 600px; display: flex; align-items: stretch;">
+                    <div class="card" style="flex-grow: 1; padding: 16px; margin: 10px; height: 100%;">
+                        <div class="card-header"
+                            style="background-color: #f8f9fc; padding: 15px; border-bottom: 1px solid #e3e6f0;">
                             <div class="card-title" style="font-size: 18px; font-weight: bold; color: #333;">
                                 Assigned Products
                             </div>
-                            
                         </div>
                         <div class="card-body"
-                            style="padding: 16px; display: flex; justify-content: center; align-items: center;">
-                            <canvas id="chartDonut" style="max-width: 100%; height: 250px;"></canvas>
+                            style="padding: 16px; display: flex; justify-content: center; align-items: center; height: 350px;">
+                            <canvas id="chartDonut" style="max-width: 100%; height: 100%;"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
+            
             <div class="card mb-0">
                 <div class="card-body">
                     <h4 class="card-title">Due Date Soon Products</h4>
@@ -174,19 +179,20 @@
     
         const labels = conditions.map(data => data.condition);
         const dataPoints = conditions.map(data => data.total);
+        const colors = conditions.map(data => data.color);
     
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, '#36A2EB'); // Light blue at the top
-        gradient.addColorStop(1, '#4BC0C0'); // Light green at the bottom
+        // const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        // gradient.addColorStop(0, '#ef4141'); // Good color 28c76f
+        // gradient.addColorStop(1, '#ef4141'); // average color ff9f43, below average color ef4141
     
         const data = {
             labels: labels,
             datasets: [{
                 label: 'Condition',
                 data: dataPoints,
-                backgroundColor: gradient,
-                hoverBackgroundColor: '#5AD3D1',
-                borderColor: '#36A2EB',
+                backgroundColor: colors,
+                // hoverBackgroundColor: '#5AD3D1',
+                // borderColor: colors,
                 borderWidth: 1
             }]
         };
@@ -195,13 +201,20 @@
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'top'
+                    position: 'top',
+                    display: false
                 }
             },
             scales: {
                 x: {
                     grid: {
                         display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 16 // Increase the font size of the x-axis labels
+                        },
+                        color: '#333' // Optional: Change the label color
                     }
                 },
                 y: {
@@ -220,6 +233,9 @@
         });
     });
     </script>
+
+
+
     
 
 
