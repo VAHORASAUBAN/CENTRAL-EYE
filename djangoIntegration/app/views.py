@@ -607,9 +607,8 @@ def newuser(request):
         password = request.POST.get('password')
         station_name = request.POST.get('station_name')
         mobile = request.POST.get('mobile')
-        print(username)
-        print(station_name)
-        print(email)
+        fname = request.POST.get('firstname')
+        lname = request.POST.get('lastname')
         # Get related Role and Station objects
         roleGet = role.objects.get(role=role_name)
         station = stationDetails.objects.get(station_name=station_name)
@@ -621,10 +620,11 @@ def newuser(request):
             password=password,
             station=station,
             contact_number=mobile,
-            full_name="amaan shaikh"
+            first_name = fname,
+            last_name = lname
         )
         
-        return redirect('newuser')
+        return redirect('userlists')
 
     roles = role.objects.all()
     station = stationDetails.objects.all()
