@@ -112,13 +112,12 @@ public class User_Home_fragment extends Fragment {
         animateEntrance(squareBox1, 100);
         animateEntrance(squareBox2, 200);
 
-        apiService.getProducts().enqueue(new Callback<List<Product>>() {
+        username = getUsername(); // Retrieve username
+        apiService.getUserProducts(username).enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Product> allProducts = response.body();
-
-                    // Initialize with all products
                     updateProductList(recyclerView, allProducts);
 
 
@@ -132,7 +131,6 @@ public class User_Home_fragment extends Fragment {
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
 
@@ -214,6 +212,11 @@ public class User_Home_fragment extends Fragment {
 
 
         return view;
+    }
+
+    private String getUsername() {
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("username", "user");
     }
 
     private void fetchTotals(String username) {

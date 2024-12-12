@@ -247,7 +247,7 @@ public class UserProductListFragment extends Fragment {
     private int findCategoryIdByName(List<Category> categories, String categoryName) {
         for (Category category : categories) {
             if (category.getCategoryName().equals(categoryName)) {
-                return category.getCategoryId(); // Assuming Category has `id` and `name` properties
+                return category.getCategoryId(); // Assuming Category has id and name properties
             }
         }
         return -1; // Return an invalid ID if not found
