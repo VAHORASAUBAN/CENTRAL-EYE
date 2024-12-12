@@ -15,11 +15,11 @@
                     <h4>Expired Products List</h4>
                     <h6>Manage your Expired Products</h6>
                 </div>
-                <div class="page-btn">
+                <!-- <div class="page-btn">
                     <a href="{% url 'addexpiredproducts' %}" class="btn btn-added"><img
                             src="{% static 'assets/img/icons/plus.svg' %}" alt="img" class="me-2">Add Expired
                         product</a>
-                </div>
+                </div> -->
             </div>
 
             <div class="card">
@@ -144,7 +144,7 @@
                                         <a class="me-3" href="{% url   'editexpiredproducts' i.expired_id %}">
                                             <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
                                         </a>
-                                        <a class="me-3 confirm-text" href="javascript:void(0);">
+                                        <a class="me-3 confirm-text" href="{% url 'deleteexpired' i.expired_id %}">
                                             <img src="{% static 'assets/img/icons/delete.svg' %}" alt="img">
                                         </a>
                                     </td>

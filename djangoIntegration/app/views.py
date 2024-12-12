@@ -368,8 +368,35 @@ def productlist(request):
     
     return render(request, 'productlist.html', {'asset': assets})
 
-def editproduct(request):
-    return render(request,'editproduct.html')
+def editproduct(request,id):
+    assets = Asset.objects.get(asset_id=id)
+    if request.method == 'POST':
+        # Get data from the form
+        asset_name = request.POST.get('asset_name')
+        barcode = request.POST.get('barcode')
+        category_id = request.POST.get('category')  # Pass category ID
+        condition = request.POST.get('condition')
+        asset_value = request.POST.get('asset_value')
+        asset_maintenance_date = request.POST.get('asset_maintenance_date')
+
+        # Update asset fields
+        assets.asset_name = asset_name
+        assets.barcode = barcode
+        assets.asset_value = asset_value
+        assets.asset_maintenance_date = asset_maintenance_date
+
+        # Update related fields (category and condition)
+        if category_id:
+            assets.asset_category_id = category_id  # Assuming category uses a foreign key
+        assets.condition = condition
+
+        assets.save()  # Save the updated object
+        return redirect('productlist')  # Redirect to product list after editing
+
+    # Fetch categories for the dropdown
+    categories = AssetCategory.objects.all()
+
+    return render(request, 'editproduct.html', {'asset': assets, 'categories': categories})
 
 def productdetails(request, id):
     # Retrieve the product with the given id or return a 404 if it doesn't exist
@@ -437,8 +464,20 @@ def issuedproducts(request):
     return render(request,'issuedproducts.html',con)
 
 
+# def deleteissued(request):
+#     issuedproducts_id = Allocation.objects.get(issuedproducts_id=id)
+#     issuedproducts_id.delete()
+#     return render(request,'issuedproducts.html')
 
 def addissuedproducts(request):
+    if request.method == "POST":
+        asset_name = request.POST['asset_name']
+        barcode = request.POST['barcode']
+        user = request.POST['user']
+        issue_date = request.POST['issue_date']
+        return_date = request.POST['return_date']
+        Allocation.objects.create(asset_name=asset_name,barcode=barcode,user=user,issue_date=issue_date,return_date=return_date)
+        return render("issuedproducts")       
     return render(request,'addissuedproducts.html')
 
 def maintenanceproducts(request):
@@ -489,6 +528,10 @@ def addmaintenanceproducts(request):
         return redirect("maintenanceproducts")
     return render(request,'addmaintenanceproducts.html')
 
+def deletemaintenance(request):
+    maintenance_id = Maintenance.objects.get(maintenance_id=id)
+    maintenance_id.delete()
+    return render(request,'maintenanceproducts')
 
 def expiredproducts(request):
     expired_id = ExpiredProduct.objects.all()
@@ -521,6 +564,14 @@ def editexpiredproducts(request,id):
 
 def addexpiredproducts(request):
     return render(request,'addexpiredproducts.html')
+
+
+def deleteexpired(request,id):
+    expired_id = ExpiredProduct.objects.get(expired_id=id)
+    expired_id.delete()
+    return redirect('expiredproducts')
+
+
 
 def returnproducts(request):
     return render(request,'returnproducts.html')

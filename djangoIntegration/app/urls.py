@@ -44,7 +44,7 @@ urlpatterns = [
 
     path('productlist', views.productlist, name='productlist'),
     path('addproduct', views.addproduct, name='addproduct'),
-    path('editproduct', views.editproduct, name='editproduct'),
+    path('editproduct/<int:id>', views.editproduct, name='editproduct'),
     path('productdetails/<int:id>', views.productdetails, name='productdetails'),
 
 
@@ -60,14 +60,20 @@ urlpatterns = [
 
     path('issuedproducts', views.issuedproducts, name='issuedproducts'),
     path('addissuedproducts', views.addissuedproducts, name='addissuedproducts'),
+    # path('deleteissued/<int:id>', views.deleteissued, name='deleteissued'),
+
 
     path('maintenanceproducts', views.maintenanceproducts, name='maintenanceproducts'),
     path('editmaintenanceproducts/<int:id>', views.editmaintenanceproducts, name='editmaintenanceproducts'),
     path('addmaintenanceproducts', views.addmaintenanceproducts, name='addmaintenanceproducts'),
+    path('deletemaintenance/<int:id>', views.deletemaintenance, name='deletemaintenance'),
+
 
     path('expiredproducts', views.expiredproducts, name='expiredproducts'),
     path('editexpiredproducts/<int:id>', views.editexpiredproducts, name='editexpiredproducts'),
     path('addexpiredproducts', views.addexpiredproducts, name='addexpiredproducts'),
+    path('deleteexpired/<int:id>', views.deleteexpired, name='deleteexpired'),
+
 
     path('returnproducts', views.returnproducts, name='returnproducts'),
     path('editreturnproducts', views.editreturnproducts, name='editreturnproducts'),

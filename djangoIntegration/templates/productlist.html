@@ -196,7 +196,7 @@
                                         <a class="me-3" href="{% url 'productdetails' asset.asset_id  %}">
                                             <img src="{% static 'assets/img/icons/eye.svg' %}" alt="img">
                                         </a>
-                                        <a class="me-3" href="{% url 'editproduct'  %}">
+                                        <a class="me-3" href="{% url 'editproduct' asset.asset_id %}">
                                             <img src="{% static 'assets/img/icons/edit.svg' %}" alt="img">
                                         </a>
                                         <a class="me-3 confirm-text" href="javascript:void(0);">
