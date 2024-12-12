@@ -15,14 +15,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Top Section -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="360dp"
-                android:background="@drawable/top_background">
+                android:background="@color/primary">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="32dp"
-                    android:src="@drawable/profile"
+                    android:src="@drawable/baseline_account_circle_24"
                     android:scaleType="centerCrop"
                     android:background="@drawable/circle_background"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Thomas James"
+                    android:text="Ayan"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -56,16 +56,7 @@
                     app:layout_constraintStart_toStartOf="@+id/imageView"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="username@gmail.com"
-                    android:textColor="#ffffff"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="@+id/textView2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- CardView for Form Fields -->
@@ -81,12 +72,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="30sp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="Ayan Husain Shaikh"
                     android:inputType="textPersonName"
                     android:padding="12dp"
                     android:background="@drawable/rounded_edittext" />
@@ -94,7 +85,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="Ayan@123"
                     android:inputType="textPassword"
                     android:padding="12dp"
                     android:layout_marginTop="16dp"
@@ -103,7 +94,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="ayan@gmail.com"
                     android:inputType="textEmailAddress"
                     android:padding="12dp"
                     android:layout_marginTop="16dp"
@@ -112,19 +103,12 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone Number"
+                    android:hint="+919104523697"
                     android:inputType="phone"
                     android:padding="12dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/rounded_edittext" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Edit Profile"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="#162676"
-                    android:textColor="#ffffff" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
