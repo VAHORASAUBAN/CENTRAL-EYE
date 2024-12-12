@@ -70,7 +70,9 @@ public class ProductDescriptionFragment extends Fragment {
 //            locationTextView.setText("Location not available");
 //        }
 
+
         // Display user details or appropriate message
+        LinearLayout topLayout = view.findViewById(R.id.topLayout);
         TextView userDetailsSection = view.findViewById(R.id.userDetailsSection);
         LinearLayout userInfoCard = view.findViewById(R.id.userInfoCard);
 
@@ -95,6 +97,28 @@ public class ProductDescriptionFragment extends Fragment {
                     .addToBackStack(null) // Optional, adds transaction to back stack
                     .commit();
         });
+
+
+        String condition = product.getCondition();
+        int colorResId; // To store the resolved color resource
+        switch (condition) {
+            case "good":
+                colorResId = R.drawable.top_background;
+                break;
+            case "average":
+                colorResId = R.drawable.top_background_3;
+                break;
+            case "below-average":
+                colorResId = R.drawable.top_background_2;
+                break;
+            default:
+                colorResId =  R.drawable.rounded_border_rect4;
+                break;
+        }
+
+        // Set the background color dynamically
+        topLayout.setBackgroundResource(colorResId);
+
 
         return view;
     }
