@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import login as django_login
 from django.contrib.auth import login as django_login
-from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer, BarcodeUpdateSerializer, RequestAssetSerializer
+from .serializers import ProductSerializer, LoginSerializer, AssignSerializer, AssetSerializer, UserSerializer, BarcodeUpdateSerializer, RequestAssetSerializer, SubcategorySerializer
 from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -167,7 +167,8 @@ def user_list_view(request):
 @api_view(['GET'])
 def AssetListView(request):
     filter_type = request.query_params.get('filter')
-
+    subcategory = request.GET.get('subcategory', None)
+    
     if filter_type == 'available':
         assets = Asset.objects.filter(asset_status='available')
     elif filter_type == 'in-use':
@@ -178,10 +179,43 @@ def AssetListView(request):
         assets = Asset.objects.filter(asset_status='expired')
     elif filter_type == 'barcode-remaining':
         assets = Asset.objects.filter(barcode__isnull=True)
+    elif subcategory:
+        assets = Asset.objects.filter(asset_category=subcategory)
     else:
         assets = Asset.objects.all()
 
     serializer = AssetSerializer(assets, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def UserAssetListView(request):
+    """
+    Retrieve products based on the username.
+    Query parameter: `username`
+    """
+    # Get the `username` parameter from the request
+    username = request.query_params.get('username', None)
+    filter = request.query_params.get('filter', None)
+    
+    if username is None:
+        return Response(
+            {"detail": "Username query parameter is required."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    # if filter == 'Due Soon':
+    products = Asset.objects.filter(assign_to=username)  # Filter based on the 'assign_to' field
+
+    # Serialize the product data
+    serializer = AssetSerializer(products, many=True)
+
+    # Return the serialized data as a response
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def SubcategoryListAPIView(request, id):
+    print(id)  # To ensure the ID is passed correctly
+    subcategories = AssetSubCategory.objects.filter(category__category_id=id)
+    serializer = SubcategorySerializer(subcategories, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -231,6 +265,20 @@ def get_totals(request):
         data = {
             "total_products": total_products,
             "total_users": total_users,
+        }
+        return Response(data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def get_user_totals(request):
+    
+    username = request.query_params.get('username', None)
+    try:
+        total_products = Asset.objects.count(assign_to=username)
+        
+        data = {
+            "total_products": total_products
         }
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
