@@ -107,6 +107,12 @@ public class ProductDescriptionFragment extends Fragment {
         String condition = product.getCondition();
 
         int colorResId; // To store the resolved color resource
+
+// Check if condition is null and set a default value if it is
+        if (condition == null) {
+            condition = "default"; // Set a default condition or handle accordingly
+        }
+
         switch (condition) {
             case "good":
                 colorResId = R.drawable.top_background;
@@ -118,11 +124,11 @@ public class ProductDescriptionFragment extends Fragment {
                 colorResId = R.drawable.top_background_2;
                 break;
             default:
-                colorResId =  R.drawable.rounded_border_rect4;
+                colorResId = R.drawable.rounded_border_rect4;
                 break;
         }
 
-        // Set the background color dynamically
+// Set the background color dynamically
         topLayout.setBackgroundResource(colorResId);
 
 

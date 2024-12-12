@@ -209,6 +209,7 @@ def UserAssetListView(request):
                 expected_return_date__lte=next_seven_days
             )
             serializer = AllocationSerializer(products, many=True)
+            print(serializer.data)
         elif filter == 'Returned':
             products = ReturnedProducts.objects.filter(user__username=username)
             serializer = AssetSerializer(products, many=True)
@@ -676,6 +677,7 @@ def assign_product(request):
         returnDate = serializer.validated_data['return_date']
         user = serializer.validated_data['username']
         location = serializer.validated_data['location']
+        print(location)
         print(user)
         
         latitude, longitude = map(float, location.split(','))
