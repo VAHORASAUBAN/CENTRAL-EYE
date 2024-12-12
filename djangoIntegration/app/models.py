@@ -72,6 +72,7 @@ class AssetSubCategory(models.Model):
     sub_category_id = models.IntegerField(primary_key=True)
     category = models.ForeignKey(AssetCategory, null=True, blank=True, on_delete=models.SET_NULL)
     sub_category_name = models.CharField(max_length=255)
+    sub_category_image = models.ImageField(null=True, blank=True)
     def __str__(self):
         return self.sub_category_name
     
@@ -88,6 +89,7 @@ class Asset(models.Model):
     assign_to = models.ForeignKey(UserDetails, null=True, blank=True, on_delete=models.SET_NULL)
     asset_status = models.CharField(max_length=20, choices=ASSET_STATUS_CHOICES, default='available')
     asset_maintenance_date = models.DateField(null=True, blank=True)
+    asset_add_date = models.DateField(auto_now=True, null=True, blank=True)
 
 
     def save(self, *args, **kwargs):
@@ -164,3 +166,11 @@ class ExpiredProduct(models.Model):
     
     def __str__(self):
         return f"Expired Product: {self.asset.asset_name} (Barcode: {self.asset.barcode})"
+
+class ReturnedProducts(models.Model):
+    asset = models.ForeignKey("Asset", null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey("UserDetails", null=True, blank=True, on_delete=models.SET_NULL)
+    returnDate = models.DateField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"asset: {self.asset.asset_name} returned on {self.returnDate}"

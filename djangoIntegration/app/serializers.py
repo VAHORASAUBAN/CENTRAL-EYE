@@ -62,3 +62,12 @@ class SubcategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = AssetSubCategory
         fields = '__all__'
+        
+class AllocationSerializer(serializers.ModelSerializer):
+    asset_name = serializers.CharField(source='asset.asset_name', read_only=True)
+    barcode = serializers.CharField(source='asset.barcode', read_only=True)
+    assign_to = serializers.CharField(source='user.username', read_only=True)
+
+    class Meta:
+        model = Allocation
+        fields = ['allocation_id', 'asset_name', 'barcode', 'assign_date', 'expected_return_date', 'assign_to']
