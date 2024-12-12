@@ -15,9 +15,9 @@
 <h4>Issued Products List</h4>
 <h6>Manage your Issued Products</h6>
 </div>
-<div class="page-btn">
+<!-- <div class="page-btn">
 <a href="{% url 'addissuedproducts' %}" class="btn btn-added"><img src="{% static 'assets/img/icons/plus.svg' %}" alt="img" class="me-2">Issue New product</a>
-</div>
+</div> -->
 </div>
 
 <div class="card">
@@ -135,9 +135,9 @@
 
     <td>
   
-    <a class="me-3 confirm-text" href="javascript:void(0);">
-    <img src="{% static 'assets/img/icons/delete.svg' %}" alt="img">
-    </a>
+        <a class="me-3 confirm-text" href="{% url 'issuedproducts' %}">
+            <img src="{% static 'assets/img/icons/delete.svg'  %}" alt="img">
+            </a>
     </td>
     </tr>
 
