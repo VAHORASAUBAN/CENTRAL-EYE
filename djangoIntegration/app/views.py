@@ -57,7 +57,7 @@ def login_view(request):
 
                 # Log the user in
                 django_login(request, user)
-
+                
                 return Response({
                     'message': 'Login successful',
                     'session_id': request.session.session_key,
@@ -126,9 +126,10 @@ def add_product(request):
             road_name = location_name.get('road')
             city_name = location_name.get('state_district')
             district_name = location_name.get('city_district')
-            specific_area_name = road_name + ', ' + city_name + ', ' + district_name
+            specific_area_name = ', '.join(filter(None, [road_name, city_name, district_name]))
             print(specific_area_name)
         except Exception as e:
+            print(e)
             return Response({"error": f"Failed to resolve location name: {str(e)}"}, status=400)
 
         # Get the AssetSubCategory instance based on the provided subcategory_id
@@ -234,6 +235,7 @@ def SubcategoryListAPIView(request, id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
 def index(request):
     userCount = UserDetails.objects.count()
     assetCount = Asset.objects.count()
@@ -241,7 +243,21 @@ def index(request):
     inUseAsset = Asset.objects.filter(assign_to__isnull=False).count()
     
     condition_queryset = Asset.objects.values('condition').annotate(total=Count('asset_id')).order_by()
-    condition_data = list(condition_queryset)
+    condition_data = []
+    for condition in condition_queryset:
+        if condition['condition'] == 'good':
+            color = '#28c76f'  # Green
+        elif condition['condition'] == 'average':
+            color = '#ff9f43'  # Orange
+        elif condition['condition'] == 'below-average':
+            color = '#ef4141'  # Red
+        else:
+            color = '#d3d3d3'  # Default Grey
+        condition_data.append({
+            'condition': condition['condition'],
+            'total': condition['total'],
+            'color': color
+        })
     
     stations_data = (
         Asset.objects.values("assign_to__station__station_name")  # Replace "station_name" with the actual field in UserDetails
@@ -449,14 +465,39 @@ def addproduct(request):
      return render(request,'addproduct.html',{'categories': categories})
 
 def categorylist(request):
-    return render(request,'categorylist.html')
+    categories=AssetCategory.objects.all()
+    return render(request,'categorylist.html',{'categories': categories})
 
 def addcategory(request):
+    if request.method == 'POST':
+        category_name = request.POST.get('category')
+        
+        AssetCategory.objects.create(category_name=category_name)        
+        return redirect('categorylist')
     return render(request,'addcategory.html')
+
 def subcategorylist(request):
-    return render(request,'subcategorylist.html')
+    subcategories=AssetSubCategory.objects.all()
+    return render(request,'subcategorylist.html',{'subcategories': subcategories})
 def addsubcategory(request):
-    return render(request,'subaddcategory.html')
+    if request.method == 'POST':
+        subcategory = request.POST.get('subcategory')
+        category=request.POST.get('category_name')
+        subcategory_image = request.FILES.get('subcategory_image')
+        
+        categoryGet = AssetCategory.objects.get(category_name=category)
+        
+        AssetSubCategory.objects.create(
+            category=categoryGet, 
+            sub_category_name=subcategory, 
+            sub_category_image=subcategory_image
+        )
+        
+        return redirect('subcategorylist')
+    
+    categories = AssetCategory.objects.all()
+    return render(request,'subaddcategory.html',{'categories': categories})
+
 def editcategory(request):
     return render(request,'editcategory.html')
 def editsubcategory(request):
@@ -604,7 +645,7 @@ def addreturnproducts(request, id):
         # Update the allocation return date
         allocation.return_date = date.today()
         allocation.save()
-
+        
         # Update the asset status to 'available'
         allocation.asset.asset_status = 'available'
         allocation.asset.save()
@@ -793,21 +834,26 @@ def assign_product(request):
         print(location)
         print(user)
         
-        latitude, longitude = map(float, location.split(','))
-        geolocator = Nominatim(user_agent="asset_management")
-        location_name = geolocator.reverse((latitude, longitude)).raw['address']
-        print(location_name)
-        road_name = location_name.get('road')
-        city_name = location_name.get('state_district')
-        district_name = location_name.get('city_district')
-        specific_area_name = road_name + ', ' + city_name + ', ' + district_name
-        print(specific_area_name)
-        
         try:
+            # Convert location to latitude and longitude
+            latitude, longitude = map(float, location.split(','))
+            geolocator = Nominatim(user_agent="asset_management")
+            location_name = geolocator.reverse((latitude, longitude)).raw.get('address', {})
+            print(location_name)
+
+            # Extract location components, with fallback defaults
+            road_name = location_name.get('road', "Unknown Road")
+            city_name = location_name.get('state_district', "Unknown City")
+            district_name = location_name.get('city_district', "Unknown District")
+
+            # Safely concatenate strings
+            specific_area_name = f"{road_name}, {city_name}, {district_name}"
+            print(specific_area_name)
+
             # Fetch the asset from the database
             asset = Asset.objects.get(barcode=barcode)
-            
-            if asset.assign_to is None:    
+
+            if asset.assign_to is None:
                 user = UserDetails.objects.get(username=user)
                 # Create a new Allocation object and save it to the database
                 allocation = Allocation.objects.create(
@@ -816,18 +862,18 @@ def assign_product(request):
                     expected_return_date=returnDate,
                     assign_location=specific_area_name
                 )
-                
+
                 asset.assign_to = user
                 asset.asset_status = 'in-use'
                 asset.save()
-                
+
                 return Response({"message": "Product assigned successfully!", "allocation_id": allocation.allocation_id}, status=201)
             else:
                 return Response({"message": "Product is already assigned!"}, status=400)
         except ObjectDoesNotExist:
             return Response({"message": "Product not found with barcode!"}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
     else:
         print("Validation Errors:", serializer.errors)
         return Response(serializer.errors, status=400)
-
-

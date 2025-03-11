@@ -20,6 +20,7 @@ color tab_text_selector
 color white
 drawable baseline_account_circle_24
 drawable baseline_add_circle_outline_24
+drawable baseline_add_circle_outline_242
 drawable baseline_arrow_circle_left_24
 drawable baseline_arrow_circle_right_24
 drawable baseline_done_all_24
@@ -49,6 +50,7 @@ drawable bottom_nav_item_background
 drawable circle_background
 drawable circles
 drawable circular_background
+drawable home
 drawable ic_baseline_notifications_24
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -59,6 +61,7 @@ drawable maintenance
 drawable mp_police
 drawable mpp
 drawable nav_item_selector
+drawable no_product
 drawable notification
 drawable profile
 drawable rounded_border
@@ -142,6 +145,9 @@ id nav_home
 id nav_notify
 id nav_products
 id newrequest
+id no_product
+id no_product_found
+id no_product_image
 id notification_message
 id notification_title
 id notifyButton
@@ -159,6 +165,7 @@ id profile_image
 id purchaseDateEditText
 id purchaseDateValue
 id quantityDisplay
+id question_icon
 id recyclerView
 id rejectbtn
 id requestButton
@@ -188,6 +195,7 @@ id textView3
 id titleremaning
 id toolbar
 id toolbar_heading
+id topLayout
 id total_products
 id total_users
 id tv_product_count
@@ -231,6 +239,7 @@ layout fragment_user_notification
 layout fragment_user_product_list
 layout fragment_userproductrequest
 layout item_card
+layout no_product
 layout notification_message
 layout product_item
 layout request_card

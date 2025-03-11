@@ -174,19 +174,20 @@
     
         const labels = conditions.map(data => data.condition);
         const dataPoints = conditions.map(data => data.total);
+        const colors = conditions.map(data => data.color);
     
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, '#36A2EB'); // Light blue at the top
-        gradient.addColorStop(1, '#4BC0C0'); // Light green at the bottom
+        // const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        // gradient.addColorStop(0, '#ef4141'); // Good color 28c76f
+        // gradient.addColorStop(1, '#ef4141'); // average color ff9f43, below average color ef4141
     
         const data = {
             labels: labels,
             datasets: [{
                 label: 'Condition',
                 data: dataPoints,
-                backgroundColor: gradient,
-                hoverBackgroundColor: '#5AD3D1',
-                borderColor: '#36A2EB',
+                backgroundColor: colors,
+                // hoverBackgroundColor: '#5AD3D1',
+                // borderColor: colors,
                 borderWidth: 1
             }]
         };
@@ -195,13 +196,20 @@
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'top'
+                    position: 'top',
+                    display: false
                 }
             },
             scales: {
                 x: {
                     grid: {
                         display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 16 // Increase the font size of the x-axis labels
+                        },
+                        color: '#333' // Optional: Change the label color
                     }
                 },
                 y: {
@@ -220,6 +228,7 @@
         });
     });
     </script>
+
     
 
 
