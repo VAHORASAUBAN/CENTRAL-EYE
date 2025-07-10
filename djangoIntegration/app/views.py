@@ -613,7 +613,7 @@ def addreturnproducts(request, id):
         returnproducts = ReturnedProducts.objects.all()
 
         # Render the returnproducts page with the returned products
-        return redirect('returnproducts')
+        return render(request,'returnproducts.html')
     
     except Allocation.DoesNotExist:
         # Handle the case when the allocation with the given id does not exist
@@ -623,6 +623,7 @@ def addreturnproducts(request, id):
         # Catch any other exceptions and log them
         print(f"An error occurred: {e}")
         return HttpResponse("An unexpected error occurred.", status=500)
+    
 def editreturnproducts(request):
     return render(request,'editreturnproducts.html')
 
